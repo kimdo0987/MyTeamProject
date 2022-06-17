@@ -13,7 +13,7 @@ import panels.MainPanel;
 import panels.PwSearchPanel;
 import panels.SignupPanel;
 
-// 특정 Panel로 갈수있는 버튼입니다
+// 특정 Panel로 갈 수 있는 버튼입니다
 
 public class GoToButton extends JButton {
 
