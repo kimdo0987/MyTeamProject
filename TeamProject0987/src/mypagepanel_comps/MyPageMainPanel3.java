@@ -4,11 +4,19 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-//출결 현황 조회 Panel이 될 JPanel입니다
+import labels.TopLabel;
+
+//나의 장바구니 Panel이 될 JPanel입니다
 
 public class MyPageMainPanel3 extends JPanel {
 	public MyPageMainPanel3() {
 		setBackground(new Color(255, 153, 204));
-		setBounds(115, 0, 650, 755);	
+		setBounds(118, 0, 1093, 800);
+		setLayout(null);
+		
+		TopLabel toplabel = new TopLabel("나의 장바구니");
+		toplabel.setLocation(335, 31);
+		add(toplabel);	
+		
 	}
 }

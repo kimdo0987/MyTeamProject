@@ -39,7 +39,7 @@ public class GoToButton extends JButton {
 			addActionListener(eventListener);
 			PanelHash.put("메인", MainPanel.mainPanel);
 			PanelHash.put("강의찾기", MainPanel.lectureSearchPanel);
-			PanelHash.put("마이페이지", MainPanel.MyPagePanel);
+			PanelHash.put("마이페이지", MainPanel.myPagePanel);
 			PanelHash.put("고객문의", MainPanel.customerServicePanel);
 			PanelHash.put("회원가입", MainPanel.signUpPanel);
 			PanelHash.put("로그인", MainPanel.loginPanel);

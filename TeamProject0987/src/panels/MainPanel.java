@@ -19,7 +19,7 @@ public class MainPanel extends JPanel {
 	
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
-	public static MyPagePanel MyPagePanel = new MyPagePanel();
+	public static MyPagePanel myPagePanel = new MyPagePanel();
 	public static CustomerServicePanel customerServicePanel = new CustomerServicePanel();
 	public static SignupPanel signUpPanel = new SignupPanel();
 	public static LoginPanel loginPanel = new LoginPanel();
@@ -86,8 +86,8 @@ public class MainPanel extends JPanel {
 		frm.add(lectureSearchPanel);
 		lectureSearchPanel.setVisible(false);
 		
-		frm.add(MyPagePanel);
-		MyPagePanel.setVisible(false);
+		frm.add(myPagePanel);
+		myPagePanel.setVisible(false);
 		
 		frm.add(customerServicePanel);
 		customerServicePanel.setVisible(false);
