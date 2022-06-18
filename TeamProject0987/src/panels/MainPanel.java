@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import buttons.GoToButton;
 import labels.TopLabel;
 
+// 첫화면
+
 public class MainPanel extends JPanel {
 	
 	private GoToButton myInfoBtn;
@@ -24,7 +26,7 @@ public class MainPanel extends JPanel {
 	public static IdSearchPanel idSearchPanel = new IdSearchPanel(); 
 	public static PwSearchPanel pwSerachPanel = new PwSearchPanel();
 	
-	public static JPanel currPanel; //이전 버튼 구현하는데 사용되는 패널들
+	public static JPanel currPanel; //이전 버튼 구현하는데 사용되는 패널들.
 	public static JPanel lastPanel; 
 	public static JPanel tempPanel;
 
