@@ -10,7 +10,7 @@ import panels.MyPagePanel;
 
 public class MyPageTabButton extends JButton {
 	
-	String name;
+	private String name;
 	
 	private ActionListener eventListener = new ActionListener() {
 
