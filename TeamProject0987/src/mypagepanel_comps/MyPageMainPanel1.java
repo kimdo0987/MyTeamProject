@@ -2,6 +2,7 @@ package mypagepanel_comps;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,6 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
+import mypagepanel_comps.frames.CancelLectureFrame;
 import mypagepanel_comps.frames.CommentsFrame;
 
 //나의 수강 조회 Panel이 될 JPanel입니다
@@ -24,6 +26,7 @@ public class MyPageMainPanel1 extends JPanel {
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
+		
 		TopLabel toplabel = new TopLabel("나의 수강 조회");
 		toplabel.setLocation(335, 31);
 		add(toplabel);	
@@ -33,8 +36,9 @@ public class MyPageMainPanel1 extends JPanel {
 		panel.setLayout(null);
 		
 
-		JLabel tableNameLabel = new JLabel("나의 수강 목록");
-		tableNameLabel.setBounds(12, 9, 100, 40);
+		JLabel tableNameLabel = new JLabel("수강 목록");
+		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
+		tableNameLabel.setBounds(12, 9, 148, 40);
 		panel.add(tableNameLabel);
 		
 		
@@ -51,7 +55,15 @@ public class MyPageMainPanel1 extends JPanel {
 		};
 		tablePanel.setLayout(null);
 		
-		JTable table = new JTable(data, headings);
+		
+		// 테이블의 셀 내용 수정 불가 시작 //
+		DefaultTableModel mod = new DefaultTableModel(data, headings) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		};
+
+		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
 		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
 		table.getColumnModel().getColumn(1).setMinWidth(50);//셀 너비 조정
@@ -75,10 +87,10 @@ public class MyPageMainPanel1 extends JPanel {
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
 		
 		
-		// 한 컬럼만 선택가능 넣어야함.
+		// 한 컬럼만 선택가능 넣어야함  
 		
-		// 셀 수정 못하게하는 기능 넣어야함
 		
+		// 수강평 쓴 아이디는 다시 접근할 수 없게 만들어야함
 		
 		
 		table.addMouseListener(new MouseAdapter() {
@@ -93,7 +105,7 @@ public class MyPageMainPanel1 extends JPanel {
 				if (col == 4) {
 					new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 				} else if (col == 5) {
-					System.out.println("수강포기 창으로 가기");
+					new CancelLectureFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 				} else {
 					
 				}

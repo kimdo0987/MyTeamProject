@@ -1,26 +1,23 @@
 package mypagepanel_comps.frames;
 
-import javax.swing.JFrame;
-
-import panels.MainPanel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-
-import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
-import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import popups.MsgPopup;
 
 public class CommentsFrame extends JFrame {
-	private JTextArea textField;
-	
+	private JTextArea textArea;	
 	JFrame thisFrame;
 	
 	public CommentsFrame(String lectureName, String teacherName) {
@@ -38,19 +35,26 @@ public class CommentsFrame extends JFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		textField = new JTextArea(3,3);
-		textField.setBounds(12, 80, 449, 130);
-		textField.setLineWrap(true); //자동으로 줄바꿈
+		JLabel textLengthLabel = new JLabel("수강평 (0/70자)");
+		textLengthLabel.setForeground(SystemColor.windowBorder);
+		textLengthLabel.setBounds(12, 185, 270, 23);
 		
-		textField.addKeyListener(new KeyListener() {
+		panel.add(textLengthLabel);
+		
+		textArea = new JTextArea(3,3);
+		textArea.setBounds(12, 80, 449, 108);
+		textArea.setLineWrap(true); //자동으로 줄바꿈
+		
+		textArea.addKeyListener(new KeyListener() {
 			
 		// textArea에 입력가능한 글자수 70글자로 제한함
 			@Override
 			public void keyTyped(KeyEvent e) {
-				String msg = textField.getText();
-							
+				String msg = textArea.getText();
+								
+				textLengthLabel.setText("수강평 (" + msg.length() + "/70자)");
                 if ( msg.length() >70) { 
-                    textField.setText(msg.substring(0, 70));
+                    textArea.setText(msg.substring(0, 70));
                 }              
             }			
 			@Override
@@ -63,8 +67,8 @@ public class CommentsFrame extends JFrame {
 		});		
 		
 		
-		panel.add(textField);
-		textField.setColumns(10);
+		panel.add(textArea);
+		
 		
 		JLabel lblNewLabel = new JLabel("강좌명 : " + lectureName + "      강사명 : " + teacherName);
 		lblNewLabel.setBounds(13, 9, 360, 46);
@@ -89,11 +93,17 @@ public class CommentsFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(ratingBox.getSelectedItem().equals("평점")) {
+					//평점고르지않으면 뜨는 팝업창생성
+					new MsgPopup(thisFrame, "평점을 골라주세요.");
+													
+				} else {
+				
 				System.out.println("평점"+ratingBox.getSelectedItem()); 
-				System.out.println(textField.getText());
-				//DB에 저장하는 기능 추가
-				thisFrame.setVisible(false);
-								
+				System.out.println(textArea.getText());
+				//DB에 저장하는 기능 추가 필요함
+				dispose();
+				}		
 			}
 		});
 		panel.add(confirmBtn);
@@ -106,7 +116,7 @@ public class CommentsFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				thisFrame.setVisible(false);			
+				dispose();
 			}
 		});
 		panel.add(cancelBtn);
@@ -115,12 +125,15 @@ public class CommentsFrame extends JFrame {
 		infoLabel.setForeground(new Color(102, 102, 102));
 		infoLabel.setBounds(12, 48, 270, 23);
 		panel.add(infoLabel);
+		
+		
 		setVisible(true);
 		
 	}	
 	
-//	public static void main(String[] args) {
-//		
-//		new CommentsFrame("자바"+"김선생");	
-//	}
+	public static void main(String[] args) {
+		//시험용
+		CommentsFrame frame = new CommentsFrame("자바","김선생");
+		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
 }

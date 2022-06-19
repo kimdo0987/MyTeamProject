@@ -17,6 +17,8 @@ public class MainPanel extends JPanel {
 	private GoToButton signUpBtn;
 	private GoToButton loginBtn;
 	
+	public static JFrame thisFrame;
+	
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
 	public static MyPagePanel myPagePanel = new MyPagePanel();
@@ -77,6 +79,7 @@ public class MainPanel extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame frm = new JFrame();
+		thisFrame = frm;
 		frm.add(new MainPanel());	
 		frm.setBounds(0, 0, 1200, 800);
 		frm.setLocationRelativeTo(null);
