@@ -37,14 +37,10 @@ public class LectureInfoPanel extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JButton enrolmentBtn = new JButton("수강 신청하기");
+		JButton enrolmentBtn = new JButton("장바구니 담기");
 		enrolmentBtn.setBackground(Color.ORANGE);
-		enrolmentBtn.setBounds(226, 101, 433, 50);
+		enrolmentBtn.setBounds(226, 101, 508, 50);
 		panel.add(enrolmentBtn);
-		
-		JButton heartBtn = new JButton("♡");
-		heartBtn.setBounds(671, 101, 63, 49);
-		panel.add(heartBtn);
 		
 		JLabel lectureNameLabel = new JLabel("강의명");
 		lectureNameLabel.setOpaque(true);
