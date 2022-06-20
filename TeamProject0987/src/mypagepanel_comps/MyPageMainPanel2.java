@@ -1,8 +1,15 @@
 package mypagepanel_comps;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
 
@@ -16,6 +23,74 @@ public class MyPageMainPanel2 extends JPanel {
 		
 		TopLabel toplabel = new TopLabel("출결 현황 조회");
 		toplabel.setLocation(335, 31);
-		add(toplabel);	
+		add(toplabel);
+		
+		JPanel panel = new JPanel(); //출석List 테이블과 label이 들어가는 패널 (출석현황 panel)
+		panel.setBounds(162, 155, 730, 569);
+		panel.setLayout(null);
+		add(panel);
+		
+		JLabel tableNameLabel = new JLabel("출결 리스트");
+		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
+		tableNameLabel.setBounds(12, 9, 148, 40);
+		panel.add(tableNameLabel);
+		
+		JPanel tablePanel = new JPanel();
+		tablePanel.setBounds(0, 58, 730, 511);		
+		tablePanel.setLayout(null);
+		panel.add(tablePanel);
+		
+		String[] headings = new String[] {"날짜","강의명","강사명","입실시간","퇴실시간","결과"};
+		Object[][] data = new Object[][] {
+			{"22.06.18","DataBase 입문", "김교수", "09:05", "18:03", "지각"},
+			{"22.06.17","DataBase 입문", "김교수", "08:55", "18:03", "출석"},
+			{"22.06.16","DataBase 입문", "김교수", "09:00", "18:02", "출석"},
+			{"22.06.15","DataBase 입문", "김교수", "null", "null", "결석"}, //이 부분을 어떻게 구현할지 생각해봐야함
+			{"22.06.14","DataBase 입문", "김교수", "08:53", "13:00", "조퇴"}
+		};
+		
+		// 테이블의 셀 내용 수정 불가 시작 //
+		DefaultTableModel mod = new DefaultTableModel(data, headings) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		};
+
+		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
+		table.setPreferredScrollableViewportSize(new Dimension(700,600));
+		
+		table.getColumnModel().getColumn(0).setMinWidth(70);
+		table.getColumnModel().getColumn(0).setMaxWidth(70);
+		table.getColumnModel().getColumn(1).setMinWidth(350);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMaxWidth(350);
+		table.getColumnModel().getColumn(2).setMinWidth(80);
+		table.getColumnModel().getColumn(2).setMaxWidth(80);
+		
+		table.getColumnModel().getColumn(3).setMinWidth(70);
+		table.getColumnModel().getColumn(3).setMaxWidth(70);
+		table.getColumnModel().getColumn(4).setMinWidth(70);
+		table.getColumnModel().getColumn(4).setMaxWidth(70);
+		table.getColumnModel().getColumn(5).setMinWidth(90);
+		table.getColumnModel().getColumn(5).setMaxWidth(90);
+		
+		
+		table.setRowHeight(30); // 셀 높이 조정		
+		table.setCellSelectionEnabled(true); // 한셀만 선택가능
+		table.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
+		table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
+		
+		
+		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
+		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
+		
+		
+		
+		table.setFillsViewportHeight(true);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(0, 0, 730, 500);		
+		tablePanel.add(scrollPane);		
+		panel.add(tablePanel);
+		
+		
 	}
 }

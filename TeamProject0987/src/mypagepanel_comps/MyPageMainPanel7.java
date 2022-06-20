@@ -2,7 +2,11 @@ package mypagepanel_comps;
 
 import java.awt.Color;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import labels.TopLabel;
 
@@ -18,6 +22,27 @@ public class MyPageMainPanel7 extends JPanel {
 		TopLabel toplabel = new TopLabel("회원 탈퇴");
 		toplabel.setLocation(335, 31);
 		add(toplabel);
+		
+		JPanel panel = new JPanel(); //탈퇴시 안내사항label, 비밀번호작성 textField,버튼 이 들어가는 패널 (장바구니 panel)
+		panel.setBounds(162, 155, 730, 569);
+		panel.setLayout(null);
+		add(panel);
+		
+		JLabel report = new JLabel("탈퇴시 안내사항");
+		report.setBounds(320,80,200,200);
+		panel.add(report);
+		
+		JLabel  explain = new JLabel("비밀번호를 입력해주세요");
+		explain.setBounds(220,300,200,60);
+		panel.add(explain);
+		
+		JPasswordField pwInput = new JPasswordField();
+		add(pwInput);
+		pwInput.setBounds(380, 500, 300, 30);
+		
+		JButton leaveBtn = new JButton("탈퇴하기");
+		leaveBtn.setBounds(260, 500, 200,40);
+		panel.add(leaveBtn);
 		
 	}
 }

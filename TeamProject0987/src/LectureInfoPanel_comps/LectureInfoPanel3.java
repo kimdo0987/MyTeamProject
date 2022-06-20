@@ -1,15 +1,19 @@
 package LectureInfoPanel_comps;
 
 import java.awt.Color;
+
 import java.awt.Component;
+
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+
 
 // 강의 시간표 Panel 이 될 JPanel 입니다
 
@@ -28,6 +32,7 @@ public class LectureInfoPanel3 extends JPanel {
 				{"6", " ", "강의", " ", "강의", " ", "강의", " "}
 		};
 		
+
 		JTable scheduleTable = new JTable(data, headings) {
 			// 익명내부클래스로 특정 row에서 색깔 바꿈
 			public Component prepareRenderer(
@@ -47,10 +52,12 @@ public class LectureInfoPanel3 extends JPanel {
 		
 		// JscroollPane 의 사이즈와 테이블의 사이즈를 각각 따로 설정해야 하는듯 합니다.
 		// 그 중에서도 테이블의 scrollPane 의 사이즈보다 크거나 같아야 합니다.
+
 		JScrollPane scrollPane = new JScrollPane(scheduleTable);
 		scrollPane.setSize(786, 390);
 		add(scrollPane);
 		
+
 		scheduleTable.setSize(786, 390);
 		scheduleTable.setRowHeight(30);
 		scheduleTable.setFillsViewportHeight(true);
@@ -73,6 +80,7 @@ public class LectureInfoPanel3 extends JPanel {
 			CellModel.getColumn(i).setCellRenderer(tableCell);			
 		}
 		
+
 		scheduleTable.setFillsViewportHeight(true);
 		scheduleTable.setSize(786, 390);
 		

@@ -71,7 +71,7 @@ public class LoginPanel extends JPanel {
 		add(pwInput);
 		pwInput.setBounds(400, 300, 300, 30);
 		
-		JButton loginBtn = new JButton("로그인 버튼");
+		JButton loginBtn = new JButton("로그인");
 		add(loginBtn);
 		loginBtn.setBounds(450, 350, 200, 50);
 		

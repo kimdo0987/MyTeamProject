@@ -84,8 +84,6 @@ public class MyPagePanel extends JPanel {
 		cardLayoutPanel.add(mainPanel7, "회원 탈퇴");
 				
 		
-		setBounds(0, 0, 1200, 800);
-		
 		MyPageTabButton btn1 = new MyPageTabButton("나의 수강조회");
 		btn1.setBounds(0, 172, 120, 60);
 		add(btn1);
@@ -113,6 +111,7 @@ public class MyPagePanel extends JPanel {
 		MyPageTabButton btn7 = new MyPageTabButton("회원 탈퇴");		
 		btn7.setBounds(0, 700, 120, 60);
 		add(btn7);
+		
 		
 		
 	}
