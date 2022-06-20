@@ -28,7 +28,7 @@ public class GoToButton extends JButton {
 				JPanel valuePanel = PanelHash.get(sourceBtn.getText());
 				
 				MainPanel.currPanel.setVisible(false);
-				valuePanel.setVisible(true);  
+				valuePanel.setVisible(true);
 				MainPanel.lastPanel = MainPanel.currPanel;
 				MainPanel.currPanel = valuePanel;				
 			}
