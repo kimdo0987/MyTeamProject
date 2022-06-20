@@ -15,8 +15,6 @@ import LectureInfoPanel_comps.LectureInfoPanel2;
 import LectureInfoPanel_comps.LectureInfoPanel3;
 import LectureInfoPanel_comps.LectureInfoTabButton;
 import buttons.GoToButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class LectureInfoPanel extends JPanel {
 	
@@ -86,7 +84,6 @@ public class LectureInfoPanel extends JPanel {
 		cardLayoutPanel.add(lectureInfoPanel1, "상세정보");
 		cardLayoutPanel.add(lectureInfoPanel2, "수강평");
 		cardLayoutPanel.add(lectureInfoPanel3, "강의 시간표");
-		
 		
 		//////////////////////////////////////////////////
 		
