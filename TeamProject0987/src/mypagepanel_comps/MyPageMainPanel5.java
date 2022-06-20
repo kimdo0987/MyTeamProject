@@ -3,6 +3,8 @@ package mypagepanel_comps;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,21 +57,27 @@ public class MyPageMainPanel5 extends JPanel {
 			}
 		};
 		
+		
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
 		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
 		table.getColumnModel().getColumn(0).setMinWidth(60);//셀 너비 조정
 		table.getColumnModel().getColumn(0).setMaxWidth(60);
-		table.getColumnModel().getColumn(1).setMinWidth(100);
-		table.getColumnModel().getColumn(1).setMaxWidth(100);
+		table.getColumnModel().getColumn(1).setMinWidth(60);
+		table.getColumnModel().getColumn(1).setMaxWidth(60);
 		table.getColumnModel().getColumn(2).setMinWidth(60);
 		table.getColumnModel().getColumn(2).setMaxWidth(60);
-		table.getColumnModel().getColumn(3).setMinWidth(400);
-		table.getColumnModel().getColumn(3).setMaxWidth(400);
+		table.getColumnModel().getColumn(3).setMinWidth(470);
+		table.getColumnModel().getColumn(3).setMaxWidth(470);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
-		table.getTableHeader().setReorderingAllowed(true); //컬럼 헤더 이동 가능 설정
+		table.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 이동 가능 불가 설정
+		table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
 		
+		
+		table.setEnabled(false);
+//		table.setCellSelectionEnabled(isEnabled());
+//		table.setColumnSelectionAllowed(true);
 		
 		
 		
