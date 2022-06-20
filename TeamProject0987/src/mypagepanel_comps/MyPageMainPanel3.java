@@ -77,7 +77,7 @@ public class MyPageMainPanel3 extends JPanel {
 		table.getColumnModel().getColumn(3).setMaxWidth(90);
 		table.getColumnModel().getColumn(4).setMinWidth(110);
 		table.getColumnModel().getColumn(4).setMaxWidth(110);
-		
+		 
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
