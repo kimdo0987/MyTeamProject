@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 
 import buttons.GoToButton;
 import labels.TopLabel;
+import popups.MsgPopup;
+import popups.PwFindPopup;
 
 public class PwSearchPanel extends JPanel {
 
@@ -52,9 +54,23 @@ public class PwSearchPanel extends JPanel {
 		
 		
 		
-		JButton idSearchBtn = new JButton("아이디 조회");
-		add(idSearchBtn);
-		idSearchBtn.setBounds(470, 350, 200, 50);
+		JButton pwSearchBtn = new JButton("임시 비밀번호로 변경하기");
+		pwSearchBtn.setBounds(470, 350, 200, 50);
+		pwSearchBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(0 != 0 ){ //해당 아이디가 DB에 존재하지 않으면 
+					new MsgPopup(MainPanel.thisFrame, "해당 아이디가 존재하지 않습니다");
+				} else if (0 != 0) { //해당아이디는 존재하는데 이름 또는 주민번호가 일치하지않으면
+					new MsgPopup(MainPanel.thisFrame, "해당 아이디와 입력한 회원정보가 일치하지 않습니다");
+				} else {
+					new PwFindPopup(MainPanel.thisFrame, idInput.getText());
+				}
+				
+			}
+		});
+		add(pwSearchBtn);
 	}
 	
 //	public static void main(String[] args) {

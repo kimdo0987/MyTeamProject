@@ -168,11 +168,11 @@ public class CancelLectureFrame extends JFrame {
 		setVisible(true);
 	}
 	
-//	public static void main(String[] args) {
-//		//시험용
-//		
-//		CancelLectureFrame CancelLectureFrame = new CancelLectureFrame("자바","김선생");
-//		CancelLectureFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-//		
-//	}
+	public static void main(String[] args) {
+		//시험용
+		
+		CancelLectureFrame CancelLectureFrame = new CancelLectureFrame("자바","김선생");
+		CancelLectureFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+	}
 }

@@ -3,6 +3,7 @@ package panels;
 
 
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 
 import buttons.GoToButton;
 import labels.TopLabel;
+import popups.IdFindPopup;
 
 public class IdSearchPanel extends JPanel{
 
@@ -45,13 +47,21 @@ public class IdSearchPanel extends JPanel{
 		add(nameInput);
 		nameInput.setBounds(398, 227, 361, 44);
 		
-		JTextField pwInput = new JTextField("주민등록번호 입력");
-		add(pwInput);
-		pwInput.setBounds(398, 286, 361, 44);
+		JTextField JNumInput = new JTextField("주민등록번호 입력");
+		add(JNumInput);
+		JNumInput.setBounds(398, 286, 361, 44);
 		
 		JButton idSearchBtn = new JButton("아이디 조회");
-		add(idSearchBtn);
 		idSearchBtn.setBounds(478, 378, 200, 50);
+		idSearchBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					new IdFindPopup(MainPanel.thisFrame, nameInput.getText(), JNumInput.getText());
+				
+			}
+		});
+		add(idSearchBtn);
 		
 	}
 //	public static void main(String[] args) {
