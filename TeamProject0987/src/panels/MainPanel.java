@@ -9,22 +9,26 @@ import javax.swing.JPanel;
 import buttons.GoToButton;
 import labels.TopLabel;
 
+// 첫화면
+
 public class MainPanel extends JPanel {
 	
 	private GoToButton myInfoBtn;
 	private GoToButton signUpBtn;
 	private GoToButton loginBtn;
 	
+	public static JFrame thisFrame;
+	
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
-	public static MyPagePanel MyPagePanel = new MyPagePanel();
+	public static MyPagePanel myPagePanel = new MyPagePanel();
 	public static CustomerServicePanel customerServicePanel = new CustomerServicePanel();
 	public static SignupPanel signUpPanel = new SignupPanel();
 	public static LoginPanel loginPanel = new LoginPanel();
 	public static IdSearchPanel idSearchPanel = new IdSearchPanel(); 
 	public static PwSearchPanel pwSerachPanel = new PwSearchPanel();
 	
-	public static JPanel currPanel; //이전 버튼 구현하는데 사용되는 패널들
+	public static JPanel currPanel; //이전 버튼 구현하는데 사용되는 패널들.
 	public static JPanel lastPanel; 
 	public static JPanel tempPanel;
 
@@ -75,6 +79,7 @@ public class MainPanel extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame frm = new JFrame();
+		thisFrame = frm;
 		frm.add(new MainPanel());	
 		frm.setBounds(0, 0, 1200, 800);
 		frm.setLocationRelativeTo(null);
@@ -84,8 +89,8 @@ public class MainPanel extends JPanel {
 		frm.add(lectureSearchPanel);
 		lectureSearchPanel.setVisible(false);
 		
-		frm.add(MyPagePanel);
-		MyPagePanel.setVisible(false);
+		frm.add(myPagePanel);
+		myPagePanel.setVisible(false);
 		
 		frm.add(customerServicePanel);
 		customerServicePanel.setVisible(false);

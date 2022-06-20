@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import buttons.GoToButton;
 import labels.TopLabel;
 
-public class SignupPanel extends JPanel{
+public class SignupPanel extends JPanel {
 	
 		
 	private JTextField createIdField;
@@ -133,7 +133,7 @@ public class SignupPanel extends JPanel{
 		add(insertPhoneNumField);
 		
 		JPanel cateBtnPanel = new JPanel();
-		cateBtnPanel.setBounds(320, 468, 486, 98);
+		cateBtnPanel.setBounds(97, 453, 926, 121);
 		add(cateBtnPanel);
 		cateBtnPanel.setLayout(new GridLayout(2,13));
 		
