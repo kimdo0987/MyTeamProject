@@ -60,6 +60,7 @@ public class MyPageMainPanel5 extends JPanel {
 		
 		table.getColumnModel().getColumn(0).setMinWidth(60);//셀 너비 조정
 		table.getColumnModel().getColumn(0).setMaxWidth(60);
+
 		table.getColumnModel().getColumn(1).setMinWidth(100);
 		table.getColumnModel().getColumn(1).setMaxWidth(100);
 		table.getColumnModel().getColumn(2).setMinWidth(60);
@@ -71,6 +72,7 @@ public class MyPageMainPanel5 extends JPanel {
 		table.getTableHeader().setReorderingAllowed(true); //컬럼 헤더 이동 가능 설정
 		
 		table.setEnabled(false); //테이블 클릭 안되도록 지정
+
 		
 		
 		//테이블 생성에 관한 내용
