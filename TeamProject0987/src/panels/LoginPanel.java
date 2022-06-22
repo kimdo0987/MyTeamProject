@@ -101,27 +101,29 @@ public class LoginPanel extends JPanel {
 		add(loginBtn);
 		loginBtn.setBounds(450, 350, 200, 50);
 		
-		try (
-				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement("SELECT member_password FROM members "
-						+ "WHERE member_id = ?");
-				) {
-			pstmt.setString(1, idText);
-			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				searchPw = rs.getString("member_password");		
-				System.out.println(searchPw);
-			}
-			
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		
 		
 		loginBtn.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(searchPw==pwText) {
+				
+				try (
+						Connection conn = OjdbcConnection.getConnection();
+						PreparedStatement pstmt = conn.prepareStatement("SELECT member_password FROM members "
+								+ "WHERE member_id = ?");
+						) {
+					pstmt.setString(1, idText);
+					ResultSet rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						searchPw = rs.getString("member_password");
+					}
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+				if(searchPw.equals(pwText)) {
 					System.out.println("로그인 성공");
 					System.out.println("내가적은 pw : " + pwText);
 					System.out.println("DB에서 찾은 pw : " + searchPw);

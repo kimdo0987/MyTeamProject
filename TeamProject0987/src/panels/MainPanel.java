@@ -18,7 +18,7 @@ public class MainPanel extends JPanel {
 	private GoToButton loginBtn;
 	
 	public static JFrame thisFrame;
-	public static String currUserId = "";
+	public static String currUserId = "hansm1119";
 	
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
