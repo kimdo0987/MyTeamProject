@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MyAttendanceLog {
 	public static String[][] getMyAttendanceLog() {
 		String sql = "select "
-				+ "attendance_date, "
+				+ "attendance_date||''||'', "
 				+ "lecture_name, "
 				+ "teacher_name, "
 				+ "attendance_state "
@@ -28,13 +28,13 @@ public class MyAttendanceLog {
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {
 				list.add(new String[] {
-						result.getString("attendance_date"),
+						result.getString("attendance_date||''||''"),
 						result.getString("lecture_name"),
 						result.getString("teacher_name"),
 						result.getString("attendance_state")
 				});
 			}
-			System.out.println("The data has been fetched");
+			System.out.println("The data(MyAttendanceLog) has been fetched");
 			String[][] arr = new String[list.size()][4];
 			return list.toArray(arr);
 		} catch (Exception e) {
