@@ -18,8 +18,7 @@ import labels.TopLabel;
 import javax.swing.JComboBox;
 
 public class SignupPanel extends JPanel {
-	
-		
+		 	
 	private JTextField createIdField;
 	private JPasswordField createPwField;
 	private JComponent rePwField;

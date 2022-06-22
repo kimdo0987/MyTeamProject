@@ -3,7 +3,7 @@ package mypagepanel_comps.mp6;
 import java.awt.CardLayout;
 
 import javax.swing.JPanel;
-
+     
 public class MpChangePanel extends JPanel {
 	public static CardLayout mpLayout = new CardLayout();
 	public static JPanel mpPanel = new JPanel();

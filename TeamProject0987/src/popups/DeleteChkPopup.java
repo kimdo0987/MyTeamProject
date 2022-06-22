@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
+ 
 public class DeleteChkPopup extends JDialog{
 	public DeleteChkPopup(Window parent) {
 		

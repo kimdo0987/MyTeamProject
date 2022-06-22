@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import popups.MsgPopup;
-
+  
 public class CommentsFrame extends JFrame {
 	private JTextArea textArea;	
 	JFrame thisFrame;
