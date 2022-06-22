@@ -36,8 +36,8 @@ public class MyProfilePanel extends JPanel {
 		emailLabel.setBounds(105, 260, 50, 50);
 		add(emailLabel);
 		
-		JButton modifyBtn = new JButton("수정하기");
-		modifyBtn.setBounds(300, 350, 100, 50);
+		JButton modifyBtn = new JButton("내 정보 수정하기");
+		modifyBtn.setBounds(276, 349, 145, 50);
 		modifyBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -50,7 +50,7 @@ public class MyProfilePanel extends JPanel {
 		
 	}
 
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 //		JFrame frame = new JFrame();
 //		JPanel panel = new JPanel();
 //		frame.add(panel);
@@ -64,5 +64,5 @@ public class MyProfilePanel extends JPanel {
 //		frame.setLocationRelativeTo(null);
 //		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frame.setVisible(true);
-	}
+//	}
 }
