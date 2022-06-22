@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
@@ -43,16 +45,10 @@ public class MyPageMainPanel1 extends JPanel {
 		
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 58, 730, 511);		
+		tablePanel.setBounds(0, 58, 730, 511);	
 		
-		
-		String[] headings = new String[] {"강의명","강사명","수강기간","출석률","수강평작성","수강포기"};
-		Object[][] data = new Object[][] {
-			{"DataBase 입문","김교수","22.06.18 ~ 22.07.18", 7 + "%", "수강평작성", "수강포기"},
-			{"JAVA 입문", "이강사","22.06.18 ~ 22.07.18", 7 + "%", "수강평작성", "수강포기"},
-			{"SQl 입문","차강사","22.06.18 ~ 22.07.18", 7 + "%", "수강평작성", "수강포기"},
-			{"MachineLearing 입문","도강사","22.06.18 ~ 22.07.18", 7 + "%", "수강평작성", "수강포기"}			
-		};
+		String[] headings = new String[] {"강의명","강사명","수강시작일", "수강평작성", "수강포기"};
+		String[][] data = database.MyLectureLists.getMyLectureLists();
 		tablePanel.setLayout(null);
 		
 		
@@ -66,16 +62,16 @@ public class MyPageMainPanel1 extends JPanel {
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
 		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
-		table.getColumnModel().getColumn(1).setMinWidth(50);//셀 너비 조정
-		table.getColumnModel().getColumn(1).setMaxWidth(50);
-		table.getColumnModel().getColumn(2).setMinWidth(120);
-		table.getColumnModel().getColumn(2).setMaxWidth(120);
-		table.getColumnModel().getColumn(3).setMinWidth(50);
-		table.getColumnModel().getColumn(3).setMaxWidth(50);
-		table.getColumnModel().getColumn(4).setMinWidth(70);
-		table.getColumnModel().getColumn(4).setMaxWidth(70);
-		table.getColumnModel().getColumn(5).setMinWidth(70);
-		table.getColumnModel().getColumn(5).setMaxWidth(70);
+		table.getColumnModel().getColumn(0).setMinWidth(300);//셀 너비 조정
+		table.getColumnModel().getColumn(0).setMaxWidth(300);
+		table.getColumnModel().getColumn(1).setMinWidth(100);
+		table.getColumnModel().getColumn(1).setMaxWidth(100);
+		table.getColumnModel().getColumn(2).setMinWidth(150);
+		table.getColumnModel().getColumn(2).setMaxWidth(150);		
+		table.getColumnModel().getColumn(3).setMinWidth(80);
+		table.getColumnModel().getColumn(3).setMaxWidth(80);
+		table.getColumnModel().getColumn(4).setMinWidth(100);
+		table.getColumnModel().getColumn(4).setMaxWidth(100);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -86,17 +82,16 @@ public class MyPageMainPanel1 extends JPanel {
 		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
 		
-		
 		// 한 컬럼만 선택가능 넣어야함  
 		
 		
 		// 수강평 쓴 아이디는 다시 접근할 수 없게 만들어야함
 		
-		
-		table.addMouseListener(new MouseAdapter() {
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
 				int row = table.getSelectedRow();
 				int col = table.getSelectedColumn();
 				System.out.println("행index:"+row +",열index:"+col );
@@ -113,15 +108,14 @@ public class MyPageMainPanel1 extends JPanel {
 			}
 		});
 		
-		
 		//테이블 생성에 관한 내용
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 730, 500);
+		scrollPane.setSize(getSize());
 		tablePanel.add(scrollPane);
-		
 		panel.add(tablePanel);
-		
+
 		add(panel);
 		
 		
