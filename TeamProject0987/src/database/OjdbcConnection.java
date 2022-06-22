@@ -19,8 +19,10 @@ public class OjdbcConnection {
 		} catch (ClassNotFoundException e) {
 			System.out.println("driver Name Error : " + driverName);
 
+
 		}		
 
+    
 	}
 	
 	public static Connection getConnection() throws SQLException{
