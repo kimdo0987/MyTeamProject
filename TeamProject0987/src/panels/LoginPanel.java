@@ -4,6 +4,8 @@ package panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import buttons.GoToButton;
@@ -22,7 +25,9 @@ import labels.TopLabel;
 public class LoginPanel extends JPanel {
 	
 	//버튼,라벨,텍스트필드 생성완료
-	
+
+	static public String pwText;
+	static public String idText = "";
 	
 	public LoginPanel() {
 		setBounds(0, 0, 1200, 800);
@@ -71,12 +76,33 @@ public class LoginPanel extends JPanel {
 		JTextField idInput = new JTextField("아이디 입력");
 		add(idInput);
 		idInput.setBounds(400, 250, 300, 30);
-		String idText = idInput.getText();
 		
-		JTextField pwInput = new JTextField("비밀번호 입력");
+		idInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				idText = idInput.getText().toString();
+			}	
+		});
+		
+		
+		JPasswordField pwInput = new JPasswordField("비밀번호 입력");
 		add(pwInput);
 		pwInput.setBounds(400, 300, 300, 30);
-		String pwText = pwInput.getText();
+		
+		pwInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				char[] a = pwInput.getPassword();
+				pwText = String.valueOf(a);				
+			}	
+		});
+		
+//		char[] pwChar = pwInput.getPassword();
+//		for(char cha : pwChar){         
+//	         Character.toString(cha);       //cha 에 저장된 값 string으로 변환
+//	       //pwText 에 저장하기, pwText 에 값이 비어있으면 저장, 값이 있으면 이어서 저장하는 삼항연산자
+//	         pwText += (pwText.equals("")) ? ""+cha+"" : ""+cha+"";   
+//	     }
 		
 		JButton loginBtn = new JButton("로그인");
 		add(loginBtn);
@@ -97,10 +123,14 @@ public class LoginPanel extends JPanel {
 		loginBtn.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(idText == "") { // id,pw가 DB데이터와 일치한다면
+				if(idText == "46") { // id,pw가 DB데이터와 일치한다면
 					MainPanel.currPanel.setVisible(true);
 					MainPanel.loginPanel.setVisible(false);
+				} else if (pwText == "2") {
+					JOptionPane.showMessageDialog(MainPanel.thisFrame, "확인");
 				} else  {
+					System.out.println(idText);
+					System.out.println(pwText);
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
 							+ "입력하신 내용을 다시 확인해주세요.");
 				}
