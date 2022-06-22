@@ -33,7 +33,7 @@ public class MyLectureLists {
 						"수강포기"
 				});
 			}
-			System.out.println("The data has been fetched");
+			System.out.println("The data(MyLectureLists) has been fetched");
 			String[][] arr = new String[list.size()][5];
 			return list.toArray(arr);
 		} catch (Exception e) {
