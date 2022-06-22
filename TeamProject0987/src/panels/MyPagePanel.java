@@ -31,7 +31,7 @@ public class MyPagePanel extends JPanel {
 	public static MyPageMainPanel5 mainPanel5 = new MyPageMainPanel5();
 	public static MyPageMainPanel6 mainPanel6 = new MyPageMainPanel6();
 	public static MyPageMainPanel7 mainPanel7 = new MyPageMainPanel7();
-	
+
 	public MyPagePanel() {				
 		
 		
