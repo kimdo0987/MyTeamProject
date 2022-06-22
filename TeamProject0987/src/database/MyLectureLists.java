@@ -1,0 +1,45 @@
+package database;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+public class MyLectureLists {
+	
+	public static String[][] getMyLectureLists() {
+		String sql = "SELECT "
+				+ "lecture_name, "
+				+ "teacher_name, "
+				+ "lecture_start_date||'~'||lecture_end_date "
+				+ "FROM "
+				+ "lecture_lists l, "
+				+ "mylecture_lists m "
+				+ "WHERE "
+				+ "l.lecture_id = m.lecture_id";
+		
+		try (
+				Connection con = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+		) {
+			ResultSet result = pstmt.executeQuery();
+			ArrayList<String[]> list = new ArrayList<String[]>();
+			while(result.next()) {
+				list.add(new String[] {
+						result.getString("lecture_name"),
+						result.getString("teacher_name"),
+						result.getString("lecture_start_date||'~'||lecture_end_date"),
+						"수강평작성",
+						"수강포기"
+				});
+			}
+			System.out.println("The data has been fetched");
+			String[][] arr = new String[list.size()][5];
+			return list.toArray(arr);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return null;			
+		}
+	}
+}

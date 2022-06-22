@@ -20,9 +20,11 @@ public class OjdbcConnection {
 			System.out.println("driver Name Error : " + driverName);
 
 
+
 		}		
 
     
+
 	}
 	
 	public static Connection getConnection() throws SQLException{
