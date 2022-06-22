@@ -13,12 +13,16 @@ import labels.TopLabel;
 
 public class MainPanel extends JPanel {
 	
+	public static String currUserId = "hansm1119";
 	private GoToButton myInfoBtn;
 	private GoToButton signUpBtn;
 	private GoToButton loginBtn;
 	
 	public static JFrame thisFrame;
+
+
 	public static String currUserId = "hansm1119";
+
 	
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
@@ -49,7 +53,7 @@ public class MainPanel extends JPanel {
 		add(searchClassBtn); // Panel에 버튼을 추가함 
 		
 		myInfoBtn = new GoToButton("마이페이지");
-		myInfoBtn.setBounds(506, 255, 118, 112);
+		myInfoBtn.setBounds(506, 255, 118, 112);		
 		add(myInfoBtn);
 		
 		GoToButton customerServiceBtn = new GoToButton("고객문의");
@@ -58,7 +62,8 @@ public class MainPanel extends JPanel {
 		
 		
 		signUpBtn = new GoToButton("회원가입");
-		signUpBtn.setBounds(421, 432, 118, 54);
+		
+		signUpBtn.setBounds(421, 432, 118, 54);	
 		add(signUpBtn);
 			
 						
@@ -71,11 +76,6 @@ public class MainPanel extends JPanel {
 	public void getMainPanel() {
 		this.mainPanel = this;		
 	}
-	
-//	
-//	public MainPanel returnMainPanel() {
-//		return mainPanel;
-//	}
 	
 	
 	public static void main(String[] args) {
