@@ -9,14 +9,16 @@ public class MyAttendanceLog {
 	public static String[][] getMyAttendanceLog() {
 		String sql = "select "
 				+ "attendance_date, "
-				+ "member_id, "
 				+ "lecture_name, "
+				+ "teacher_name, "
 				+ "attendance_state "
 				+ "from "
 				+ "attendance_log a, "
 				+ "lecture_lists l "
 				+ "where "
-				+ "a.lecture_id = l.lecture_id";
+				+ "a.lecture_id = l.lecture_id "
+				+ "and "
+				+ "member_id = 'hansm1119'";
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
@@ -27,8 +29,8 @@ public class MyAttendanceLog {
 			while(result.next()) {
 				list.add(new String[] {
 						result.getString("attendance_date"),
-						result.getString("member_id"),
 						result.getString("lecture_name"),
+						result.getString("teacher_name"),
 						result.getString("attendance_state")
 				});
 			}
