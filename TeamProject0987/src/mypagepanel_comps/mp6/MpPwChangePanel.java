@@ -22,6 +22,7 @@ public class MpPwChangePanel extends JPanel {
 	String newPasswordCheck;
 	
 	public MpPwChangePanel() {
+
 		
 		String sql = "UPDATE members SET member_password = ? WHERE member_id = ?";
 		
@@ -61,6 +62,15 @@ public class MpPwChangePanel extends JPanel {
 			add(emailChangeBtn);
 
 			/////////////////////////////////////////////////////////////////////////////////
+      
+      JButton profileBtn = new JButton("내 정보");
+      profileBtn.addActionListener(new ActionListener() {
+			  public void actionPerformed(ActionEvent e) {
+			  MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
+			  }
+  	  });
+      profileBtn.setBounds(24, 9, 93, 23);
+	  	add(profileBtn);
 
 			JButton pwChangeBtn = new JButton("비밀번호 변경");
 			pwChangeBtn.addActionListener(new ActionListener() {
@@ -156,6 +166,7 @@ public class MpPwChangePanel extends JPanel {
 		} catch (Exception e) {
 
 		}
+
 
 	}
 

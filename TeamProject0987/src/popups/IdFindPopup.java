@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-
+ 
 public class IdFindPopup extends JDialog{
 	
 	public IdFindPopup(Window parent, String name, String Jnum) {

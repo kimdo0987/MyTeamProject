@@ -95,6 +95,17 @@ public class MpPhoneNumChangePanel extends JPanel {
 		JLabel newPnLabel = new JLabel("새 전화번호");
 		newPnLabel.setBounds(56, 223, 124, 51);
 		add(newPnLabel);
+      
+      
+		JButton profileBtn = new JButton("내 정보");
+		profileBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
+			}
+		});
+		profileBtn.setBounds(24, 9, 93, 23);
+		add(profileBtn);
+
 
 		JButton ChangeOkBtn = new JButton("변경 하기");
 		ChangeOkBtn.addActionListener(new ActionListener() {
@@ -126,5 +137,6 @@ public class MpPhoneNumChangePanel extends JPanel {
 		} catch (Exception e) {
 
 		}
+
 	}
 }
