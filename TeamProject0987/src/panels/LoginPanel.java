@@ -28,6 +28,7 @@ public class LoginPanel extends JPanel {
 
 	static public String pwText;
 	static public String idText = "";
+	static public String searchPw;
 	
 	public LoginPanel() {
 		setBounds(0, 0, 1200, 800);
@@ -59,7 +60,6 @@ public class LoginPanel extends JPanel {
 				MainPanel.currPanel.setVisible(false);
 				MainPanel.mainPanel.setVisible(true);
 				MainPanel.currPanel=MainPanel.mainPanel;
-				
 				
 			}
 		});
@@ -97,17 +97,9 @@ public class LoginPanel extends JPanel {
 			}	
 		});
 		
-//		char[] pwChar = pwInput.getPassword();
-//		for(char cha : pwChar){         
-//	         Character.toString(cha);       //cha 에 저장된 값 string으로 변환
-//	       //pwText 에 저장하기, pwText 에 값이 비어있으면 저장, 값이 있으면 이어서 저장하는 삼항연산자
-//	         pwText += (pwText.equals("")) ? ""+cha+"" : ""+cha+"";   
-//	     }
-		
 		JButton loginBtn = new JButton("로그인");
 		add(loginBtn);
 		loginBtn.setBounds(450, 350, 200, 50);
-
 		
 		try (
 				Connection conn = OjdbcConnection.getConnection();
@@ -115,28 +107,38 @@ public class LoginPanel extends JPanel {
 						+ "WHERE member_id = ?");
 				) {
 			pstmt.setString(1, idText);
+			ResultSet rs = pstmt.executeQuery();
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+			while(rs.next()) {
+				searchPw = rs.getString("member_password");		
+				System.out.println(searchPw);
+			}
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 		
 		loginBtn.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(idText == "46") { // id,pw가 DB데이터와 일치한다면
-					MainPanel.currPanel.setVisible(true);
-					MainPanel.loginPanel.setVisible(false);
-				} else if (pwText == "2") {
-					JOptionPane.showMessageDialog(MainPanel.thisFrame, "확인");
-				} else  {
-					System.out.println(idText);
-					System.out.println(pwText);
+				if(searchPw==pwText) {
+					System.out.println("로그인 성공");
+					System.out.println("내가적은 pw : " + pwText);
+					System.out.println("DB에서 찾은 pw : " + searchPw);
+					MainPanel.currPanel.setVisible(false);
+					MainPanel.mainPanel.setVisible(true);
+					MainPanel.lastPanel = MainPanel.currPanel;
+					MainPanel.currPanel = MainPanel.mainPanel;		
+				} else {
+					System.out.println("로그인 실패");
+					System.out.println("적은id : " + idText);
+					System.out.println("적은pw : " + pwText);
+					System.out.println("DB에서 찾은 pw : " + searchPw);
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
 							+ "입력하신 내용을 다시 확인해주세요.");
 				}
 			}
 		});
-		
 		
 		
 		JButton findId = new JButton("아이디찾기");
@@ -161,10 +163,5 @@ public class LoginPanel extends JPanel {
 		add(signUp);
 		signUp.setBounds(661, 430, 150, 35);
 		
-		
-		
-		
 	}
-	
-
 }
