@@ -10,6 +10,7 @@ public class MpChangePanel extends JPanel {
 	public static MpPwChangePanel mpPanel1 = new MpPwChangePanel();
 	public static MpPhoneNumChangePanel mpPanel2 = new MpPhoneNumChangePanel();
 	public static MpEmailChangePanel mpPanel3 = new MpEmailChangePanel();
+	public static MyProfilePanel mpPanel0 = new MyProfilePanel();
 
 	public MpChangePanel() {
 
@@ -18,6 +19,7 @@ public class MpChangePanel extends JPanel {
 		mpPanel.setBounds(0, 58, 730, 511);
 		mpPanel.setLayout(mpLayout);
 
+		mpPanel.add(mpPanel0,"profile");
 		mpPanel.add(mpPanel1, "password");
 		mpPanel.add(mpPanel2, "phoneNum");
 		mpPanel.add(mpPanel3, "email");
