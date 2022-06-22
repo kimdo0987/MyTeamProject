@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-
+  
 public class MsgPopup extends JDialog{
 	
 	public MsgPopup(Window parent, String msg) {

@@ -70,9 +70,18 @@ public class MpEmailChangePanel extends JPanel {
 		newEmailLabel.setBounds(56, 223, 124, 51);
 		add(newEmailLabel);
 
-		JButton ChangeOkBtn = new JButton("변경 하기");
-		ChangeOkBtn.setBounds(260, 346, 202, 78);
-		add(ChangeOkBtn);
+		JButton emailChangeOkBtn = new JButton("변경 하기");
+		emailChangeOkBtn.setBounds(260, 346, 202, 78);
+		add(emailChangeOkBtn);
+		
+		JButton profileBtn = new JButton("내 정보");
+		profileBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
+			}
+		});
+		profileBtn.setBounds(24, 9, 93, 23);
+		add(profileBtn);
 
 	}
 }

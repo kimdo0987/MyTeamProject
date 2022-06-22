@@ -92,6 +92,15 @@ public class MpPwChangePanel extends JPanel {
 
 			}
 		});
+		
+		JButton profileBtn = new JButton("내 정보");
+		profileBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
+			}
+		});
+		profileBtn.setBounds(24, 9, 93, 23);
+		add(profileBtn);
 
 	}
 

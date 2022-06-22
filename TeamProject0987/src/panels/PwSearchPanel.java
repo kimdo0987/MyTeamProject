@@ -13,8 +13,8 @@ import popups.MsgPopup;
 import popups.PwFindPopup;
 
 public class PwSearchPanel extends JPanel {
-
-	public PwSearchPanel() {
+    
+	public PwSearchPanel() { 
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);
 		
