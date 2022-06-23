@@ -109,6 +109,7 @@ public class MpEmailChangePanel extends JPanel {
 		profileBtn.setBounds(24, 9, 93, 23);
 		add(profileBtn);
 
+
 		emailChangeOkBtn.addActionListener(new ActionListener() {
 
 				@Override
