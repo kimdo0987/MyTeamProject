@@ -3,12 +3,19 @@ package mypagepanel_comps.mp6;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import database.OjdbcConnection;
+import panels.MainPanel;
 
 public class MyProfilePanel extends JPanel {
 	public MyProfilePanel() {
@@ -48,21 +55,58 @@ public class MyProfilePanel extends JPanel {
 		});
 		add(modifyBtn);
 		
+		JLabel lbl1 = new JLabel("이름뜨는창");
+		lbl1.setBounds(157, 106, 187, 38);
+		
+		lbl1.setText("g");
+		add(lbl1);
+		
+		JLabel lbl2 = new JLabel("id 넣는곳");
+		lbl2.setBounds(157, 146, 187, 38);
+		add(lbl2);
+		
+		JLabel lbl3 = new JLabel("생일 넣는곳");
+		lbl3.setBounds(157, 186, 187, 38);
+		add(lbl3);
+		
+		JLabel lbl4 = new JLabel("전화번호 넣는곳");
+		lbl4.setBounds(157, 226, 187, 38);
+		add(lbl4);
+		
+		JLabel lbl5 = new JLabel("이메일 넣는곳");
+		lbl5.setBounds(157, 266, 187, 38);
+		add(lbl5);
+		
+		
+		
+		String sql = "SELECT * FROM members WHERE member_id = ?";
+				
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);				
+				)		
+		{
+			pstmt.setString(1, MainPanel.currUserId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			rs.next();
+				
+			lbl2.setText(rs.getString("member_id")); 
+			lbl1.setText(rs.getString("member_name"));	
+				
+			
+			
+			
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
 	}
-
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		JPanel panel = new JPanel();
-//		frame.add(panel);
-//		panel.setBounds(100, 100, 1200, 800);
-//		panel.setBackground(Color.white);
-//		panel.setLayout(null);
-//
-//		panel.add(new MyProfilePanel());
-//
-//		frame.setBounds(100, 100, 1200, 800);
-//		frame.setLocationRelativeTo(null);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setVisible(true);
-//	}
 }
