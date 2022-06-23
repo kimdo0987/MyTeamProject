@@ -4,6 +4,7 @@ package panels;
 
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -26,16 +27,16 @@ import javax.swing.JTextField;
 import buttons.GoToButton;
 import database.OjdbcConnection;
 import labels.TopLabel;
+import methods.RestrictTextLength;
 
 public class LoginPanel extends JPanel {
 	
 	//버튼,라벨,텍스트필드 생성완료
 
 	static public String pwText;
-
 	static public String idText = "";
-
 	static public String searchPw;
+	private HintPasswordField pwInput;
 	
 	public LoginPanel() {
 		setBounds(0, 0, 1200, 800);
@@ -83,12 +84,7 @@ public class LoginPanel extends JPanel {
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
 		add(idInput);
 		idInput.setBounds(400, 250, 300, 30);
-		
-
-//		HintTextField h = new HintTextField("아이디를 입력하세요");
-//		add(h);
-//		h.setBounds(200, 150, 300, 30);
-		
+		idInput.addKeyListener(new RestrictTextLength(idInput, 16)); //글자수제한
 
 		idInput.addKeyListener(new KeyAdapter() {
 			@Override
@@ -97,14 +93,13 @@ public class LoginPanel extends JPanel {
 			}	
 		});
 		
-		
-
-		JPasswordField pwInput = new JPasswordField("비밀번호를 입력하세요.");
-		add(pwInput);
+		pwInput = new HintPasswordField("비밀번호를 입력하세요.");
+		pwInput.setFont(new Font("굴림", Font.PLAIN, 16));
 		pwInput.setBounds(400, 300, 300, 30);
+		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
 		
+		add(pwInput);
 	    
-
 		pwInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -146,20 +141,12 @@ public class LoginPanel extends JPanel {
 				}
 				
 				if(searchPw.equals(pwText)) {
-//					System.out.println("로그인 성공");
-//					System.out.println("내가적은 pw : " + pwText);
-//					System.out.println("DB에서 찾은 pw : " + searchPw);
 					MainPanel.currPanel.setVisible(false);
 					MainPanel.mainPanel.setVisible(true);
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
 					MainPanel.currUserId = idText;
 				} else {
-//					System.out.println("로그인 실패");
-//					System.out.println("적은id : " + idText);
-//					System.out.println("적은pw : " + pwText);
-
-					System.out.println("DB에서 찾은 pw : " + searchPw);
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
 							+ "입력하신 내용을 다시 확인해주세요.");
 				}
