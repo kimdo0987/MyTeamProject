@@ -5,18 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class MyLectureLists {
-	
-	public static String[][] getMyLectureLists() {
-		String sql = "SELECT "
+public class MyAttendanceLog {
+	public static String[][] getMyAttendanceLog() {
+		String sql = "select "
+				+ "attendance_date||''||'', "
 				+ "lecture_name, "
 				+ "teacher_name, "
-				+ "lecture_start_date||'~'||lecture_end_date "
-				+ "FROM "
-				+ "lecture_lists l, "
-				+ "mylecture_lists m "
-				+ "WHERE "
-				+ "l.lecture_id = m.lecture_id";
+				+ "attendance_state "
+				+ "from "
+				+ "attendance_log a, "
+				+ "lecture_lists l "
+				+ "where "
+				+ "a.lecture_id = l.lecture_id "
+				+ "and "
+				+ "member_id = 'hansm1119'"; //member_id 나중에 물음표찍고 mainPanel 에서 currId 받아와서 넣으면될듯?
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
@@ -26,15 +28,14 @@ public class MyLectureLists {
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {
 				list.add(new String[] {
+						result.getString("attendance_date||''||''"),
 						result.getString("lecture_name"),
 						result.getString("teacher_name"),
-						result.getString("lecture_start_date||'~'||lecture_end_date"),
-						"수강평작성",
-						"수강포기"
+						result.getString("attendance_state")
 				});
 			}
-			System.out.println("The data(MyLectureLists) has been fetched");
-			String[][] arr = new String[list.size()][5];
+			System.out.println("The data(MyAttendanceLog) has been fetched");
+			String[][] arr = new String[list.size()][4];
 			return list.toArray(arr);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
