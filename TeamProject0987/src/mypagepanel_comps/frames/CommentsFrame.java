@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -45,26 +46,21 @@ public class CommentsFrame extends JFrame {
 		textArea.setBounds(12, 80, 449, 108);
 		textArea.setLineWrap(true); //자동으로 줄바꿈
 		
-		textArea.addKeyListener(new KeyListener() {
+		
+		textArea.addKeyListener(new KeyAdapter() {
+			// textArea에 입력가능한 글자수 70글자로 제한함
 			
-		// textArea에 입력가능한 글자수 70글자로 제한함
 			@Override
 			public void keyTyped(KeyEvent e) {
 				String msg = textArea.getText();
-								
+				
 				textLengthLabel.setText("수강평 (" + msg.length() + "/70자)");
                 if ( msg.length() >70) { 
                     textArea.setText(msg.substring(0, 70));
-                }              
-            }			
-			@Override
-			public void keyReleased(KeyEvent e) {			
+                    textLengthLabel.setText("수강평 (70/70자)");//복붙했을때 글자counting 수 넘어가는거 방지
+                }             
 			}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {				
-			}
-		});		
+		});
 		
 		
 		panel.add(textArea);

@@ -1,27 +1,34 @@
 package panels;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import buttons.GoToButton;
+import database.OjdbcConnection;
 import labels.TopLabel;
-import javax.swing.JComboBox;
+import methods.RestrictTextLength;
 
 public class SignupPanel extends JPanel {
 		 	
 	private JTextField createIdField;
-	private JPasswordField createPwField;
-	private JComponent rePwField;
+	private HintPasswordField createPwField;
+	private HintPasswordField rePwField;
 	private JTextField insertNameField;
 	private JComponent insertJNum1Field;
 	private JComponent insertJNum2Field;
@@ -59,46 +66,78 @@ public class SignupPanel extends JPanel {
 		TopLabel toplabel = new TopLabel("회원 가입");
 		add(toplabel);		
 		
+		
+		
+		////////////////////아이디 생성조건 ///////////////////////////////////
 		JLabel idMsgLabel = new JLabel("4~16 이내 영문숫자조합");
-		idMsgLabel.setToolTipText("");
 		idMsgLabel.setVisible(true);
 		idMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
 		idMsgLabel.setBounds(420, 143, 254, 32);
 		add(idMsgLabel);
 		
-		createIdField = new JTextField();
-		createIdField.setFont(new Font("굴림", Font.PLAIN, 16));
+		createIdField = new HintTextField("4~16 이내 영문숫자조합");
 		createIdField.setBounds(420, 99, 276, 44);
+		createIdField.addKeyListener(new RestrictTextLength(createIdField, 16)); //글자수제한
 		createIdField.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e) {
-				if(createIdField.getText().equals("")) {
-					idMsgLabel.setText("4~16 이내 영문숫자조합");
-					
-				}
-				// else if (createIdField.getText().)
+			public void keyTyped(KeyEvent e) {
+				String msg = createIdField.getText();
 				
-				super.keyReleased(e);
+				if(!Pattern.matches("\\w", ""+e.getKeyChar())||e.getKeyChar()=='_') {
+					e.consume(); // 이벤트 소멸(무시)하기
+				}  
+				if(msg.length() != 0 && msg.length() < 4) {
+					idMsgLabel.setForeground(Color.red);
+					idMsgLabel.setText("아이디는 4글자 이상이여야 합니다");				
+				} else if (!Pattern.matches("\\w*", msg)){
+					idMsgLabel.setForeground(Color.red);
+					idMsgLabel.setText("사용 불가능한 문자가 포함되어 있습니다");
+				} else if (Pattern.matches("\\w*", msg) 
+						&& msg.length() < 17 && msg.length() > 3
+						//중복확인한뒤 true 판단
+						){
+					idMsgLabel.setForeground(new Color(0, 128, 0)); //초록색
+					idMsgLabel.setText("사용가능한 아이디입니다");		
+				}					
+			}		
+		});
+		
+		createIdField.addFocusListener(new FocusAdapter() {		
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (createIdField.getText().equals("4~16 이내 영문숫자조합")) {
+					idMsgLabel.setForeground(Color.red);
+					idMsgLabel.setText("필수 정보입니다");
+				} else {
+					
+				} 
 			}
 		
 		});
+		
 		add(createIdField);
-		createIdField.setColumns(10);
+		
+		//////////////////// 비밀번호 생성조건 ///////////////////////////////////
 		
 		JLabel pwMsgLabel= new JLabel("");
 		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 16));
 		pwMsgLabel.setBounds(425, 190, 254, 49);
 		add(pwMsgLabel);
 		
-		createPwField = new JPasswordField();
+		createPwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
 		createPwField.setFont(new Font("굴림", Font.PLAIN, 16));
-		
 		createPwField.setBounds(420, 190, 276, 49);
+		createPwField.addKeyListener(new RestrictTextLength(createPwField, 12)); //글자수제한
+		
 		add(createPwField);
 		
-		rePwField = new JPasswordField();
+		rePwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
 		rePwField.setFont(new Font("굴림", Font.PLAIN, 16));
 		rePwField.setBounds(420, 280, 276, 49);
+		rePwField.addKeyListener(new RestrictTextLength(rePwField, 12)); //글자수제한
+		
+		
+		
 		add(rePwField);
 		
 		JLabel insertNameLabel = new JLabel("이름");
@@ -150,6 +189,7 @@ public class SignupPanel extends JPanel {
 		JButton createBtn = new JButton("회원 가입 완료");
 		createBtn.setBounds(473, 700, 185, 38);
 		add(createBtn);
+		
 		
 		JLabel lblNewLabel = new JLabel("아이디");
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 15));
@@ -215,4 +255,9 @@ public class SignupPanel extends JPanel {
 		cateBtnPanel.add(new JButton("cate"+i));
 		}			
 	}
+	
+
+	
+	
+	
 }
