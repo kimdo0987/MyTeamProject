@@ -14,8 +14,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
-import mypagepanel_comps.frames.CancelLectureFrame;
-import mypagepanel_comps.frames.CommentsFrame;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
 
@@ -71,24 +69,54 @@ public class MyPageMainPanel3 extends JPanel {
 		table.getColumnModel().getColumn(3).setMaxWidth(90);
 		table.getColumnModel().getColumn(4).setMinWidth(110);
 		table.getColumnModel().getColumn(4).setMaxWidth(110);
-		 
+		
+		table.setEnabled(false); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
+		
 		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				int row = table.getSelectedRow();
-				int col = table.getSelectedColumn();		
-				
-				if (col == 4) {
-					new DeleteChkPopup(MainPanel.thisFrame);
-				} else {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    	// getPoint 는 좌표를 뽑아오는건데 rowAtPoint, columnAtPoint 는 
+		    	// 행과 열의 범위를 좌표화해서 뽑아옵니다.
+		    	/*
+		    	
+					int javax.swing.JTable.rowAtPoint(Point point)
 					
-				}
-				
-			}
+					Returns the index of the row that point lies in,or -1 
+					if the result is not in the range[0, getRowCount()-1].
+					
+					Parameters:point the location of interestReturns:
+					the index of the row that point lies in,or -1 
+					if the result is not in the range[0, getRowCount()-1]
+					
+					See Also:columnAtPoint 
+					
+		    	*/
+		        int row = table.rowAtPoint(e.getPoint());
+		        int col = table.columnAtPoint(e.getPoint());
+		        System.out.println(row + "and" + col);
+		        if (row >= 0 && col >= 0) {
+		            if (col == 4) {
+		            	new DeleteChkPopup(MainPanel.thisFrame);
+		            }
+		        }
+		    }
+		    
 		});
 		
-		
+		// 이전 코드의 문제점 : 셀이 선택될 때 따른 테이블 범위를 클릭하면 이벤트가 발생하게 됨
+//		table.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				
+//				int row = table.getSelectedRow();
+//				int col = table.getSelectedColumn();		
+//				
+//				if (col == 4) {
+//					new DeleteChkPopup(MainPanel.thisFrame);
+//				} 
+//				
+//			}
+//		});
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -98,8 +126,6 @@ public class MyPageMainPanel3 extends JPanel {
 		
 		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
-		
-		
 		
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
