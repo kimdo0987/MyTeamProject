@@ -13,7 +13,7 @@ import labels.TopLabel;
 
 public class MainPanel extends JPanel {
 	
-	public static String currUserId = "hansm1119";
+	
 	private GoToButton myInfoBtn;
 	private GoToButton signUpBtn;
 	private GoToButton loginBtn;

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.time.LocalDate;
@@ -66,7 +67,7 @@ public class CancelLectureFrame extends JFrame {
 		textArea.setText("기타 사유에만 작성할 수 있습니다.");
 		textArea.setEditable(false);
 		textArea.setLineWrap(true); //자동으로 줄바꿈
-		textArea.addKeyListener(new KeyListener() {
+		textArea.addKeyListener(new KeyAdapter() {
 			
 		// textArea에 입력가능한 글자수 70글자로 제한함
 			@Override
@@ -75,19 +76,14 @@ public class CancelLectureFrame extends JFrame {
 
 					String msg = textArea.getText();
 					textLengthLabel.setText("수강포기사유 (" + msg.length() + "/70자)");
-					if (msg.length() > 70) {
+					if (msg.length() > 70 - 1) {
 						textArea.setText(msg.substring(0, 70));
+						textLengthLabel.setText("수강포기사유 (70/70자)"); //복붙했을때 글자counting 수 넘어가는거 방지
 					}
 				}
 			}
 
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
+			
 		});		
 		
 		
