@@ -108,6 +108,7 @@ public class MyPageMainPanel1 extends JPanel {
 			}
 		});
 		
+		
 		//테이블 생성에 관한 내용
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);

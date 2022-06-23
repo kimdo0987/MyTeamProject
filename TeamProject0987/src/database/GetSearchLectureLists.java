@@ -5,24 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class getCategorytLectureLists {
-
-	public static String[][] getLectureLists(String category) {
+public class GetSearchLectureLists {
+	
+	public static String[][] getSearchList(String SearchWord) {
 		
+		String sql = "SELECT * FROM lecture_lists WHERE lecture_name LIKE ?";
 		
-		String sql = "SELECT * FROM lecture_lists WHERE lecture_category = ?";
-		if(category=="ALL") {
-			sql = "SELECT * FROM lecture_lists";	
-		}
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 
 		) {
-			if(category!="ALL") {
-				pstmt.setString(1, category);				
-			}
+				pstmt.setString(1,"%"+SearchWord+"%");				
+			
 			ResultSet rs = pstmt.executeQuery();
 			
 			ArrayList<String[]> list = new ArrayList<String[]>();
@@ -37,7 +33,7 @@ public class getCategorytLectureLists {
 				});
 			}
 			
-			System.out.println("The data has been fetched2");
+			System.out.println("The data has been fetched4");
 			String[][] arr = new String[list.size()][5];
 			
 			return list.toArray(arr);
@@ -46,5 +42,6 @@ public class getCategorytLectureLists {
 			e.printStackTrace();
 			return null;			
 		}
+		
 	}
 }
