@@ -3,20 +3,32 @@ package panels;
 
 
 
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import buttons.GoToButton;
+import database.OjdbcConnection;
 import labels.TopLabel;
+import methods.RestrictTextLength;
 import popups.IdFindPopup;
 
 public class IdSearchPanel extends JPanel{
 
+	private static String nameText = "";
+	private static String jNumText = "";
+	private static String searchJNum;
+	private static String searchId;
+	
 	public IdSearchPanel() {
 	
 		setBounds(0, 0, 1200, 800);
@@ -43,37 +55,78 @@ public class IdSearchPanel extends JPanel{
 		TopLabel toplabel = new TopLabel("아이디 찾기");
 		add(toplabel);
 		
-		JTextField nameInput = new JTextField("이름 입력");
+		//
+		HintTextField nameInput = new HintTextField("이름를 입력하세요.");
 		add(nameInput);
 		nameInput.setBounds(398, 227, 361, 44);
+		nameInput.addKeyListener(new RestrictTextLength(nameInput, 10)); //글자수제한
+
+		nameInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				nameText = nameInput.getText().toString();
+			}	
+		});
 		
-		JTextField JNumInput = new JTextField("주민등록번호 입력");
-		add(JNumInput);
-		JNumInput.setBounds(398, 286, 361, 44);
-		
+		HintTextField jNumInput = new HintTextField("주민등록번호를 입력하세요.('-'제외후 입력)");
+		add(jNumInput);
+		jNumInput.setBounds(398, 286, 361, 44);
+		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 13)); //글자수제한
+
+		jNumInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				jNumText = jNumInput.getText().toString();
+			}	
+		});
+
 		JButton idSearchBtn = new JButton("아이디 조회");
 		idSearchBtn.setBounds(478, 378, 200, 50);
 		idSearchBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					new IdFindPopup(MainPanel.thisFrame, nameInput.getText(), JNumInput.getText());
+				try (
+						Connection conn = OjdbcConnection.getConnection();
+						PreparedStatement pstmt1 = conn.prepareStatement("SELECT j_number FROM members "
+								+ "WHERE member_name = ?");
+						) {
+					pstmt1.setString(1, nameText);
+					ResultSet rs1 = pstmt1.executeQuery();
+					
+					while(rs1.next()) {
+						searchJNum = rs1.getString("j_number");
+					}
+					
+					PreparedStatement pstmt2 = conn.prepareStatement("SELECT member_id FROM members "
+							+ "WHERE j_number = ?");
+					pstmt2.setString(1, searchJNum);
+					ResultSet rs2 = pstmt2.executeQuery();
+					
+					while(rs2.next()) {
+						searchId = rs2.getString(1);
+					}
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+				if (searchJNum == null) {
+					searchJNum = "";
+				}
 				
+				if(searchJNum.equals(jNumText)) {		
+					JOptionPane.showMessageDialog(MainPanel.thisFrame, "조회된 아이디 : " + searchId);
+					
+				} else {
+					JOptionPane.showMessageDialog(MainPanel.thisFrame, "이름 또는 주민등록번호를 잘못 입력했습니다.\r\n"
+							+ "입력하신 내용을 다시 확인해주세요.");
+				}
 			}
 		});
 		add(idSearchBtn);
 		
 	}
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		frame.add(new IdSearchPanel());
-//		
-//		
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setBounds(0, 0, 1200, 800);
-//		frame.setVisible(true);
-//	}
-//
 }
 	
 	
