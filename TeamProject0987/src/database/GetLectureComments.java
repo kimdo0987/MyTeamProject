@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 public class GetLectureComments {
 	
+
 	public static String[][] getLectureComments(int num) {
+
 		
 		String sql = "SELECT member_id, comment_msg, rating FROM lecture_comments WHERE lecture_id = ?";
 		
@@ -16,7 +18,9 @@ public class GetLectureComments {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 
 		) {
+
 				pstmt.setInt(1, num);				
+
 			
 			ResultSet rs = pstmt.executeQuery();
 			

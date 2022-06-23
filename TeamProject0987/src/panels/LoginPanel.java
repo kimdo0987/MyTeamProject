@@ -128,7 +128,7 @@ public class LoginPanel extends JPanel {
 						Connection conn = OjdbcConnection.getConnection();
 						PreparedStatement pstmt = conn.prepareStatement("SELECT member_password FROM members "
 								+ "WHERE member_id = ?");
-						) {
+				) {
 					pstmt.setString(1, idText);
 					ResultSet rs = pstmt.executeQuery();
 					

@@ -75,7 +75,7 @@ public class LectureTable extends JPanel {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				
+
 				int row = table.getSelectedRow();
 				int col = table.getSelectedColumn();
 
@@ -84,11 +84,13 @@ public class LectureTable extends JPanel {
 				System.out.println(table.getValueAt(row, 0));
 
 				lectureName = (String) table.getValueAt(row, 0);
+
 				
 				if(col==4) {
 				MainPanel.lectureSearchPanel.setVisible(false);
 				MainPanel.lectureInfoPanel.setVisible(true);
 				}
+
 
 				HashMap<String, String> detailInfoHash = new HashMap<>();
 
