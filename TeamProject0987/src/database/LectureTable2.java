@@ -27,10 +27,10 @@ import panels.LectureInfoPanel;
 import panels.LectureSearchPanel;
 import panels.MainPanel;
 
-public class LectureTable extends JPanel {
+public class LectureTable2 extends JPanel {
 	public static String lectureName = "";
 
-	public LectureTable(String category) {
+	public LectureTable2(String searchWord) {
 
 		setBounds(176, 365, 730, 300);
 		setLayout(null);
@@ -39,7 +39,7 @@ public class LectureTable extends JPanel {
 		tablePanel.setBounds(0, 58, 730, 300);
 
 		String[] firstRow = new String[] { "강의명", "강사명", "카테고리", "강의시작일", "강의상세보기" };
-		String[][] data = GetCategorytLectureLists.getLectureLists(category);
+		String[][] data = GetSearchLectureLists.getSearchList(searchWord);
 
 		DefaultTableModel mod = new DefaultTableModel(data, firstRow) {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {

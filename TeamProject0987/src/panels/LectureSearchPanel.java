@@ -2,24 +2,23 @@ package panels;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 import buttons.GoToButton;
 import database.LectureTable;
+import database.LectureTable2;
 import labels.TopLabel;
 
 public class LectureSearchPanel extends JPanel {
 
 	public int rowCnt = 0;
-
+	public static int currLectureId; //////////
+	
 	public LectureSearchPanel() {
 
 		
@@ -41,15 +40,11 @@ public class LectureSearchPanel extends JPanel {
 			infoBtn.setBounds(1046, 10, 106, 55);
 			add(infoBtn);
 
-			JButton searchBtn = new JButton("검색");
-			searchBtn.setBounds(780, 114, 110, 55);
-			searchBtn.setBackground(Color.WHITE);
-			add(searchBtn);
-
-			JTextField textField = new JTextField();
-			textField.setColumns(10);
-			textField.setBounds(180, 114, 590, 55);
-			add(textField);
+			HintTextField searchField = new HintTextField("검색어를 입력해주세요");
+			searchField.setColumns(10);
+			searchField.setBounds(180, 114, 590, 55);
+			
+			add(searchField);
 
 			JPanel categoryPanel = new JPanel();
 			categoryPanel.setBounds(180, 178, 710, 153);
@@ -78,7 +73,23 @@ public class LectureSearchPanel extends JPanel {
 			allCategoryBtn.setBackground(Color.WHITE);
 			categoryPanel.add(allCategoryBtn);
 			
-
+			lectureListPanel.add(new LectureTable("ALL"));
+			
+			JButton searchBtn = new JButton("검색");
+			searchBtn.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					LectureTable2 lecListPanel2 = new LectureTable2(searchField.getText());
+					lectureListPanel.add(lecListPanel2,searchField.getText());
+					layMng.show(lectureListPanel,searchField.getText());
+					searchField.setText("");
+				}
+			});
+			searchBtn.setBounds(780, 114, 110, 55);
+			searchBtn.setBackground(Color.WHITE);
+			add(searchBtn);
+			
 			for (int i = 0; i < 11; ++i) {
 				LectureCategoryButton cateBtn = new LectureCategoryButton(i);
 				categoryPanel.add(cateBtn);

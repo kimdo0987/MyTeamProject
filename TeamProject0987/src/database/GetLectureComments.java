@@ -5,40 +5,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class getCategorytLectureLists {
-
-	public static String[][] getLectureLists(String category) {
+public class GetLectureComments {
+	
+	public static String[][] getLectureComments(int num) {
 		
-		
-		String sql = "SELECT * FROM lecture_lists WHERE lecture_category = ?";
-		if(category=="ALL") {
-			sql = "SELECT * FROM lecture_lists";	
-		}
+		String sql = "SELECT member_id, comment_msg, rating FROM lecture_comments WHERE lecture_id = ?";
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 
 		) {
-			if(category!="ALL") {
-				pstmt.setString(1, category);				
-			}
+				pstmt.setInt(1, num);				
+			
 			ResultSet rs = pstmt.executeQuery();
 			
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			
 			while(rs.next()) {
 				list.add(new String[] {
-						rs.getString("lecture_name"),
-						rs.getString("teacher_name"),
-						rs.getString("lecture_category"),
-						rs.getString("lecture_start_date"),
-						"강의상세보기"
+						rs.getString("member_id"),
+						rs.getString("comment_msg"),
+						rs.getString("rating")
 				});
 			}
 			
-			System.out.println("The data has been fetched2");
-			String[][] arr = new String[list.size()][5];
+			System.out.println("The data has been fetched3");
+			String[][] arr = new String[list.size()][3];
 			
 			return list.toArray(arr);
 		} catch (Exception e) {
@@ -46,5 +39,6 @@ public class getCategorytLectureLists {
 			e.printStackTrace();
 			return null;			
 		}
+		
 	}
 }

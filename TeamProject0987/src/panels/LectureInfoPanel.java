@@ -3,9 +3,10 @@ package panels;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -22,7 +23,7 @@ public class LectureInfoPanel extends JPanel {
 	public static JPanel cardLayoutPanel = new JPanel();
 	
 	public static LectureInfoPanel1 lectureInfoPanel1 = new LectureInfoPanel1();
-	public static LectureInfoPanel2 lectureInfoPanel2 = new LectureInfoPanel2();
+	public static LectureInfoPanel2 lectureInfoPanel2 = new LectureInfoPanel2(99);
 	public static LectureInfoPanel3 lectureInfoPanel3 = new LectureInfoPanel3();
 	
 	public LectureInfoPanel() {
@@ -57,6 +58,14 @@ public class LectureInfoPanel extends JPanel {
 		GoToButton mainBtn = new GoToButton("메인");
 		mainBtn.setFont(new Font("굴림", Font.PLAIN, 15));
 		mainBtn.setBackground(Color.WHITE);
+		mainBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.lectureInfoPanel.setVisible(false);
+				
+			}
+		});
 		mainBtn.setBounds(199, 39, 111, 68);
 		add(mainBtn);
 		
@@ -82,7 +91,7 @@ public class LectureInfoPanel extends JPanel {
 		cardLayoutPanel.setLayout(cardLayout1);
 		
 		cardLayoutPanel.add(lectureInfoPanel1, "상세정보");
-		cardLayoutPanel.add(lectureInfoPanel2, "수강평");
+		cardLayoutPanel.add(lectureInfoPanel2, "수강평");///////////////////
 		cardLayoutPanel.add(lectureInfoPanel3, "강의 시간표");
 		
 		//////////////////////////////////////////////////
@@ -92,21 +101,27 @@ public class LectureInfoPanel extends JPanel {
 		add(detailInfoBtn);
 		
 		LectureInfoTabButton commentsBtn = new LectureInfoTabButton("수강평");
+		commentsBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lectureInfoPanel2 = new LectureInfoPanel2(LectureSearchPanel.currLectureId); ///////////	
+				cardLayoutPanel.add(lectureInfoPanel2, "수강평");
+				}
+		});
 		commentsBtn.setBounds(460, 297, 261, 62);
 		add(commentsBtn);
 		
 		LectureInfoTabButton scheduleBtn = new LectureInfoTabButton("강의 시간표");
 		scheduleBtn.setBounds(723, 297, 261, 62);
 		add(scheduleBtn);
-		
+		setVisible(false);
 	}
 	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.getContentPane().add(new LectureInfoPanel());
-		frame.setBounds(100, 100, 1200, 800);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().add(new LectureInfoPanel());
+//		frame.setBounds(100, 100, 1200, 800);
+//		frame.setLocationRelativeTo(null);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setVisible(true);
+//	}
 }
