@@ -47,13 +47,7 @@ public class MyPageMainPanel3 extends JPanel {
 		panel.add(tablePanel);
 		
 		String[] headings = new String[] {"강의명","강사명","수강 기간","수강료","장바구니에서 삭제"};
-		Object[][] data = new Object[][] {
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"}
-		};
+		String[][] data = database.MyWishLists.getMyWishLists();
 		
 		// 테이블의 셀 내용 수정 불가 시작 //
 		DefaultTableModel mod = new DefaultTableModel(data, headings) {
