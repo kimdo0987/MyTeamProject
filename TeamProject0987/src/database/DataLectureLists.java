@@ -12,13 +12,15 @@ public class DataLectureLists {
 	private static ArrayList<String> categoryArr = new ArrayList<>();
 	private static ArrayList<String> startDateArr = new ArrayList<>();
 	private static ArrayList<String> endDateArr = new ArrayList<>();
+	private static ArrayList<String> lectureInfoArr = new ArrayList<>();
 	
 	public DataLectureLists() {
-		setLectureNameArr();
-		setTeacherNameArr();
-		setCategoryArr();
-		setStartDateArr();
-		setEndDateArr();
+//		setLectureNameArr();
+//		setTeacherNameArr();
+//		setCategoryArr();
+//		setStartDateArr();
+//		setEndDateArr();
+		setLectureInfoArr();
 	}
 	
 	public void setLectureNameArr() {
@@ -86,6 +88,19 @@ public class DataLectureLists {
 		}
 	}
 	
+	public void setLectureInfoArr() {
+		try (BufferedReader in = new BufferedReader(new FileReader("dataFile/LectureInfo"));) 
+		{
+			String line;
+			while ((line = in.readLine()) != null) {
+				lectureInfoArr.add(line);
+			}
+			System.out.println("LectureInfoArray is created");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<String> getLectureNameArr() {
 		return lectureNameArr;
 	}
@@ -104,5 +119,9 @@ public class DataLectureLists {
 	
 	public ArrayList<String> getEndDateArr() {
 		return endDateArr;
+	}
+	
+	public ArrayList<String> getLectureInfoArr() {
+		return lectureInfoArr;
 	}
 }
