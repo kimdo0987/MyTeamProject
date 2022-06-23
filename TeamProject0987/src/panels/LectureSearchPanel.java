@@ -19,7 +19,8 @@ import labels.TopLabel;
 public class LectureSearchPanel extends JPanel {
 
 	public int rowCnt = 0;
-
+	public static int currLectureId; //////////
+	
 	public LectureSearchPanel() {
 
 		

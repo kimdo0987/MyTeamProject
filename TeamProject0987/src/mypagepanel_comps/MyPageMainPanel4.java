@@ -68,7 +68,7 @@ public class MyPageMainPanel4 extends JPanel {
 		panel.add(btnNewButton);
 		
 		
-		///////////////////TABLE 생성 /////////////////////
+		///////////////////TABLE 생성 //////////////////////////
 		
 		String[] headings = new String[] {"no.","쿠폰이름","쿠폰번호","할인율","유효기간","사용유무"};
 		Object[][] data = new Object[][] {
