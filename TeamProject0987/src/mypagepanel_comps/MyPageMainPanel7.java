@@ -1,14 +1,17 @@
 package mypagepanel_comps;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import labels.TopLabel;
+import panels.MainPanel;
 
 //회원 탈퇴 Panel이 될 JPanel입니다
 
@@ -44,5 +47,11 @@ public class MyPageMainPanel7 extends JPanel {
 		leaveBtn.setBounds(260, 500, 200,40);
 		panel.add(leaveBtn);
 		
+		leaveBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "정말 탈퇴하시겠습니까?", "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
+			}
+		});
 	}
 }
