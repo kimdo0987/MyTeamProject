@@ -70,7 +70,7 @@ public class PwSearchPanel extends JPanel {
 		});
 		
 		
-		HintTextField nameInput = new HintTextField("이름를 입력하세요.");
+		HintTextField nameInput = new HintTextField("이름을 입력하세요.");
 		add(nameInput);
 		nameInput.setBounds(420, 250, 300, 30);
 		nameInput.addKeyListener(new RestrictTextLength(nameInput, 10)); //글자수제한
@@ -179,7 +179,7 @@ public class PwSearchPanel extends JPanel {
 					idInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
 					idInput.setForeground(Color.GRAY);
 					
-					nameInput.setText("이름를 입력하세요.");
+					nameInput.setText("이름을 입력하세요.");
 					nameInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
 					nameInput.setForeground(Color.GRAY);
 					nameText = "";

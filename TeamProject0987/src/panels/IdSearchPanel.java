@@ -3,6 +3,8 @@ package panels;
 
 
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -68,7 +70,7 @@ public class IdSearchPanel extends JPanel{
 			}	
 		});
 		
-		HintTextField jNumInput = new HintTextField("주민등록번호를 입력하세요.('-'제외후 입력)");
+		HintTextField jNumInput = new HintTextField("주민등록번호를 입력하세요. ('-' 제외 후 입력)");
 		add(jNumInput);
 		jNumInput.setBounds(398, 286, 361, 44);
 		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 13)); //글자수제한
@@ -117,6 +119,18 @@ public class IdSearchPanel extends JPanel{
 				
 				if(searchJNum.equals(jNumText)) {		
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "조회된 아이디 : " + searchId);
+					
+					// 다시 비워놓기
+					nameInput.setText("이름를 입력하세요.");
+					nameInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					nameInput.setForeground(Color.GRAY);
+					nameText = "";
+					
+					jNumInput.setText("주민등록번호를 입력하세요. ('-' 제외 후 입력)");
+					jNumInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					jNumInput.setForeground(Color.GRAY);
+					jNumText = "";
+					//
 					
 				} else {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "이름 또는 주민등록번호를 잘못 입력했습니다.\r\n"
