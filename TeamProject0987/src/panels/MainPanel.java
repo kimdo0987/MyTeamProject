@@ -1,12 +1,9 @@
 package panels;
-import java.awt.Color;
-import java.awt.Font;
-
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.LogoutButton;
 import labels.TopLabel;
 
 // 첫화면
@@ -16,7 +13,8 @@ public class MainPanel extends JPanel {
 	
 	private GoToButton myInfoBtn;
 	private GoToButton signUpBtn;
-	private GoToButton loginBtn;
+	public static GoToButton loginBtn;
+	public static LogoutButton logoutBtn;
 	
 	public static JFrame thisFrame;
 
@@ -71,6 +69,10 @@ public class MainPanel extends JPanel {
 		loginBtn = new GoToButton("로그인");
 		loginBtn.setBounds(609, 432, 118, 54);
 		add(loginBtn);	
+		
+		logoutBtn = new LogoutButton("로그아웃");
+		logoutBtn.setBounds(609, 432, 118, 54);
+		add(logoutBtn);
 	}	
 	
 	

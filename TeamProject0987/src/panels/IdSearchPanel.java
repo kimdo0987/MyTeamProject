@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import buttons.GoToButton;
 import database.OjdbcConnection;
 import labels.TopLabel;
+import methods.NameKeyAdaptor;
+import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
 import popups.IdFindPopup;
 
@@ -61,7 +63,8 @@ public class IdSearchPanel extends JPanel{
 		HintTextField nameInput = new HintTextField("이름를 입력하세요.");
 		add(nameInput);
 		nameInput.setBounds(398, 227, 361, 44);
-		nameInput.addKeyListener(new RestrictTextLength(nameInput, 10)); //글자수제한
+		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); //글자수제한
+		nameInput.addKeyListener(new NameKeyAdaptor()); // 제약사항 적용
 
 		nameInput.addKeyListener(new KeyAdapter() {
 			@Override
@@ -74,6 +77,7 @@ public class IdSearchPanel extends JPanel{
 		add(jNumInput);
 		jNumInput.setBounds(398, 286, 361, 44);
 		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 13)); //글자수제한
+		jNumInput.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 
 		jNumInput.addKeyListener(new KeyAdapter() {
 			@Override
