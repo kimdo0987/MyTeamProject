@@ -1,17 +1,27 @@
 package mypagepanel_comps;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.CellEditor;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import labels.TopLabel;
 import panels.MainPanel;
@@ -20,6 +30,9 @@ import popups.DeleteChkPopup;
 //나의 장바구니 Panel이 될 JPanel입니다
 
 public class MyPageMainPanel3 extends JPanel {
+	
+	static JTable table;
+	
 	public MyPageMainPanel3() {
 		setBackground(new Color(255, 153, 204));
 		setBounds(118, 0, 1093, 800);
@@ -70,6 +83,24 @@ public class MyPageMainPanel3 extends JPanel {
 		table.getColumnModel().getColumn(4).setMinWidth(110);
 		table.getColumnModel().getColumn(4).setMaxWidth(110);
 		
+		///////////////////////////////////////////////////////
+		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, 
+					boolean isSelected, boolean hasFocus, int row, int column) {
+				
+				Component c = super.getTableCellRendererComponent(
+						table, value, isSelected, hasFocus, row, column);
+				
+				return c;
+			}
+		};
+		
+		for (int i = 0; i < 4; i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+		}
+		//////////////////////////////////////////////////////////
+		
 		table.setEnabled(false); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
 		
 		table.addMouseListener(new MouseAdapter() {
@@ -94,13 +125,34 @@ public class MyPageMainPanel3 extends JPanel {
 		        int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
 		        System.out.println(row + "and" + col);
+		        
+		        String cell = ""; 
+		        
 		        if (row >= 0 && col >= 0) {
 		            if (col == 4) {
-		            	new DeleteChkPopup(MainPanel.thisFrame);
+		            	// 셀을 선택하면 이 테이블의 좌표가 (row, 0)인 값을 String 으로 cell 에 값을 저장함
+		            	// -> 이렇게 cell 을 여기다 추가하면 삭제하기 버튼을 누를때 그 행의 강의명을 얻을 수 있음
+		            	cell = table.getModel().getValueAt(row, 0).toString();
+		            	new DeleteChkPopup(MainPanel.thisFrame, cell);
 		            }
 		        }
+		        
 		    }
-		    
+		});
+		
+		// 테이블에서 마우스 커서 적용 먹이려면 모션리스너 -> Moved 이벤트로 해야 먹일 수 있습니다 
+		// (다른 리스너,이벤트론 안됨)
+		table.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int row = table.rowAtPoint(e.getPoint());
+		        int col = table.columnAtPoint(e.getPoint());
+		        if(col == 4) {
+		        	setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        } else {
+		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        }
+			}
 		});
 		
 		// 이전 코드의 문제점 : 셀이 선택될 때 따른 테이블 범위를 클릭하면 이벤트가 발생하게 됨
@@ -132,7 +184,15 @@ public class MyPageMainPanel3 extends JPanel {
 		scrollPane.setBounds(0, 0, 730, 500);		
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
+		setTable(table);
 		
-		
+	}
+	
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
+	public static JTable getTable() {
+		return table;
 	}
 }
