@@ -6,27 +6,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import buttons.GoToButton;
-import database.OjdbcConnection;
 import labels.TopLabel;
 import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
+import popups.MsgPopup;
 
 public class SignupPanel extends JPanel {
 		 	
@@ -454,8 +452,8 @@ public class SignupPanel extends JPanel {
 		insertPhoneNumField3.addKeyListener(new OnlyNumKeyAdaptor()); //숫자만 입력가능, 복붙차단
 		add(insertPhoneNumField3);
 		
-		KeyListener phoneNumKeyAdapter = new KeyAdapter() {			
-			
+		KeyListener phoneNumKeyAdapter = new KeyAdapter() {
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (insertPhoneNumField1.getText().equals("") || insertPhoneNumField2.getText().equals("")
@@ -465,12 +463,33 @@ public class SignupPanel extends JPanel {
 				} else {
 					phoneMsgLabel.setForeground(new Color(0, 128, 0));
 					phoneMsgLabel.setText("입력완료");
-				}				
-			}		
-		};			
+				}
+			}
+		};
 		insertPhoneNumField1.addKeyListener(phoneNumKeyAdapter);		
 		insertPhoneNumField2.addKeyListener(phoneNumKeyAdapter);
 		insertPhoneNumField3.addKeyListener(phoneNumKeyAdapter);
+		
+		FocusListener phoneFocusAdapter = new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (insertPhoneNumField1.getText().equals("")
+						&& insertPhoneNumField2.getText().equals("")
+						&& insertPhoneNumField3.getText().equals("")) {
+					phoneMsgLabel.setForeground(Color.red);
+					phoneMsgLabel.setText("필수 정보입니다");
+				} else {
+
+				}
+			}
+
+		};
+		
+		insertPhoneNumField1.addFocusListener(phoneFocusAdapter);
+		insertPhoneNumField2.addFocusListener(phoneFocusAdapter);
+		insertPhoneNumField3.addFocusListener(phoneFocusAdapter);
+		
+		////////////////////////메일 입력조건 ///////////////////////////////////
 		
 		JLabel mailMsgLabel = new JLabel("example@gmail.com 형식으로 입력해주세요");
 		mailMsgLabel.setBounds(590, 475, 325, 43);
@@ -565,6 +584,23 @@ public class SignupPanel extends JPanel {
 				super.keyReleased(e);
 			}
 		});
+
+		FocusListener mailFocusAdapter = new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (insertMailField.getText().equals("") 
+					&& domainField.getText().equals("")) {
+					mailMsgLabel.setForeground(Color.red);
+					mailMsgLabel.setText("필수 정보입니다");
+				} else {
+
+				}
+			}
+
+		};
+		
+		insertMailField.addFocusListener(mailFocusAdapter);
+		domainField.addFocusListener(mailFocusAdapter);
 		
 		JPanel cateBtnPanel = new JPanel();
 		cateBtnPanel.setBounds(97, 550, 926, 121);
@@ -586,9 +622,54 @@ public class SignupPanel extends JPanel {
 		cateBtnPanel.add(new CateButton("프론트엔드"));
 		
 		
-		
+		/////////////// 회원가입 완료 조건 /////////////////////////////////
 		JButton createBtn = new JButton("회원 가입 완료");
 		createBtn.setBounds(473, 700, 185, 38);
+		
+		createBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(idMsgLabel.getText().equals("중복확인완료")) {
+					if(pwMsgLabel.getText().equals("사용가능한 비밀번호입니다")) {
+						if(rePwMsgLabel.getText().equals("비밀번호가 같게 입력되었습니다")) {
+							if(nameMsgLabel.getText().equals("입력완료")) {
+								if(JNumMsgLabel.getText().equals("입력완료")) {
+									if(phoneMsgLabel.getText().equals("입력완료")) {
+										if(mailMsgLabel.getText().equals("입력완료")) {
+											JOptionPane.showMessageDialog(MainPanel.thisFrame, "회원가입완료!");
+											MainPanel.currPanel.setVisible(false);
+											MainPanel.loginPanel.setVisible(true);
+											MainPanel.currPanel=MainPanel.loginPanel;
+											//DB에 저장 members, 관심 카테고리 저장.
+										}else {
+											JOptionPane.showMessageDialog(MainPanel.thisFrame, "이메일을 올바르게 입력해 주세요");
+										}
+									}else {
+										JOptionPane.showMessageDialog(MainPanel.thisFrame, "전화번호를 올바르게 입력해 주세요");
+									}
+								}else {
+									JOptionPane.showMessageDialog(MainPanel.thisFrame, "주민번호를 올바르게 입력해 주세요");
+								}
+							}else {
+								JOptionPane.showMessageDialog(MainPanel.thisFrame, "이름을 올바르게 입력해 주세요");
+							}
+						}else {
+							JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호를 재입력을 확인해 주세요");
+						}
+						
+					} else {
+						JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호를 올바르게 입력해 주세요");
+					}
+					
+				}else {
+					JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디 중복확인을 해주세요.");
+				}
+				
+			}
+		});
+		
+		
 		add(createBtn);			
 		
 		
