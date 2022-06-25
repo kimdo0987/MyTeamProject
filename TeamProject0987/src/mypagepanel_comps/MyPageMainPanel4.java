@@ -112,7 +112,7 @@ public class MyPageMainPanel4 extends JPanel {
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
 		
 		
-		
+		table.setEnabled(false);
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 730, 450);		

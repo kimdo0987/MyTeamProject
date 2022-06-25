@@ -71,6 +71,7 @@ public class MyPageMainPanel2 extends JPanel {
 		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
 		
+		table.setEnabled(false); // 버튼 선택 색상 X
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 730, 500);		

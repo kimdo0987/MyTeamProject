@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import labels.TopLabel;
 import mypagepanel_comps.frames.CancelLectureFrame;
 import mypagepanel_comps.frames.CommentsFrame;
+import panels.MainPanel;
+import popups.DeleteChkPopup;
 
 //나의 수강 조회 Panel이 될 JPanel입니다
 
@@ -87,27 +89,41 @@ public class MyPageMainPanel1 extends JPanel {
 		
 		// 수강평 쓴 아이디는 다시 접근할 수 없게 만들어야함
 		
-		selectionModel.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				int row = table.getSelectedRow();
-				int col = table.getSelectedColumn();
-				System.out.println("행index:"+row +",열index:"+col );
-				System.out.println("눌린내용: " + table.getValueAt(row, col)); 
-				
-				if (col == 4) {
-					new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
-				} else if (col == 5) {
-					new CancelLectureFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
-				} else {
-					
-				}
-				
-			}
-		});
+		table.setEnabled(false); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
 		
+		table.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    	// getPoint 는 좌표를 뽑아오는건데 rowAtPoint, columnAtPoint 는 
+		    	// 행과 열의 범위를 좌표화해서 뽑아옵니다.
+		    	/*
+		    	
+					int javax.swing.JTable.rowAtPoint(Point point)
+					
+					Returns the index of the row that point lies in,or -1 
+					if the result is not in the range[0, getRowCount()-1].
+					
+					Parameters:point the location of interestReturns:
+					the index of the row that point lies in,or -1 
+					if the result is not in the range[0, getRowCount()-1]
+					
+					See Also:columnAtPoint 
+					
+		    	*/
+		        int row = table.rowAtPoint(e.getPoint());
+		        int col = table.columnAtPoint(e.getPoint());
+		        System.out.println(row + "and" + col);
+		        if (row >= 0 && col >= 0) {
+		        	if (col == 4) {
+						new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
+					} else if (col == 5) {
+						new CancelLectureFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
+					} else {
+						
+					}
+		        }
+		    }
+		});
 		
 		//테이블 생성에 관한 내용
 		table.setFillsViewportHeight(true);

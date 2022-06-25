@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
  
 public class DeleteChkPopup extends JDialog{
-	public DeleteChkPopup(Window parent) {
+	public DeleteChkPopup(Window parent, String lecture_name) {
 		
 		super(parent, "안내 메시지", ModalityType.APPLICATION_MODAL);
 		
@@ -30,13 +30,17 @@ public class DeleteChkPopup extends JDialog{
 		JButton confirmBtn = new JButton("확인");
 		confirmBtn.setBounds(38, 91, 64, 23);
 		getContentPane().add(confirmBtn);
+		
+		String sql = "delete table wish_lists from ";
+		
 		confirmBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("//장바구니 Table에서 해당 강의를 추가한 데이터 삭제 필요함"); 
+				
 				dispose();	
-				}
+			}
 		});
 		
 		JButton cancelBtn = new JButton("취소");
