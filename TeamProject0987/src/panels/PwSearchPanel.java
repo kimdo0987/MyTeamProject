@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -35,7 +36,8 @@ public class PwSearchPanel extends JPanel {
 	private static String jNumText = "";
 	private static String searchName;
 	private static String searchJNum;
-	
+	private static String frontJNum;
+	private static String backJNum;
 	
 	public PwSearchPanel() { 
 		setBounds(0, 0, 1200, 800);
@@ -64,7 +66,7 @@ public class PwSearchPanel extends JPanel {
 		
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
 		add(idInput);
-		idInput.setBounds(420, 220, 300, 30);
+		idInput.setBounds(420, 220, 361, 44);
 		idInput.addKeyListener(new RestrictTextLength(idInput, 16)); //글자수제한
 		idInput.addKeyListener(new IdKeyAdaptor()); // 제약사항 적용
 		
@@ -78,7 +80,7 @@ public class PwSearchPanel extends JPanel {
 		
 		HintTextField nameInput = new HintTextField("이름을 입력하세요.");
 		add(nameInput);
-		nameInput.setBounds(420, 250, 300, 30);
+		nameInput.setBounds(420, 275, 361, 44);
 		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); //글자수제한
 		nameInput.addKeyListener(new NameKeyAdaptor()); // 제약사항 적용
 
@@ -90,26 +92,45 @@ public class PwSearchPanel extends JPanel {
 		});
 		
 		
-		HintTextField jNumInput = new HintTextField("주민등록번호를 입력하세요. ('-' 제외 후 입력)");
+		HintTextField jNumInput = new HintTextField("주민등록번호 앞 6자리");
 		add(jNumInput);
-		jNumInput.setBounds(420, 280, 300, 30);
-		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 13)); //글자수제한
+		jNumInput.setBounds(420, 330, 170, 44);
+		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 6)); //글자수제한
 		jNumInput.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 		
 		jNumInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				jNumText = jNumInput.getText().toString();
+				frontJNum = jNumInput.getText().toString();
 			}	
 		});		
 		
+		JLabel pwMsgLabel = new JLabel("-");
+		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		pwMsgLabel.setBounds(594, 330, 20, 44);
+		add(pwMsgLabel);
+		
+		HintTextField jNumInput2 = new HintTextField("주민등록번호 뒤 7자리");
+		add(jNumInput2);
+		jNumInput2.setBounds(610, 330, 170, 44);
+		jNumInput2.addKeyListener(new RestrictTextLength(jNumInput2, 7)); //글자수제한
+		jNumInput2.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
+
+		jNumInput2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				backJNum = jNumInput2.getText().toString();
+			}	
+		});
 		
 		JButton pwSearchBtn = new JButton("임시 비밀번호로 변경하기");
-		pwSearchBtn.setBounds(470, 350, 200, 50);
+		pwSearchBtn.setBounds(470, 425, 200, 50);
 		pwSearchBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//frontJNum 이랑 backJNum 합쳐서 text로 보내놓기
+				jNumText = frontJNum + backJNum;
 				try (
 						Connection conn = OjdbcConnection.getConnection();
 						PreparedStatement pstmt1 = conn.prepareStatement("SELECT member_name FROM members "

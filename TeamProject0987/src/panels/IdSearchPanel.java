@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -32,6 +33,8 @@ public class IdSearchPanel extends JPanel{
 	private static String jNumText = "";
 	private static String searchJNum;
 	private static String searchId;
+	private static String frontJNum;
+	private static String backJNum;
 	
 	public IdSearchPanel() {
 	
@@ -72,17 +75,35 @@ public class IdSearchPanel extends JPanel{
 				nameText = nameInput.getText().toString();
 			}	
 		});
-		
-		HintTextField jNumInput = new HintTextField("주민등록번호를 입력하세요. ('-' 제외 후 입력)");
-		add(jNumInput);
-		jNumInput.setBounds(398, 286, 361, 44);
-		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 13)); //글자수제한
-		jNumInput.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
+//		jNumText - 최종 받는 텍스트
+		HintTextField jNumInput1 = new HintTextField("주민등록번호 앞 6자리");
+		add(jNumInput1);
+		jNumInput1.setBounds(398, 286, 170, 44);
+		jNumInput1.addKeyListener(new RestrictTextLength(jNumInput1, 6)); //글자수제한
+		jNumInput1.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 
-		jNumInput.addKeyListener(new KeyAdapter() {
+		jNumInput1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				jNumText = jNumInput.getText().toString();
+				frontJNum = jNumInput1.getText().toString();
+			}	
+		});
+		
+		JLabel pwMsgLabel = new JLabel("-");
+		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		pwMsgLabel.setBounds(572, 286, 20, 44);
+		add(pwMsgLabel);
+		
+		HintTextField jNumInput2 = new HintTextField("주민등록번호 뒤 7자리");
+		add(jNumInput2);
+		jNumInput2.setBounds(588, 286, 170, 44);
+		jNumInput2.addKeyListener(new RestrictTextLength(jNumInput2, 7)); //글자수제한
+		jNumInput2.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
+
+		jNumInput2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				backJNum = jNumInput2.getText().toString();
 			}	
 		});
 
@@ -92,6 +113,8 @@ public class IdSearchPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// 주민번호 두개로 된거 합치고 시작하자
+				jNumText = frontJNum + backJNum;
 				try (Connection conn = OjdbcConnection.getConnection();
 						PreparedStatement pstmt1 = conn
 								.prepareStatement("SELECT j_number FROM members " + "WHERE member_name = ?");) {
@@ -129,10 +152,13 @@ public class IdSearchPanel extends JPanel{
 					nameText = "";
 					
 
-					jNumInput.setText("주민등록번호를 입력하세요. ('-' 제외 후 입력)");
-
-					jNumInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
-					jNumInput.setForeground(Color.GRAY);
+					jNumInput1.setText("주민등록번호 앞 6자리");
+					jNumInput1.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					jNumInput1.setForeground(Color.GRAY);
+					
+					jNumInput2.setText("주민등록번호 뒤 7자리");
+					jNumInput2.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					jNumInput2.setForeground(Color.GRAY);
 					jNumText = "";
 					//
 					
