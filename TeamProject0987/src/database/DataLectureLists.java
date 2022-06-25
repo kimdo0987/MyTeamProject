@@ -13,6 +13,7 @@ public class DataLectureLists {
 	private static ArrayList<String> startDateArr = new ArrayList<>();
 	private static ArrayList<String> endDateArr = new ArrayList<>();
 	private static ArrayList<String> lectureInfoArr = new ArrayList<>();
+	private static ArrayList<String> couponCodeArr = new ArrayList<>();
 	
 	public DataLectureLists() {
 //		setLectureNameArr();
@@ -20,7 +21,8 @@ public class DataLectureLists {
 //		setCategoryArr();
 //		setStartDateArr();
 //		setEndDateArr();
-		setLectureInfoArr();
+//		setLectureInfoArr();
+		setCouponCodeArr();
 	}
 	
 	public void setLectureNameArr() {
@@ -101,6 +103,19 @@ public class DataLectureLists {
 		}
 	}
 	
+	public void setCouponCodeArr() {
+		try (BufferedReader in = new BufferedReader(new FileReader("dataFile/CouponCode"));) 
+		{
+			String line;
+			while ((line = in.readLine()) != null) {
+				couponCodeArr.add(line);
+			}
+			System.out.println("CouponCode Array is created");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<String> getLectureNameArr() {
 		return lectureNameArr;
 	}
@@ -123,5 +138,9 @@ public class DataLectureLists {
 	
 	public ArrayList<String> getLectureInfoArr() {
 		return lectureInfoArr;
+	}
+	
+	public ArrayList<String> getCouponCodeArr() {
+		return couponCodeArr;
 	}
 }
