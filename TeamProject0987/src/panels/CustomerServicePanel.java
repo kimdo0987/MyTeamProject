@@ -10,6 +10,7 @@ import labels.TopLabel;
 import java.awt.Color;
 
 public class CustomerServicePanel extends JPanel {
+	
 	public CustomerServicePanel() {
 		
 		setBounds(0, 0, 1200, 800);

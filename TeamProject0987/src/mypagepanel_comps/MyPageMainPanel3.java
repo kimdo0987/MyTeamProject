@@ -2,7 +2,9 @@ package mypagepanel_comps;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import java.awt.Component;
+
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -133,6 +135,7 @@ public class MyPageMainPanel3 extends JPanel {
 		            	// 셀을 선택하면 이 테이블의 좌표가 (row, 0)인 값을 String 으로 cell 에 값을 저장함
 		            	// -> 이렇게 cell 을 여기다 추가하면 삭제하기 버튼을 누를때 그 행의 강의명을 얻을 수 있음
 		            	cell = table.getModel().getValueAt(row, 0).toString();
+
 		            	new DeleteChkPopup(MainPanel.thisFrame, cell);
 		            }
 		        }
@@ -153,7 +156,24 @@ public class MyPageMainPanel3 extends JPanel {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        }
 			}
+
 		});
+		table.addMouseMotionListener(new MouseMotionAdapter() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+		
+				int row = table.rowAtPoint(e.getPoint());
+		        int col = table.columnAtPoint(e.getPoint());
+		        //System.out.println("마우스위치- 행:" +row +"|열:"+ col);
+		        if(col == 4) {
+		        	setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        } else {
+		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        }		       
+			}
+		});
+
 		
 		// 이전 코드의 문제점 : 셀이 선택될 때 따른 테이블 범위를 클릭하면 이벤트가 발생하게 됨
 //		table.addMouseListener(new MouseAdapter() {

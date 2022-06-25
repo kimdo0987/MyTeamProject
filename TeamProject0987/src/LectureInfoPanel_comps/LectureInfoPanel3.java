@@ -3,7 +3,8 @@ package LectureInfoPanel_comps;
 import java.awt.Color;
 
 import java.awt.Component;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -48,7 +49,9 @@ public class LectureInfoPanel3 extends JPanel {
 				}
 				return c;
 			}
+			
 		};
+		
 		
 		// JscroollPane 의 사이즈와 테이블의 사이즈를 각각 따로 설정해야 하는듯 합니다.
 		// 그 중에서도 테이블의 scrollPane 의 사이즈보다 크거나 같아야 합니다.
