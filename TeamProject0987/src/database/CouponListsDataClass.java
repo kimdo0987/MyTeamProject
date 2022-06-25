@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-public class MyCouponLists {
+public class CouponListsDataClass {
 //	public static void main(String[] args) {
 //		DataLectureLists data = new DataLectureLists();
 //		ArrayList<String> couponCode = data.getCouponCodeArr();
