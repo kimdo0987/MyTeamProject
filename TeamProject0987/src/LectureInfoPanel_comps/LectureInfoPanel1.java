@@ -24,7 +24,7 @@ public class LectureInfoPanel1 extends JPanel {
 
 		setBounds(199, 371, 786, 390);
 		setLayout(null);
-
+		
 		detailInfoLabel.setBackground(Color.WHITE);
 		detailInfoLabel.setOpaque(true);
 		detailInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
