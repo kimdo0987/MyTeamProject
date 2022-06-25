@@ -21,6 +21,10 @@ import javax.swing.JPanel;
 import buttons.GoToButton;
 import database.OjdbcConnection;
 import labels.TopLabel;
+
+import methods.IdKeyAdaptor;
+import methods.NameKeyAdaptor;
+
 import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
 import tempPassword.TempPassword;
@@ -61,8 +65,9 @@ public class PwSearchPanel extends JPanel {
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
 		add(idInput);
 		idInput.setBounds(420, 220, 300, 30);
-		idInput.addKeyListener(new RestrictTextLength(idInput, 10)); //글자수제한
-
+		idInput.addKeyListener(new RestrictTextLength(idInput, 16)); //글자수제한
+		idInput.addKeyListener(new IdKeyAdaptor()); // 제약사항 적용
+		
 		idInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -71,10 +76,11 @@ public class PwSearchPanel extends JPanel {
 		});
 		
 		
-		HintTextField nameInput = new HintTextField("이름를 입력하세요.");
+		HintTextField nameInput = new HintTextField("이름을 입력하세요.");
 		add(nameInput);
 		nameInput.setBounds(420, 250, 300, 30);
-		nameInput.addKeyListener(new RestrictTextLength(nameInput, 10)); //글자수제한
+		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); //글자수제한
+		nameInput.addKeyListener(new NameKeyAdaptor()); // 제약사항 적용
 
 		nameInput.addKeyListener(new KeyAdapter() {
 			@Override
@@ -88,7 +94,8 @@ public class PwSearchPanel extends JPanel {
 		add(jNumInput);
 		jNumInput.setBounds(420, 280, 300, 30);
 		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 13)); //글자수제한
-
+		jNumInput.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
+		
 		jNumInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -180,7 +187,7 @@ public class PwSearchPanel extends JPanel {
 					idInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
 					idInput.setForeground(Color.GRAY);
 					
-					nameInput.setText("이름를 입력하세요.");
+					nameInput.setText("이름을 입력하세요.");
 					nameInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
 					nameInput.setForeground(Color.GRAY);
 					nameText = "";

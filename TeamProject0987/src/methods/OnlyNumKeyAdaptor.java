@@ -10,13 +10,17 @@ public class OnlyNumKeyAdaptor implements KeyListener {
 
 		if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
 
+
 			e.consume();
+
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) { // 타자칠때 숫자이외 방지용
+
 		if ((e.getKeyChar() != KeyEvent.VK_BACK_SPACE)
+
 				&& (e.getKeyChar() != KeyEvent.VK_DELETE) 
 				&& (e.getKeyCode() != 36) // END키 허용
 				&& (e.getKeyCode() != 35) // HOME키 허용
