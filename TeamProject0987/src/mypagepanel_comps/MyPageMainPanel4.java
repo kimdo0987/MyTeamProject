@@ -70,13 +70,8 @@ public class MyPageMainPanel4 extends JPanel {
 		
 		///////////////////TABLE 생성 //////////////////////////
 		
-		String[] headings = new String[] {"no.","쿠폰이름","쿠폰번호","할인율","유효기간","사용유무"};
-		Object[][] data = new Object[][] {
-			{"","회원가입 환영 쿠폰", "A23ZTEQV2", 10 + "%", "22.06.20 ~ 22.07.20", "사용가능"},
-			{"","생일 축하 쿠폰", "B23QTEQV2", 25 + "%", "22.06.20 ~ 22.07.20", "사용완료"},
-			{"","7월 이벤트 쿠폰", "A23ZTEQV2", 10 + "%", "22.06.20 ~ 22.07.20", "사용가능"},
-			{"","여름방학 맞이 쿠폰", "B23QTEQV2", 5 + "%", "22.06.20 ~ 22.07.20", "사용완료"},
-		};
+		String[] headings = new String[] {"coupon id", "쿠폰이름", "쿠폰번호", "할인율", "사용만료일", "사용유무"};
+		String[][] data = database.MyCouponLists.getMyCouponLists();
 		
 		// 테이블의 셀 내용 수정 불가 시작 //
 		DefaultTableModel mod = new DefaultTableModel(data, headings) {
@@ -90,15 +85,17 @@ public class MyPageMainPanel4 extends JPanel {
 		
 		table.getColumnModel().getColumn(0).setMinWidth(50);
 		table.getColumnModel().getColumn(0).setMaxWidth(50);
-		table.getColumnModel().getColumn(1).setMinWidth(320);//셀 너비 조정
-		table.getColumnModel().getColumn(1).setMaxWidth(320);
-		table.getColumnModel().getColumn(2).setMinWidth(80);
-		table.getColumnModel().getColumn(2).setMaxWidth(80);
+		table.getColumnModel().getColumn(1).setMinWidth(200);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMaxWidth(200);
+		table.getColumnModel().getColumn(2).setMinWidth(130);
+		table.getColumnModel().getColumn(2).setMaxWidth(130);
 		
 		table.getColumnModel().getColumn(3).setMinWidth(50);
 		table.getColumnModel().getColumn(3).setMaxWidth(50);
-		table.getColumnModel().getColumn(4).setMinWidth(140);
-		table.getColumnModel().getColumn(4).setMaxWidth(140);		
+		table.getColumnModel().getColumn(4).setMinWidth(150);
+		table.getColumnModel().getColumn(4).setMaxWidth(150);
+		table.getColumnModel().getColumn(5).setMinWidth(150);
+		table.getColumnModel().getColumn(5).setMaxWidth(150);
 		
 		table.setEnabled(false); //테이블 클릭 안되도록 지정
 

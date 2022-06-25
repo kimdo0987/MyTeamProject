@@ -40,14 +40,9 @@ public class MyPageMainPanel5 extends JPanel {
 		tablePanel.setBounds(0, 58, 730, 511);	
 		tablePanel.setLayout(null);
 		
-		String[] headings = new String[] {"주문번호","주문날짜","상태","주문명","금액"};
-		Object[][] data = new Object[][] {
-			{"1","22.06.20","결제완료", "스프링 핵심 원리 - 기본편", "￦26,500"},
-			{"2","22.06.20","결제완료", "Java TPC(생각하고, 표현하고, 코딩하고)", "￦88,000"},
-			{"3","22.06.17","결제완료", "스프링 핵심 원리 - 심화편", "￦33,500"},
-			{"4","22.06.16","결제대기", "예제로 공부하는 Java 100 문제풀이 Part.1", "￦16,500"},			
-		};
-		
+		String[] headings = new String[] {"주문번호", "주문날짜", "강의명", "쿠폰명","결제금액", "결제수단"};
+		String[][] data = database.MyPaymentLog.getMyPaymentLog();
+
 		// 테이블의 셀 내용 수정 불가 시작 //
 		DefaultTableModel mod = new DefaultTableModel(data, headings) {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -63,10 +58,12 @@ public class MyPageMainPanel5 extends JPanel {
 
 		table.getColumnModel().getColumn(1).setMinWidth(100);
 		table.getColumnModel().getColumn(1).setMaxWidth(100);
-		table.getColumnModel().getColumn(2).setMinWidth(60);
-		table.getColumnModel().getColumn(2).setMaxWidth(60);
-		table.getColumnModel().getColumn(3).setMinWidth(400);
-		table.getColumnModel().getColumn(3).setMaxWidth(400);
+		table.getColumnModel().getColumn(2).setMinWidth(360);
+		table.getColumnModel().getColumn(2).setMaxWidth(360);
+		table.getColumnModel().getColumn(3).setMinWidth(140);
+		table.getColumnModel().getColumn(3).setMaxWidth(140);
+		table.getColumnModel().getColumn(4).setMinWidth(70);
+		table.getColumnModel().getColumn(4).setMaxWidth(70);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.getTableHeader().setReorderingAllowed(true); //컬럼 헤더 이동 가능 설정
