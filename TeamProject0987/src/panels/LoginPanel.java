@@ -146,6 +146,17 @@ public class LoginPanel extends JPanel {
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
 					MainPanel.currUserId = idText;
+					
+					// 다시 비워진 상태로 돌려놓기
+					idInput.setText("이름를 입력하세요.");
+					idInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					idInput.setForeground(Color.GRAY);
+					
+					pwInput.setText("이름를 입력하세요.");
+					pwInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					pwInput.setForeground(Color.GRAY);
+					pwText = "";
+					//
 				} else {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
 							+ "입력하신 내용을 다시 확인해주세요.");

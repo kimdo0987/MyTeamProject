@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import buttons.GoToButton;
 import database.OjdbcConnection;
 import labels.TopLabel;
+import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
 import tempPassword.TempPassword;
 
@@ -93,7 +94,7 @@ public class PwSearchPanel extends JPanel {
 			public void keyReleased(KeyEvent e) {
 				jNumText = jNumInput.getText().toString();
 			}	
-		});
+		});		
 		
 		
 		JButton pwSearchBtn = new JButton("임시 비밀번호로 변경하기");
