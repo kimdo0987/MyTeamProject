@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
@@ -16,9 +17,10 @@ import labels.TopLabel;
 
 public class LectureSearchPanel extends JPanel {
 
-	public int rowCnt = 0;
+	public static String lectureImageCategory;
 	public static int currLectureId; //////////
-	
+	public static int lectureCnt;
+	public static JLabel lectureCntLabel = new JLabel("총 100개가 검색되었습니다");
 	public LectureSearchPanel() {
 
 		
@@ -51,6 +53,9 @@ public class LectureSearchPanel extends JPanel {
 			add(categoryPanel);
 			categoryPanel.setLayout(new GridLayout(2, 9));
 
+			
+			add(lectureCntLabel);
+			lectureCntLabel.setBounds(180,295,500,100);
 			JPanel lectureListPanel = new JPanel();
 			lectureListPanel.setBounds(176, 365, 730, 300);
 			CardLayout layMng = new CardLayout();
