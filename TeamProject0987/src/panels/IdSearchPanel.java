@@ -89,30 +89,28 @@ public class IdSearchPanel extends JPanel{
 		JButton idSearchBtn = new JButton("아이디 조회");
 		idSearchBtn.setBounds(478, 378, 200, 50);
 		idSearchBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try (
-						Connection conn = OjdbcConnection.getConnection();
-						PreparedStatement pstmt1 = conn.prepareStatement("SELECT j_number FROM members "
-								+ "WHERE member_name = ?");
-						) {
+				try (Connection conn = OjdbcConnection.getConnection();
+						PreparedStatement pstmt1 = conn
+								.prepareStatement("SELECT j_number FROM members " + "WHERE member_name = ?");) {
 					pstmt1.setString(1, nameText);
 					ResultSet rs1 = pstmt1.executeQuery();
-					
-					while(rs1.next()) {
+
+					while (rs1.next()) {
 						searchJNum = rs1.getString("j_number");
 					}
-					
-					PreparedStatement pstmt2 = conn.prepareStatement("SELECT member_id FROM members "
-							+ "WHERE j_number = ?");
+
+					PreparedStatement pstmt2 = conn
+							.prepareStatement("SELECT member_id FROM members " + "WHERE j_number = ?");
 					pstmt2.setString(1, searchJNum);
 					ResultSet rs2 = pstmt2.executeQuery();
-					
-					while(rs2.next()) {
+
+					while (rs2.next()) {
 						searchId = rs2.getString(1);
 					}
-					
+
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -130,7 +128,9 @@ public class IdSearchPanel extends JPanel{
 					nameInput.setForeground(Color.GRAY);
 					nameText = "";
 					
+
 					jNumInput.setText("주민등록번호를 입력하세요. ('-' 제외 후 입력)");
+
 					jNumInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
 					jNumInput.setForeground(Color.GRAY);
 					jNumText = "";

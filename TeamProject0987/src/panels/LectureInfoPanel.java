@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,6 +20,8 @@ import buttons.GoToButton;
 
 public class LectureInfoPanel extends JPanel {
 	
+	public static JLabel lectureNameLabel = new JLabel();
+	public static JLabel lectureImageLabel = new JLabel(LectureSearchPanel.lectureImageCategory);
 	public static CardLayout cardLayout1 = new CardLayout();
 	public static JPanel cardLayoutPanel = new JPanel();
 	
@@ -41,14 +44,13 @@ public class LectureInfoPanel extends JPanel {
 		enrolmentBtn.setBounds(226, 101, 508, 50);
 		panel.add(enrolmentBtn);
 		
-		JLabel lectureNameLabel = new JLabel("강의명");
 		lectureNameLabel.setOpaque(true);
 		lectureNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lectureNameLabel.setBackground(Color.WHITE);
 		lectureNameLabel.setBounds(226, 21, 508, 70);
 		panel.add(lectureNameLabel);
 		
-		JLabel lectureImageLabel = new JLabel("이미지");
+		
 		lectureImageLabel.setOpaque(true);
 		lectureImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lectureImageLabel.setBackground(Color.PINK);

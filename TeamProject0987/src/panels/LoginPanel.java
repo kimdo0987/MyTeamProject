@@ -157,6 +157,7 @@ public class LoginPanel extends JPanel {
 					MainPanel.currPanel = MainPanel.mainPanel;
 					MainPanel.currUserId = idText;
 					
+
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);
 					
@@ -173,6 +174,7 @@ public class LoginPanel extends JPanel {
 					pwInput.setEchoChar((char) 0);
 					
 					// 로그인 실패상황
+
 				} else {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
 							+ "입력하신 내용을 다시 확인해주세요.");

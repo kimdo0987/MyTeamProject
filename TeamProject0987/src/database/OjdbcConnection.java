@@ -28,7 +28,7 @@ public class OjdbcConnection {
 	}
 	
 	public static Connection getConnection() throws SQLException{
-		System.out.println("The connection Sucessful");
+		//System.out.println("The connection Sucessful");
 		return DriverManager.getConnection(url,user,password);
 	}
 	public static void main(String[] args) {
