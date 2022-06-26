@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -17,6 +16,7 @@ import LectureInfoPanel_comps.LectureInfoPanel2;
 import LectureInfoPanel_comps.LectureInfoPanel3;
 import LectureInfoPanel_comps.LectureInfoTabButton;
 import buttons.GoToButton;
+import buttons.MypageButton;
 
 public class LectureInfoPanel extends JPanel {
 	
@@ -79,7 +79,7 @@ public class LectureInfoPanel extends JPanel {
 		stateLabel.setBounds(323, 39, 554, 68);
 		add(stateLabel);
 		
-		GoToButton myInfoBtn = new GoToButton("마이페이지");	
+		MypageButton myInfoBtn = new MypageButton("마이페이지");	
 		myInfoBtn.setBackground(Color.WHITE);
 		myInfoBtn.addActionListener(new ActionListener() { /////////////////////   
 			
