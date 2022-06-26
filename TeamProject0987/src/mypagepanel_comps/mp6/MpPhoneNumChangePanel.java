@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -19,9 +20,29 @@ import panels.MainPanel;
 
 public class MpPhoneNumChangePanel extends JPanel {
 	
-	public String newPhoneNum;
+	String newPhoneNum;
+	String currPhoneNum;
 	
 	public MpPhoneNumChangePanel() {
+		String sql2 = "SELECT * FROM members WHERE member_id = ?";
+		try (
+				Connection conn2 = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+		) {
+			
+			pstmt2.setString(1, MainPanel.currUserId);
+			
+			try (ResultSet rs = pstmt2.executeQuery()) {
+				while (rs.next()) {
+					
+					currPhoneNum = rs.getString("phone_number");
+					
+				}
+			}
+				
+		}catch (Exception e) {
+
+		}
 		
 		String sql = "UPDATE members SET phone_number = ? WHERE member_id = ?";
 		try (
@@ -73,7 +94,7 @@ public class MpPhoneNumChangePanel extends JPanel {
 
 		/////////////////////////////////////////////////////////////////////////////////////
 
-		JLabel pnLabel = new JLabel("010-1234-1234");
+		JLabel pnLabel = new JLabel(currPhoneNum);
 		pnLabel.setBounds(196, 162, 469, 51);
 		add(pnLabel);
 

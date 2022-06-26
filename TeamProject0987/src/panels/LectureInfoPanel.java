@@ -57,9 +57,8 @@ public class LectureInfoPanel extends JPanel {
 		lectureImageLabel.setBounds(46, 21, 168, 130);
 		panel.add(lectureImageLabel);
 		
-		GoToButton mainBtn = new GoToButton("메인");
+		GoToButton mainBtn = new GoToButton("메인"); ///////////////
 		mainBtn.setFont(new Font("굴림", Font.PLAIN, 15));
-		mainBtn.setBackground(Color.WHITE);
 		mainBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -68,7 +67,8 @@ public class LectureInfoPanel extends JPanel {
 				
 			}
 		});
-		mainBtn.setBounds(199, 39, 111, 68);
+		mainBtn.setBackground(Color.WHITE);
+		mainBtn.setBounds(199, 39, 106, 55);
 		add(mainBtn);
 		
 		JLabel stateLabel = new JLabel("강의 검색");
@@ -79,26 +79,17 @@ public class LectureInfoPanel extends JPanel {
 		stateLabel.setBounds(323, 39, 554, 68);
 		add(stateLabel);
 		
-		JButton myInfoBtn = new JButton("내 정보");
-		myInfoBtn.setFont(new Font("굴림", Font.PLAIN, 15));
-		myInfoBtn.addActionListener(new ActionListener() {
+		GoToButton myInfoBtn = new GoToButton("마이페이지");	
+		myInfoBtn.setBackground(Color.WHITE);
+		myInfoBtn.addActionListener(new ActionListener() { /////////////////////   
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(MainPanel.currUserId != null) {
 				MainPanel.lectureInfoPanel.setVisible(false);
-				MainPanel.myPagePanel.setVisible(true);
-				} else {
-					JOptionPane.showMessageDialog(MainPanel.thisFrame, "로그인이 필요합니다",
-							"", 1);
-					MainPanel.lectureInfoPanel.setVisible(false);
-					MainPanel.loginPanel.setVisible(true);
-				}
 				
 			}
 		});
-		myInfoBtn.setBackground(Color.WHITE);
-		myInfoBtn.setBounds(889, 39, 97, 68);
+		myInfoBtn.setBounds(889, 39, 106, 55);
 		add(myInfoBtn);
 		
 		////////////////////////////////////////////////

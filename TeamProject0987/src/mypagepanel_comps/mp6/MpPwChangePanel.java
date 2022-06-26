@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -20,9 +21,29 @@ import panels.MainPanel;
 public class MpPwChangePanel extends JPanel {
 	String newPassword;
 	String newPasswordCheck;
+	String userName;
+	
 	
 	public MpPwChangePanel() {
+		String sql2 = "SELECT * FROM members WHERE member_id = ?";
+		try (
+				Connection conn2 = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+		) {
+			
+			pstmt2.setString(1, MainPanel.currUserId);
+			
+			try (ResultSet rs = pstmt2.executeQuery()) {
+				while (rs.next()) {
+					
+					userName = rs.getString("member_name");
+					
+				}
+			}
+				
+		}catch (Exception e) {
 
+		}
 		
 		String sql = "UPDATE members SET member_password = ? WHERE member_id = ?";
 		
@@ -121,7 +142,7 @@ public class MpPwChangePanel extends JPanel {
 			nameLabel.setBounds(56, 151, 124, 51);
 			add(nameLabel);
 
-			JLabel nameLabel2 = new JLabel("사용자이름");
+			JLabel nameLabel2 = new JLabel(userName);
 			nameLabel2.setBounds(197, 151, 207, 51);
 			add(nameLabel2);
 
