@@ -8,7 +8,13 @@ import java.util.ArrayList;
 public class MyPaymentLog {
 	public static String[][] getMyPaymentLog() {
 		String sql = "select "
-				+ "order_num, lecture_name, coupon_name, total_price, payment_date||''||'', payment_type "
+				+ "order_num, "
+				+ "lecture_name, "
+				+ "coupon_name, "
+				+ "lecture_price, "
+				+ "total_price, "
+				+ "payment_date||''||'', "
+				+ "payment_type "
 				+ "from "
 				+ "payment_log p, lecture_lists l, coupon_lists c "
 				+ "where p.lecture_id = l.lecture_id "
@@ -27,6 +33,7 @@ public class MyPaymentLog {
 						result.getString("payment_date||''||''"),
 						result.getString("lecture_name"),
 						result.getString("coupon_name"),
+						result.getString("lecture_price"),
 						result.getString("total_price"),
 						result.getString("payment_type")
 				});

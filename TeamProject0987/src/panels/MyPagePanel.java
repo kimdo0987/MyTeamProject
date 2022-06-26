@@ -18,6 +18,7 @@ import mypagepanel_comps.MyPageMainPanel5;
 import mypagepanel_comps.MyPageMainPanel6;
 import mypagepanel_comps.MyPageMainPanel7;
 import mypagepanel_comps.MyPageTabButton;
+import mypagepanel_comps.PaymentPanel;
 
 public class MyPagePanel extends JPanel {
 	
@@ -31,9 +32,9 @@ public class MyPagePanel extends JPanel {
 	public static MyPageMainPanel5 mainPanel5 = new MyPageMainPanel5();
 	public static MyPageMainPanel6 mainPanel6 = new MyPageMainPanel6();
 	public static MyPageMainPanel7 mainPanel7 = new MyPageMainPanel7();
+	public static PaymentPanel payPanel = new PaymentPanel();
 
 	public MyPagePanel() {				
-		
 		
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);		
@@ -82,6 +83,7 @@ public class MyPagePanel extends JPanel {
 		cardLayoutPanel.add(mainPanel5, "구매 내역");
 		cardLayoutPanel.add(mainPanel6, "계정 관리");
 		cardLayoutPanel.add(mainPanel7, "회원 탈퇴");
+		cardLayoutPanel.add(payPanel, "결제하기");
 				
 		
 		MyPageTabButton btn1 = new MyPageTabButton("나의 수강조회");
