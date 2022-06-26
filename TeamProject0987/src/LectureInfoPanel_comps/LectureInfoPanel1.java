@@ -24,7 +24,6 @@ public class LectureInfoPanel1 extends JPanel {
 		detailInfoLabel.setBounds(0, 0, 786, 390);
 		add(detailInfoLabel);
 
-		setVisible(false);
 	}
 
 }

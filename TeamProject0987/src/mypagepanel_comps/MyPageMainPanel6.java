@@ -113,7 +113,7 @@ public class MyPageMainPanel6 extends JPanel {
 							
 									if(pw.equals(inputPw)) {
 										JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치합니다",
-												"굿", 1);
+												"비밀번호 확인", 1);
 										tablePanel.setVisible(false);
 										mpPanel.setVisible(true);
 									} else {

@@ -1,24 +1,50 @@
 package mypagepanel_comps.mp6;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import database.OjdbcConnection;
 import panels.MainPanel;
 
 public class MyProfilePanel extends JPanel {
+	String userName;
+	String userId;
+	String userEmail;
+	String phoneNum;
+	String jNum;
+	
 	public MyProfilePanel() {
+		
+		String sql2 = "SELECT * FROM members WHERE member_id = ?";
+		try (
+				Connection conn2 = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+		) {
+			
+			pstmt2.setString(1, MainPanel.currUserId);
+			
+			try (ResultSet rs = pstmt2.executeQuery()) {
+				while (rs.next()) {
+					userId = rs.getString("member_ID");
+					userName = rs.getString("member_name");
+					userEmail = rs.getString("email");
+					jNum = rs.getString("j_number");
+					phoneNum = rs.getString("phone_number");
+					
+				}
+			}
+				
+		}catch (Exception e) {
+
+		}
+		String a = jNum.charAt(2)+""+jNum.charAt(3)+"월"+jNum.charAt(4)+""+jNum.charAt(5)+"일";
 		setLayout(null);
 
 		setBounds(0, 58, 730, 511);
@@ -55,52 +81,28 @@ public class MyProfilePanel extends JPanel {
 		});
 		add(modifyBtn);
 		
-		JLabel lbl1 = new JLabel("이름뜨는창");
+		JLabel lbl1 = new JLabel(userName);
 		lbl1.setBounds(157, 106, 187, 38);
-		
-		lbl1.setText("g");
 		add(lbl1);
 		
-		JLabel lbl2 = new JLabel("id 넣는곳");
+		JLabel lbl2 = new JLabel(userId);
 		lbl2.setBounds(157, 146, 187, 38);
 		add(lbl2);
 		
-		JLabel lbl3 = new JLabel("생일 넣는곳");
+		JLabel lbl3 = new JLabel(a);
 		lbl3.setBounds(157, 186, 187, 38);
 		add(lbl3);
 		
-		JLabel lbl4 = new JLabel("전화번호 넣는곳");
+		JLabel lbl4 = new JLabel(phoneNum);
 		lbl4.setBounds(157, 226, 187, 38);
 		add(lbl4);
 		
-		JLabel lbl5 = new JLabel("이메일 넣는곳");
+		JLabel lbl5 = new JLabel(userEmail);
 		lbl5.setBounds(157, 266, 187, 38);
 		add(lbl5);
 		
 		
 		
-		String sql = "SELECT * FROM members WHERE member_id = ?";
-				
-		try (
-				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);				
-				)		
-		{
-			pstmt.setString(1, MainPanel.currUserId);
-			ResultSet rs = pstmt.executeQuery();
-			
-			rs.next();
-				
-			lbl2.setText(rs.getString("member_id")); 
-			lbl1.setText(rs.getString("member_name"));	
-				
-			
-			
-			
-			
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
 		
 		
 		

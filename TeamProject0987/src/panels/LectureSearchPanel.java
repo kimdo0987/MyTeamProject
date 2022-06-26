@@ -30,39 +30,40 @@ public class LectureSearchPanel extends JPanel {
 
 			int cnt = 0;
 
-			GoToButton mainBtn = new GoToButton("메인");
+			GoToButton mainBtn = new GoToButton("메인"); ////////////////
 			mainBtn.setBounds(12, 10, 106, 55);
+			
+			mainBtn.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					MainPanel.lectureInfoPanel.setVisible(false);
+					
+				}
+			});
 			mainBtn.setBackground(Color.WHITE);
 			add(mainBtn);
 
 			TopLabel toplabel = new TopLabel("강의 찾기");
 			add(toplabel);
 
-			JButton infoBtn = new JButton("내정보");
-			infoBtn.addActionListener(new ActionListener() {
+			GoToButton myInfoBtn = new GoToButton("마이페이지");	
+			myInfoBtn.setBackground(Color.WHITE);
+			
+			myInfoBtn.addActionListener(new ActionListener() { /////////////////////
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(MainPanel.currUserId != null) {
-						MainPanel.lectureSearchPanel.setVisible(false);
-						MainPanel.myPagePanel.setVisible(true);
-						} else {
-							JOptionPane.showMessageDialog(MainPanel.thisFrame, "로그인이 필요합니다",
-									"", 1);
-							MainPanel.lectureSearchPanel.setVisible(false);
-							MainPanel.loginPanel.setVisible(true);
-						}
+					MainPanel.lectureInfoPanel.setVisible(false);
+					
 				}
-		
 			});
-			infoBtn.setBackground(Color.white);
-			infoBtn.setBounds(1046, 10, 106, 55);
-			add(infoBtn);
-
+			myInfoBtn.setBounds(889, 39, 106, 55);
+			add(myInfoBtn);
+			
 			HintTextField searchField = new HintTextField("검색어를 입력해주세요");
 			searchField.setColumns(10);
 			searchField.setBounds(180, 114, 590, 55);
-			
 			add(searchField);
 
 			JPanel categoryPanel = new JPanel();
@@ -133,14 +134,5 @@ public class LectureSearchPanel extends JPanel {
 
 
 	}
-//	public static void main(String[] args) {
-//		
-//		JFrame frame = new JFrame();
-//		frame.add(new LectureSearchPanel());
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setBounds(0, 0, 1200, 800);
-//		frame.setLocationRelativeTo(null);
-//		frame.setVisible(true);
-//	}
 
 }

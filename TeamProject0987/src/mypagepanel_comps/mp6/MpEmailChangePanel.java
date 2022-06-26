@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -14,13 +15,36 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import LectureInfoPanel_comps.LectureInfoPanel1;
 import database.OjdbcConnection;
+import panels.LectureInfoPanel;
+import panels.LectureSearchPanel;
 import panels.MainPanel;
 
 public class MpEmailChangePanel extends JPanel {
-	public String newEmail;
-
+	String newEmail;
+	String currEmail;
+	
 	public MpEmailChangePanel() {
+		String sql2 = "SELECT * FROM members WHERE member_id = ?";
+		try (
+				Connection conn2 = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+		) {
+			
+			pstmt2.setString(1, MainPanel.currUserId);
+			
+			try (ResultSet rs = pstmt2.executeQuery()) {
+				while (rs.next()) {
+					
+					currEmail = rs.getString("email");
+					
+				}
+			}
+				
+		}catch (Exception e) {
+
+		}
 
 		String sql = "UPDATE members SET email = ? WHERE member_id = ?";
 		try (
@@ -72,7 +96,7 @@ public class MpEmailChangePanel extends JPanel {
 			pwChangeBtn.setBounds(56, 50, 202, 78);
 			add(pwChangeBtn);
 
-			JLabel emailLabel = new JLabel("abcde@naver.com");
+			JLabel emailLabel = new JLabel(currEmail);
 			emailLabel.setBounds(196, 162, 469, 51);
 			add(emailLabel);
 
@@ -147,4 +171,5 @@ public class MpEmailChangePanel extends JPanel {
 
 	}
 
-}
+	}
+
