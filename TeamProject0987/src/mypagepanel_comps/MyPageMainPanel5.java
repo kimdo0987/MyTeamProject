@@ -40,7 +40,7 @@ public class MyPageMainPanel5 extends JPanel {
 		tablePanel.setBounds(0, 58, 730, 511);	
 		tablePanel.setLayout(null);
 		
-		String[] headings = new String[] {"주문번호", "주문날짜", "강의명", "쿠폰명","결제금액", "결제수단"};
+		String[] headings = new String[] {"주문번호", "주문날짜", "강의명", "쿠폰명", "정가", "결제금액", "결제수단"};
 		String[][] data = database.MyPaymentLog.getMyPaymentLog();
 
 		// 테이블의 셀 내용 수정 불가 시작 //
@@ -50,30 +50,41 @@ public class MyPageMainPanel5 extends JPanel {
 			}
 		};
 		
+		
+		
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
+		table.setEnabled(false); //테이블 클릭 안되도록 지정
+		
 		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
 		table.getColumnModel().getColumn(0).setMinWidth(60);//셀 너비 조정
 		table.getColumnModel().getColumn(0).setMaxWidth(60);
 
-		table.getColumnModel().getColumn(1).setMinWidth(100);
-		table.getColumnModel().getColumn(1).setMaxWidth(100);
-		table.getColumnModel().getColumn(2).setMinWidth(360);
-		table.getColumnModel().getColumn(2).setMaxWidth(360);
-		table.getColumnModel().getColumn(3).setMinWidth(140);
-		table.getColumnModel().getColumn(3).setMaxWidth(140);
-		table.getColumnModel().getColumn(4).setMinWidth(70);
-		table.getColumnModel().getColumn(4).setMaxWidth(70);
+		table.getColumnModel().getColumn(1).setMinWidth(60);
+		table.getColumnModel().getColumn(1).setMaxWidth(60);
+		
+		table.getColumnModel().getColumn(2).setMinWidth(300);
+		table.getColumnModel().getColumn(2).setMaxWidth(300);
+		
+		table.getColumnModel().getColumn(3).setMinWidth(120);
+		table.getColumnModel().getColumn(3).setMaxWidth(120);
+		
+		table.getColumnModel().getColumn(4).setMinWidth(60);
+		table.getColumnModel().getColumn(4).setMaxWidth(60);
+		
+		table.getColumnModel().getColumn(5).setMinWidth(60);
+		table.getColumnModel().getColumn(5).setMaxWidth(60);
+		
+		table.getColumnModel().getColumn(6).setMinWidth(70);
+		table.getColumnModel().getColumn(6).setMaxWidth(70);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
-		table.getTableHeader().setReorderingAllowed(true); //컬럼 헤더 이동 가능 설정
-		
-		table.setEnabled(false); //테이블 클릭 안되도록 지정
+		table.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
+		table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
 
 		
 		
 		//테이블 생성에 관한 내용
-		table.setEnabled(false);
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 730, 500);
