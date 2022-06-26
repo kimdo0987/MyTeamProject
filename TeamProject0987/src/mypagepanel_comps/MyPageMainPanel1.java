@@ -114,9 +114,9 @@ public class MyPageMainPanel1 extends JPanel {
 		        int col = table.columnAtPoint(e.getPoint());
 		        System.out.println(row + "and" + col);
 		        if (row >= 0 && col >= 0) {
-		        	if (col == 4) {
+		        	if (col == 3) {
 						new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
-					} else if (col == 5) {
+					} else if (col == 4) {
 						new CancelLectureFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 					} else {
 						
