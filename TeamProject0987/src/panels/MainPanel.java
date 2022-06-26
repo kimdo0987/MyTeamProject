@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import buttons.GoToButton;
 import buttons.LogoutButton;
+import buttons.MypageButton;
 import labels.TopLabel;
 
 // 첫화면
@@ -11,7 +12,7 @@ import labels.TopLabel;
 public class MainPanel extends JPanel {
 	
 	
-	private GoToButton myInfoBtn;
+	private MypageButton myInfoBtn;
 	private GoToButton signUpBtn;
 	public static GoToButton loginBtn;
 	public static LogoutButton logoutBtn;
@@ -51,7 +52,7 @@ public class MainPanel extends JPanel {
 		searchClassBtn.setBounds(315, 255, 118, 112); //버튼 생성 위치, 버튼 크기 정해줌
 		add(searchClassBtn); // Panel에 버튼을 추가함 
 		
-		myInfoBtn = new GoToButton("마이페이지");
+		myInfoBtn = new MypageButton("마이페이지");
 		myInfoBtn.setBounds(506, 255, 118, 112);		
 		add(myInfoBtn);
 		

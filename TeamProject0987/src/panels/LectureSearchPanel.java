@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.MypageButton;
 import database.LectureTable;
 import database.LectureTable2;
 import labels.TopLabel;
@@ -47,7 +47,7 @@ public class LectureSearchPanel extends JPanel {
 			TopLabel toplabel = new TopLabel("강의 찾기");
 			add(toplabel);
 
-			GoToButton myInfoBtn = new GoToButton("마이페이지");	
+			MypageButton myInfoBtn = new MypageButton("마이페이지");	
 			myInfoBtn.setBackground(Color.WHITE);
 			
 			myInfoBtn.addActionListener(new ActionListener() { /////////////////////
