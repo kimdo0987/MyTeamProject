@@ -12,7 +12,7 @@ public class MyCouponLists {
 				+ "coupon_id, "
 				+ "coupon_name, "
 				+ "coupon_code, "
-				+ "discount_percent, "
+				+ "discount_percent||'%'||'', "
 				+ "expiration_period||''||'', "
 				+ "used_or_unused "
 				+ "from "
@@ -31,7 +31,7 @@ public class MyCouponLists {
 						result.getString("coupon_id"),
 						result.getString("coupon_name"),
 						result.getString("coupon_code"),
-						result.getString("discount_percent"),
+						result.getString("discount_percent||'%'||''"),
 						result.getString("expiration_period||''||''"),
 						result.getString("used_or_unused")
 				});

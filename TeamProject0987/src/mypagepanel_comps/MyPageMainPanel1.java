@@ -1,10 +1,12 @@
 package mypagepanel_comps;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -92,6 +94,7 @@ public class MyPageMainPanel1 extends JPanel {
 		table.setEnabled(false); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
 		
 		table.addMouseListener(new MouseAdapter() {
+			
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
 		    	// getPoint 는 좌표를 뽑아오는건데 rowAtPoint, columnAtPoint 는 
@@ -114,15 +117,28 @@ public class MyPageMainPanel1 extends JPanel {
 		        int col = table.columnAtPoint(e.getPoint());
 		        System.out.println(row + "and" + col);
 		        if (row >= 0 && col >= 0) {
-		        	if (col == 4) {
+		        	if (col == 3) {
 						new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
-					} else if (col == 5) {
+					} else if (col == 4) {
 						new CancelLectureFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 					} else {
 						
 					}
 		        }
 		    }
+		});
+		
+		table.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int row = table.rowAtPoint(e.getPoint());
+		        int col = table.columnAtPoint(e.getPoint());
+		        if(col == 3 || col == 4) {
+		        	setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        } else {
+		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        }
+			}
 		});
 		
 		//테이블 생성에 관한 내용

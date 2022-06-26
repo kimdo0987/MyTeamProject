@@ -28,6 +28,7 @@ import javax.swing.table.TableCellRenderer;
 import labels.TopLabel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
+import javax.swing.JButton;
 
 //나의 장바구니 Panel이 될 JPanel입니다
 
@@ -45,7 +46,7 @@ public class MyPageMainPanel3 extends JPanel {
 		add(toplabel);	
 		
 		JPanel panel = new JPanel(); //장바구니List 테이블과 label이 들어가는 패널 (장바구니 panel)
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(162, 155, 730, 488);
 		panel.setLayout(null);
 		add(panel);
 		
@@ -55,7 +56,7 @@ public class MyPageMainPanel3 extends JPanel {
 		panel.add(tableNameLabel);
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 58, 730, 511);		
+		tablePanel.setBounds(0, 58, 730, 430);		
 		tablePanel.setLayout(null);
 		panel.add(tablePanel);
 		
@@ -201,10 +202,15 @@ public class MyPageMainPanel3 extends JPanel {
 		
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 500);		
+		scrollPane.setBounds(0, 0, 730, 430);		
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
 		setTable(table);
+		
+		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
+		paymentBtn.setBackground(new Color(255, 127, 80));
+		paymentBtn.setBounds(604, 653, 287, 60);
+		add(paymentBtn);
 		
 	}
 	

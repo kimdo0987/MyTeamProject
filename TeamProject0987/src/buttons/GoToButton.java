@@ -32,7 +32,7 @@ public class GoToButton extends JButton {
 				MainPanel.lastPanel = MainPanel.currPanel;
 				MainPanel.currPanel = valuePanel;				
 			}
-		};		
+		};
 		
 		public GoToButton(String name) {
 			setText(name);
@@ -48,5 +48,5 @@ public class GoToButton extends JButton {
 			PanelHash.put("비밀번호찾기", MainPanel.pwSerachPanel);
 			PanelHash.put("이전", MainPanel.lastPanel);
 		}	
-	
 }
+
