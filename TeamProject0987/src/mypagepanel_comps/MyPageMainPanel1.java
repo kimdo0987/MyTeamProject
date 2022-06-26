@@ -94,6 +94,7 @@ public class MyPageMainPanel1 extends JPanel {
 		table.setEnabled(false); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
 		
 		table.addMouseListener(new MouseAdapter() {
+			
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
 		    	// getPoint 는 좌표를 뽑아오는건데 rowAtPoint, columnAtPoint 는 

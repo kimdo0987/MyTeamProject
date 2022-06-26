@@ -10,6 +10,12 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
@@ -21,6 +27,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import buttons.GoToButton;
+import database.OjdbcConnection;
 import labels.TopLabel;
 import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
@@ -153,11 +160,37 @@ public class SignupPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (!createIdField.getText().equals("4~16 이내 영문숫자조합")
 						&& idMsgLabel.getText().equals("사용가능한 형식입니다 (중복확인을 해주세요)")) {
-					System.out.println(createIdField.getText());
-					createIdField.setEditable(false);
-					idMsgLabel.setText("중복확인완료");
-					createIdField.removeKeyListener(null);
-
+					//기존에있던 아이디인지 확인.
+					String memberid = null;
+					try (
+							Connection conn = OjdbcConnection.getConnection();
+							PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM members "
+									+ "WHERE member_id = ?");							
+							) {
+						pstmt.setString(1, createIdField.getText());
+						ResultSet rs = pstmt.executeQuery();
+						while(rs.next()) {
+							//System.out.println(createIdField.getText());
+							memberid = rs.getString("member_id");
+						}				
+						
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					if(memberid == null) {
+						if(JOptionPane.showConfirmDialog(MainPanel.thisFrame, "사용가능한 아이디입니다\n사용하시겠습니까?", "아이디 중복확인", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE) == 0) {
+							
+							createIdField.setEditable(false);
+							idMsgLabel.setText("중복확인완료");
+							createIdField.removeKeyListener(null);
+						} else {
+							
+						}				
+					} else {
+						JOptionPane.showMessageDialog(MainPanel.thisFrame, "이미 사용중인 아이디입니다");
+						idMsgLabel.setForeground(Color.red);
+						idMsgLabel.setText("다른 아이디를 입력해주세요");
+					}
 				}
 			}
 		});
@@ -627,21 +660,70 @@ public class SignupPanel extends JPanel {
 		createBtn.setBounds(473, 700, 185, 38);
 		
 		createBtn.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String Jnum = insertJNum1Field.getText() + insertJNum2Field.getText();
+				ArrayList <String> nameArr = new ArrayList<>();
 				if(idMsgLabel.getText().equals("중복확인완료")) {
 					if(pwMsgLabel.getText().equals("사용가능한 비밀번호입니다")) {
 						if(rePwMsgLabel.getText().equals("비밀번호가 같게 입력되었습니다")) {
 							if(nameMsgLabel.getText().equals("입력완료")) {
 								if(JNumMsgLabel.getText().equals("입력완료")) {
+									int age = (LocalDateTime.now().getYear()-1900+1-(Integer.parseInt(insertJNum1Field.getText().substring(0, 2))));
+									try (
+											Connection conn = OjdbcConnection.getConnection();
+											PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM members "
+													+ "WHERE j_number = ?");							
+											) {
+										pstmt.setString(1, Jnum);
+										ResultSet rs = pstmt.executeQuery();
+										while(rs.next()) {															
+											nameArr.add(rs.getString("member_name"));
+										}	
+										//System.out.println(nameArr);
+										
+									} catch (SQLException e1) {
+										e1.printStackTrace();
+									}
 									if(phoneMsgLabel.getText().equals("입력완료")) {
 										if(mailMsgLabel.getText().equals("입력완료")) {
-											JOptionPane.showMessageDialog(MainPanel.thisFrame, "회원가입완료!");
-											MainPanel.currPanel.setVisible(false);
-											MainPanel.loginPanel.setVisible(true);
-											MainPanel.currPanel=MainPanel.loginPanel;
-											//DB에 저장 members, 관심 카테고리 저장.
+											if(!nameArr.contains(insertNameField.getText())
+													
+													) { 											
+												//DB에 저장 members, 관심 카테고리 저장.
+												String sql = "INSERT INTO members VALUES (?,?,?,?,?,?,?)";
+														
+//												//해쉬맵해서 하나씩 꺼내서 갯수만큼 insert반복
+//												String sql2 = "INSERT INTO favorite_category VALUES "
+//														+ "(favorite_category_seq.NEXTVAL,'" 
+//														+ insertNameLabel.getText() + "', '"
+//														+ insertJNum1Field.getText()+insertJNum2Field.getText() + "')";
+												try (Connection conn = OjdbcConnection.getConnection();
+														PreparedStatement pstmt = conn.prepareStatement(sql);													
+													) {
+													conn.setAutoCommit(false);
+														pstmt.setString(1, createIdField.getText());
+														pstmt.setString(2, String.valueOf(createPwField.getPassword()));
+														pstmt.setString(3, insertNameField.getText());
+														pstmt.setInt(4, age);
+														pstmt.setString(5, insertPhoneNumField1.getText()+"-"+insertPhoneNumField2.getText()+"-"+ insertPhoneNumField3.getText());
+														pstmt.setString(6, insertMailField.getText()+"@"+domainField.getText());
+														pstmt.setString(7, insertJNum1Field.getText()+insertJNum2Field.getText());
+														pstmt.executeUpdate();
+														conn.commit();
+																												
+													} catch (SQLException e1) {
+														e1.printStackTrace();
+
+													}
+												
+												JOptionPane.showMessageDialog(MainPanel.thisFrame, "회원가입완료!");
+												MainPanel.currPanel.setVisible(false);
+												MainPanel.loginPanel.setVisible(true);
+												MainPanel.currPanel = MainPanel.loginPanel;
+											}else {
+												JOptionPane.showMessageDialog(MainPanel.thisFrame, "이미 회원으로 등록된 회원정보입니다","회원조회",JOptionPane.ERROR_MESSAGE);
+											}
 										}else {
 											JOptionPane.showMessageDialog(MainPanel.thisFrame, "이메일을 올바르게 입력해 주세요");
 										}
