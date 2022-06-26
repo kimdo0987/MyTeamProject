@@ -140,7 +140,11 @@ public class MyPageMainPanel3 extends JPanel {
 		            	new DeleteChkPopup(MainPanel.thisFrame, cell);
 		            }
 		        }
-		        
+		    }
+		    
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		    }
 		});
 		
@@ -151,27 +155,15 @@ public class MyPageMainPanel3 extends JPanel {
 			public void mouseMoved(MouseEvent e) {
 				int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
-		        if(col == 4) {
-		        	setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        if (row >= 0 && col >= 0) {
+		        	if(col == 4) {
+		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        	} else {
+		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        	}		        	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        }
-			}
-
-		});
-		table.addMouseMotionListener(new MouseMotionAdapter() {
-			
-			@Override
-			public void mouseMoved(MouseEvent e) {
-		
-				int row = table.rowAtPoint(e.getPoint());
-		        int col = table.columnAtPoint(e.getPoint());
-		        //System.out.println("마우스위치- 행:" +row +"|열:"+ col);
-		        if(col == 4) {
-		        	setCursor(new Cursor(Cursor.HAND_CURSOR));
-		        } else {
-		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		        }		       
 			}
 		});
 
@@ -190,6 +182,7 @@ public class MyPageMainPanel3 extends JPanel {
 //				
 //			}
 //		});
+		
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
