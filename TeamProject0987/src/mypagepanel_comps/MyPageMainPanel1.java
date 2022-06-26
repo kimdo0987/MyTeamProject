@@ -125,6 +125,11 @@ public class MyPageMainPanel1 extends JPanel {
 					}
 		        }
 		    }
+		    
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		    }
 		});
 		
 		table.addMouseMotionListener(new MouseMotionAdapter() {
@@ -132,12 +137,17 @@ public class MyPageMainPanel1 extends JPanel {
 			public void mouseMoved(MouseEvent e) {
 				int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
-		        if(col == 3 || col == 4) {
-		        	setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        if (row >= 0 && col >= 0) {
+		        	if(col == 3 || col == 4) {
+		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        	} else {
+		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        	}	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        }
 			}
+			
 		});
 		
 		//테이블 생성에 관한 내용
