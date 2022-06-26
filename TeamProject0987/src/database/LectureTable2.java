@@ -1,7 +1,10 @@
 package database;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +21,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import LectureInfoPanel_comps.LectureInfoPanel1;
+import database.LectureTable.MyRenderer;
 import panels.LectureInfoPanel;
 import panels.LectureSearchPanel;
 import panels.MainPanel;
@@ -41,8 +45,29 @@ public class LectureTable2 extends JPanel {
 				return false;
 			}
 		};
-
+		
 		JTable table = new JTable(mod);
+		
+		MyRenderer cellRenderer = new MyRenderer();
+		table.addMouseMotionListener(new MouseMotionAdapter(){
+			public void mouseMoved(MouseEvent e)
+			{
+				int row = table.rowAtPoint(e.getPoint());
+				if (row > -1)
+				 {
+				    cellRenderer.rowAtMouse = row;
+				    cellRenderer.color = new Color(246,246,246);
+				    table.repaint();
+				 }
+			 }
+		});
+		table.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
+		
+		
+		
 		table.setPreferredScrollableViewportSize(new Dimension(700, 600));
 		
 		table.getColumnModel().getColumn(0).setMinWidth(375);// 셀 너비 조정
@@ -56,6 +81,8 @@ public class LectureTable2 extends JPanel {
 
 		table.setRowHeight(30);
 		table.setShowVerticalLines(false);
+		
+		
 		
 		table.setRowHeight(30); // 셀 높이 조정
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -99,14 +126,13 @@ public class LectureTable2 extends JPanel {
 
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
-							LectureInfoPanel1.detailInfoLabel.setText((detailInfoHash.get(rs.getString("lecture_id"))));
+							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							
 							LectureSearchPanel.currLectureId = rs.getInt("lecture_id");//////
 							
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
-							
 							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
 						}
 					} catch (SQLException e1) {
@@ -131,6 +157,25 @@ public class LectureTable2 extends JPanel {
 		
 	
 	
+	}
+	
+	public class MyRenderer extends DefaultTableCellRenderer {
+		Color color;
+		int rowAtMouse;
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			if (!table.isRowSelected(row)) // 현재 선택된 행의 색상은 변경하지 않고 선택 해제된 경우에만 배경색상을 변경한다
+			{
+				if (row == rowAtMouse)
+					c.setBackground(color);
+				else
+					c.setBackground(Color.WHITE);
+			}
+			return c;
+		}
 	}
 }
 

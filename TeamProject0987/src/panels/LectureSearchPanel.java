@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
@@ -23,7 +24,7 @@ public class LectureSearchPanel extends JPanel {
 	public static JLabel lectureCntLabel = new JLabel("총 100개가 검색되었습니다");
 	public LectureSearchPanel() {
 
-		
+			
 			setBounds(0, 0, 1200, 800);
 			setLayout(null);
 
@@ -38,6 +39,22 @@ public class LectureSearchPanel extends JPanel {
 			add(toplabel);
 
 			JButton infoBtn = new JButton("내정보");
+			infoBtn.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(MainPanel.currUserId != null) {
+						MainPanel.lectureSearchPanel.setVisible(false);
+						MainPanel.myPagePanel.setVisible(true);
+						} else {
+							JOptionPane.showMessageDialog(MainPanel.thisFrame, "로그인이 필요합니다",
+									"", 1);
+							MainPanel.lectureSearchPanel.setVisible(false);
+							MainPanel.loginPanel.setVisible(true);
+						}
+				}
+		
+			});
 			infoBtn.setBackground(Color.white);
 			infoBtn.setBounds(1046, 10, 106, 55);
 			add(infoBtn);
@@ -75,6 +92,7 @@ public class LectureSearchPanel extends JPanel {
 					
 				}
 			});
+			
 			allCategoryBtn.setBackground(Color.WHITE);
 			categoryPanel.add(allCategoryBtn);
 			
@@ -112,7 +130,7 @@ public class LectureSearchPanel extends JPanel {
 
 			}
 
-			setVisible(false);
+
 
 	}
 //	public static void main(String[] args) {

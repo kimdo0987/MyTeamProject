@@ -12,7 +12,7 @@ public class GetSearchLectureLists {
 	public static int lecCnt=0;
 	public static String[][] getSearchList(String SearchWord) {
 		
-		String sql = "SELECT * FROM lecture_lists WHERE lecture_name LIKE ?";
+		String sql = "SELECT lecture_name,teacher_name,lecture_category,lecture_start_date||''||'' FROM lecture_lists WHERE lecture_name LIKE ?";
 		
 		
 		try (
@@ -33,7 +33,7 @@ public class GetSearchLectureLists {
 						rs.getString("lecture_name"),
 						rs.getString("teacher_name"),
 						rs.getString("lecture_category"),
-						rs.getString("lecture_start_date")
+						rs.getString("lecture_start_date||''||''")
 				});
 			}
 			

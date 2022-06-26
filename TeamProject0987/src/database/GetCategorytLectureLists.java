@@ -10,9 +10,9 @@ public class GetCategorytLectureLists {
 	public static String[][] getLectureLists(String category) {
 		
 		
-		String sql = "SELECT * FROM lecture_lists WHERE lecture_category = ?";
+		String sql = "SELECT lecture_name,teacher_name,lecture_category,lecture_start_date||''||'' FROM lecture_lists WHERE lecture_category = ?";
 		if(category=="ALL") {
-			sql = "SELECT * FROM lecture_lists";	
+			sql = "SELECT lecture_name,teacher_name,lecture_category,lecture_start_date||''||'' FROM lecture_lists";	
 		}
 		
 		try (
@@ -33,7 +33,7 @@ public class GetCategorytLectureLists {
 						rs.getString("lecture_name"),
 						rs.getString("teacher_name"),
 						rs.getString("lecture_category"),
-						rs.getString("lecture_start_date")
+						rs.getString("lecture_start_date||''||''")
 				});
 			}
 			panels.LectureSearchPanel.lectureCntLabel.setText("총 "+lecCnt+"개의 강의를 검색하였습니다");

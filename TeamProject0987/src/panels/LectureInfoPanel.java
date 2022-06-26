@@ -6,9 +6,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -81,6 +81,22 @@ public class LectureInfoPanel extends JPanel {
 		
 		JButton myInfoBtn = new JButton("내 정보");
 		myInfoBtn.setFont(new Font("굴림", Font.PLAIN, 15));
+		myInfoBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MainPanel.currUserId != null) {
+				MainPanel.lectureInfoPanel.setVisible(false);
+				MainPanel.myPagePanel.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(MainPanel.thisFrame, "로그인이 필요합니다",
+							"", 1);
+					MainPanel.lectureInfoPanel.setVisible(false);
+					MainPanel.loginPanel.setVisible(true);
+				}
+				
+			}
+		});
 		myInfoBtn.setBackground(Color.WHITE);
 		myInfoBtn.setBounds(889, 39, 97, 68);
 		add(myInfoBtn);
@@ -115,7 +131,7 @@ public class LectureInfoPanel extends JPanel {
 		LectureInfoTabButton scheduleBtn = new LectureInfoTabButton("강의 시간표");
 		scheduleBtn.setBounds(723, 297, 261, 62);
 		add(scheduleBtn);
-		setVisible(false);
+	
 	}
 	
 //	public static void main(String[] args) {

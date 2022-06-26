@@ -61,6 +61,7 @@ public class LectureTable extends JPanel {
 				 }
 			 }
 		});
+		
 		table.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
@@ -134,7 +135,7 @@ public class LectureTable extends JPanel {
 							
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
-							LectureInfoPanel1.detailInfoLabel.setText((detailInfoHash.get(rs.getString("lecture_id"))));
+							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							
