@@ -230,7 +230,7 @@ public class SignupPanel extends JPanel {
 					pwMsgLabel.setText("비밀번호는 8글자 이상이여야 합니다");
 				} else if (msg.length() > 12) {
 					createPwField.setText(msg.substring(0, 12)); // 긴 글 복붙으로 삽입 방지
-				} else if (!Pattern.matches("\\w*", msg)) {
+				} else if (!Pattern.matches("[!-~]*", msg)) {
 					pwMsgLabel.setForeground(Color.red);
 					pwMsgLabel.setText("사용 불가능한 문자가 포함되어 있습니다");
 				} else if (Pattern.matches("[!-~]*", msg) && msg.length() < 13 && msg.length() > 7) {
@@ -277,7 +277,7 @@ public class SignupPanel extends JPanel {
 				}
 				if (msg.length() > 12) {
 					rePwField.setText(msg.substring(0, 12)); // 긴 글 복붙으로 삽입 방지
-				} else if (!Pattern.matches("\\w*", msg)) {
+				} else if (!Pattern.matches("[!-~]*", msg)) {
 					rePwMsgLabel.setForeground(Color.red);
 					rePwMsgLabel.setText("사용 불가능한 문자가 포함되어 있습니다");
 				} else if ((Pattern.matches("[!-~]*", msg)) && msg.equals(String.valueOf(createPwField.getPassword()))

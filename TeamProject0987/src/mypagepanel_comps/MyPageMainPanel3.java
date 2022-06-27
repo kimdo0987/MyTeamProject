@@ -127,7 +127,7 @@ public class MyPageMainPanel3 extends JPanel {
 		    	*/
 		        int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
-		        System.out.println(row + "and" + col);
+		        //System.out.println(row + "and" + col);
 		        
 		        String cell = ""; 
 		        
