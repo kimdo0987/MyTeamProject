@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import LectureInfoPanel_comps.LectureInfoPanel1;
+import LectureInfoPanel_comps.LectureInfoPanel3;
 import buttons.WishButton;
 import database.LectureTable.MyRenderer;
 import panels.LectureInfoPanel;
@@ -110,6 +111,7 @@ public class LectureTable2 extends JPanel {
 				
 				MainPanel.lectureSearchPanel.setVisible(false);
 				MainPanel.lectureInfoPanel.setVisible(true);
+				LectureInfoPanel.cardLayout1.show(LectureInfoPanel.cardLayoutPanel,"상세정보");
 
 
 				HashMap<String, String> detailInfoHash = new HashMap<>();
@@ -135,6 +137,7 @@ public class LectureTable2 extends JPanel {
 							WishButton.currLectureId = rs.getInt("lecture_id");
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
 							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
+							LectureInfoPanel.lectureTime = (rs.getString("timetable"));
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();

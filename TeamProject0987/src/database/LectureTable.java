@@ -117,6 +117,8 @@ public class LectureTable extends JPanel {
 				
 				MainPanel.lectureSearchPanel.setVisible(false);
 				MainPanel.lectureInfoPanel.setVisible(true);
+				LectureInfoPanel.cardLayout1.show(LectureInfoPanel.cardLayoutPanel,"상세정보");
+				
 				
 
 
@@ -143,7 +145,8 @@ public class LectureTable extends JPanel {
 							WishButton.currLectureId = rs.getInt("lecture_id");
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
 							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
-							LectureInfoPanel3.lectureTime = (rs.getString("timetable"));
+							LectureInfoPanel.lectureTime = (rs.getString("timetable"));
+							
 							
 						}
 					} catch (SQLException e1) {

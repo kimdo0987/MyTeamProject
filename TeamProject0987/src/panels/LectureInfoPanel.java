@@ -25,10 +25,11 @@ public class LectureInfoPanel extends JPanel {
 	public static CardLayout cardLayout1 = new CardLayout();
 	public static JPanel cardLayoutPanel = new JPanel();
 	public static JLabel rateAvgLabel = new JLabel();
+	public static String lectureTime = "";
 	
 	public static LectureInfoPanel1 lectureInfoPanel1 = new LectureInfoPanel1();
 	public static LectureInfoPanel2 lectureInfoPanel2 = new LectureInfoPanel2(99);
-	public static LectureInfoPanel3 lectureInfoPanel3 = new LectureInfoPanel3();
+	public static LectureInfoPanel3 lectureInfoPanel3 = new LectureInfoPanel3(lectureTime);
 	
 	public LectureInfoPanel() {
 		setBounds(0, 0, 1200, 800);
@@ -141,7 +142,9 @@ public class LectureInfoPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				cardLayout1.show(cardLayoutPanel, "상세정보");
+				lectureInfoPanel3 = new LectureInfoPanel3(lectureTime); ///////////	
+				cardLayoutPanel.add(lectureInfoPanel3, "강의 시간표");
 				rateAvgLabel.setText("");
 			}
 		});
