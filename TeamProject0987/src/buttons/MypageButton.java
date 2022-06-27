@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 
 import panels.IdSearchPanel;
 import panels.LectureSearchPanel;
+import panels.LoginPanel;
 import panels.MainPanel;
+import panels.MyPagePanel;
 import panels.PwSearchPanel;
 import panels.SignupPanel;
  
@@ -18,8 +20,7 @@ import panels.SignupPanel;
 
 public class MypageButton extends JButton {
 
-		public static HashMap<String,JPanel> PanelHash = new HashMap<>();
-		
+			
 		private static ActionListener eventListener = new ActionListener() {
 
 			@Override
@@ -28,12 +29,23 @@ public class MypageButton extends JButton {
 				if (MainPanel.currUserId.equals("logout")) {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "회원만 이용 가능합니다\n로그인해 주세요");
 					MainPanel.currPanel.setVisible(false);
+					MainPanel.thisFrame.remove(MainPanel.loginPanel);
+					LoginPanel newLoginPanel = new LoginPanel();
+					MainPanel.thisFrame.add(newLoginPanel);
+					MainPanel.loginPanel = newLoginPanel;
 					MainPanel.loginPanel.setVisible(true);
+					
 					MainPanel.lastPanel = MainPanel.currPanel;
-					MainPanel.currPanel = MainPanel.loginPanel;
+					MainPanel.currPanel = MainPanel.loginPanel;	
+
 				} else {
 					MainPanel.currPanel.setVisible(false);
+					MainPanel.thisFrame.remove(MainPanel.myPagePanel);
+					MyPagePanel newMyPagePanel = new MyPagePanel();
+					MainPanel.thisFrame.add(newMyPagePanel);
+					MainPanel.myPagePanel = newMyPagePanel;
 					MainPanel.myPagePanel.setVisible(true);
+					
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.myPagePanel;
 				}

@@ -17,11 +17,12 @@ public class SignupButton extends JButton{
 		public void actionPerformed(ActionEvent e) {
 								
 			MainPanel.currPanel.setVisible(false);
+			MainPanel.thisFrame.remove(MainPanel.signUpPanel); 
 			SignupPanel newSignupPanel = new SignupPanel();
 			MainPanel.thisFrame.add(newSignupPanel);
 			MainPanel.signUpPanel = newSignupPanel;
-			
 			MainPanel.signUpPanel.setVisible(true);
+			
 			MainPanel.lastPanel = MainPanel.currPanel;
 			MainPanel.currPanel = MainPanel.signUpPanel;				
 		}
