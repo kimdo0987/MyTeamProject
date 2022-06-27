@@ -2,7 +2,6 @@ package mypagepanel_comps;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +9,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.font.TextAttribute;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -93,27 +93,6 @@ public class MyPageMainPanel3 extends JPanel {
 			model.setValueAt(data[i][3], i, 4);
 			model.setValueAt("삭제하기", i, 5);
 		}
-		
-		//obtain selected row
-//		JButton btn = new JButton("Get Selected");
-////		add(btn);
-//		table.add(btn);
-//		btn.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				for (int i = 0; i < table.getRowCount(); i++) {
-//					Boolean checked = Boolean.valueOf(table.getValueAt(i, 0).toString());
-//					String col = table.getValueAt(i, 1).toString();
-//					
-//					//display
-//					if (checked) {
-//						JOptionPane.showMessageDialog(null, col);
-//					}
-//				}
-//			}
-//		});
 		
 //		table.getColumnModel().getColumn(0).setMinWidth(40);
 //		table.getColumnModel().getColumn(0).setMaxWidth(40);
@@ -233,6 +212,43 @@ public class MyPageMainPanel3 extends JPanel {
 		paymentBtn.setBackground(new Color(255, 127, 80));
 		paymentBtn.setBounds(604, 653, 287, 60);
 		add(paymentBtn);
+		
+		//obtain selected row
+		paymentBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				HashMap<String, String[]> checkArr = new HashMap<>();
+				
+				Collection<String[]> values = null;
+				for (int i = 0; i < table.getRowCount(); i++) {
+					Boolean checked = Boolean.valueOf(table.getValueAt(i, 0).toString());
+					String col1 = table.getValueAt(i, 1).toString();
+					String col2 = table.getValueAt(i, 2).toString();
+					String col3 = table.getValueAt(i, 3).toString();
+					String col4 = table.getValueAt(i, 4).toString();
+					
+					String[] col = {col1, col2, col3, col4};
+					//display
+					
+					if (checked) {
+						checkArr.put(col1, col);
+					} else if (!checked) {
+						checkArr.remove(col1);
+					}
+					
+					values = checkArr.values();
+				}
+				
+				for(String[] val : values) {
+					
+					System.out.println(val[0]); 
+				}
+//				System.out.println(checkArr);
+				
+			}
+		});
+		
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
