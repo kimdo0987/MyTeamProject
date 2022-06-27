@@ -199,9 +199,15 @@ public class MyPageMainPanel3 extends JPanel {
 		        	cellRenderer.rowAtMouse = row;
 		        	cellRenderer.color = new Color(246,246,246);
 		        	table.repaint();
+		        	
+		        	Font font = table.getFont();
+					Map attributes = font.getAttributes();
+					attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		        	
 		        	if(col == 5) {
 		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		        		cellRenderer.colAtMouse = col;
+		        		cellRenderer.fontunderLine = font.deriveFont(attributes);
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        		table.setFont(new Font("Serif", Font.PLAIN, 13));

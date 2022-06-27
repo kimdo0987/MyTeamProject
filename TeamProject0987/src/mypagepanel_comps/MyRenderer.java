@@ -13,7 +13,7 @@ public class MyRenderer extends DefaultTableCellRenderer {
 	Color color;
 	int rowAtMouse;
 	int colAtMouse;
-	Font font;
+	Font fontunderLine;
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
@@ -21,6 +21,7 @@ public class MyRenderer extends DefaultTableCellRenderer {
 		Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 		if (!(table.isRowSelected(row) && table.isColumnSelected(column))) // 현재 선택된 행의 색상은 변경하지 않고 선택 해제된 경우에만 배경색상을 변경한다
 		{
+			
 			if (row == rowAtMouse) {
 				c.setBackground(color);
 			}  else {
@@ -28,10 +29,7 @@ public class MyRenderer extends DefaultTableCellRenderer {
 			}
 			
 			if (row == rowAtMouse && column == colAtMouse) {
-				Font font = table.getFont();
-        		Map attributes = font.getAttributes();
-        		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        		table.setFont(font.deriveFont(attributes));
+        		table.setFont(fontunderLine);
 			} else {
 				c.setFont(new Font("Serif", Font.PLAIN, 13));
 			}
