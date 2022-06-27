@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +24,7 @@ import mypagepanel_comps.frames.CancelLectureFrame;
 import mypagepanel_comps.frames.CommentsFrame;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
+import mypagepanel_comps.MyRenderer;
 
 //나의 수강 조회 Panel이 될 JPanel입니다
 
@@ -89,6 +92,16 @@ public class MyPageMainPanel1 extends JPanel {
 		// 한 컬럼만 선택가능 넣어야함  
 		
 		
+		MyRenderer cellRenderer = new MyRenderer();
+		
+		table.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(cellRenderer);
+
+		
+		
 		// 수강평 쓴 아이디는 다시 접근할 수 없게 만들어야함
 		
 		table.setEnabled(false); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
@@ -130,6 +143,7 @@ public class MyPageMainPanel1 extends JPanel {
 		    @Override
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
 		    }
 		});
 		
@@ -139,13 +153,26 @@ public class MyPageMainPanel1 extends JPanel {
 				int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
 		        if (row >= 0 && col >= 0) {
+		        	// 폰트 밑줄 넣는 코드
+		        	cellRenderer.rowAtMouse = row;
+		        	cellRenderer.color = new Color(246,246,246);
+		        	table.repaint();
+		        	
 		        	if(col == 3 || col == 4) {
 		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        		
+		        		// 폰트 밑줄 넣는 코드
+		        		Font font = table.getFont();
+		        		Map attributes = font.getAttributes();
+		        		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		        		table.setFont(font.deriveFont(attributes));
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        	}	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        }
 			}
 			

@@ -1,34 +1,29 @@
 package mypagepanel_comps;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-
-import java.awt.Component;
-
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 
-import javax.swing.CellEditor;
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import labels.TopLabel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
-import javax.swing.JButton;
 
 //나의 장바구니 Panel이 될 JPanel입니다
 
@@ -60,51 +55,92 @@ public class MyPageMainPanel3 extends JPanel {
 		tablePanel.setLayout(null);
 		panel.add(tablePanel);
 		
-		String[] headings = new String[] {"강의명","강사명","수강 기간","수강료","장바구니에서 삭제"};
-		String[][] data = database.MyWishLists.getMyWishLists();
+		JTable table = new JTable(); // 수정불가능한 테이블로 생성
 		
-		// 테이블의 셀 내용 수정 불가 시작 //
-		DefaultTableModel mod = new DefaultTableModel(data, headings) {
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				return false;
+		DefaultTableModel model = new DefaultTableModel() {
+			public Class<?> getColumnClass(int column) {
+				switch(column) {
+				case 0:
+					return Boolean.class;
+				default:
+					return String.class;
+				}
 			}
 		};
 
-		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
-		table.setPreferredScrollableViewportSize(new Dimension(700,600));
+		table.setModel(model);
+//		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
+		//headings 설정
+		model.addColumn("선택");
+		model.addColumn("강의명");
+		model.addColumn("강사명");
+		model.addColumn("수강 기간");
+		model.addColumn("수강료");
+		model.addColumn("장바구니에서 삭제");
 		
-		table.getColumnModel().getColumn(0).setMinWidth(310);//셀 너비 조정
-		table.getColumnModel().getColumn(0).setMaxWidth(310);
-		table.getColumnModel().getColumn(1).setMinWidth(80);
-		table.getColumnModel().getColumn(1).setMaxWidth(80);
+		//row 넣을 data
+		String[][] data = database.MyWishLists.getMyWishLists();
 		
-		table.getColumnModel().getColumn(2).setMinWidth(140);
-		table.getColumnModel().getColumn(2).setMaxWidth(140);
-		table.getColumnModel().getColumn(3).setMinWidth(90);
-		table.getColumnModel().getColumn(3).setMaxWidth(90);
-		table.getColumnModel().getColumn(4).setMinWidth(110);
-		table.getColumnModel().getColumn(4).setMaxWidth(110);
+		//the row
+		for (int i = 0; i < data.length; i++) {
+			model.addRow(new Object[0]); 
+			model.setValueAt(false, i, 0); // checkbox 의 boolean type 이 되는데, true - 체크됨, false - 체크안됨
+			//data
+			model.setValueAt(data[i][0], i, 1); // (data[row][column], 위치 row번째 행, 위치 column)
+			model.setValueAt(data[i][1], i, 2);
+			model.setValueAt(data[i][2], i, 3);
+			model.setValueAt(data[i][3], i, 4);
+			model.setValueAt("삭제하기", i, 5);
+		}
+		
+		//obtain selected row
+//		JButton btn = new JButton("Get Selected");
+////		add(btn);
+//		table.add(btn);
+//		btn.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				for (int i = 0; i < table.getRowCount(); i++) {
+//					Boolean checked = Boolean.valueOf(table.getValueAt(i, 0).toString());
+//					String col = table.getValueAt(i, 1).toString();
+//					
+//					//display
+//					if (checked) {
+//						JOptionPane.showMessageDialog(null, col);
+//					}
+//				}
+//			}
+//		});
+		
+//		table.getColumnModel().getColumn(0).setMinWidth(40);
+//		table.getColumnModel().getColumn(0).setMaxWidth(40);
+		table.getColumnModel().getColumn(1).setMinWidth(300);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMaxWidth(300);
+		table.getColumnModel().getColumn(2).setMinWidth(80);
+		table.getColumnModel().getColumn(2).setMaxWidth(80);
+		
+		table.getColumnModel().getColumn(3).setMinWidth(130);
+		table.getColumnModel().getColumn(3).setMaxWidth(130);
+		table.getColumnModel().getColumn(4).setMinWidth(90);
+		table.getColumnModel().getColumn(4).setMaxWidth(90);
+		table.getColumnModel().getColumn(5).setMinWidth(100);
+		table.getColumnModel().getColumn(5).setMaxWidth(100);
 		
 		///////////////////////////////////////////////////////
-		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
-			@Override
-			public Component getTableCellRendererComponent(JTable table, Object value, 
-					boolean isSelected, boolean hasFocus, int row, int column) {
-				
-				Component c = super.getTableCellRendererComponent(
-						table, value, isSelected, hasFocus, row, column);
-				
-				return c;
-			}
-		};
 		
-		for (int i = 0; i < 4; i++) {
-			table.getColumnModel().getColumn(i).setCellRenderer(renderer);
-		}
-		//////////////////////////////////////////////////////////
+		MyRenderer cellRenderer = new MyRenderer();
 		
-		table.setEnabled(false); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
+//		table.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(5).setCellRenderer(cellRenderer);
+		
+		table.setEnabled(true); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
 		
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
@@ -145,6 +181,7 @@ public class MyPageMainPanel3 extends JPanel {
 		    @Override
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
 		    }
 		});
 		
@@ -156,13 +193,22 @@ public class MyPageMainPanel3 extends JPanel {
 				int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
 		        if (row >= 0 && col >= 0) {
+		        	cellRenderer.rowAtMouse = row;
+		        	cellRenderer.color = new Color(246,246,246);
+		        	table.repaint();
 		        	if(col == 4) {
 		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        		Font font = table.getFont();
+		        		Map attributes = font.getAttributes();
+		        		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		        		table.setFont(font.deriveFont(attributes));
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        	}		        	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        }
 			}
 		});
