@@ -141,6 +141,7 @@ public class MyPageMainPanel3 extends JPanel {
 		table.getColumnModel().getColumn(5).setCellRenderer(cellRenderer);
 		
 		table.setEnabled(true); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
+		table.setSelectionBackground(Color.WHITE);
 		
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
