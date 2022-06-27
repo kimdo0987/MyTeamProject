@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -61,19 +63,6 @@ public class LectureSearchPanel extends JPanel {
 			myInfoBtn.setBounds(889, 39, 106, 55);
 			add(myInfoBtn);
 			
-			HintTextField searchField = new HintTextField("검색어를 입력해주세요");
-			searchField.setColumns(10);
-			searchField.setBounds(180, 114, 590, 55);
-			add(searchField);
-
-			JPanel categoryPanel = new JPanel();
-			categoryPanel.setBounds(180, 178, 710, 153);
-			add(categoryPanel);
-			categoryPanel.setLayout(new GridLayout(2, 9));
-
-			
-			add(lectureCntLabel);
-			lectureCntLabel.setBounds(180,295,500,100);
 			JPanel lectureListPanel = new JPanel();
 			lectureListPanel.setBounds(176, 365, 730, 300);
 			CardLayout layMng = new CardLayout();
@@ -89,10 +78,37 @@ public class LectureSearchPanel extends JPanel {
 					LectureTable lecListPanel = new LectureTable(allCategoryBtn.getText());
 					lectureListPanel.add(lecListPanel,allCategoryBtn.getText());
 					layMng.show(lectureListPanel,allCategoryBtn.getText());
-
+					
 					
 				}
 			});
+			
+			HintTextField searchField = new HintTextField("검색어를 입력해주세요");
+			searchField.addKeyListener(new KeyAdapter() {
+				
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					 if(e.getKeyCode() == KeyEvent.VK_ENTER){
+						 LectureTable2 lecListPanel2 = new LectureTable2(searchField.getText());
+							lectureListPanel.add(lecListPanel2,searchField.getText());
+							layMng.show(lectureListPanel,searchField.getText());
+							searchField.setText("");
+					 }
+				}
+			});
+			searchField.setColumns(10);
+			searchField.setBounds(180, 114, 590, 55);
+			add(searchField);
+
+			JPanel categoryPanel = new JPanel();
+			categoryPanel.setBounds(180, 178, 710, 153);
+			add(categoryPanel);
+			categoryPanel.setLayout(new GridLayout(2, 9));
+
+			
+			add(lectureCntLabel);
+			lectureCntLabel.setBounds(180,295,500,100);
 			
 			allCategoryBtn.setBackground(Color.WHITE);
 			categoryPanel.add(allCategoryBtn);
