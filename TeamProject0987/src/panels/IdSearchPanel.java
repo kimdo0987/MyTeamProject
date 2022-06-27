@@ -94,7 +94,7 @@ public class IdSearchPanel extends JPanel{
 		pwMsgLabel.setBounds(572, 286, 20, 44);
 		add(pwMsgLabel);
 		
-		HintTextField jNumInput2 = new HintTextField("주민등록번호 뒤 7자리");
+		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
 		jNumInput2.setBounds(588, 286, 170, 44);
 		jNumInput2.addKeyListener(new RestrictTextLength(jNumInput2, 7)); //글자수제한
