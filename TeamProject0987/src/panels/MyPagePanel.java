@@ -23,15 +23,15 @@ import mypagepanel_comps.PaymentPanel;
 public class MyPagePanel extends JPanel {
 	
 	public static CardLayout cardLayout1 = new CardLayout();
-	public static JPanel cardLayoutPanel = new JPanel();
+	public static JPanel cardLayoutPanel;
 	
-	public static MyPageMainPanel1 mainPanel1 = new MyPageMainPanel1();
-	public static MyPageMainPanel2 mainPanel2 = new MyPageMainPanel2();
-	public static MyPageMainPanel3 mainPanel3 = new MyPageMainPanel3();
-	public static MyPageMainPanel4 mainPanel4 = new MyPageMainPanel4();	
-	public static MyPageMainPanel5 mainPanel5 = new MyPageMainPanel5();
-	public static MyPageMainPanel6 mainPanel6 = new MyPageMainPanel6();
-	public static MyPageMainPanel7 mainPanel7 = new MyPageMainPanel7();
+	public static MyPageMainPanel1 mainPanel1 ;
+	public static MyPageMainPanel2 mainPanel2 ;
+	public static MyPageMainPanel3 mainPanel3 ;
+	public static MyPageMainPanel4 mainPanel4 ;	
+	public static MyPageMainPanel5 mainPanel5 ;
+	public static MyPageMainPanel6 mainPanel6 ;
+	public static MyPageMainPanel7 mainPanel7 ;
 	public static PaymentPanel payPanel = new PaymentPanel();
 
 	public MyPagePanel() {				
@@ -68,8 +68,16 @@ public class MyPagePanel extends JPanel {
 		lbl3.setBounds(0, 580, 120, 60);
 		add(lbl3);
 		
-		//////////////////////////////////////////////////
 		
+		mainPanel1 = new MyPageMainPanel1();
+		mainPanel2 = new MyPageMainPanel2();
+		mainPanel3 = new MyPageMainPanel3();
+		mainPanel4 = new MyPageMainPanel4();	
+		mainPanel5 = new MyPageMainPanel5();
+		mainPanel6 = new MyPageMainPanel6();
+		mainPanel7 = new MyPageMainPanel7();
+		//////////////////////////////////////////////////
+		cardLayoutPanel = new JPanel();
 		cardLayoutPanel.setBounds(118, 0, 1093, 800);
 		add(cardLayoutPanel);
 		
