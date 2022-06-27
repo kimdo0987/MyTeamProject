@@ -90,14 +90,14 @@ public class LectureInfoPanel extends JPanel {
 		
 		MypageButton myInfoBtn = new MypageButton("마이페이지");	
 		myInfoBtn.setBackground(Color.WHITE);
-		myInfoBtn.addActionListener(new ActionListener() { /////////////////////   
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				MainPanel.lectureInfoPanel.setVisible(false);
-				
-			}
-		});
+//		myInfoBtn.addActionListener(new ActionListener() { /////////////////////   
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				MainPanel.lectureInfoPanel.setVisible(false);
+//				
+//			}
+//		});
 		myInfoBtn.setBounds(889, 39, 106, 55);
 		add(myInfoBtn);
 		
