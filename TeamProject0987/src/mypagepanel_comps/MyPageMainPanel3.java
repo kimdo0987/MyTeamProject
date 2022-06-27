@@ -184,7 +184,7 @@ public class MyPageMainPanel3 extends JPanel {
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
-		    	cellRenderer.colAtMouse = 999;
+		    	cellRenderer.colAtMouse = -1;
 		    }
 		});
 		
@@ -205,12 +205,12 @@ public class MyPageMainPanel3 extends JPanel {
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
-		        		cellRenderer.colAtMouse = 999;
+		        		cellRenderer.colAtMouse = -1;
 		        	}		        	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
-		        	cellRenderer.colAtMouse = 999;
+		        	cellRenderer.colAtMouse = -1;
 		        }
 		        
 		        if (col == 0) {
