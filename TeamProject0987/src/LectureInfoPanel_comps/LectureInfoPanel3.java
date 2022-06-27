@@ -19,6 +19,8 @@ import javax.swing.table.TableColumnModel;
 // 강의 시간표 Panel 이 될 JPanel 입니다
 
 public class LectureInfoPanel3 extends JPanel {
+	public static String lectureTime = "";
+
 	public LectureInfoPanel3() {
 		setBounds(199, 371, 786, 390);
 		setLayout(null);

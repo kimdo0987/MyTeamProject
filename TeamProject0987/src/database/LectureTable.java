@@ -16,12 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import LectureInfoPanel_comps.LectureInfoPanel1;
+import LectureInfoPanel_comps.LectureInfoPanel3;
+import buttons.WishButton;
 import panels.LectureInfoPanel;
 import panels.LectureSearchPanel;
 import panels.MainPanel;
@@ -135,14 +135,15 @@ public class LectureTable extends JPanel {
 							
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
-							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
+							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							
 							LectureSearchPanel.currLectureId = rs.getInt("lecture_id");//////
-							
+							WishButton.currLectureId = rs.getInt("lecture_id");
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
 							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
+							LectureInfoPanel3.lectureTime = (rs.getString("timetable"));
 							
 						}
 					} catch (SQLException e1) {

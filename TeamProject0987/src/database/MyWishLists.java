@@ -28,6 +28,8 @@ public class MyWishLists {
 		) {
 			pstmt.setString(1, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
+			
+			
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {
 				list.add(new String[] {
