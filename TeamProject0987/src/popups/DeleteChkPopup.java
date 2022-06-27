@@ -57,7 +57,7 @@ public class DeleteChkPopup extends JDialog{
 					currLectureId = rs.getInt("lecture_id");
 				}
 			}
-		System.out.println(currLectureId);		
+		//System.out.println(currLectureId);		
 		}catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -88,10 +88,12 @@ public class DeleteChkPopup extends JDialog{
 					e1.printStackTrace();
 				}
 					
-					MyPagePanel.mainPanel3.setVisible(false);
-					
-					
-				dispose();	
+				MyPagePanel.mainPanel3.setVisible(false);
+				MyPagePanel.mainPanel3 = new MyPageMainPanel3();
+				MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel3, "나의 장바구니");
+				MyPagePanel.mainPanel3.setVisible(true);
+				dispose();
+							
 			}
 		});
 		

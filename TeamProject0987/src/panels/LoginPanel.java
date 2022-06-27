@@ -47,11 +47,18 @@ public class LoginPanel extends JPanel {
 		lastPageBtn.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(MainPanel.lastPanel == MainPanel.loginPanel) {
+					MainPanel.currPanel.setVisible(false);
+					MainPanel.mainPanel.setVisible(true);					
+					MainPanel.lastPanel = MainPanel.currPanel;
+					MainPanel.currPanel = MainPanel.mainPanel;
+				} else {
 				MainPanel.currPanel.setVisible(false);
 				MainPanel.lastPanel.setVisible(true);
-				MainPanel.tempPanel = MainPanel.lastPanel; //일시적으로 담아둠
-				MainPanel.lastPanel = MainPanel.currPanel;
-				MainPanel.currPanel = MainPanel.tempPanel;
+				
+				MainPanel.currPanel = MainPanel.lastPanel;
+				MainPanel.lastPanel = MainPanel.loginPanel;
+				}
 			}
 		});
 		
@@ -186,15 +193,31 @@ public class LoginPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainPanel.currPanel.setVisible(false);
+				MainPanel.thisFrame.remove(MainPanel.idSearchPanel);
+				MainPanel.idSearchPanel = new IdSearchPanel();
+				MainPanel.thisFrame.add(MainPanel.idSearchPanel);
 				MainPanel.idSearchPanel.setVisible(true);
-				MainPanel.currPanel=MainPanel.idSearchPanel;
+				MainPanel.currPanel = MainPanel.idSearchPanel;
 			}
 		});
 		
 		
-		GoToButton findPwBtn = new GoToButton("비밀번호찾기");
+		JButton findPwBtn = new JButton("비밀번호찾기");
 		add(findPwBtn);
-		findPwBtn.setBounds(500, 430, 150, 35);		
+		findPwBtn.setBounds(500, 430, 150, 35);
+		findPwBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.currPanel.setVisible(false);
+				MainPanel.thisFrame.remove(MainPanel.pwSerachPanel);
+				MainPanel.pwSerachPanel = new PwSearchPanel();
+				MainPanel.thisFrame.add(MainPanel.pwSerachPanel);
+				MainPanel.pwSerachPanel.setVisible(true);
+				MainPanel.currPanel = MainPanel.pwSerachPanel;
+				
+			}
+		});
 		
 		SignupButton signUp = new SignupButton("회원가입");
 		add(signUp);

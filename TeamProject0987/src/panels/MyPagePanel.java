@@ -25,13 +25,13 @@ public class MyPagePanel extends JPanel {
 	public static CardLayout cardLayout1 = new CardLayout();
 	public static JPanel cardLayoutPanel;
 	
-	public static MyPageMainPanel1 mainPanel1 ;
-	public static MyPageMainPanel2 mainPanel2 ;
-	public static MyPageMainPanel3 mainPanel3 ;
-	public static MyPageMainPanel4 mainPanel4 ;	
-	public static MyPageMainPanel5 mainPanel5 ;
-	public static MyPageMainPanel6 mainPanel6 ;
-	public static MyPageMainPanel7 mainPanel7 ;
+	public static MyPageMainPanel1 mainPanel1;
+	public static MyPageMainPanel2 mainPanel2;
+	public static MyPageMainPanel3 mainPanel3;
+	public static MyPageMainPanel4 mainPanel4;	
+	public static MyPageMainPanel5 mainPanel5;
+	public static MyPageMainPanel6 mainPanel6;
+	public static MyPageMainPanel7 mainPanel7;
 	public static PaymentPanel payPanel = new PaymentPanel();
 
 	public MyPagePanel() {				

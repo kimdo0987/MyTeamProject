@@ -21,7 +21,8 @@ public class MyPaymentLog {
 				+ "payment_log p, lecture_lists l, coupon_lists c "
 				+ "where p.lecture_id = l.lecture_id "
 				+ "AND p.coupon_id = c.coupon_id "
-				+ "AND p.member_id = ?";
+				+ "AND p.member_id = ?"
+				+ "ORDER BY payment_date DESC ";
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
