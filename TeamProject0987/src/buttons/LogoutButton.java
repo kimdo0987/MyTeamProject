@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import panels.CustomerServicePanel;
 import panels.MainPanel;
 
 public class LogoutButton extends JButton {
@@ -29,6 +30,10 @@ public class LogoutButton extends JButton {
 				if (logoutBtnresult == 0) {
 					MainPanel.logoutBtn.setVisible(false);
 					MainPanel.loginBtn.setVisible(true);
+					
+					CustomerServicePanel.logoutBtn.setVisible(false);
+					CustomerServicePanel.loginBtn.setVisible(true);
+					
 					MainPanel.currUserId = "";
 					
 					System.out.println(MainPanel.currUserId);

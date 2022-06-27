@@ -5,11 +5,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.LogoutButton;
 import labels.TopLabel;
 
 import java.awt.Color;
 
 public class CustomerServicePanel extends JPanel {
+	
+	public static GoToButton loginBtn;
+	public static LogoutButton logoutBtn;
 	
 	public CustomerServicePanel() {
 		
@@ -39,9 +43,13 @@ public class CustomerServicePanel extends JPanel {
 		join.setBounds(331, 660, 153, 100 );
 		add(join);
 		
-		GoToButton login = new GoToButton ("로그인");
-		login.setBounds(645, 660, 144, 100);
-		add(login);
+		loginBtn = new GoToButton ("로그인");
+		loginBtn.setBounds(645, 660, 144, 100);
+		add(loginBtn);
+		
+		logoutBtn = new LogoutButton("로그아웃");
+		logoutBtn.setBounds(645, 660, 144, 100);
+		add(logoutBtn);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(204, 153, 204));
