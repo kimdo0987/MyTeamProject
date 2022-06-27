@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import panels.MainPanel;
+
 public class MyCouponLists {
 	
 	public static String[][] getMyCouponLists() {
@@ -18,12 +20,13 @@ public class MyCouponLists {
 				+ "from "
 				+ "coupon_lists "
 				+ "where "
-				+ "member_id = 'hansm1119'";
+				+ "member_id = ?";
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 		) {
+			pstmt.setString(1, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {

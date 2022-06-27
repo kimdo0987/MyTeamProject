@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import panels.MainPanel;
+
 public class MyWishLists {
 	public static String[][] getMyWishLists() {
 		String sql = "select "
@@ -18,12 +20,13 @@ public class MyWishLists {
 				+ "where "
 				+ "l.lecture_id = w.lecture_id "
 				+ "AND "
-				+ "user_id = 'hansm1119'"; 
+				+ "user_id = ?"; 
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 		) {
+			pstmt.setString(1, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {
