@@ -143,6 +143,7 @@ public class MyPageMainPanel1 extends JPanel {
 		    @Override
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
 		    }
 		});
 		
@@ -171,6 +172,7 @@ public class MyPageMainPanel1 extends JPanel {
 		        	}	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        }
 			}
 			
