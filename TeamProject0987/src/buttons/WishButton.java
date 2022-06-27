@@ -24,20 +24,20 @@ public class WishButton extends JButton {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				if (MainPanel.currUserId.equals("")) {
+				if (MainPanel.currUserId.equals("logout")) {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "회원만 이용 가능합니다\n로그인해 주세요");
 					
 					return;
 				} 
 				
 				
-				String sql2 = "SELECT * FROM wish_lists WHERE lecture_id = ?";
+				String sql2 = "SELECT * FROM wish_lists WHERE member_id = ?";
 				try (
 						Connection conn2 = OjdbcConnection.getConnection(); 
 						PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
 				) {
 					
-					pstmt2.setInt(1,  currLectureId);
+					pstmt2.setString(1,  MainPanel.currUserId);
 					
 					try (ResultSet rs = pstmt2.executeQuery()) {
 						while (rs.next()) {

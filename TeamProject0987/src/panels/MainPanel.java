@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.LectureSearchButton;
 import buttons.LoginButton;
 import buttons.LogoutButton;
 import buttons.MypageButton;
@@ -21,7 +22,7 @@ public class MainPanel extends JPanel {
 
 	public static JFrame thisFrame;
 
-	public static String currUserId = "hansm1119";
+	public static String currUserId = "logout";
 
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
@@ -47,7 +48,7 @@ public class MainPanel extends JPanel {
 		TopLabel toplabel = new TopLabel("메인 화면");
 		add(toplabel);
 
-		GoToButton searchClassBtn = new GoToButton("강의찾기"); // 버튼생성
+		LectureSearchButton searchClassBtn = new LectureSearchButton("강의찾기"); // 버튼생성
 		searchClassBtn.setBounds(315, 255, 118, 112); // 버튼 생성 위치, 버튼 크기 정해줌
 		add(searchClassBtn); // Panel에 버튼을 추가함
 

@@ -20,7 +20,8 @@ public class MyAttendanceLog {
 				+ "where "
 				+ "a.lecture_id = l.lecture_id "
 				+ "and "
-				+ "member_id = ?"; //member_id 나중에 물음표찍고 mainPanel 에서 currId 받아와서 넣으면될듯?
+				+ "member_id = ?"
+				+ "order by attendance_date DESC"; //member_id 나중에 물음표찍고 mainPanel 에서 currId 받아와서 넣으면될듯?
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();

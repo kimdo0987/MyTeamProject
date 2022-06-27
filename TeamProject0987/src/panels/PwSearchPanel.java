@@ -194,9 +194,11 @@ public class PwSearchPanel extends JPanel {
 							Connection conn = OjdbcConnection.getConnection();
 							PreparedStatement pstmt3 = conn.prepareStatement(sql);
 					){
+						conn.setAutoCommit(false);
 						pstmt3.setString(1, tpw.temp_password);
 						pstmt3.setString(2, idText);
 						pstmt3.executeUpdate();
+						conn.commit();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
