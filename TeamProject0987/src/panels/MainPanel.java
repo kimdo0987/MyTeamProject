@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.LoginButton;
 import buttons.LogoutButton;
 import buttons.MypageButton;
 import buttons.SignupButton;
@@ -15,7 +16,7 @@ public class MainPanel extends JPanel {
 
 	private MypageButton myInfoBtn;
 	private SignupButton signUpBtn;
-	public static GoToButton loginBtn;
+	public static LoginButton loginBtn;
 	public static LogoutButton logoutBtn;
 
 	public static JFrame thisFrame;
@@ -63,7 +64,7 @@ public class MainPanel extends JPanel {
 		signUpBtn.setBounds(421, 432, 118, 54);
 		add(signUpBtn);
 
-		loginBtn = new GoToButton("로그인");
+		loginBtn = new LoginButton("로그인");
 		loginBtn.setBounds(609, 432, 118, 54);
 		add(loginBtn);
 
