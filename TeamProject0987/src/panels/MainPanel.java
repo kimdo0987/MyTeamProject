@@ -11,7 +11,6 @@ import labels.TopLabel;
 
 public class MainPanel extends JPanel {
 	
-	
 	private MypageButton myInfoBtn;
 	private GoToButton signUpBtn;
 	public static GoToButton loginBtn;
@@ -19,9 +18,7 @@ public class MainPanel extends JPanel {
 	
 	public static JFrame thisFrame;
 
-
 	public static String currUserId = "hansm1119";
-
 	
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();

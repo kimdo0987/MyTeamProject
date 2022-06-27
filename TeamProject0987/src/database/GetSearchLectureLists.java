@@ -12,7 +12,7 @@ public class GetSearchLectureLists {
 	public static int lecCnt=0;
 	public static String[][] getSearchList(String SearchWord) {
 		
-		String sql = "SELECT lecture_name,teacher_name,lecture_category,lecture_start_date||''||'' FROM lecture_lists WHERE lecture_name LIKE ?";
+		String sql = "SELECT lecture_name,teacher_name,lecture_category,lecture_start_date||''||'' FROM lecture_lists WHERE LOWER(lecture_name) LIKE LOWER(?)";
 		
 		
 		try (
