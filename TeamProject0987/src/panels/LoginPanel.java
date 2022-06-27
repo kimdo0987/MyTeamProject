@@ -5,14 +5,8 @@ package panels;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -24,18 +18,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import buttons.GoToButton;
-import buttons.LogoutButton;
+import buttons.SignupButton;
 import database.OjdbcConnection;
 import labels.TopLabel;
 import methods.IdKeyAdaptor;
-import methods.OnlyNumKeyAdaptor;
 import methods.PwKeyAdaptor;
 import methods.RestrictTextLength;
-import tempPassword.TempPassword;
 
 public class LoginPanel extends JPanel {
 	
@@ -206,7 +196,7 @@ public class LoginPanel extends JPanel {
 		add(findPwBtn);
 		findPwBtn.setBounds(500, 430, 150, 35);		
 		
-		GoToButton signUp = new GoToButton("회원가입");
+		SignupButton signUp = new SignupButton("회원가입");
 		add(signUp);
 		signUp.setBounds(661, 430, 150, 35);
 		

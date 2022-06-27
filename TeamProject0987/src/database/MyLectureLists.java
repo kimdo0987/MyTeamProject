@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import panels.MainPanel;
+
 public class MyLectureLists {
 	
 	public static String[][] getMyLectureLists() {
@@ -16,12 +18,15 @@ public class MyLectureLists {
 				+ "lecture_lists l, "
 				+ "mylecture_lists m "
 				+ "WHERE "
-				+ "l.lecture_id = m.lecture_id";
+				+ "l.lecture_id = m.lecture_id "
+				+ "AND "
+				+ "m.member_id = ?";
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 		) {
+			pstmt.setString(1, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {

@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import LectureInfoPanel_comps.LectureInfoPanel2;
+import panels.LectureInfoPanel;
 
 public class GetLectureComments {
 	
+	public static String rateAvg = "";
 
 	public static String[][] getLectureComments(int num) {
 
@@ -27,18 +29,22 @@ public class GetLectureComments {
 			ResultSet rs = pstmt.executeQuery();
 			
 			ArrayList<String[]> list = new ArrayList<String[]>();
-			int cnt = 0;
-			int rateAvg =0;
+			int commentCnt = 0 ;
+			int ratingSum = 0 ;
 			while(rs.next()) {
+				commentCnt++;
+				ratingSum = ratingSum += Integer.parseInt(rs.getString("rating"));
+				
 				list.add(new String[] {
 						rs.getString("member_id"),
 						rs.getString("comment_msg"),
 						rs.getString("rating")
 				});
-				
 			}
 			
-		
+			if(commentCnt!=0) {
+			LectureInfoPanel.rateAvgLabel.setText(String.format("강의 평점 : %.2f", (double)ratingSum/commentCnt));
+			}
 			System.out.println("The data has been fetched3");
 			String[][] arr = new String[list.size()][3];
 			
