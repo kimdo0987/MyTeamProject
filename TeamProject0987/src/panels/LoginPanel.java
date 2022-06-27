@@ -146,7 +146,8 @@ public class LoginPanel extends JPanel {
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
 					MainPanel.currUserId = idText;
-					
+					System.out.println("로그인시 DB에서 찾은 pw : " + searchPw);
+					System.out.println("로그인시 내가 써놓은 pw : " + pwText);
 
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);
@@ -164,6 +165,8 @@ public class LoginPanel extends JPanel {
 					pwInput.setForeground(Color.GRAY);
 					pwText = "";
 					pwInput.setEchoChar((char) 0);
+					
+					searchPw = "";
 					
 					// 로그인 실패상황
 
