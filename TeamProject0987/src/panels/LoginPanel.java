@@ -161,6 +161,8 @@ public class LoginPanel extends JPanel {
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);
 					
+					CustomerServicePanel.loginBtn.setVisible(false);
+					CustomerServicePanel.logoutBtn.setVisible(true);
 					
 					// 다시 비워진 상태로 돌려놓기
 					idInput.setText("아이디를 입력하세요.");
