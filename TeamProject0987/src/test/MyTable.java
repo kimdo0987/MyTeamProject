@@ -72,7 +72,7 @@ public class MyTable extends JFrame {
 		
 		//the row
 		for (int i = 0; i < data.length; i++) {
-			model.addRow(new Object[0]); // 어떤 숫자를 넣어도 바뀌지 않음...
+			model.addRow(new Object[1]); // 어떤 숫자를 넣어도 바뀌지 않음...
 			model.setValueAt(false, i, 0); // checkbox 의 boolean type 이 되는데, true - 체크됨, false - 체크안됨
 			//data
 			model.setValueAt(data[i][0], i, 1); // (data[row][column], 위치 row번째 행, 위치 column)
@@ -112,7 +112,7 @@ public class MyTable extends JFrame {
 		table.getColumnModel().getColumn(4).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(5).setCellRenderer(cellRenderer);
 		
-		table.setEnabled(false); // 특정 행 선택 할 때 색깔 파란색 뜨는거 방지
+		table.setEnabled(true); // 특정 행 선택 할 때 색깔 파란색 뜨는거 방지
 		// ★
 		
 		table.addMouseListener(new MouseAdapter() {
