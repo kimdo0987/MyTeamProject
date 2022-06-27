@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import panels.MainPanel;
+
 public class MyAttendanceLog {
 	public static String[][] getMyAttendanceLog() {
 		String sql = "select "
@@ -18,12 +20,13 @@ public class MyAttendanceLog {
 				+ "where "
 				+ "a.lecture_id = l.lecture_id "
 				+ "and "
-				+ "member_id = 'hansm1119'"; //member_id 나중에 물음표찍고 mainPanel 에서 currId 받아와서 넣으면될듯?
+				+ "member_id = ?"; //member_id 나중에 물음표찍고 mainPanel 에서 currId 받아와서 넣으면될듯?
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 		) {
+			pstmt.setString(1, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {

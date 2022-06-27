@@ -34,7 +34,7 @@ public class LogoutButton extends JButton {
 					CustomerServicePanel.logoutBtn.setVisible(false);
 					CustomerServicePanel.loginBtn.setVisible(true);
 					
-					MainPanel.currUserId = "";
+					MainPanel.currUserId = "logout";
 					
 					System.out.println(MainPanel.currUserId);
 				}

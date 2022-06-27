@@ -144,6 +144,7 @@ public class MyPageMainPanel1 extends JPanel {
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		    	cellRenderer.colAtMouse = -1;
 		    }
 		});
 		
@@ -155,24 +156,28 @@ public class MyPageMainPanel1 extends JPanel {
 		        if (row >= 0 && col >= 0) {
 		        	// 폰트 밑줄 넣는 코드
 		        	cellRenderer.rowAtMouse = row;
+		        	cellRenderer.colAtMouse = col;
 		        	cellRenderer.color = new Color(246,246,246);
 		        	table.repaint();
 		        	
+		        	// 폰트 밑줄 넣는 코드
+		        	Font font = table.getFont();
+		        	Map attributes = font.getAttributes();
+		        	attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		        	
 		        	if(col == 3 || col == 4) {
 		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
-		        		
-		        		// 폰트 밑줄 넣는 코드
-		        		Font font = table.getFont();
-		        		Map attributes = font.getAttributes();
-		        		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-		        		table.setFont(font.deriveFont(attributes));
+		        		cellRenderer.colAtMouse = col;
+		        		cellRenderer.fontunderLine = font.deriveFont(attributes);
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        		cellRenderer.colAtMouse = -1;
 		        	}	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        	cellRenderer.colAtMouse = -1;
 		        }
 			}
 			
