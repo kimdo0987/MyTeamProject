@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import database.OjdbcConnection;
+import mypagepanel_comps.MyPageMainPanel3;
 import panels.MainPanel;
+import panels.MyPagePanel;
  
 public class DeleteChkPopup extends JDialog{
 	public static int currLectureId;
@@ -68,7 +70,6 @@ public class DeleteChkPopup extends JDialog{
 
 				System.out.println(currLectureId);
 			
-				
 				String sql = "DELETE FROM wish_lists WHERE user_id = ? AND lecture_id = ?";
 			
 				try (
@@ -86,7 +87,10 @@ public class DeleteChkPopup extends JDialog{
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
-
+					
+					MyPagePanel.mainPanel3.setVisible(false);
+					
+					
 				dispose();	
 			}
 		});
