@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import panels.MainPanel;
+
 public class MyPaymentLog {
 	public static String[][] getMyPaymentLog() {
 		String sql = "select "
@@ -19,12 +21,13 @@ public class MyPaymentLog {
 				+ "payment_log p, lecture_lists l, coupon_lists c "
 				+ "where p.lecture_id = l.lecture_id "
 				+ "AND p.coupon_id = c.coupon_id "
-				+ "AND p.member_id = 'hansm1119'";
+				+ "AND p.member_id = ?";
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 		) {
+			pstmt.setString(1, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {

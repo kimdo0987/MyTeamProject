@@ -169,7 +169,7 @@ public class MyPageMainPanel3 extends JPanel {
 		        String cell = ""; 
 		        
 		        if (row >= 0 && col >= 0) {
-		            if (col == 4) {
+		            if (col == 5) {
 		            	// 셀을 선택하면 이 테이블의 좌표가 (row, 0)인 값을 String 으로 cell 에 값을 저장함
 		            	// -> 이렇게 cell 을 여기다 추가하면 삭제하기 버튼을 누를때 그 행의 강의명을 얻을 수 있음
 		            	cell = table.getModel().getValueAt(row, 0).toString();
@@ -183,6 +183,7 @@ public class MyPageMainPanel3 extends JPanel {
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		    	cellRenderer.colAtMouse = -1;
 		    }
 		});
 		
@@ -197,39 +198,38 @@ public class MyPageMainPanel3 extends JPanel {
 		        	cellRenderer.rowAtMouse = row;
 		        	cellRenderer.color = new Color(246,246,246);
 		        	table.repaint();
-		        	if(col == 4) {
+		        	
+		        	Font font = table.getFont();
+					Map attributes = font.getAttributes();
+					attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		        	
+		        	if(col == 5) {
 		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
-		        		Font font = table.getFont();
-		        		Map attributes = font.getAttributes();
-		        		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-		        		table.setFont(font.deriveFont(attributes));
+		        		cellRenderer.colAtMouse = col;
+		        		cellRenderer.fontunderLine = font.deriveFont(attributes);
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        		cellRenderer.colAtMouse = -1;
 		        	}		        	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        	cellRenderer.colAtMouse = -1;
+		        }
+		        
+		        if (col == 0) {
+		        	table.setEnabled(true);
+		        } else {
+		        	table.setEnabled(false);
 		        }
 			}
 		});
-
 		
-		// 이전 코드의 문제점 : 셀이 선택될 때 따른 테이블 범위를 클릭하면 이벤트가 발생하게 됨
-//		table.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				
-//				int row = table.getSelectedRow();
-//				int col = table.getSelectedColumn();		
-//				
-//				if (col == 4) {
-//					new DeleteChkPopup(MainPanel.thisFrame);
-//				} 
-//				
-//			}
-//		});
-		
+		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
+		paymentBtn.setBackground(new Color(255, 127, 80));
+		paymentBtn.setBounds(604, 653, 287, 60);
+		add(paymentBtn);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -246,11 +246,6 @@ public class MyPageMainPanel3 extends JPanel {
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
 		setTable(table);
-		
-		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
-		paymentBtn.setBackground(new Color(255, 127, 80));
-		paymentBtn.setBounds(604, 653, 287, 60);
-		add(paymentBtn);
 		
 	}
 	
