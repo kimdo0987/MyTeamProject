@@ -1,15 +1,12 @@
 package LectureInfoPanel_comps;
 
 import java.awt.Color;
-
 import java.awt.Component;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -19,31 +16,101 @@ import javax.swing.table.TableColumnModel;
 // 강의 시간표 Panel 이 될 JPanel 입니다
 
 public class LectureInfoPanel3 extends JPanel {
-	public static String lectureTime = "";
 
-	public LectureInfoPanel3() {
+	HashMap<String,Object[][]>timeTableMap = new HashMap<>();
+	
+		Object[][]dataA ={
+				{"시간표", "A형", "", "", "종일반", "", "", ""},
+				{"09:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"10:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"11:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"12:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"13:00", "", "점심", "점심", "점심", "점심", "점심", ""},
+				{"14:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"15:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"16:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"17:00", "", "강의", "강의", "강의", "강의", "강의", ""}
+				};
+
+	
+		Object[][]dataB = {
+				{"시간표", "B형", "", "", "오전반", "", "", ""},
+				{"09:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"10:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"11:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"12:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"13:00", "", "점심", "점심", "점심", "점심", "점심", ""},
+				{"14:00", "", "", "", "", "", "", ""},
+				{"15:00", "", "", "", "", "", "", ""},
+				{"16:00", "", "", "", "", "", "", ""},
+				{"17:00", "", "", "", "", "", "", ""}
+				};
+
+
+		Object[][]dataC =  {
+				{"시간표", "C형", "", "", "오후반", "", "", ""},
+				{"09:00", "", "", "", "", "", "", ""},
+				{"10:00", "", "", "", "", "", "", ""},
+				{"11:00", "", "", "", "", "", "", ""},
+				{"12:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"13:00", "", "점심", "점심", "점심", "점심", "점심", ""},
+				{"14:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"15:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"16:00", "", "강의", "강의", "강의", "강의", "강의", ""},
+				{"17:00", "", "강의", "강의", "강의", "강의", "강의", ""}
+				};
+
+
+		Object[][]dataD = {
+				{"시간표", "D형", "", "", "월수금반", "", "", ""},
+				{"09:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				{"10:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				{"11:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				{"12:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				{"13:00", " ", "점심", " ", "점심", " ", "점심", " "},
+				{"14:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				{"15:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				{"16:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				{"17:00", " ", "강의", " ", "강의", " ", "강의", " "},
+				};
+
+		Object[][]dataE = {
+				{"시간표", "E형", "", "", "화목반", "", "", ""},
+				{"09:00", " ", "", "강의", "", "강의", "", " "},
+				{"10:00", " ", "", "강의", "", "강의", "", " "},
+				{"11:00", " ", "", "강의", "", "강의", "", " "},
+				{"12:00", " ", "", "강의", "", "강의", "", " "},
+				{"13:00", " ", "", "점심", "", "점심", "", " "},
+				{"14:00", " ", "", "강의", "", "강의", "", " "},
+				{"15:00", " ", "", "강의", "", "강의", "", " "},
+				{"16:00", " ", "", "강의", "", "강의", "", " "},
+				{"17:00", " ", "", "강의", "", "강의", "", " "},
+				};
+
+		
+	
+	public LectureInfoPanel3(String lectureTime) {
+		timeTableMap.put("A", dataA);
+		timeTableMap.put("B", dataB);
+		timeTableMap.put("C", dataC);
+		timeTableMap.put("D", dataD);
+		timeTableMap.put("E", dataE);
+		timeTableMap.put("", dataA);
 		setBounds(199, 371, 786, 390);
 		setLayout(null);
 		
 		String[] headings = {" ", "일", "월", "화", "수", "목", "금", "토"};
-		Object[][] data = {
-				{"1", " ", "강의", " ", "강의", " ", "강의", " "},
-				{"2", " ", "강의", " ", "강의", " ", "강의", " "},
-				{"3", " ", "강의", " ", "강의", " ", "강의", " "},
-				{"4", " ", "점심", " ", "점심", " ", "점심", " "},
-				{"5", " ", "강의", " ", "강의", " ", "강의", " "},
-				{"6", " ", "강의", " ", "강의", " ", "강의", " "}
-		};
+		
 		
 
-		JTable scheduleTable = new JTable(data, headings) {
+		JTable scheduleTable = new JTable(timeTableMap.get(lectureTime), headings) {
 			// 익명내부클래스로 특정 row에서 색깔 바꿈
 			public Component prepareRenderer(
 					TableCellRenderer renderer, int row, int column) 
 			{
 				Component c = super.prepareRenderer(renderer, row, column);
 				if(!c.getBackground().equals(getSelectionBackground())) {
-					if (row == 3) {
+					if (row == 5) {
 						c.setBackground(Color.ORANGE);
 					} else {
 						c.setBackground(Color.WHITE);

@@ -7,6 +7,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 
 import javax.swing.JFrame;
@@ -14,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import database.OjdbcConnection;
+import panels.MainPanel;
 import popups.MsgPopup;
 
 import javax.swing.JButton;
@@ -154,6 +158,22 @@ public class CancelLectureFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String sql = "DELETE FROM wish_lists WHERE user_id = ? AND lecture_id = ?";
+				
+				try (
+						Connection conn = OjdbcConnection.getConnection(); 
+						PreparedStatement pstmt = conn.prepareStatement(sql);
+				) {
+					
+					
+					
+					
+					
+					
+					
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				dispose(); //창 꺼버리기
 			}
 		});
