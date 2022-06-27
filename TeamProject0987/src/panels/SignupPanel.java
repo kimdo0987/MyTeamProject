@@ -693,13 +693,15 @@ public class SignupPanel extends JPanel {
 												//DB에 저장 members, 관심 카테고리 저장.
 												String sql = "INSERT INTO members VALUES (?,?,?,?,?,?,?)";
 														
-//												//해쉬맵해서 하나씩 꺼내서 갯수만큼 insert반복
-//												String sql2 = "INSERT INTO favorite_category VALUES "
-//														+ "(favorite_category_seq.NEXTVAL,'" 
-//														+ insertNameLabel.getText() + "', '"
-//														+ insertJNum1Field.getText()+insertJNum2Field.getText() + "')";
+ 												//해쉬셋해서 하나씩 꺼내서 갯수만큼 insert반복
+												String sql2 = "INSERT INTO favorite_category VALUES "
+														+ "(favorite_category_seq.NEXTVAL,'" 
+														+ createIdField.getText() 
+														+ "', ?  )";
+												
 												try (Connection conn = OjdbcConnection.getConnection();
-														PreparedStatement pstmt = conn.prepareStatement(sql);													
+														PreparedStatement pstmt = conn.prepareStatement(sql);	
+														PreparedStatement pstmt2 = conn.prepareStatement(sql2);	
 													) {
 													conn.setAutoCommit(false);
 														pstmt.setString(1, createIdField.getText());
@@ -710,6 +712,12 @@ public class SignupPanel extends JPanel {
 														pstmt.setString(6, insertMailField.getText()+"@"+domainField.getText());
 														pstmt.setString(7, insertJNum1Field.getText()+insertJNum2Field.getText());
 														pstmt.executeUpdate();
+														conn.commit();
+														
+														for(String cate : favCategories) {
+														pstmt2.setString(1, cate);
+														pstmt2.executeUpdate();
+														}
 														conn.commit();
 																												
 													} catch (SQLException e1) {
@@ -738,12 +746,10 @@ public class SignupPanel extends JPanel {
 							}
 						}else {
 							JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호를 재입력을 확인해 주세요");
-						}
-						
+						}						
 					} else {
 						JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호를 올바르게 입력해 주세요");
-					}
-					
+					}					
 				}else {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디 중복확인을 해주세요.");
 				}
@@ -822,7 +828,7 @@ class CateButton extends JButton {
 					setBackground(new Color(153, 153, 153));//무색
 					SignupPanel.favCategories.remove(name);
 				}
-				System.out.println(SignupPanel.favCategories);
+				//System.out.println(SignupPanel.favCategories);
 				
 			}
 		});
