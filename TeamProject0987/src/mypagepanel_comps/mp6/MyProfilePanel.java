@@ -21,6 +21,7 @@ import panels.MainPanel;
 public class MyProfilePanel extends JPanel {
 	private String name;
 	private String id;
+	private String jNum;
 	private String birth;
 	private String phone;
 	private String mail;
@@ -95,10 +96,10 @@ public class MyProfilePanel extends JPanel {
 		while(rs.next()) { 
 			name = (rs.getString("member_name"));
 			id = (rs.getString("member_id"));
-			birth = (rs.getString("j_number"));
+			jNum = (rs.getString("j_number"));
 			phone = (rs.getString("phone_number"));
 			mail = (rs.getString("member_id"));
-			
+			birth = jNum.substring(0,2)+"년"+jNum.substring(2,4)+"월"+jNum.substring(4,6)+"일";
 		}
 		
 		lbl1.setText(name);
