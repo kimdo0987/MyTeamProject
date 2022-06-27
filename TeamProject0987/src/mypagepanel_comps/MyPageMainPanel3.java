@@ -177,7 +177,6 @@ public class MyPageMainPanel3 extends JPanel {
 		            	new DeleteChkPopup(MainPanel.thisFrame, cell);
 		            }
 		        }
-		        
 		    }
 		    
 		    @Override
@@ -226,23 +225,11 @@ public class MyPageMainPanel3 extends JPanel {
 		        }
 			}
 		});
-
 		
-		// 이전 코드의 문제점 : 셀이 선택될 때 따른 테이블 범위를 클릭하면 이벤트가 발생하게 됨
-//		table.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				
-//				int row = table.getSelectedRow();
-//				int col = table.getSelectedColumn();		
-//				
-//				if (col == 4) {
-//					new DeleteChkPopup(MainPanel.thisFrame);
-//				} 
-//				
-//			}
-//		});
-		
+		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
+		paymentBtn.setBackground(new Color(255, 127, 80));
+		paymentBtn.setBounds(604, 653, 287, 60);
+		add(paymentBtn);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -259,11 +246,6 @@ public class MyPageMainPanel3 extends JPanel {
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
 		setTable(table);
-		
-		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
-		paymentBtn.setBackground(new Color(255, 127, 80));
-		paymentBtn.setBounds(604, 653, 287, 60);
-		add(paymentBtn);
 		
 	}
 	
