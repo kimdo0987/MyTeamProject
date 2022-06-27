@@ -15,7 +15,7 @@ import panels.LectureSearchPanel;
 // 수강평 Panel 이 될 JPanel 입니다.
 
 public class LectureInfoPanel2 extends JPanel {
-	public static int ratingAvg = 0;
+	
 	public LectureInfoPanel2(int num) { /////////
 		setBounds(199, 371, 786, 390);
 		setLayout(null);
