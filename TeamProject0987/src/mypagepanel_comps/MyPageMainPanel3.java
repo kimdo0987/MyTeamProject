@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.font.TextAttribute;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,8 @@ import popups.DeleteChkPopup;
 public class MyPageMainPanel3 extends JPanel {
 	
 	static JTable table;
+	ArrayList<Integer> checkedRows;
+	static JTable table2;
 	
 	public MyPageMainPanel3() {
 		setBackground(new Color(255, 153, 204));
@@ -213,39 +216,80 @@ public class MyPageMainPanel3 extends JPanel {
 		paymentBtn.setBounds(604, 653, 287, 60);
 		add(paymentBtn);
 		
+		
+		DefaultTableModel model2 = new DefaultTableModel();
+		
+		JTable table2 = new JTable(); // 수정불가능한 테이블로 생성
+		
+//		table.setPreferredScrollableViewportSize(new Dimension(700,600));
+		
+		//headings 설정
+		
+		model2.addColumn("강의명");
+		model2.addColumn("강사명");
+		model2.addColumn("수강 기간");
+		model2.addColumn("수강료");
+		model2.addColumn("쿠폰선택");
+		model2.addColumn("결제금액");
+
+		
 		//obtain selected row
 		paymentBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String[]> checkArr = new HashMap<>();
+				checkedRows = new ArrayList<>();
 				
-				Collection<String[]> values = null;
 				for (int i = 0; i < table.getRowCount(); i++) {
 					Boolean checked = Boolean.valueOf(table.getValueAt(i, 0).toString());
-					String col1 = table.getValueAt(i, 1).toString();
-					String col2 = table.getValueAt(i, 2).toString();
-					String col3 = table.getValueAt(i, 3).toString();
-					String col4 = table.getValueAt(i, 4).toString();
-					
-					String[] col = {col1, col2, col3, col4};
-					//display
-					
+										
 					if (checked) {
-						checkArr.put(col1, col);
-					} else if (!checked) {
-						checkArr.remove(col1);
-					}
+						checkedRows.add(i);
+					} else {						
 					
-					values = checkArr.values();
-				}
-				
-				for(String[] val : values) {
+					}					
 					
-					System.out.println(val[0]); 
+				}				
+				System.out.println(checkedRows);
+				int i = 0;
+				for(int checkRow : checkedRows) {
+					System.out.println(checkRow);
+					System.out.println(data[checkRow][0]);
+					model2.addRow(new Object[0]); 
+					model2.setValueAt(data[checkRow][0], i, 0); // (data[row][column], 위치 row번째 행, 위치 column)
+					model2.setValueAt(data[checkRow][1], i, 1);
+					model2.setValueAt(data[checkRow][2], i, 2);
+					model2.setValueAt(data[checkRow][3], i, 3);
+					model2.setValueAt(data[checkRow][5], i, 4);
+					model2.setValueAt(data[checkRow][6], i, 5);
+					++i;					
 				}
-//				System.out.println(checkArr);
+				table2.setModel(model2);
 				
+				table2.getColumnModel().getColumn(0).setMinWidth(300);
+				table2.getColumnModel().getColumn(0).setMaxWidth(300);
+				table2.getColumnModel().getColumn(1).setMinWidth(80);//셀 너비 조정
+				table2.getColumnModel().getColumn(1).setMaxWidth(80);
+				table2.getColumnModel().getColumn(2).setMinWidth(120);
+				table2.getColumnModel().getColumn(2).setMaxWidth(120);
+				
+				table2.getColumnModel().getColumn(3).setMinWidth(60);
+				table2.getColumnModel().getColumn(3).setMaxWidth(60);
+				table2.getColumnModel().getColumn(4).setMinWidth(90);
+				table2.getColumnModel().getColumn(4).setMaxWidth(90);
+				table2.getColumnModel().getColumn(5).setMinWidth(100);
+				table2.getColumnModel().getColumn(5).setMaxWidth(100);
+				
+				table2.setRowHeight(30); // 셀 높이 조정		
+				table2.setCellSelectionEnabled(true); // 한셀만 선택가능
+				table2.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
+				table2.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
+				
+				ListSelectionModel selectionModel = table2.getSelectionModel(); //한 행만 선택가능
+				selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				
+				table2.setFillsViewportHeight(true);
+				MyPageMainPanel3.table2 = table2;
 			}
 		});
 		

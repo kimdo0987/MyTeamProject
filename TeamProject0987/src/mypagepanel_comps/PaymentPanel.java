@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 
 import labels.TopLabel;
 
@@ -26,6 +27,17 @@ public class PaymentPanel extends JPanel {
 		panel.setBounds(162, 155, 730, 569);
 		panel.setLayout(null);
 		add(panel);
+		
+		JPanel tablePanel = new JPanel();
+		tablePanel.setBounds(0, 58, 730, 430);		
+		tablePanel.setLayout(null);
+		panel.add(tablePanel);
+		
+		JScrollPane scrollPane = new JScrollPane(MyPageMainPanel3.table2);
+		scrollPane.setBounds(0, 0, 730, 430);		
+		tablePanel.add(scrollPane);		
+		panel.add(tablePanel);
+		
 		
 	}
 }
