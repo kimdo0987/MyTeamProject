@@ -6,20 +6,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import database.OjdbcConnection;
+import panels.MainPanel;
 import popups.MsgPopup;
   
 public class CommentsFrame extends JFrame {
 	private JTextArea textArea;	
 	JFrame thisFrame;
+	String msg;
+	int searchLectureId;
+	int seqVal;
 	
 	public CommentsFrame(String lectureName, String teacherName) {
 		
@@ -52,7 +61,7 @@ public class CommentsFrame extends JFrame {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
-				String msg = textArea.getText();
+				msg = textArea.getText();
 				
 				textLengthLabel.setText("수강평 (" + msg.length() + "/70자)");
                 if ( msg.length() >70) { 
@@ -74,11 +83,11 @@ public class CommentsFrame extends JFrame {
 		ratingBox.setBounds(385, 25, 63, 38);
 		ratingBox.addItem("평점");
 		
-		ratingBox.addItem("1.0");
-		ratingBox.addItem("2.0");
-		ratingBox.addItem("3.0");
-		ratingBox.addItem("4.0");
-		ratingBox.addItem("5.0");
+		ratingBox.addItem((double)1.0);
+		ratingBox.addItem((double)2.0);
+		ratingBox.addItem((double)3.0);
+		ratingBox.addItem((double)4.0);
+		ratingBox.addItem((double)5.0);
 		
 		panel.add(ratingBox);
 		
@@ -94,11 +103,66 @@ public class CommentsFrame extends JFrame {
 					new MsgPopup(thisFrame, "평점을 골라주세요.");
 													
 				} else {
+					
+					
+					
+				double ratingVal = (double) ratingBox.getSelectedItem();
+				
+				
+				
+				
 				
 				System.out.println("평점"+ratingBox.getSelectedItem()); 
 				System.out.println(textArea.getText());
 				//DB에 저장하는 기능 추가 필요함
 				dispose();
+				
+//				INSERT INTO lecture_comments VALUES ('grape', 33, 15.55, 'EN');
+//				sequence, currUserId, lecture_id, comments_msg, rating 들어가야함
+				
+//				lectureName 에 맞는 lecture_id를 가져오고 3번에 넣자
+//				SELECT lecture_id FROM lecture_lists WHERE lecture_name = letureName
+				
+				String sql1 = "SELECT lecture_id FROM lecture_lists WHERE lecture_name = ?";
+				String sql2 = "INSERT INTO lecture_comments VALUES (?, ?, ?, ?, ?)";
+				String sql3 = "SELECT comment_seq.nextval FROM dual";
+				try (
+						Connection conn = OjdbcConnection.getConnection();
+						PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+						PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+						PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+				) {
+					pstmt1.setString(1, lectureName);
+					ResultSet rs1 = pstmt1.executeQuery();
+					while (rs1.next()) {
+						searchLectureId = rs1.getInt(1);
+					}
+					
+					ResultSet rs3 = pstmt3.executeQuery();
+					while (rs3.next()) {
+						seqVal = rs3.getInt(1);
+					}
+					
+					
+					
+					pstmt2.setInt(1, seqVal);
+					pstmt2.setString(2, MainPanel.currUserId);
+					pstmt2.setInt(3,searchLectureId);
+					pstmt2.setString(4, msg);
+					pstmt2.setDouble(5, ratingVal);;
+					pstmt2.executeQuery();
+					
+					JOptionPane.showMessageDialog(MainPanel.thisFrame, "수강평 등록이 완료되었습니다.");
+					
+					
+					
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+				
 				}		
 			}
 		});
