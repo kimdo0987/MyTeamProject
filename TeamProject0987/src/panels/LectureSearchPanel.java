@@ -19,7 +19,7 @@ import database.LectureTable2;
 import database.LectureTable3;
 import labels.TopLabel;
 
-public class LectureSearchPanel extends JPanel {
+public class LectureSearchPanel extends ImagePanel {
 
 	public static String lectureImageCategory;
 	public static int currLectureId; //////////
