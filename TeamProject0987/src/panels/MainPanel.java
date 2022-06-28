@@ -13,7 +13,7 @@ import labels.TopLabel;
 
 // 첫화면
 
-public class MainPanel extends JPanel {
+public class MainPanel extends ImagePanel {
 
 	private MypageButton myInfoBtn;
 	private SignupButton signUpBtn;
