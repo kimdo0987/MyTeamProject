@@ -22,7 +22,7 @@ import mypagepanel_comps.MyPageMainPanel7;
 import mypagepanel_comps.MyPageTabButton;
 import mypagepanel_comps.PaymentPanel;
 
-public class MyPagePanel extends JPanel {
+public class MyPagePanel extends ImagePanel {
 	
 	public static CardLayout cardLayout1 = new CardLayout();
 	public static JPanel cardLayoutPanel;

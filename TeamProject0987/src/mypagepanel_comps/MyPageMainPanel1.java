@@ -36,24 +36,13 @@ public class MyPageMainPanel1 extends ImagePanel {
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
-		
-		TopLabel toplabel = new TopLabel("나의 수강 조회");
-		toplabel.setLocation(335, 31);
-		add(toplabel);	
-		
 		JPanel panel = new JPanel(); //테이블과 label이 들어가는 패널 (나의수강목록 panel)
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(161, 137, 800, 568);
 		panel.setLayout(null);
-		
-
-		JLabel tableNameLabel = new JLabel("수강 목록");
-		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-		tableNameLabel.setBounds(12, 9, 148, 40);
-		panel.add(tableNameLabel);
 		
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 58, 730, 511);	
+		tablePanel.setBounds(0, 0, 730, 511);	
 		
 		String[] headings = new String[] {"강의명","강사명","수강시작일", "수강평작성", "수강포기", "출석률"};
 		String[][] data = database.MyLectureLists.getMyLectureLists();
@@ -197,6 +186,13 @@ public class MyPageMainPanel1 extends ImagePanel {
 		panel.add(tablePanel);
 
 		add(panel);
+		
+
+		JLabel tableNameLabel = new JLabel("수강 목록");
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(161, 43, 285, 63);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
 		
 		
 		
