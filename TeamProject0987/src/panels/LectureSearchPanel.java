@@ -16,6 +16,7 @@ import buttons.GoToButton;
 import buttons.MypageButton;
 import database.LectureTable;
 import database.LectureTable2;
+import database.LectureTable3;
 import labels.TopLabel;
 
 public class LectureSearchPanel extends JPanel {
@@ -82,6 +83,21 @@ public class LectureSearchPanel extends JPanel {
 					
 				}
 			});
+			JButton recommendBtn = new JButton("강의추천");
+			recommendBtn.setBounds(180, 114, 110, 55);
+			recommendBtn.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					LectureTable3 lecListPanel = new LectureTable3();
+					lectureListPanel.add(lecListPanel,recommendBtn.getText());
+					layMng.show(lectureListPanel,recommendBtn.getText());
+
+				}
+			});
+			recommendBtn.setBackground(Color.WHITE);
+			add(recommendBtn);
 			
 			HintTextField searchField = new HintTextField("검색어를 입력해주세요");
 			searchField.addKeyListener(new KeyAdapter() {
@@ -98,14 +114,14 @@ public class LectureSearchPanel extends JPanel {
 				}
 			});
 			searchField.setColumns(10);
-			searchField.setBounds(180, 114, 590, 55);
+			searchField.setBounds(300, 114, 470, 55);
 			add(searchField);
 
 			JPanel categoryPanel = new JPanel();
 			categoryPanel.setBounds(180, 178, 710, 153);
 			add(categoryPanel);
 			categoryPanel.setLayout(new GridLayout(2, 9));
-
+			
 			
 			add(lectureCntLabel);
 			lectureCntLabel.setBounds(180,295,500,100);

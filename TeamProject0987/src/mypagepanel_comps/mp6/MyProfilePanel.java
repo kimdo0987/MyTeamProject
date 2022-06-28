@@ -98,7 +98,7 @@ public class MyProfilePanel extends JPanel {
 			id = (rs.getString("member_id"));
 			jNum = (rs.getString("j_number"));
 			phone = (rs.getString("phone_number"));
-			mail = (rs.getString("member_id"));
+			mail = (rs.getString("email"));
 			birth = jNum.substring(0,2)+"년"+jNum.substring(2,4)+"월"+jNum.substring(4,6)+"일";
 		}
 		
@@ -115,20 +115,20 @@ public class MyProfilePanel extends JPanel {
 		
 	}
 	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel);
-		panel.setBounds(100, 100, 1200, 800);
-		panel.setBackground(Color.white);
-		panel.setLayout(null);
-
-		panel.add(new MyProfilePanel());
-
-		frame.setBounds(100, 100, 1200, 800);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);	
-		
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new JFrame();
+//		JPanel panel = new JPanel();
+//		frame.getContentPane().add(panel);
+//		panel.setBounds(100, 100, 1200, 800);
+//		panel.setBackground(Color.white);
+//		panel.setLayout(null);
+//
+//		panel.add(new MyProfilePanel());
+//
+//		frame.setBounds(100, 100, 1200, 800);
+//		frame.setLocationRelativeTo(null);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setVisible(true);	
+//		
+//	}
 }
