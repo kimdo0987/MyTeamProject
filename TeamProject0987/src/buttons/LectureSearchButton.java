@@ -3,6 +3,7 @@ package buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import panels.LectureSearchPanel;
@@ -30,6 +31,12 @@ public class LectureSearchButton extends JButton{
 	
 	public LectureSearchButton(String name) {
 		super(name);
+		addActionListener(eventListener);
+		
+	}
+
+	public LectureSearchButton(String name, ImageIcon icon) {
+		super(name, icon);
 		addActionListener(eventListener);
 		
 	}

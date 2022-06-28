@@ -3,6 +3,7 @@ package buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -10,7 +11,8 @@ import panels.MainPanel;
 import panels.SignupPanel;
 
 public class SignupButton extends JButton{
-
+	static ImageIcon signUpBtn_img = new ImageIcon("images/dohyun4.png");
+	static ImageIcon signUpBtn1_img = new ImageIcon("images/dohyun4-1.png");
 	private static ActionListener eventListener = new ActionListener() {
 		
 		@Override
@@ -29,7 +31,10 @@ public class SignupButton extends JButton{
 	};
 	
 	public SignupButton(String name) {
-		super(name);
+		super(name, signUpBtn_img);
+
+		setBorderPainted(false);//테두리 안보이게하기
+		setRolloverIcon(signUpBtn1_img);//마우스 올렸을때 이미지
 		addActionListener(eventListener);
 		
 	}
