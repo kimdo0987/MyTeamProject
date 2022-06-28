@@ -3,6 +3,8 @@ package panels;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -111,7 +113,15 @@ public class MyPagePanel extends JPanel {
 		btn4.setBounds(0, 440, 120, 60);
 		add(btn4);
 		
-		MyPageTabButton btn5 = new MyPageTabButton("구매 내역");		
+		MyPageTabButton btn5 = new MyPageTabButton("구매 내역");
+		btn5.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardLayout1.show(cardLayoutPanel,"구매내역");
+				
+			}
+		});
 		btn5.setBounds(0, 500, 120, 60);
 		add(btn5);
 		

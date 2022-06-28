@@ -67,7 +67,7 @@ public class MyPageMainPanel1 extends JPanel {
 		};
 
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
-		table.setPreferredScrollableViewportSize(new Dimension(700,600));
+//		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
 		table.getColumnModel().getColumn(0).setMinWidth(300);//셀 너비 조정
 		table.getColumnModel().getColumn(0).setMaxWidth(300);
@@ -126,6 +126,7 @@ public class MyPageMainPanel1 extends JPanel {
 					See Also:columnAtPoint 
 					
 		    	*/
+
 		        int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
 		        //System.out.println(row + "and" + col);
@@ -133,6 +134,7 @@ public class MyPageMainPanel1 extends JPanel {
 		        	if (col == 3) {
 						new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 					} else if (col == 4) {
+
 						new CancelLectureFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 					} else {
 						
