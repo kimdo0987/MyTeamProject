@@ -60,10 +60,9 @@ public class SignupPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainPanel.currPanel.setVisible(false);
-				MainPanel.lastPanel.setVisible(true);
-				MainPanel.tempPanel = MainPanel.lastPanel; // 일시적으로 담아둠
-				MainPanel.lastPanel = MainPanel.currPanel;
-				MainPanel.currPanel = MainPanel.tempPanel;
+				MainPanel.lastPanel.setVisible(true);			
+				
+				MainPanel.currPanel = MainPanel.lastPanel;
 			}
 		});
 		

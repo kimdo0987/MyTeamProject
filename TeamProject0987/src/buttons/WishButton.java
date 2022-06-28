@@ -31,8 +31,10 @@ public class WishButton extends JButton {
 				} 
 				
 				
+
 				String sql2 = "SELECT * FROM wish_lists WHERE user_id = ?";
 				try ( 
+
 						Connection conn2 = OjdbcConnection.getConnection(); 
 						PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
 				) {
