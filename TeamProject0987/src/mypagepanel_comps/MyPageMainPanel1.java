@@ -54,7 +54,7 @@ public class MyPageMainPanel1 extends JPanel {
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBounds(0, 58, 730, 511);	
 		
-		String[] headings = new String[] {"강의명","강사명","수강시작일", "수강평작성", "수강포기"};
+		String[] headings = new String[] {"강의명","강사명","수강시작일", "수강평작성", "수강포기", "출석률"};
 		String[][] data = database.MyLectureLists.getMyLectureLists();
 		tablePanel.setLayout(null);
 		
@@ -73,12 +73,14 @@ public class MyPageMainPanel1 extends JPanel {
 		table.getColumnModel().getColumn(0).setMaxWidth(300);
 		table.getColumnModel().getColumn(1).setMinWidth(100);
 		table.getColumnModel().getColumn(1).setMaxWidth(100);
-		table.getColumnModel().getColumn(2).setMinWidth(150);
-		table.getColumnModel().getColumn(2).setMaxWidth(150);		
-		table.getColumnModel().getColumn(3).setMinWidth(80);
-		table.getColumnModel().getColumn(3).setMaxWidth(80);
-		table.getColumnModel().getColumn(4).setMinWidth(100);
-		table.getColumnModel().getColumn(4).setMaxWidth(100);
+		table.getColumnModel().getColumn(2).setMinWidth(110);
+		table.getColumnModel().getColumn(2).setMaxWidth(110);		
+		table.getColumnModel().getColumn(3).setMinWidth(75);
+		table.getColumnModel().getColumn(3).setMaxWidth(75);
+		table.getColumnModel().getColumn(4).setMinWidth(60);
+		table.getColumnModel().getColumn(4).setMaxWidth(60);
+		table.getColumnModel().getColumn(5).setMinWidth(55);
+		table.getColumnModel().getColumn(5).setMaxWidth(55);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
