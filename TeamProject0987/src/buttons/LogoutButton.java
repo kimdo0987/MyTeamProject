@@ -31,6 +31,7 @@ public class LogoutButton extends JButton {
 					MainPanel.logoutBtn.setVisible(false);
 					MainPanel.loginBtn.setVisible(true);
 					
+					WishButton.lecIdArr.clear();
 					CustomerServicePanel.logoutBtn.setVisible(false);
 					CustomerServicePanel.loginBtn.setVisible(true);
 					

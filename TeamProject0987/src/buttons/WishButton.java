@@ -18,8 +18,8 @@ public class WishButton extends JButton {
 	
 	public static int currLectureId;
 	
+	public static ArrayList<Integer>lecIdArr = new ArrayList<>();
 		private static ActionListener eventListener = new ActionListener() {
-			ArrayList<Integer>lecIdArr = new ArrayList<>();
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
