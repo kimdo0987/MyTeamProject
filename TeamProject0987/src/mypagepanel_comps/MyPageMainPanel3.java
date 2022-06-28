@@ -23,12 +23,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
+import panels.ImagePanel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
 
 //나의 장바구니 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel3 extends JPanel {
+public class MyPageMainPanel3 extends ImagePanel {
 	
 	static JTable table;
 	ArrayList<Integer> checkedRows;
@@ -39,22 +40,19 @@ public class MyPageMainPanel3 extends JPanel {
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
-		TopLabel toplabel = new TopLabel("나의 장바구니");
-		toplabel.setLocation(335, 31);
-		add(toplabel);	
-		
 		JPanel panel = new JPanel(); //장바구니List 테이블과 label이 들어가는 패널 (장바구니 panel)
-		panel.setBounds(162, 155, 730, 488);
+		panel.setBounds(80, 155, 800, 510);
 		panel.setLayout(null);
 		add(panel);
 		
 		JLabel tableNameLabel = new JLabel("장바구니 리스트");
-		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-		tableNameLabel.setBounds(12, 9, 148, 40);
-		panel.add(tableNameLabel);
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(80, 60, 460, 60);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 58, 730, 430);		
+		tablePanel.setBounds(0, 0, 800, 529);		
 		tablePanel.setLayout(null);
 		panel.add(tablePanel);
 		
@@ -97,19 +95,19 @@ public class MyPageMainPanel3 extends JPanel {
 			model.setValueAt("삭제하기", i, 5);
 		}
 		
-//		table.getColumnModel().getColumn(0).setMinWidth(40);
-//		table.getColumnModel().getColumn(0).setMaxWidth(40);
+		table.getColumnModel().getColumn(0).setMinWidth(40);
+		table.getColumnModel().getColumn(0).setMaxWidth(40);
 		table.getColumnModel().getColumn(1).setMinWidth(300);//셀 너비 조정
 		table.getColumnModel().getColumn(1).setMaxWidth(300);
-		table.getColumnModel().getColumn(2).setMinWidth(80);
-		table.getColumnModel().getColumn(2).setMaxWidth(80);
+		table.getColumnModel().getColumn(2).setMinWidth(120);
+		table.getColumnModel().getColumn(2).setMaxWidth(120);
 		
 		table.getColumnModel().getColumn(3).setMinWidth(130);
 		table.getColumnModel().getColumn(3).setMaxWidth(130);
 		table.getColumnModel().getColumn(4).setMinWidth(90);
 		table.getColumnModel().getColumn(4).setMaxWidth(90);
 		table.getColumnModel().getColumn(5).setMinWidth(100);
-		table.getColumnModel().getColumn(5).setMaxWidth(100);
+		table.getColumnModel().getColumn(5).setMaxWidth(120);
 		
 		///////////////////////////////////////////////////////
 		
@@ -213,7 +211,7 @@ public class MyPageMainPanel3 extends JPanel {
 		
 		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
 		paymentBtn.setBackground(new Color(255, 127, 80));
-		paymentBtn.setBounds(604, 653, 287, 60);
+		paymentBtn.setBounds(642, 675, 238, 49);
 		add(paymentBtn);
 		
 		
@@ -305,11 +303,16 @@ public class MyPageMainPanel3 extends JPanel {
 		
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 430);		
+		scrollPane.setBounds(0, 0, 800, 529);		
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
 		setTable(table);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 	}
 	
 	public void setTable(JTable table) {

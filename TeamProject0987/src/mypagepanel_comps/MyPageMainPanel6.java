@@ -21,11 +21,12 @@ import javax.swing.JPasswordField;
 import database.OjdbcConnection;
 import labels.TopLabel;
 import mypagepanel_comps.mp6.MpChangePanel;
+import panels.ImagePanel;
 import panels.MainPanel;
 
 //계정 관리 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel6 extends JPanel {
+public class MyPageMainPanel6 extends ImagePanel {
 
 
 	MpChangePanel mpPanel = new MpChangePanel();
@@ -55,19 +56,16 @@ public class MyPageMainPanel6 extends JPanel {
 					setLayout(null);
 					CardLayout mpLayout = new CardLayout();
 					
-					TopLabel toplabel = new TopLabel("계정 관리");
-					toplabel.setLocation(335, 31);
-					add(toplabel);
-					
 					JPanel panel = new JPanel(); 
 					panel.setBounds(162, 155, 730, 569);
 					panel.setLayout(mpLayout);
-					
 					add(panel);
-					JLabel tableNameLabel = new JLabel("계정 관리");
-					tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-					tableNameLabel.setBounds(12, 9, 148, 40);
 					
+					JLabel tableNameLabel = new JLabel("계정 관리");
+					tableNameLabel.setForeground(Color.WHITE);
+					tableNameLabel.setBounds(80, 60, 321, 60);
+					add(tableNameLabel);
+					tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
 					
 					JPanel tablePanel = new JPanel();
 					tablePanel.setBounds(0, 58, 730, 511);
@@ -122,16 +120,18 @@ public class MyPageMainPanel6 extends JPanel {
 									}
 						}
 					});
+					
+					JLabel lblNewLabel = new JLabel("");
+					lblNewLabel.setBackground(Color.WHITE);
+					lblNewLabel.setOpaque(true);
+					lblNewLabel.setBounds(80, 124, 800, 3);
+					add(lblNewLabel);
 				}
 			}
 
 		}  catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
-		
-		
-		
 	}
 	
 	

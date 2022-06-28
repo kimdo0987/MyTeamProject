@@ -22,37 +22,27 @@ import javax.swing.table.DefaultTableModel;
 import labels.TopLabel;
 import mypagepanel_comps.frames.CancelLectureFrame;
 import mypagepanel_comps.frames.CommentsFrame;
+import panels.ImagePanel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
 import mypagepanel_comps.MyRenderer;
 
 //나의 수강 조회 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel1 extends JPanel {
+public class MyPageMainPanel1 extends ImagePanel {
 	
 	public MyPageMainPanel1() {
 		setBackground(new Color(153, 204, 204));
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
-		
-		TopLabel toplabel = new TopLabel("나의 수강 조회");
-		toplabel.setLocation(335, 31);
-		add(toplabel);	
-		
 		JPanel panel = new JPanel(); //테이블과 label이 들어가는 패널 (나의수강목록 panel)
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(80, 154, 800, 560);
 		panel.setLayout(null);
-		
-
-		JLabel tableNameLabel = new JLabel("수강 목록");
-		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-		tableNameLabel.setBounds(12, 9, 148, 40);
-		panel.add(tableNameLabel);
 		
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 58, 730, 511);	
+		tablePanel.setBounds(0, 0, 800, 568);	
 		
 		String[] headings = new String[] {"강의명","강사명","수강시작일", "수강평작성", "수강포기", "출석률"};
 		String[][] data = database.MyLectureLists.getMyLectureLists();
@@ -79,8 +69,9 @@ public class MyPageMainPanel1 extends JPanel {
 		table.getColumnModel().getColumn(3).setMaxWidth(75);
 		table.getColumnModel().getColumn(4).setMinWidth(60);
 		table.getColumnModel().getColumn(4).setMaxWidth(60);
-		table.getColumnModel().getColumn(5).setMinWidth(55);
-		table.getColumnModel().getColumn(5).setMaxWidth(55);
+		table.getColumnModel().getColumn(5).setMinWidth(155);
+		table.getColumnModel().getColumn(5).setMaxWidth(155);
+		
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -196,6 +187,19 @@ public class MyPageMainPanel1 extends JPanel {
 		panel.add(tablePanel);
 
 		add(panel);
+		
+
+		JLabel tableNameLabel = new JLabel("수강 목록");
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(80, 60, 280, 60);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 		
 		
 		
