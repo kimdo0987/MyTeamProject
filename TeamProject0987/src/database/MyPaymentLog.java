@@ -32,6 +32,10 @@ public class MyPaymentLog {
 			ResultSet result = pstmt.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(result.next()) {
+				String status = result.getString("payment_type");
+				if(result.getInt("total_price")<0) {
+					status = "환불완료";
+				}
 				list.add(new String[] {
 						result.getString("order_num"),
 						result.getString("payment_date||''||''"),
@@ -39,7 +43,7 @@ public class MyPaymentLog {
 						result.getString("coupon_name"),
 						result.getString("lecture_price"),
 						result.getString("total_price"),
-						result.getString("payment_type")
+						status
 				});
 			}
 			System.out.println("The data(MyPaymentLog) has been fetched");

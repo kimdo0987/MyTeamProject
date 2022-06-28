@@ -57,8 +57,8 @@ public class MyPageMainPanel5 extends JPanel {
 		
 		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
-		table.getColumnModel().getColumn(0).setMinWidth(60);//셀 너비 조정
-		table.getColumnModel().getColumn(0).setMaxWidth(60);
+		table.getColumnModel().getColumn(0).setMinWidth(40);//셀 너비 조정
+		table.getColumnModel().getColumn(0).setMaxWidth(40);
 
 		table.getColumnModel().getColumn(1).setMinWidth(60);
 		table.getColumnModel().getColumn(1).setMaxWidth(60);
