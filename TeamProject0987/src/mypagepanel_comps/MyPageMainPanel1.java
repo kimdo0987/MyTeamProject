@@ -37,12 +37,12 @@ public class MyPageMainPanel1 extends ImagePanel {
 		setLayout(null);
 		
 		JPanel panel = new JPanel(); //테이블과 label이 들어가는 패널 (나의수강목록 panel)
-		panel.setBounds(161, 137, 800, 568);
+		panel.setBounds(80, 154, 800, 560);
 		panel.setLayout(null);
 		
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 0, 730, 511);	
+		tablePanel.setBounds(0, 0, 800, 568);	
 		
 		String[] headings = new String[] {"강의명","강사명","수강시작일", "수강평작성", "수강포기", "출석률"};
 		String[][] data = database.MyLectureLists.getMyLectureLists();
@@ -69,8 +69,9 @@ public class MyPageMainPanel1 extends ImagePanel {
 		table.getColumnModel().getColumn(3).setMaxWidth(75);
 		table.getColumnModel().getColumn(4).setMinWidth(60);
 		table.getColumnModel().getColumn(4).setMaxWidth(60);
-		table.getColumnModel().getColumn(5).setMinWidth(55);
-		table.getColumnModel().getColumn(5).setMaxWidth(55);
+		table.getColumnModel().getColumn(5).setMinWidth(155);
+		table.getColumnModel().getColumn(5).setMaxWidth(155);
+		
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -190,9 +191,15 @@ public class MyPageMainPanel1 extends ImagePanel {
 
 		JLabel tableNameLabel = new JLabel("수강 목록");
 		tableNameLabel.setForeground(Color.WHITE);
-		tableNameLabel.setBounds(161, 43, 285, 63);
+		tableNameLabel.setBounds(80, 60, 280, 60);
 		add(tableNameLabel);
 		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 		
 		
 		

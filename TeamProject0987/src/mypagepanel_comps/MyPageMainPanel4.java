@@ -40,36 +40,91 @@ public class MyPageMainPanel4 extends ImagePanel {
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
-		TopLabel toplabel = new TopLabel("쿠폰함");
-		toplabel.setLocation(335, 31);
-		add(toplabel);
-		
 		JPanel panel = new JPanel(); //쿠폰 등록 textField와 내 쿠폰함 List 테이블이 들어갈 Label
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(80, 183, 800, 549);
 		panel.setLayout(null);
 		add(panel);
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 90, 730, 479);
+		tablePanel.setBounds(0, 0, 800, 549);
 		panel.add(tablePanel);
 		
-		couponCodeField = new JTextField();
-		couponCodeField.setBounds(424, 13, 176, 35);
-		panel.add(couponCodeField);
-		couponCodeField.setColumns(10);
-		
 		JLabel tableNameLabel = new JLabel("나의 쿠폰 리스트");
-		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-		tableNameLabel.setBounds(12, 13, 148, 40);
-		panel.add(tableNameLabel);
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(80, 60, 491, 60);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
+		
+		
+		///////////////////TABLE 생성 //////////////////////////
+		
+		String[] headings = new String[] {"coupon id", "쿠폰이름", "쿠폰번호", "할인율", "사용만료일", "사용유무"};
+		String[][] data = database.MyCouponLists.getMyCouponLists();
+		
+		// 테이블의 셀 내용 수정 불가 시작 //
+		DefaultTableModel mod = new DefaultTableModel(data, headings) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		};
+
+		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
+		table.setPreferredScrollableViewportSize(new Dimension(800, 450));
+		
+		table.getColumnModel().getColumn(0).setMinWidth(90);
+		table.getColumnModel().getColumn(0).setMaxWidth(90);
+		table.getColumnModel().getColumn(1).setMinWidth(200);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMaxWidth(200);
+		table.getColumnModel().getColumn(2).setMinWidth(150);
+		table.getColumnModel().getColumn(2).setMaxWidth(150);
+		
+		table.getColumnModel().getColumn(3).setMinWidth(60);
+		table.getColumnModel().getColumn(3).setMaxWidth(60);
+		table.getColumnModel().getColumn(4).setMinWidth(150);
+		table.getColumnModel().getColumn(4).setMaxWidth(150);
+		table.getColumnModel().getColumn(5).setMinWidth(150);
+		table.getColumnModel().getColumn(5).setMaxWidth(150);
+		
+		table.setEnabled(false); //테이블 클릭 안되도록 지정
+
+		table.setRowHeight(30); // 셀 높이 조정		
+		table.setCellSelectionEnabled(true); // 한셀만 선택가능
+		table.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
+		table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
+		
+		
+		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
+		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
+		tablePanel.setLayout(null);
+		
+		
+		table.setEnabled(false);
+		table.setFillsViewportHeight(true);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(0, 0, 800, 549);		
+		tablePanel.add(scrollPane);		
+		panel.add(tablePanel);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 		
 		JLabel tableNameLabel_1 = new JLabel("쿠폰 등록하기");
-		tableNameLabel_1.setFont(new Font("", Font.PLAIN, 12));
-		tableNameLabel_1.setBounds(336, 10, 84, 40);
-		panel.add(tableNameLabel_1);
+		tableNameLabel_1.setBounds(534, 133, 127, 40);
+		add(tableNameLabel_1);
+		tableNameLabel_1.setForeground(Color.WHITE);
+		tableNameLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
+		
+		couponCodeField = new JTextField();
+		couponCodeField.setBounds(644, 138, 176, 35);
+		add(couponCodeField);
+		couponCodeField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("등록");
-		btnNewButton.setBounds(612, 16, 93, 29);
+		btnNewButton.setBounds(832, 138, 90, 35);
+		add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -114,60 +169,5 @@ public class MyPageMainPanel4 extends ImagePanel {
 				}
 			}
 		});
-		panel.add(btnNewButton);
-		
-		
-		///////////////////TABLE 생성 //////////////////////////
-		
-		String[] headings = new String[] {"coupon id", "쿠폰이름", "쿠폰번호", "할인율", "사용만료일", "사용유무"};
-		String[][] data = database.MyCouponLists.getMyCouponLists();
-		
-		// 테이블의 셀 내용 수정 불가 시작 //
-		DefaultTableModel mod = new DefaultTableModel(data, headings) {
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				return false;
-			}
-		};
-
-		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
-		table.setPreferredScrollableViewportSize(new Dimension(730,450));
-		
-		table.getColumnModel().getColumn(0).setMinWidth(50);
-		table.getColumnModel().getColumn(0).setMaxWidth(50);
-		table.getColumnModel().getColumn(1).setMinWidth(200);//셀 너비 조정
-		table.getColumnModel().getColumn(1).setMaxWidth(200);
-		table.getColumnModel().getColumn(2).setMinWidth(130);
-		table.getColumnModel().getColumn(2).setMaxWidth(130);
-		
-		table.getColumnModel().getColumn(3).setMinWidth(50);
-		table.getColumnModel().getColumn(3).setMaxWidth(50);
-		table.getColumnModel().getColumn(4).setMinWidth(150);
-		table.getColumnModel().getColumn(4).setMaxWidth(150);
-		table.getColumnModel().getColumn(5).setMinWidth(150);
-		table.getColumnModel().getColumn(5).setMaxWidth(150);
-		
-		table.setEnabled(false); //테이블 클릭 안되도록 지정
-
-		table.setRowHeight(30); // 셀 높이 조정		
-		table.setCellSelectionEnabled(true); // 한셀만 선택가능
-		table.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
-		table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
-		
-		
-		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
-		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
-		
-		
-		table.setEnabled(false);
-		table.setFillsViewportHeight(true);
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 450);		
-		tablePanel.add(scrollPane);		
-		panel.add(tablePanel);
-		
-		
-		
-		
-		
 	}
 }

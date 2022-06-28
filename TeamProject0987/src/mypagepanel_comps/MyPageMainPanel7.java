@@ -36,10 +36,6 @@ public class MyPageMainPanel7 extends ImagePanel {
 		setBounds(118, 0, 1093, 800);	
 		setLayout(null);
 		
-		TopLabel toplabel = new TopLabel("회원 탈퇴");
-		toplabel.setLocation(335, 31);
-		add(toplabel);
-		
 		JPanel panel = new JPanel(); //탈퇴시 안내사항label, 비밀번호작성 textField,버튼 이 들어가는 패널 (장바구니 panel)
 		panel.setBounds(162, 155, 730, 569);
 		panel.setLayout(null);
@@ -149,5 +145,11 @@ public class MyPageMainPanel7 extends ImagePanel {
 				
 			}
 		});
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 	}
 }

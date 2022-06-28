@@ -22,22 +22,19 @@ public class MyPageMainPanel2 extends ImagePanel {
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
-		TopLabel toplabel = new TopLabel("출결 현황 조회");
-		toplabel.setLocation(335, 31);
-		add(toplabel);
-		
 		JPanel panel = new JPanel(); //출석List 테이블과 label이 들어가는 패널 (출석현황 panel)
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(80, 154, 800, 560);
 		panel.setLayout(null);
 		add(panel);
 		
 		JLabel tableNameLabel = new JLabel("출결 리스트");
-		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-		tableNameLabel.setBounds(12, 9, 148, 40);
-		panel.add(tableNameLabel);
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(80, 60, 321, 60);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 58, 730, 511);		
+		tablePanel.setBounds(0, 0, 800, 560);		
 		tablePanel.setLayout(null);
 		panel.add(tablePanel);
 		
@@ -52,17 +49,17 @@ public class MyPageMainPanel2 extends ImagePanel {
 		};
 
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
-		table.setPreferredScrollableViewportSize(new Dimension(700,600));
+		table.setPreferredScrollableViewportSize(new Dimension(800,600));
 		
 		table.getColumnModel().getColumn(0).setMinWidth(110);
 		table.getColumnModel().getColumn(0).setMaxWidth(110);
 		table.getColumnModel().getColumn(1).setMinWidth(400);//셀 너비 조정
 		table.getColumnModel().getColumn(1).setMaxWidth(400);
-		table.getColumnModel().getColumn(2).setMinWidth(160);
-		table.getColumnModel().getColumn(2).setMaxWidth(160);
+		table.getColumnModel().getColumn(2).setMinWidth(180);
+		table.getColumnModel().getColumn(2).setMaxWidth(180);
 		
-		table.getColumnModel().getColumn(3).setMinWidth(60);
-		table.getColumnModel().getColumn(3).setMaxWidth(60);
+		table.getColumnModel().getColumn(3).setMinWidth(110);
+		table.getColumnModel().getColumn(3).setMaxWidth(110);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -75,8 +72,14 @@ public class MyPageMainPanel2 extends ImagePanel {
 		table.setEnabled(false); // 버튼 선택 색상 X
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 500);		
+		scrollPane.setBounds(0, 0, 800, 560);		
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 	}
 }
