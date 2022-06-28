@@ -12,10 +12,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
+import panels.ImagePanel;
 
 //구매 내역 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel5 extends JPanel {
+public class MyPageMainPanel5 extends ImagePanel {
 	public MyPageMainPanel5() {
 		setBackground(new Color(204, 255, 102));
 		setBounds(118, 0, 1093, 800);	

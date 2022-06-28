@@ -21,11 +21,12 @@ import javax.swing.JPasswordField;
 import database.OjdbcConnection;
 import labels.TopLabel;
 import mypagepanel_comps.mp6.MpChangePanel;
+import panels.ImagePanel;
 import panels.MainPanel;
 
 //계정 관리 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel6 extends JPanel {
+public class MyPageMainPanel6 extends ImagePanel {
 
 
 	MpChangePanel mpPanel = new MpChangePanel();

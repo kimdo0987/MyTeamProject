@@ -12,8 +12,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 
 import labels.TopLabel;
+import panels.ImagePanel;
 
-public class PaymentPanel extends JPanel {
+public class PaymentPanel extends ImagePanel {
 	public PaymentPanel() {
 		setBackground(new Color(245, 222, 179));
 		setBounds(118, 0, 1093, 800);	

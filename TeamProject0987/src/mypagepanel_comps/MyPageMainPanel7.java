@@ -21,11 +21,12 @@ import database.OjdbcConnection;
 import labels.TopLabel;
 import methods.RestrictTextLength;
 import panels.CustomerServicePanel;
+import panels.ImagePanel;
 import panels.MainPanel;
 
 //회원 탈퇴 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel7 extends JPanel {
+public class MyPageMainPanel7 extends ImagePanel {
 	
 	private static String pwText = "";
 	private static String searchPw;

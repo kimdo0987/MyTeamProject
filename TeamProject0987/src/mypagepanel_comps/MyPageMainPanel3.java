@@ -23,12 +23,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
+import panels.ImagePanel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
 
 //나의 장바구니 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel3 extends JPanel {
+public class MyPageMainPanel3 extends ImagePanel {
 	
 	static JTable table;
 	ArrayList<Integer> checkedRows;

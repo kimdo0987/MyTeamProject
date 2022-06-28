@@ -22,13 +22,14 @@ import javax.swing.table.DefaultTableModel;
 import labels.TopLabel;
 import mypagepanel_comps.frames.CancelLectureFrame;
 import mypagepanel_comps.frames.CommentsFrame;
+import panels.ImagePanel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
 import mypagepanel_comps.MyRenderer;
 
 //나의 수강 조회 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel1 extends JPanel {
+public class MyPageMainPanel1 extends ImagePanel {
 	
 	public MyPageMainPanel1() {
 		setBackground(new Color(153, 204, 204));

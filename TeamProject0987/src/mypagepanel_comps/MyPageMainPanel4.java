@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import labels.TopLabel;
+import panels.ImagePanel;
 import panels.MainPanel;
 import panels.MyPagePanel;
 
@@ -32,7 +33,7 @@ import javax.swing.JButton;
 
 //쿠폰함 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel4 extends JPanel {
+public class MyPageMainPanel4 extends ImagePanel {
 	private JTextField couponCodeField;
 	public MyPageMainPanel4() {
 		setBackground(new Color(204, 255, 204));
