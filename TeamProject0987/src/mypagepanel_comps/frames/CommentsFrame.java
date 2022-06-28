@@ -74,11 +74,11 @@ public class CommentsFrame extends JFrame {
 		ratingBox.setBounds(385, 25, 63, 38);
 		ratingBox.addItem("평점");
 		
-		ratingBox.addItem("1.0");
-		ratingBox.addItem("2.0");
-		ratingBox.addItem("3.0");
-		ratingBox.addItem("4.0");
-		ratingBox.addItem("5.0");
+		ratingBox.addItem((double)1.0);
+		ratingBox.addItem((double)2.0);
+		ratingBox.addItem((double)3.0);
+		ratingBox.addItem((double)4.0);
+		ratingBox.addItem((double)5.0);
 		
 		panel.add(ratingBox);
 		

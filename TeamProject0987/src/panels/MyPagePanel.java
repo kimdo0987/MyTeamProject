@@ -32,7 +32,7 @@ public class MyPagePanel extends JPanel {
 	public static MyPageMainPanel5 mainPanel5;
 	public static MyPageMainPanel6 mainPanel6;
 	public static MyPageMainPanel7 mainPanel7;
-	public static PaymentPanel payPanel = new PaymentPanel();
+	public static PaymentPanel payPanel;
 
 	public MyPagePanel() {				
 		
@@ -76,6 +76,7 @@ public class MyPagePanel extends JPanel {
 		mainPanel5 = new MyPageMainPanel5();
 		mainPanel6 = new MyPageMainPanel6();
 		mainPanel7 = new MyPageMainPanel7();
+		payPanel = new PaymentPanel();
 		//////////////////////////////////////////////////
 		cardLayoutPanel = new JPanel();
 		cardLayoutPanel.setBounds(118, 0, 1093, 800);
