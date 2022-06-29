@@ -15,6 +15,7 @@ import panels.MyPagePanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import database.OjdbcConnection;
 
@@ -97,6 +98,13 @@ public class MyPageMainPanel4 extends ImagePanel {
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
 		tablePanel.setLayout(null);
 		
+		// 테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+
+		// 컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
+		tableHeader.setFont(headerFont);
 		
 		table.setEnabled(false);
 		table.setFillsViewportHeight(true);
