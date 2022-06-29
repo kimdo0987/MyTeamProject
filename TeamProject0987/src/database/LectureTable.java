@@ -57,6 +57,7 @@ public class LectureTable extends JPanel {
 		tableHeader.setFont(headerFont);
 		
 		MyRenderer cellRenderer = new MyRenderer();
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.addMouseMotionListener(new MouseMotionAdapter(){
 			public void mouseMoved(MouseEvent e)
 			{
