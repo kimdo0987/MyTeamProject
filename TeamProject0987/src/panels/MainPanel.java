@@ -32,7 +32,6 @@ public class MainPanel extends ImagePanel {
 	public static JFrame thisFrame;
 
 	public static String currUserId = "logout";
-
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
 	public static MyPagePanel myPagePanel = new MyPagePanel();
