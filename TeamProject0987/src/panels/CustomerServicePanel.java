@@ -1,23 +1,28 @@
 package panels;
 
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.LoginButton;
 import buttons.LogoutButton;
+import buttons.SignupButton;
 import labels.TopLabel;
 import java.awt.Font;
+
 
 public class CustomerServicePanel extends ImagePanel {
 
 	public static GoToButton loginBtn;
+
 	public static LogoutButton logoutBtn;
 
 	public CustomerServicePanel() {
@@ -101,12 +106,14 @@ public class CustomerServicePanel extends ImagePanel {
 		road.setBounds(710, 271, 192, 80);
 		add(road);
 
-		GoToButton join = new GoToButton("회원가입");
+
+		SignupButton join = new SignupButton("회원가입");
 		join.setBounds(1073, 31, 92, 66);
 		add(join);
 
-		loginBtn = new GoToButton("로그인");
+		loginBtn = new LoginButton("로그인");
 		loginBtn.setBounds(1044, 232, 144, 100);
+
 		add(loginBtn);
 
 		logoutBtn = new LogoutButton("로그아웃");
