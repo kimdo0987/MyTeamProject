@@ -100,10 +100,10 @@ public class MainPanel extends ImagePanel {
 		lblNewLabel.setBounds(130, 20, 904, 399);
 		add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("───────────────────────────────────────────");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 24));
-		lblNewLabel_1.setBounds(66, 20, 1093, 28);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBackground(Color.WHITE);
+		lblNewLabel_1.setOpaque(true);
+		lblNewLabel_1.setBounds(70, 20, 1065, 3);
 		add(lblNewLabel_1);
 	}
 

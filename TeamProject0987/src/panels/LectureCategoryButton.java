@@ -15,10 +15,10 @@ public class LectureCategoryButton extends JButton {
 		{"개발도구", "게임개발", "프론트엔드", "데브옵스/인프라", "데스크톱 앱 개발", "데이터베이스", "모바일 앱 개발"
 				, "백엔드", "알고리즘/자료구조", "임베디드/IOT", "교양,기타"};
 	private static String [] imagePath = {
-			"개발도구.jpg","게임개발.jpg","프론트엔드.jpg",
-			"데브옵스.jpg","데스크톱.jpg",
-			"데이터베이스.jpg","모바일.jpg","백엔드.jpg",
-			"알고리즘.jpg","임베디드.jpg","교양.jpg"
+			"개발도구.png","게임개발.png","프론트엔드.png",
+			"데브옵스.png","데스크톱.png",
+			"데이터베이스.png","모바일.png","백엔드.png",
+			"알고리즘.png","임베디드.png","교양.png"
 	};
 	
 	public LectureCategoryButton (int num) {
