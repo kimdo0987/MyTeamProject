@@ -94,6 +94,7 @@ public class MainPanel extends ImagePanel {
 		logoutBtn.setBounds(1057, 70, 102, 54);
 		add(logoutBtn);
 		
+		
 		JLabel lblNewLabel = new JLabel("<html><body style='text-align:center;'>Developer <br/>lecture <br/>program</body></html>", JLabel.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Libre Baskerville", Font.PLAIN, 100));

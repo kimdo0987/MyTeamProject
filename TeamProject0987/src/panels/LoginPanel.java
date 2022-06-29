@@ -31,7 +31,7 @@ public class LoginPanel extends JPanel {
 	
 	//버튼,라벨,텍스트필드 생성완료
 
-	static public String pwText;
+//	static public String pwText;
 	static public String idText = "";
 	static public String searchPw;
 	private HintPasswordField pwInput;
@@ -91,12 +91,12 @@ public class LoginPanel extends JPanel {
 		idInput.setBounds(400, 250, 300, 30);
 		idInput.addKeyListener(new RestrictTextLength(idInput, 16)); //글자수제한
 		idInput.addKeyListener(new IdKeyAdaptor()); // 제약사항 적용
-		idInput.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				idText = idInput.getText().toString();
-			}	
-		});
+//		idInput.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				idText = idInput.getText().toString();
+//			}	
+//		});
 		
 		pwInput = new HintPasswordField("비밀번호를 입력하세요.");
 		pwInput.setFont(new Font("굴림", Font.PLAIN, 16));
@@ -106,13 +106,13 @@ public class LoginPanel extends JPanel {
 		
 		add(pwInput);
 	    
-		pwInput.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				char[] a = pwInput.getPassword();
-				pwText = String.valueOf(a);				
-			}	
-		});
+//		pwInput.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				char[] a = pwInput.getPassword();
+//				pwText = String.valueOf(a);				
+//			}	
+//		});
 		
 
 		JButton loginBtn = new JButton("로그인");
@@ -130,7 +130,7 @@ public class LoginPanel extends JPanel {
 						PreparedStatement pstmt = conn.prepareStatement("SELECT member_password FROM members "
 								+ "WHERE member_id = ?");
 				) {
-					pstmt.setString(1, idText);
+					pstmt.setString(1, idInput.getText().toString());
 					ResultSet rs = pstmt.executeQuery();
 					
 					while(rs.next()) {
@@ -147,14 +147,12 @@ public class LoginPanel extends JPanel {
 				}
 				
 				// 로그인 성공상황
-				if(searchPw.equals(pwText)) {
+				if(searchPw.equals(String.valueOf(pwInput.getPassword()))) {
 					MainPanel.currPanel.setVisible(false);
 					MainPanel.mainPanel.setVisible(true);
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
 					MainPanel.currUserId = idText;
-					System.out.println("로그인시 DB에서 찾은 pw : " + searchPw);
-					System.out.println("로그인시 내가 써놓은 pw : " + pwText);
 
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);
@@ -170,7 +168,6 @@ public class LoginPanel extends JPanel {
 					pwInput.setText("비밀번호를 입력하세요.");
 					pwInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
 					pwInput.setForeground(Color.GRAY);
-					pwText = "";
 					pwInput.setEchoChar((char) 0);
 					
 					searchPw = "";
