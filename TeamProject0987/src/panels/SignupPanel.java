@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,7 +34,7 @@ import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
 import popups.MsgPopup;
 
-public class SignupPanel extends JPanel {
+public class SignupPanel extends ImagePanel {
 		 	
 	private JTextField createIdField;
 	private HintPasswordField createPwField;
@@ -81,11 +82,11 @@ public class SignupPanel extends JPanel {
 		JLabel idMsgLabel = new JLabel("");
 		idMsgLabel.setVisible(true);
 		idMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		idMsgLabel.setBounds(420, 143, 276, 32);
+		idMsgLabel.setBounds(202, 143, 276, 32);
 		add(idMsgLabel);
 
 		createIdField = new HintTextField("4~16 이내 영문숫자조합");
-		createIdField.setBounds(420, 99, 276, 44);
+		createIdField.setBounds(202, 99, 276, 44);
 		createIdField.addKeyListener(new RestrictTextLength(createIdField, 16)); // 글자수제한
 		createIdField.addKeyListener(new KeyAdapter() {
 			@Override
@@ -152,7 +153,7 @@ public class SignupPanel extends JPanel {
 		
 		/////////////////// 중복 확인 /////////////////////////////
 		JButton idCheckBtn = new JButton("중복확인");
-		idCheckBtn.setBounds(708, 99, 87, 44);
+		idCheckBtn.setBounds(490, 99, 87, 44);
 		idCheckBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -198,22 +199,22 @@ public class SignupPanel extends JPanel {
 		////////////////////비밀번호 생성조건 ///////////////////////////////////
 		JLabel pwMsgLabel = new JLabel("");
 		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		pwMsgLabel.setBounds(420, 235, 276, 43);
+		pwMsgLabel.setBounds(202, 235, 276, 43);
 		add(pwMsgLabel);
 		
 		JLabel rePwMsgLabel = new JLabel("");
 		rePwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		rePwMsgLabel.setBounds(420, 325, 276, 43);
+		rePwMsgLabel.setBounds(202, 325, 276, 43);
 		add(rePwMsgLabel);
 		
 		createPwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
 		createPwField.setFont(new Font("굴림", Font.PLAIN, 16));
-		createPwField.setBounds(420, 190, 276, 49);
+		createPwField.setBounds(202, 190, 276, 49);
 		createPwField.addKeyListener(new RestrictTextLength(createPwField, 12)); //글자수제한
 		
 		rePwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
 		rePwField.setFont(new Font("굴림", Font.PLAIN, 16));
-		rePwField.setBounds(420, 280, 276, 49);
+		rePwField.setBounds(202, 280, 276, 49);
 		rePwField.addKeyListener(new RestrictTextLength(rePwField, 12)); //글자수제한
 		
 		createPwField.addKeyListener(new KeyAdapter() {
@@ -310,18 +311,19 @@ public class SignupPanel extends JPanel {
 		
 		//////////////////////// 이름 입력 조건 ///////////////////////////////////
 		JLabel insertNameLabel = new JLabel("이름");
+		insertNameLabel.setForeground(Color.WHITE);
 		insertNameLabel.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertNameLabel.setBounds(175, 366, 37, 44);
+		insertNameLabel.setBounds(156, 365, 37, 44);
 		add(insertNameLabel);
 		
 		JLabel nameMsgLabel = new JLabel();
 		nameMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		nameMsgLabel.setBounds(220, 405, 276, 32);
+		nameMsgLabel.setBounds(201, 404, 276, 32);
 		add(nameMsgLabel);
 		
 		insertNameField = new JTextField();
 		insertNameField.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertNameField.setBounds(220, 366, 276, 44);
+		insertNameField.setBounds(201, 365, 276, 44);
 
 		insertNameField.addKeyListener(new RestrictTextLength(insertNameField, 14));
 		insertNameField.addKeyListener(new KeyAdapter() {
@@ -359,18 +361,19 @@ public class SignupPanel extends JPanel {
 		////////////////////////주민번호 앞자리 입력 조건 ///////////////////////////////////
 		
 		JLabel insertJNum1Label = new JLabel("주민번호");
+		insertJNum1Label.setForeground(Color.WHITE);
 		insertJNum1Label.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertJNum1Label.setBounds(524, 366, 64, 44);
+		insertJNum1Label.setBounds(127, 522, 64, 44);
 		add(insertJNum1Label);
 		
 		JLabel JNumMsgLabel = new JLabel();
 		JNumMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		JNumMsgLabel.setBounds(590, 405, 276, 32);
+		JNumMsgLabel.setBounds(193, 561, 276, 32);
 		add(JNumMsgLabel);
 		
 		insertJNum1Field = new JTextField();
 		insertJNum1Field.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertJNum1Field.setBounds(590, 366, 121, 44);
+		insertJNum1Field.setBounds(193, 522, 121, 44);
 		insertJNum1Field.addKeyListener(new RestrictTextLength(insertJNum1Field, 6)); //글자수제한
 		insertJNum1Field.addKeyListener(new OnlyNumKeyAdaptor());
 		insertJNum1Field.addKeyListener(new KeyAdapter() {
@@ -393,7 +396,7 @@ public class SignupPanel extends JPanel {
 		
 		insertJNum2Field = new JPasswordField();
 		insertJNum2Field.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertJNum2Field.setBounds(747, 366, 127, 44);
+		insertJNum2Field.setBounds(350, 522, 127, 44);
 		insertJNum2Field.addKeyListener(new RestrictTextLength(insertJNum2Field, 7)); //글자수제한
 		insertJNum2Field.addKeyListener(new OnlyNumKeyAdaptor());
 		insertJNum2Field.addKeyListener(new KeyAdapter() {
@@ -447,23 +450,24 @@ public class SignupPanel extends JPanel {
 		////////////////////////전화번호 입력조건 ///////////////////////////////////
 		
 		JLabel insertPhoneNumLabel = new JLabel("전화번호");
+		insertPhoneNumLabel.setForeground(Color.WHITE);
 		insertPhoneNumLabel.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumLabel.setBounds(146, 440, 64, 44);
+		insertPhoneNumLabel.setBounds(127, 439, 64, 44);
 		add(insertPhoneNumLabel);
 		
 		JLabel hyphenLabel = new JLabel("-");
 		hyphenLabel.setFont(new Font("굴림", Font.PLAIN, 16));
-		hyphenLabel.setBounds(726, 366, 30, 44);
+		hyphenLabel.setBounds(329, 522, 30, 44);
 		add(hyphenLabel);
 		
 		JLabel phoneMsgLabel = new JLabel();
 		phoneMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		phoneMsgLabel.setBounds(220, 475, 276, 43);
+		phoneMsgLabel.setBounds(201, 474, 276, 43);
 		add(phoneMsgLabel);
 		
 		insertPhoneNumField1 = new JTextField();
 		insertPhoneNumField1.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumField1.setBounds(220, 440, 39, 44);
+		insertPhoneNumField1.setBounds(201, 439, 39, 44);
 		insertPhoneNumField1.addKeyListener(new RestrictTextLength(insertPhoneNumField1, 3));//글자수 3자로 제한
 		insertPhoneNumField1.addKeyListener(new OnlyNumKeyAdaptor()); //숫자만 입력가능, 복붙차단
 		
@@ -472,14 +476,14 @@ public class SignupPanel extends JPanel {
 		
 		insertPhoneNumField2 = new JTextField();
 		insertPhoneNumField2.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumField2.setBounds(280, 440, 52, 44);
+		insertPhoneNumField2.setBounds(261, 439, 52, 44);
 		insertPhoneNumField2.addKeyListener(new RestrictTextLength(insertPhoneNumField2, 4));//글자수 4자로제한
 		insertPhoneNumField2.addKeyListener(new OnlyNumKeyAdaptor()); //숫자만 입력가능, 복붙차단
 		add(insertPhoneNumField2);
 		
 		insertPhoneNumField3 = new JTextField();
 		insertPhoneNumField3.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumField3.setBounds(355, 440, 52, 44);
+		insertPhoneNumField3.setBounds(336, 439, 52, 44);
 		insertPhoneNumField3.addKeyListener(new RestrictTextLength(insertPhoneNumField3, 4));//글자수 4자로제한
 		insertPhoneNumField3.addKeyListener(new OnlyNumKeyAdaptor()); //숫자만 입력가능, 복붙차단
 		add(insertPhoneNumField3);
@@ -524,17 +528,18 @@ public class SignupPanel extends JPanel {
 		////////////////////////메일 입력조건 ///////////////////////////////////
 		
 		JLabel mailMsgLabel = new JLabel("example@gmail.com 형식으로 입력해주세요");
-		mailMsgLabel.setBounds(590, 475, 325, 43);
+		mailMsgLabel.setForeground(Color.WHITE);
+		mailMsgLabel.setBounds(193, 631, 325, 43);
 		mailMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
 		add(mailMsgLabel);
 		
 		JTextField insertMailField = new JTextField("");
 		insertMailField.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertMailField.setBounds(590, 440, 132, 44);
+		insertMailField.setBounds(193, 596, 132, 44);
 		
 		JTextField domainField = new JTextField("");
 		domainField.setFont(new Font("굴림", Font.PLAIN, 16));
-		domainField.setBounds(747, 440, 132, 44);
+		domainField.setBounds(350, 596, 132, 44);
 		add(domainField);
 		
 		insertMailField.addKeyListener(new RestrictTextLength(insertMailField, 20));
@@ -635,9 +640,9 @@ public class SignupPanel extends JPanel {
 		domainField.addFocusListener(mailFocusAdapter);
 		
 		JPanel cateBtnPanel = new JPanel();
-		cateBtnPanel.setBounds(97, 550, 926, 121);
+		cateBtnPanel.setBounds(642, 99, 400, 531);
 		add(cateBtnPanel);
-		cateBtnPanel.setLayout(new GridLayout(2,13));
+		cateBtnPanel.setLayout(new GridLayout(6,2));
 		
 		favCategories = new HashSet<>();		
 		
@@ -766,42 +771,47 @@ public class SignupPanel extends JPanel {
 		
 		/////////////// 항목 표시해주는 라벨 /////////////////////////////////
 		JLabel lblNewLabel = new JLabel("아이디");
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 15));
-		lblNewLabel.setBounds(356, 100, 52 , 43);
+		lblNewLabel.setBounds(138, 100, 52 , 43);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("비밀번호");
+		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(350, 194, 64, 43);
+		lblNewLabel_1.setBounds(132, 194, 64, 43);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("비밀번호 재입력");
+		lblNewLabel_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1.setFont(new Font("굴림", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(295, 284, 121, 43);
+		lblNewLabel_1_1.setBounds(77, 284, 121, 43);
 		add(lblNewLabel_1_1);
 				
 		JLabel insertPhoneNumLabel_1 = new JLabel("이메일");
+		insertPhoneNumLabel_1.setForeground(Color.WHITE);
 		insertPhoneNumLabel_1.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumLabel_1.setBounds(524, 440, 64, 44);
+		insertPhoneNumLabel_1.setBounds(127, 596, 64, 44);
 		add(insertPhoneNumLabel_1);
 		
 		JLabel hyphenLabel_1 = new JLabel("-");
 		hyphenLabel_1.setFont(new Font("굴림", Font.PLAIN, 16));
-		hyphenLabel_1.setBounds(265, 440, 30, 44);
+		hyphenLabel_1.setBounds(246, 439, 30, 44);
 		add(hyphenLabel_1);
 		
 		JLabel hyphenLabel_2 = new JLabel("-");
 		hyphenLabel_2.setFont(new Font("굴림", Font.PLAIN, 16));
-		hyphenLabel_2.setBounds(337, 440, 16, 44);
+		hyphenLabel_2.setBounds(318, 439, 16, 44);
 		add(hyphenLabel_2);
 		
 		JLabel atLabel_3 = new JLabel("@");
 		atLabel_3.setFont(new Font("굴림", Font.PLAIN, 16));
-		atLabel_3.setBounds(726, 440, 30, 44);
+		atLabel_3.setBounds(329, 595, 30, 44);
 		add(atLabel_3);
 		
 		JLabel lblNewLabel_2 = new JLabel("관심 분야를 골라 주세요 (선택사항)");
-		lblNewLabel_2.setBounds(97, 516, 235, 24);
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setBounds(735, 639, 235, 24);
 		add(lblNewLabel_2);
 		
 		
@@ -813,6 +823,8 @@ class CateButton extends JButton {
 	 public CateButton(String name) {
 		 super.setText(name);
 		 setBackground(new Color(153, 153, 153));
+		 setSize(80,80);
+		// setIcon(new ImageIcon("images/"+imagePath[num])); //버튼에 맞는이미지 받아오기
 		 addActionListener(new ActionListener() {
 			
 			@Override
