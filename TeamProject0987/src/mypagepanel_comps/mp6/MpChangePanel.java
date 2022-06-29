@@ -12,7 +12,7 @@ public class MpChangePanel extends JPanel {
 	public static MpPhoneNumChangePanel mpPanel2 = new MpPhoneNumChangePanel();
 	public static MpEmailChangePanel mpPanel3 = new MpEmailChangePanel();
 	public static MyProfilePanel mpPanel0 = new MyProfilePanel();
-
+	
 	public MpChangePanel() {
 		setOpaque(false);
 		setBackground(Color.DARK_GRAY);

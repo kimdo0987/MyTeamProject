@@ -15,10 +15,16 @@ import panels.CustomerServicePanel;
 import panels.MainPanel;
 
 public class LogoutButton extends JButton {
-	
+	static ImageIcon logoutBtn_img = new ImageIcon("images/logoutBtn.png");
+	static ImageIcon logoutBtn1_img = new ImageIcon("images/logoutBtn2.png");
 	public LogoutButton(String text) {
 		this.setBounds(609, 432, 118, 54);
 		this.setText(text);
+			
+		this.setIcon(logoutBtn_img);
+		this.setBorderPainted(false);//테두리 안보이게하기
+		this.setRolloverIcon(logoutBtn1_img);//마우스 올렸을때 이미지
+
 		
 		addActionListener(new ActionListener() {
 			
@@ -44,7 +50,10 @@ public class LogoutButton extends JButton {
 			}
 			
 		});
+		
+	
 	}
+	
 	
 
 }
