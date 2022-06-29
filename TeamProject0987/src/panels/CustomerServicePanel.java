@@ -120,6 +120,7 @@ public class CustomerServicePanel extends ImagePanel {
 		logoutBtn = new LogoutButton("로그아웃");
 		logoutBtn.setBounds(1044, 353, 144, 100);
 		add(logoutBtn);
+		logoutBtn.setVisible(false);
 
 		JLabel privacyLabel = new JLabel();
 
