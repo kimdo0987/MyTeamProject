@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 import buttons.GoToButton;
 import buttons.LoginButton;
@@ -21,7 +22,7 @@ import java.awt.Font;
 
 public class CustomerServicePanel extends ImagePanel {
 
-	public static GoToButton loginBtn;
+	public static LoginButton loginBtn;
 
 	public static LogoutButton logoutBtn;
 
