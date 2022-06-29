@@ -3,6 +3,7 @@ package database;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -80,6 +81,7 @@ public class LectureTable extends JPanel {
 		table.getColumnModel().getColumn(3).setMinWidth(80);
 		table.getColumnModel().getColumn(3).setMaxWidth(80);
 		
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.setRowHeight(30);
 		table.setShowVerticalLines(false);
 		
@@ -139,7 +141,7 @@ public class LectureTable extends JPanel {
 							
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
-							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
+							LectureInfoPanel1.detailInfoLabel.setText((detailInfoHash.get(rs.getString("lecture_id"))));
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							
@@ -148,8 +150,7 @@ public class LectureTable extends JPanel {
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
 							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
 							LectureInfoPanel.lectureTime = (rs.getString("timetable"));
-							
-							
+	
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();

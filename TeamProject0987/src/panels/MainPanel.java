@@ -31,7 +31,7 @@ public class MainPanel extends ImagePanel {
 
 	public static JFrame thisFrame;
 
-	public static String currUserId = "hansm1119";
+	public static String currUserId = "logout";
 
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
@@ -91,8 +91,9 @@ public class MainPanel extends ImagePanel {
 		add(loginBtn);
 
 		logoutBtn = new LogoutButton("로그아웃");
-		logoutBtn.setBounds(1057, 70, 102, 54);
+		logoutBtn.setBounds(1054, 57, 115, 115);
 		add(logoutBtn);
+		logoutBtn.setVisible(false);
 		
 		JLabel lblNewLabel = new JLabel("<html><body style='text-align:center;'>Developer <br/>lecture <br/>program</body></html>", JLabel.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);

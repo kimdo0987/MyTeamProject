@@ -3,6 +3,7 @@ package database;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.sql.Connection;
@@ -68,7 +69,7 @@ public class LectureTable2 extends JPanel {
 		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
 		
-		
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));	
 		
 		table.setPreferredScrollableViewportSize(new Dimension(700, 600));
 		
