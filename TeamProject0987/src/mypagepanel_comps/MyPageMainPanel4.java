@@ -8,75 +8,58 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import labels.TopLabel;
+import panels.ImagePanel;
+import panels.MainPanel;
+import panels.MyPagePanel;
+
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+import database.OjdbcConnection;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 
 //쿠폰함 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel4 extends JPanel {
-	private JTextField textField;
+public class MyPageMainPanel4 extends ImagePanel {
+	private JTextField couponCodeField;
 	public MyPageMainPanel4() {
 		setBackground(new Color(204, 255, 204));
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
-		TopLabel toplabel = new TopLabel("쿠폰함");
-		toplabel.setLocation(335, 31);
-		add(toplabel);
-		
 		JPanel panel = new JPanel(); //쿠폰 등록 textField와 내 쿠폰함 List 테이블이 들어갈 Label
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(80, 183, 800, 549);
 		panel.setLayout(null);
 		add(panel);
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 90, 730, 479);
+		tablePanel.setBounds(0, 0, 800, 549);
 		panel.add(tablePanel);
 		
-		textField = new JTextField();
-		textField.setBounds(424, 13, 176, 35);
-		panel.add(textField);
-		textField.setColumns(10);
-		
 		JLabel tableNameLabel = new JLabel("나의 쿠폰 리스트");
-		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-		tableNameLabel.setBounds(12, 13, 148, 40);
-		panel.add(tableNameLabel);
-		
-		JLabel tableNameLabel_1 = new JLabel("쿠폰 등록하기");
-		tableNameLabel_1.setFont(new Font("", Font.PLAIN, 12));
-		tableNameLabel_1.setBounds(336, 10, 84, 40);
-		panel.add(tableNameLabel_1);
-		
-		JButton btnNewButton = new JButton("등록");
-		btnNewButton.setBounds(612, 16, 93, 29);
-		btnNewButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("등록하려는 쿠폰번호: " + textField.getText());
-				
-			}
-		});
-		panel.add(btnNewButton);
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(80, 60, 491, 60);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
 		
 		
-		///////////////////TABLE 생성 /////////////////////
+		///////////////////TABLE 생성 //////////////////////////
 		
-		String[] headings = new String[] {"no.","쿠폰이름","쿠폰번호","할인율","유효기간","사용유무"};
-		Object[][] data = new Object[][] {
-			{"","회원가입 환영 쿠폰", "A23ZTEQV2", 10 + "%", "22.06.20 ~ 22.07.20", "사용가능"},
-			{"","생일 축하 쿠폰", "B23QTEQV2", 25 + "%", "22.06.20 ~ 22.07.20", "사용완료"},
-			{"","7월 이벤트 쿠폰", "A23ZTEQV2", 10 + "%", "22.06.20 ~ 22.07.20", "사용가능"},
-			{"","여름방학 맞이 쿠폰", "B23QTEQV2", 5 + "%", "22.06.20 ~ 22.07.20", "사용완료"},
-		};
+		String[] headings = new String[] {"coupon id", "쿠폰이름", "쿠폰번호", "할인율", "사용만료일", "사용유무"};
+		String[][] data = database.MyCouponLists.getMyCouponLists();
 		
 		// 테이블의 셀 내용 수정 불가 시작 //
 		DefaultTableModel mod = new DefaultTableModel(data, headings) {
@@ -86,19 +69,21 @@ public class MyPageMainPanel4 extends JPanel {
 		};
 
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
-		table.setPreferredScrollableViewportSize(new Dimension(730,450));
+		table.setPreferredScrollableViewportSize(new Dimension(800, 450));
 		
-		table.getColumnModel().getColumn(0).setMinWidth(50);
-		table.getColumnModel().getColumn(0).setMaxWidth(50);
-		table.getColumnModel().getColumn(1).setMinWidth(320);//셀 너비 조정
-		table.getColumnModel().getColumn(1).setMaxWidth(320);
-		table.getColumnModel().getColumn(2).setMinWidth(80);
-		table.getColumnModel().getColumn(2).setMaxWidth(80);
+		table.getColumnModel().getColumn(0).setMinWidth(90);
+		table.getColumnModel().getColumn(0).setMaxWidth(90);
+		table.getColumnModel().getColumn(1).setMinWidth(200);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMaxWidth(200);
+		table.getColumnModel().getColumn(2).setMinWidth(150);
+		table.getColumnModel().getColumn(2).setMaxWidth(150);
 		
-		table.getColumnModel().getColumn(3).setMinWidth(50);
-		table.getColumnModel().getColumn(3).setMaxWidth(50);
-		table.getColumnModel().getColumn(4).setMinWidth(140);
-		table.getColumnModel().getColumn(4).setMaxWidth(140);		
+		table.getColumnModel().getColumn(3).setMinWidth(60);
+		table.getColumnModel().getColumn(3).setMaxWidth(60);
+		table.getColumnModel().getColumn(4).setMinWidth(150);
+		table.getColumnModel().getColumn(4).setMaxWidth(150);
+		table.getColumnModel().getColumn(5).setMinWidth(150);
+		table.getColumnModel().getColumn(5).setMaxWidth(150);
 		
 		table.setEnabled(false); //테이블 클릭 안되도록 지정
 
@@ -110,18 +95,79 @@ public class MyPageMainPanel4 extends JPanel {
 		
 		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
+		tablePanel.setLayout(null);
 		
 		
-		
+		table.setEnabled(false);
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 450);		
+		scrollPane.setBounds(0, 0, 800, 549);		
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 		
+		JLabel tableNameLabel_1 = new JLabel("쿠폰 등록하기");
+		tableNameLabel_1.setBounds(534, 133, 127, 40);
+		add(tableNameLabel_1);
+		tableNameLabel_1.setForeground(Color.WHITE);
+		tableNameLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
 		
+		couponCodeField = new JTextField();
+		couponCodeField.setBounds(644, 138, 176, 35);
+		add(couponCodeField);
+		couponCodeField.setColumns(10);
 		
-		
+		JButton btnNewButton = new JButton("등록");
+		btnNewButton.setBounds(832, 138, 90, 35);
+		add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String memberId = " ";
+				if (couponCodeField.getText().length() != 10) {
+					JOptionPane.showMessageDialog(MainPanel.thisFrame, "쿠폰코드를 정확히 입력해주세요");
+
+				} else {
+					String sql1 = "SELECT coupon_code, member_id FROM coupon_lists WHERE coupon_code = ? ";
+					String sql2 = "UPDATE coupon_lists SET member_id = ? WHERE coupon_code = ?";
+					try (
+							Connection conn = OjdbcConnection.getConnection();
+							PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+							PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+					) {
+						pstmt1.setString(1, couponCodeField.getText());
+						pstmt2.setString(1, MainPanel.currUserId);
+						pstmt2.setString(2, couponCodeField.getText());
+						
+						ResultSet rs = pstmt1.executeQuery();
+						while(rs.next()) {
+							memberId = rs.getString(2);
+						}
+						if(memberId == null) {
+							conn.setAutoCommit(false);
+							pstmt2.executeUpdate();
+							conn.commit();
+							JOptionPane.showMessageDialog(MainPanel.thisFrame, "쿠폰이 등록되었습니다");
+							MyPagePanel.mainPanel4.setVisible(false);
+							MyPagePanel.mainPanel4 = new MyPageMainPanel4();
+							MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel4, "쿠폰함");
+							MyPagePanel.mainPanel4.setVisible(true);
+						}else {
+							JOptionPane.showMessageDialog(MainPanel.thisFrame, "쿠폰코드를 정확히 입력해주세요");
+						}
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+			}
+		});
 	}
 }

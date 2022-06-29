@@ -1,12 +1,21 @@
 package mypagepanel_comps;
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.font.TextAttribute;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,86 +23,273 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import labels.TopLabel;
-import mypagepanel_comps.frames.CancelLectureFrame;
-import mypagepanel_comps.frames.CommentsFrame;
+import panels.ImagePanel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
 
 //나의 장바구니 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel3 extends JPanel {
+public class MyPageMainPanel3 extends ImagePanel {
+	
+	static JTable table;
+	ArrayList<Integer> checkedRows;
+	static JTable table2;
+	
 	public MyPageMainPanel3() {
 		setBackground(new Color(255, 153, 204));
 		setBounds(118, 0, 1093, 800);
 		setLayout(null);
 		
-		TopLabel toplabel = new TopLabel("나의 장바구니");
-		toplabel.setLocation(335, 31);
-		add(toplabel);	
-		
 		JPanel panel = new JPanel(); //장바구니List 테이블과 label이 들어가는 패널 (장바구니 panel)
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(80, 155, 800, 510);
 		panel.setLayout(null);
 		add(panel);
 		
 		JLabel tableNameLabel = new JLabel("장바구니 리스트");
-		tableNameLabel.setFont(new Font("", Font.PLAIN, 18));
-		tableNameLabel.setBounds(12, 9, 148, 40);
-		panel.add(tableNameLabel);
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(80, 60, 460, 60);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 58, 730, 511);		
+		tablePanel.setBounds(0, 0, 800, 529);		
 		tablePanel.setLayout(null);
 		panel.add(tablePanel);
 		
-		String[] headings = new String[] {"강의명","강사명","수강 기간","수강료","장바구니에서 삭제"};
-		Object[][] data = new Object[][] {
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"},
-			{"DataBase 입문", "김교수", "22.06.19 ~ 22.08.19", "300,000원", "삭제하기"}
-		};
+		JTable table = new JTable(); // 수정불가능한 테이블로 생성
 		
-		// 테이블의 셀 내용 수정 불가 시작 //
-		DefaultTableModel mod = new DefaultTableModel(data, headings) {
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				return false;
+		DefaultTableModel model = new DefaultTableModel() {
+			public Class<?> getColumnClass(int column) {
+				switch(column) {
+				case 0:
+					return Boolean.class;
+				default:
+					return String.class;
+				}
 			}
 		};
 
-		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
-		table.setPreferredScrollableViewportSize(new Dimension(700,600));
+		table.setModel(model);
+//		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
+		//headings 설정
+		model.addColumn("선택");
+		model.addColumn("강의명");
+		model.addColumn("강사명");
+		model.addColumn("수강 기간");
+		model.addColumn("수강료");
+		model.addColumn("장바구니에서 삭제");
 		
-		table.getColumnModel().getColumn(0).setMinWidth(310);//셀 너비 조정
-		table.getColumnModel().getColumn(0).setMaxWidth(310);
-		table.getColumnModel().getColumn(1).setMinWidth(80);
-		table.getColumnModel().getColumn(1).setMaxWidth(80);
+		//row 넣을 data
+		String[][] data = database.MyWishLists.getMyWishLists();
 		
-		table.getColumnModel().getColumn(2).setMinWidth(140);
-		table.getColumnModel().getColumn(2).setMaxWidth(140);
-		table.getColumnModel().getColumn(3).setMinWidth(90);
-		table.getColumnModel().getColumn(3).setMaxWidth(90);
-		table.getColumnModel().getColumn(4).setMinWidth(110);
-		table.getColumnModel().getColumn(4).setMaxWidth(110);
-		 
+		//the row
+		for (int i = 0; i < data.length; i++) {
+			model.addRow(new Object[0]); 
+			model.setValueAt(false, i, 0); // checkbox 의 boolean type 이 되는데, true - 체크됨, false - 체크안됨
+			//data
+			model.setValueAt(data[i][0], i, 1); // (data[row][column], 위치 row번째 행, 위치 column)
+			model.setValueAt(data[i][1], i, 2);
+			model.setValueAt(data[i][2], i, 3);
+			model.setValueAt(data[i][3], i, 4);
+			model.setValueAt("삭제하기", i, 5);
+		}
+		
+		table.getColumnModel().getColumn(0).setMinWidth(40);
+		table.getColumnModel().getColumn(0).setMaxWidth(40);
+		table.getColumnModel().getColumn(1).setMinWidth(300);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMaxWidth(300);
+		table.getColumnModel().getColumn(2).setMinWidth(120);
+		table.getColumnModel().getColumn(2).setMaxWidth(120);
+		
+		table.getColumnModel().getColumn(3).setMinWidth(130);
+		table.getColumnModel().getColumn(3).setMaxWidth(130);
+		table.getColumnModel().getColumn(4).setMinWidth(90);
+		table.getColumnModel().getColumn(4).setMaxWidth(90);
+		table.getColumnModel().getColumn(5).setMinWidth(100);
+		table.getColumnModel().getColumn(5).setMaxWidth(120);
+		
+		///////////////////////////////////////////////////////
+		
+		MyRenderer cellRenderer = new MyRenderer();
+		
+//		table.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(cellRenderer);
+		table.getColumnModel().getColumn(5).setCellRenderer(cellRenderer);
+		
+		table.setEnabled(true); //셀이 선택될 때 파란색으로 뜨는게 없어집니다.
+		table.setSelectionBackground(Color.WHITE);
+		
 		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				int row = table.getSelectedRow();
-				int col = table.getSelectedColumn();		
-				
-				if (col == 4) {
-					new DeleteChkPopup(MainPanel.thisFrame);
-				} else {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    	// getPoint 는 좌표를 뽑아오는건데 rowAtPoint, columnAtPoint 는 
+		    	// 행과 열의 범위를 좌표화해서 뽑아옵니다.
+		    	/*
+		    	
+					int javax.swing.JTable.rowAtPoint(Point point)
 					
-				}
-				
+					Returns the index of the row that point lies in,or -1 
+					if the result is not in the range[0, getRowCount()-1].
+					
+					Parameters:point the location of interestReturns:
+					the index of the row that point lies in,or -1 
+					if the result is not in the range[0, getRowCount()-1]
+					
+					See Also:columnAtPoint 
+					
+		    	*/
+		        int row = table.rowAtPoint(e.getPoint());
+		        int col = table.columnAtPoint(e.getPoint());
+		        //System.out.println(row + "and" + col);
+		        
+		        String cell = ""; 
+		        
+		        if (row >= 0 && col >= 0) {
+		            if (col == 5) {
+		            	// 셀을 선택하면 이 테이블의 좌표가 (row, 0)인 값을 String 으로 cell 에 값을 저장함
+		            	// -> 이렇게 cell 을 여기다 추가하면 삭제하기 버튼을 누를때 그 행의 강의명을 얻을 수 있음
+		            	cell = table.getModel().getValueAt(row, 1).toString();
+		            	System.out.println(cell);
+		            	DeleteChkPopup.currLectureName = cell ;
+		            	new DeleteChkPopup(MainPanel.thisFrame,cell);
+		            }
+		        }
+		    }
+		    
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		    	cellRenderer.colAtMouse = -1;
+		    }
+		});
+		
+		// 테이블에서 마우스 커서 적용 먹이려면 모션리스너 -> Moved 이벤트로 해야 먹일 수 있습니다 
+		// (다른 리스너,이벤트론 안됨)
+		table.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int row = table.rowAtPoint(e.getPoint());
+		        int col = table.columnAtPoint(e.getPoint());
+		        if (row >= 0 && col >= 0) {
+		        	cellRenderer.rowAtMouse = row;
+		        	cellRenderer.color = new Color(246,246,246);
+		        	table.repaint();
+
+		        	
+		        	Font font = table.getFont();
+					Map attributes = font.getAttributes();
+					attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		        	
+		        	if(col == 5) {
+		        		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        		cellRenderer.colAtMouse = col;
+		        		cellRenderer.fontunderLine = font.deriveFont(attributes);
+
+		        	} else {
+		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        		cellRenderer.colAtMouse = -1;
+		        	}		        	
+		        } else {
+		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        	cellRenderer.colAtMouse = -1;
+		        }
+		        
+		        if (col == 0) {
+		        	table.setEnabled(true);
+		        } else {
+		        	table.setEnabled(false);
+		        }
 			}
 		});
 		
+		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
+		paymentBtn.setBackground(new Color(255, 127, 80));
+		paymentBtn.setBounds(642, 675, 238, 49);
+		add(paymentBtn);
+		
+		
+		DefaultTableModel model2 = new DefaultTableModel();
+		
+		JTable table2 = new JTable(); // 수정불가능한 테이블로 생성
+		
+//		table.setPreferredScrollableViewportSize(new Dimension(700,600));
+		
+		//headings 설정
+		
+		model2.addColumn("강의명");
+		model2.addColumn("강사명");
+		model2.addColumn("수강 기간");
+		model2.addColumn("수강료");
+		model2.addColumn("쿠폰선택");
+		model2.addColumn("결제금액");
+
+		
+		//obtain selected row
+		paymentBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				checkedRows = new ArrayList<>();
+				
+				for (int i = 0; i < table.getRowCount(); i++) {
+					Boolean checked = Boolean.valueOf(table.getValueAt(i, 0).toString());
+										
+					if (checked) {
+						checkedRows.add(i);
+					} else {						
+					
+					}					
+					
+				}				
+				System.out.println(checkedRows);
+				int i = 0;
+				for(int checkRow : checkedRows) {
+					System.out.println(checkRow);
+					System.out.println(data[checkRow][0]);
+					model2.addRow(new Object[0]); 
+					model2.setValueAt(data[checkRow][0], i, 0); // (data[row][column], 위치 row번째 행, 위치 column)
+					model2.setValueAt(data[checkRow][1], i, 1);
+					model2.setValueAt(data[checkRow][2], i, 2);
+					model2.setValueAt(data[checkRow][3], i, 3);
+					model2.setValueAt(data[checkRow][5], i, 4);
+					model2.setValueAt(data[checkRow][6], i, 5);
+					++i;					
+				}
+				table2.setModel(model2);
+				
+				table2.getColumnModel().getColumn(0).setMinWidth(300);
+				table2.getColumnModel().getColumn(0).setMaxWidth(300);
+				table2.getColumnModel().getColumn(1).setMinWidth(80);//셀 너비 조정
+				table2.getColumnModel().getColumn(1).setMaxWidth(80);
+				table2.getColumnModel().getColumn(2).setMinWidth(120);
+				table2.getColumnModel().getColumn(2).setMaxWidth(120);
+				
+				table2.getColumnModel().getColumn(3).setMinWidth(60);
+				table2.getColumnModel().getColumn(3).setMaxWidth(60);
+				table2.getColumnModel().getColumn(4).setMinWidth(90);
+				table2.getColumnModel().getColumn(4).setMaxWidth(90);
+				table2.getColumnModel().getColumn(5).setMinWidth(100);
+				table2.getColumnModel().getColumn(5).setMaxWidth(100);
+				
+				table2.setRowHeight(30); // 셀 높이 조정		
+				table2.setCellSelectionEnabled(true); // 한셀만 선택가능
+				table2.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
+				table2.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
+				
+				ListSelectionModel selectionModel = table2.getSelectionModel(); //한 행만 선택가능
+				selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				
+				table2.setFillsViewportHeight(true);
+				MyPageMainPanel3.table2 = table2;
+			}
+		});
 		
 		
 		table.setRowHeight(30); // 셀 높이 조정		
@@ -105,14 +301,25 @@ public class MyPageMainPanel3 extends JPanel {
 		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
 		
-		
-		
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 500);		
+		scrollPane.setBounds(0, 0, 800, 529);		
 		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
+		setTable(table);
 		
-		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
+	}
+	
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
+	public static JTable getTable() {
+		return table;
 	}
 }

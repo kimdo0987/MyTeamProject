@@ -1,27 +1,33 @@
 package mypagepanel_comps.frames;
 
+import java.awt.Color;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import database.OjdbcConnection;
+import mypagepanel_comps.MyPageMainPanel1;
+import mypagepanel_comps.MyPageMainPanel5;
+import panels.MainPanel;
+import panels.MyPagePanel;
 import popups.MsgPopup;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import java.awt.Color;
-import java.awt.SystemColor;
-
 public class CancelLectureFrame extends JFrame {
-	
+	public static int currLectureId;
+	public static int totalPrice;
 	private JTextArea textArea;	
 	private JFrame thisFrame;
 
@@ -29,6 +35,30 @@ public class CancelLectureFrame extends JFrame {
 	public CancelLectureFrame(String lectureName, String teacherName) {
 	
 		super("수강 포기");
+
+		
+		String sql2 = "SELECT * FROM "
+				+ "payment_log p, lecture_lists l "
+				+ "WHERE p.lecture_id = l.lecture_id and l.lecture_name = ?";
+		
+			
+		try (
+				Connection conn2 = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+		) {
+			
+			pstmt2.setString(1, lectureName);
+			
+			try (ResultSet rs = pstmt2.executeQuery()) {
+				while (rs.next()) {
+					currLectureId = rs.getInt("lecture_id");
+					totalPrice = -1 * (rs.getInt("total_price"));
+				}
+			}
+		//System.out.println(currLectureId);		
+		}catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		thisFrame = this;
 		setBounds(0, 0, 500, 300);
@@ -66,7 +96,7 @@ public class CancelLectureFrame extends JFrame {
 		textArea.setText("기타 사유에만 작성할 수 있습니다.");
 		textArea.setEditable(false);
 		textArea.setLineWrap(true); //자동으로 줄바꿈
-		textArea.addKeyListener(new KeyListener() {
+		textArea.addKeyListener(new KeyAdapter() {
 			
 		// textArea에 입력가능한 글자수 70글자로 제한함
 			@Override
@@ -75,19 +105,14 @@ public class CancelLectureFrame extends JFrame {
 
 					String msg = textArea.getText();
 					textLengthLabel.setText("수강포기사유 (" + msg.length() + "/70자)");
-					if (msg.length() > 70) {
+					if (msg.length() > 70 - 1) {
 						textArea.setText(msg.substring(0, 70));
+						textLengthLabel.setText("수강포기사유 (70/70자)"); //복붙했을때 글자counting 수 넘어가는거 방지
 					}
 				}
 			}
 
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
+			
 		});		
 		
 		
@@ -129,10 +154,10 @@ public class CancelLectureFrame extends JFrame {
 		lblNewLabel_1.setBounds(12, 53, 84, 23);
 		panel.add(lblNewLabel_1);
 		
-		JButton confirmBtn = new JButton("수강 포기");
-		confirmBtn.setBounds(92, 219, 112, 34);
+		JButton abandonBtn = new JButton("수강 포기");
+		abandonBtn.setBounds(92, 219, 112, 34);
 		
-		confirmBtn.addActionListener(new ActionListener() {
+		abandonBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -145,12 +170,55 @@ public class CancelLectureFrame extends JFrame {
 					if (comboBox.getSelectedItem().equals("기타")) {
 						System.out.println("기타포기내용 : " + textArea.getText());
 					}
-					// DB에 저장하는 기능 추가해야함
+					
+					// SELECT * FROM payment_log p, lecture_lists l WHERE p.lecture_id = l.lecture_id and l.lecture_name = '더 자바, 코드를 조작하는 다양한 방법'; 
+					String sql = "UPDATE payment_log SET refund_status = '환불' , total_price = ? WHERE member_id = ? AND lecture_id = ?";
+					String sql2 = "DELETE FROM mylecture_lists WHERE member_id = ? AND lecture_id = ?" ;
+					try (
+							Connection conn = OjdbcConnection.getConnection(); 
+							PreparedStatement pstmt = conn.prepareStatement(sql);
+							PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+					) {
+						
+						conn.setAutoCommit(false);
+						
+						pstmt.setInt(1, totalPrice);
+						pstmt.setString(2, MainPanel.currUserId);
+						pstmt.setInt(3, currLectureId);
+						
+						pstmt2.setString(1, MainPanel.currUserId);
+						pstmt2.setInt(2, currLectureId);
+						
+						pstmt.executeUpdate();
+						pstmt2.executeUpdate();
+						conn.commit();
+						
+
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
+				
+					
+					MyPagePanel.mainPanel1.setVisible(false);
+					MyPagePanel.mainPanel1 = new MyPageMainPanel1();
+					MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel1, "나의 수강조회");
+					MyPagePanel.mainPanel1.setVisible(true);
+					
+					
+					MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel5);
+					MyPagePanel.mainPanel5 = new MyPageMainPanel5();
+					MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel5,"구매내역");
+		
+					
 					dispose();
+					
+					
+					
 				}
 			}
 		});
-		panel.add(confirmBtn);
+		panel.add(abandonBtn);
 		
 		JButton cancelBtn = new JButton("취소");
 		cancelBtn.setBounds(260, 219, 112, 34);
@@ -158,6 +226,7 @@ public class CancelLectureFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				dispose(); //창 꺼버리기
 			}
 		});
@@ -168,11 +237,11 @@ public class CancelLectureFrame extends JFrame {
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		//시험용
-		
-		CancelLectureFrame CancelLectureFrame = new CancelLectureFrame("자바","김선생");
-		CancelLectureFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-	}
+//	public static void main(String[] args) {
+//		//시험용
+//		
+//		CancelLectureFrame CancelLectureFrame = new CancelLectureFrame("자바","김선생");
+//		CancelLectureFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		
+//	}
 }

@@ -2,15 +2,53 @@ package mypagepanel_comps.mp6;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MpPhoneNumChangePanel extends JPanel {
+import database.OjdbcConnection;
+import panels.MainPanel;
 
+public class MpPhoneNumChangePanel extends JPanel {
+	
+	String newPhoneNum;
+	String currPhoneNum;
+	
 	public MpPhoneNumChangePanel() {
+		String sql2 = "SELECT * FROM members WHERE member_id = ?";
+		try (
+				Connection conn2 = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt2 = conn2.prepareStatement(sql2);
+		) {
+			
+			pstmt2.setString(1, MainPanel.currUserId);
+			
+			try (ResultSet rs = pstmt2.executeQuery()) {
+				while (rs.next()) {
+					
+					currPhoneNum = rs.getString("phone_number");
+					
+				}
+			}
+				
+		}catch (Exception e) {
+
+		}
+		
+		String sql = "UPDATE members SET phone_number = ? WHERE member_id = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+		) {
 		setLayout(null);
 
 		setBounds(0, 58, 730, 511);
@@ -56,12 +94,19 @@ public class MpPhoneNumChangePanel extends JPanel {
 
 		/////////////////////////////////////////////////////////////////////////////////////
 
-		JLabel pnLabel = new JLabel("010-1234-1234");
+		JLabel pnLabel = new JLabel(currPhoneNum);
 		pnLabel.setBounds(196, 162, 469, 51);
 		add(pnLabel);
 
 		JTextField newPnField = new JTextField();
 		newPnField.setBounds(196, 223, 469, 51);
+		newPnField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				newPhoneNum = newPnField.getText();
+			}
+
+		});
 		add(newPnField);
 
 		JLabel pnLabel2 = new JLabel("기존 전화번호");
@@ -71,10 +116,48 @@ public class MpPhoneNumChangePanel extends JPanel {
 		JLabel newPnLabel = new JLabel("새 전화번호");
 		newPnLabel.setBounds(56, 223, 124, 51);
 		add(newPnLabel);
+      
+      
+		JButton profileBtn = new JButton("내 정보");
+		profileBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
+			}
+		});
+		profileBtn.setBounds(24, 9, 93, 23);
+		add(profileBtn);
+
 
 		JButton ChangeOkBtn = new JButton("변경 하기");
+		ChangeOkBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try(
+					Connection conn = OjdbcConnection.getConnection(); 
+					PreparedStatement pstmt = conn.prepareStatement(sql);
+				) {
+					conn.setAutoCommit(false);
+					pstmt.setString(1, newPhoneNum);
+					pstmt.setString(2, MainPanel.currUserId);
+					
+					pstmt.executeUpdate();
+					conn.commit();
+					
+				} catch (SQLException e1) {
+
+					e1.printStackTrace();
+				}
+				
+				JOptionPane.showMessageDialog(MainPanel.thisFrame, newPhoneNum + "로 번호가 변경되었습니다", "변경 완료", 1);
+				newPnField.setText("");
+			}
+		});
 		ChangeOkBtn.setBounds(260, 346, 202, 78);
 		add(ChangeOkBtn);
+		} catch (Exception e) {
+
+		}
 
 	}
 }
