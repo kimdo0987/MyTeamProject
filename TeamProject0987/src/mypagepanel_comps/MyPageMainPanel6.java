@@ -57,7 +57,8 @@ public class MyPageMainPanel6 extends ImagePanel {
 					CardLayout mpLayout = new CardLayout();
 					
 					JPanel panel = new JPanel(); 
-					panel.setBounds(162, 155, 730, 569);
+					panel.setOpaque(false);
+					panel.setBounds(80, 152, 800, 612);
 					panel.setLayout(mpLayout);
 					add(panel);
 					
@@ -65,9 +66,10 @@ public class MyPageMainPanel6 extends ImagePanel {
 					tableNameLabel.setForeground(Color.WHITE);
 					tableNameLabel.setBounds(80, 60, 321, 60);
 					add(tableNameLabel);
-					tableNameLabel.setFont(new Font("Dialog", Font.BOLD, 58));
+					tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
 					
 					JPanel tablePanel = new JPanel();
+					tablePanel.setOpaque(false);
 					tablePanel.setBounds(0, 58, 730, 511);
 					
 					tablePanel.setLayout(null);
@@ -76,8 +78,9 @@ public class MyPageMainPanel6 extends ImagePanel {
 					panel.add(mpPanel);
 
 					JLabel pwChangeLabel = new JLabel("비밀번호를 입력해주세요");
-					pwChangeLabel.setFont(new Font("굴림", Font.PLAIN, 14));
-					pwChangeLabel.setBounds(203, 50, 195, 39);
+					pwChangeLabel.setForeground(Color.WHITE);
+					pwChangeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+					pwChangeLabel.setBounds(205, 163, 356, 57);
 					tablePanel.add(pwChangeLabel);
 
 					JPasswordField pwInputField = new JPasswordField();
@@ -91,18 +94,25 @@ public class MyPageMainPanel6 extends ImagePanel {
 						}	
 					});
 					
-					pwInputField.setBounds(203, 100, 418, 73);		
+					pwInputField.setBounds(205, 223, 418, 73);		
 					tablePanel.add(pwInputField);
 					
 					JLabel pwLabel = new JLabel("비밀번호");
-					pwLabel.setFont(new Font("굴림", Font.PLAIN, 18));
-					pwLabel.setBounds(72, 110, 108, 73);
+					pwLabel.setForeground(Color.WHITE);
+					pwLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+					pwLabel.setBounds(101, 222, 92, 73);
 					tablePanel.add(pwLabel);
 					
 					
 					JButton okBtn = new JButton("확인");
-					okBtn.setBounds(250, 270, 260, 83);
+					okBtn.setBounds(552, 306, 71, 65);
 					tablePanel.add(okBtn);
+					
+					JLabel lblNewLabel_1 = new JLabel("<html><body>계정 관리 페이지는 보안 사고 예방을 위해 <br/> 고객님의 비밀번호 재 확인이 필요합니다.</body></html>");
+					lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 24));
+					lblNewLabel_1.setForeground(Color.WHITE);
+					lblNewLabel_1.setBounds(0, -16, 498, 112);
+					tablePanel.add(lblNewLabel_1);
 					
 					okBtn.addActionListener(new ActionListener() {
 						
@@ -127,12 +137,9 @@ public class MyPageMainPanel6 extends ImagePanel {
 					lblNewLabel.setBounds(80, 124, 800, 3);
 					add(lblNewLabel);
 				}
-			}
-
+			}	
 		}  catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
+	}				
 }
