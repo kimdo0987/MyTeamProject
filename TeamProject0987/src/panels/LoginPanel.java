@@ -48,6 +48,12 @@ public class LoginPanel extends ImagePanel {
 		ImageIcon pwSearchIcon = new ImageIcon("images/intackBtn/비밀번호찾기버튼.png");
 		ImageIcon signInIcon = new ImageIcon("images/intackBtn/회원가입버튼.png");
 		
+		ImageIcon yLoginIcon = new ImageIcon("images/intackYellowBtn/노란로그인.png");
+		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
+		ImageIcon yPwSearchIcon = new ImageIcon("images/intackYellowBtn/노란비밀번호찾기.png");
+		ImageIcon ySignInIcon = new ImageIcon("images/intackYellowBtn/노란회원가입.png");
+		
+		
 		// 크기조정
 		Image img1 = mainIcon.getImage();
 		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -68,6 +74,26 @@ public class LoginPanel extends ImagePanel {
 		Image img5 = signInIcon.getImage();
 		Image changeImg5 = img5.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
 		ImageIcon changesignInIcon = new ImageIcon(changeImg5);
+		///////////////////////////////////////////////////////////////////////////
+		
+		
+		
+		// 노란이미지 크기조정중
+		Image img22 = loginIcon.getImage();
+		Image changeImg22 = img22.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeYLoginIcon = new ImageIcon(changeImg22);
+		
+		Image img33 = idSearchIcon.getImage();
+		Image changeImg33 = img33.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYIdSearchIcon = new ImageIcon(changeImg33);
+		
+		Image img44 = pwSearchIcon.getImage();
+		Image changeImg44 = img44.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYPwSearchIcon = new ImageIcon(changeImg44);
+		
+		Image img55 = signInIcon.getImage();
+		Image changeImg55 = img55.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYSignInIcon = new ImageIcon(changeImg55);
 		
 		
 		
@@ -158,6 +184,7 @@ public class LoginPanel extends ImagePanel {
 		loginBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		loginBtn.setIcon(changeloginIcon);
 		loginBtn.setBorderPainted(false);
+//		loginBtn.setRolloverIcon(lectureSearchBtn1_img); //마우스 올렸을때 이미지 추가
 		
 		loginBtn.setBackground(Color.WHITE);
 		add(loginBtn);
