@@ -55,12 +55,12 @@ public class MyPageMainPanel7 extends ImagePanel {
 		pwInput.setBounds(380, 500, 300, 30);
 		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
 		
-		pwInput.addKeyListener(new KeyAdapter() {				// 입력한것을 pwText에 받기
-			@Override
-			public void keyReleased(KeyEvent e) {
-				pwText = pwInput.getText().toString();
-			}	
-		});
+//		pwInput.addKeyListener(new KeyAdapter() {				// 입력한것을 pwText에 받기
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				pwText = pwInput.getText().toString();
+//			}	
+//		});
 		
 		JButton leaveBtn = new JButton("탈퇴하기");
 		leaveBtn.setBounds(260, 500, 200,40);
@@ -76,8 +76,10 @@ public class MyPageMainPanel7 extends ImagePanel {
 						JOptionPane.OK_CANCEL_OPTION, 1);
 				
 				
+
 				// currUserId에 해당하는 member_password 가 현재 pwText가 맞다면 -> 탈퇴진행
 				if (logoutBtnresult == 0) {
+
 					
 					try (Connection conn = OjdbcConnection.getConnection();
 							PreparedStatement pstmt1 = conn

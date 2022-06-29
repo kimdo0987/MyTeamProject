@@ -29,7 +29,7 @@ public class LectureSearchPanel extends ImagePanel {
 	public static JLabel lectureCntLabel = new JLabel("총 100개가 검색되었습니다");
 	public LectureSearchPanel() {
 		
-		ImageIcon icon = new ImageIcon("images/homeBtn.jpg");
+		ImageIcon icon = new ImageIcon("images/homeBtn.png");
 		
 		Image img = icon.getImage();
 		// 창의 사이즈인 500,500에 맞춰서 이미지를 변경
@@ -43,7 +43,7 @@ public class LectureSearchPanel extends ImagePanel {
 
 			GoToButton mainBtn = new GoToButton("메인");
 			mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-			mainBtn.setIcon(new ImageIcon("images/homeBtn.jpg"));
+			mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
 			mainBtn.setBorderPainted(false);
 			mainBtn.setBounds(1037, 38, 46, 44);
 			mainBtn.addActionListener(new ActionListener() {
@@ -59,7 +59,7 @@ public class LectureSearchPanel extends ImagePanel {
 
 			MypageButton myInfoBtn = new MypageButton("마이페이지");
 			myInfoBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-			myInfoBtn.setIcon(new ImageIcon("images/infoBtn.jpg"));
+			myInfoBtn.setIcon(new ImageIcon("images/infoBtn.png"));
 			myInfoBtn.setBorderPainted(false);
 			myInfoBtn.setBackground(Color.WHITE);
 			
@@ -83,7 +83,7 @@ public class LectureSearchPanel extends ImagePanel {
 			allCategoryBtn.setFont(new Font("Gulim", Font.PLAIN, 0));
 			allCategoryBtn.setSize(75,80);
 			
-			allCategoryBtn.setIcon(new ImageIcon("images/all.jpg"));
+			allCategoryBtn.setIcon(new ImageIcon("images/all.png"));
 			allCategoryBtn.addActionListener(new ActionListener() {
 				
 				@Override
@@ -97,7 +97,7 @@ public class LectureSearchPanel extends ImagePanel {
 				}
 			});
 			JButton recommendBtn = new JButton("강의추천");
-			recommendBtn.setIcon(new ImageIcon("images/recommendBtn.jpg"));
+			recommendBtn.setIcon(new ImageIcon("images/recommendBtn.png"));
 			recommendBtn.setFont(new Font("Gulim", Font.PLAIN, 0));
 			recommendBtn.setBounds(309, 129, 46, 44);
 			recommendBtn.addActionListener(new ActionListener() {
@@ -152,7 +152,7 @@ public class LectureSearchPanel extends ImagePanel {
 			
 			JButton searchBtn = new JButton("검색");
 			searchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-			searchBtn.setIcon(new ImageIcon("images/searchBtn.jpg"));
+			searchBtn.setIcon(new ImageIcon("images/searchBtn.png"));
 			searchBtn.setBorderPainted(false);
 			searchBtn.addActionListener(new ActionListener() {
 				
