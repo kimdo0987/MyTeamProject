@@ -21,11 +21,12 @@ import database.OjdbcConnection;
 import labels.TopLabel;
 import methods.RestrictTextLength;
 import panels.CustomerServicePanel;
+import panels.ImagePanel;
 import panels.MainPanel;
 
 //회원 탈퇴 Panel이 될 JPanel입니다
 
-public class MyPageMainPanel7 extends JPanel {
+public class MyPageMainPanel7 extends ImagePanel {
 	
 	private static String pwText = "";
 	private static String searchPw;
@@ -34,10 +35,6 @@ public class MyPageMainPanel7 extends JPanel {
 		setBackground(new Color(204, 200, 204));
 		setBounds(118, 0, 1093, 800);	
 		setLayout(null);
-		
-		TopLabel toplabel = new TopLabel("회원 탈퇴");
-		toplabel.setLocation(335, 31);
-		add(toplabel);
 		
 		JPanel panel = new JPanel(); //탈퇴시 안내사항label, 비밀번호작성 textField,버튼 이 들어가는 패널 (장바구니 panel)
 		panel.setBounds(162, 155, 730, 569);
@@ -57,12 +54,12 @@ public class MyPageMainPanel7 extends JPanel {
 		pwInput.setBounds(380, 500, 300, 30);
 		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
 		
-		pwInput.addKeyListener(new KeyAdapter() {				// 입력한것을 pwText에 받기
-			@Override
-			public void keyReleased(KeyEvent e) {
-				pwText = pwInput.getText().toString();
-			}	
-		});
+//		pwInput.addKeyListener(new KeyAdapter() {				// 입력한것을 pwText에 받기
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				pwText = pwInput.getText().toString();
+//			}	
+//		});
 		
 		JButton leaveBtn = new JButton("탈퇴하기");
 		leaveBtn.setBounds(260, 500, 200,40);
@@ -95,7 +92,7 @@ public class MyPageMainPanel7 extends JPanel {
 					searchPw = "";
 				}
 				
-				if (searchPw.equals(pwText)) {
+				if (searchPw.equals(String.valueOf(pwInput.getPassword()))) {
 					JOptionPane.showMessageDialog(null, "탈퇴가 완료되었습니다. \r\n이용해주셔서 감사합니다."			// 탈퇴멘트
 									, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
 
@@ -148,5 +145,11 @@ public class MyPageMainPanel7 extends JPanel {
 				
 			}
 		});
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 	}
 }

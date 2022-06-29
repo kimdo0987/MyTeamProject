@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,8 +24,10 @@ import mypagepanel_comps.MyPageMainPanel6;
 import mypagepanel_comps.MyPageMainPanel7;
 import mypagepanel_comps.MyPageTabButton;
 import mypagepanel_comps.PaymentPanel;
+import java.awt.Font;
+import java.awt.Image;
 
-public class MyPagePanel extends JPanel {
+public class MyPagePanel extends ImagePanel {
 	
 	public static CardLayout cardLayout1 = new CardLayout();
 	public static JPanel cardLayoutPanel;
@@ -41,33 +46,109 @@ public class MyPagePanel extends JPanel {
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);		
 		
+		MyPageTabButton btn5 = new MyPageTabButton("구매 내역");
+		btn5.setFont(new Font("HY중고딕", Font.PLAIN, 16));
+		btn5.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardLayout1.show(cardLayoutPanel,"구매내역");
+				
+			}
+		});
+		
+		MyPageTabButton btn7 = new MyPageTabButton("회원 탈퇴");		
+		btn7.setFont(new Font("HY중고딕", Font.PLAIN, 16));
+		btn7.setBounds(0, 700, 200, 60);
+		add(btn7);
+		
+		MyPageTabButton btn6 = new MyPageTabButton("계정 관리");		
+		btn6.setFont(new Font("HY중고딕", Font.PLAIN, 16));
+		btn6.setBounds(0, 640, 200, 60);
+		add(btn6);
+		btn5.setBounds(0, 500, 200, 60);
+		add(btn5);
+		
+		MyPageTabButton btn4 = new MyPageTabButton("쿠폰함");		
+		btn4.setFont(new Font("HY중고딕", Font.PLAIN, 16));
+		btn4.setBounds(0, 440, 200, 60);
+		add(btn4);
+		
+		MyPageTabButton btn3 = new MyPageTabButton("나의 장바구니");		
+		btn3.setFont(new Font("HY중고딕", Font.PLAIN, 16));
+		btn3.setBounds(0, 380, 200, 60);
+		add(btn3);
+		
+		MyPageTabButton btn2 = new MyPageTabButton("출결 현황 조회");		
+		btn2.setFont(new Font("HY중고딕", Font.PLAIN, 16));
+		btn2.setBounds(0, 231, 200, 60);
+		add(btn2);
+		
+		
+		MyPageTabButton btn1 = new MyPageTabButton("나의 수강조회");
+		btn1.setFont(new Font("HY중고딕", Font.PLAIN, 16));
+		btn1.setBounds(0, 172, 200, 60);
+		add(btn1);
+		
+		ImageIcon icon = new ImageIcon("images/homeButton.png");
+		Image img = icon.getImage();
+		// 창의 사이즈인 500,500에 맞춰서 이미지를 변경
+		Image changeImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon = new ImageIcon(changeImg);
+		
+		ImageIcon icon2 = new ImageIcon("images/homeButton2.png");
+		Image img2 = icon2.getImage();
+		Image changeImg2 = img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon2 = new ImageIcon(changeImg2);
+		
 		GoToButton mainBtn = new GoToButton("메인");
-		mainBtn.setBounds(12, 10, 106, 55);
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(changeIcon);
+		mainBtn.setBorderPainted(false);
+		mainBtn.setBounds(10, 10, 75, 75);
 		mainBtn.setBackground(Color.WHITE);
+		mainBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.myPagePanel.setVisible(false);
+			}
+		});
+		
+		mainBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mainBtn.setIcon(changeIcon2);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				mainBtn.setIcon(changeIcon);
+			}
+		});
 		add(mainBtn);		
 		
-		JLabel lbl1 = new JLabel("수강중인 과정");
+		JLabel lbl1 = new JLabel("내 수강");
+		lbl1.setForeground(Color.WHITE);
 		lbl1.setHorizontalAlignment(JLabel.CENTER);
-		lbl1.setLocation(0, 113);
+		lbl1.setLocation(0, 143);
 		lbl1.setBackground(Color.GRAY);
-		lbl1.setOpaque(true); 
-		lbl1.setSize(new Dimension(120, 60));
+		lbl1.setSize(new Dimension(80, 30));
 		add(lbl1);
 		
-		JLabel lbl2 = new JLabel("수강신청 관리");
+		JLabel lbl2 = new JLabel("나의 수강관리");
+		lbl2.setForeground(Color.WHITE);
 		lbl2.setHorizontalAlignment(JLabel.CENTER);
 		lbl2.setSize(new Dimension(104, 69));
 		lbl2.setBackground(Color.GRAY);
-		lbl2.setOpaque(true); 
-		lbl2.setBounds(0, 320, 120, 60);
+		lbl2.setBounds(0, 350, 111, 30);
 		add(lbl2);
 		
 		JLabel lbl3 = new JLabel("회원 관리");
+		lbl3.setForeground(Color.WHITE);
 		lbl3.setHorizontalAlignment(JLabel.CENTER);
 		lbl3.setSize(new Dimension(104, 69));
 		lbl3.setBackground(Color.GRAY);
-		lbl3.setOpaque(true); 
-		lbl3.setBounds(0, 580, 120, 60);
+		lbl3.setBounds(0, 610, 80, 30);
 		add(lbl3);
 		
 		
@@ -81,7 +162,7 @@ public class MyPagePanel extends JPanel {
 		payPanel = new PaymentPanel();
 		//////////////////////////////////////////////////
 		cardLayoutPanel = new JPanel();
-		cardLayoutPanel.setBounds(118, 0, 1093, 800);
+		cardLayoutPanel.setBounds(200, 0, 1011, 800);
 		add(cardLayoutPanel);
 		
 		cardLayoutPanel.setLayout(cardLayout1);
@@ -95,43 +176,24 @@ public class MyPagePanel extends JPanel {
 		cardLayoutPanel.add(mainPanel6, "계정 관리");
 		cardLayoutPanel.add(mainPanel7, "회원 탈퇴");
 		cardLayoutPanel.add(payPanel, "결제하기");
-				
 		
-		MyPageTabButton btn1 = new MyPageTabButton("나의 수강조회");
-		btn1.setBounds(0, 172, 120, 60);
-		add(btn1);
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setBounds(80, 156, 120, 3);
+		add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setOpaque(true);
+		lblNewLabel_1_1.setBackground(Color.WHITE);
 		
-		MyPageTabButton btn2 = new MyPageTabButton("출결 현황 조회");		
-		btn2.setBounds(0, 231, 120, 60);
-		add(btn2);
-					
-		MyPageTabButton btn3 = new MyPageTabButton("나의 장바구니");		
-		btn3.setBounds(0, 380, 120, 60);
-		add(btn3);
+		JLabel lblNewLabel_1_1_1 = new JLabel("");
+		lblNewLabel_1_1_1.setOpaque(true);
+		lblNewLabel_1_1_1.setBackground(Color.WHITE);
+		lblNewLabel_1_1_1.setBounds(80, 622, 120, 3);
+		add(lblNewLabel_1_1_1);
 		
-		MyPageTabButton btn4 = new MyPageTabButton("쿠폰함");		
-		btn4.setBounds(0, 440, 120, 60);
-		add(btn4);
-		
-		MyPageTabButton btn5 = new MyPageTabButton("구매 내역");
-		btn5.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cardLayout1.show(cardLayoutPanel,"구매내역");
-				
-			}
-		});
-		btn5.setBounds(0, 500, 120, 60);
-		add(btn5);
-		
-		MyPageTabButton btn6 = new MyPageTabButton("계정 관리");		
-		btn6.setBounds(0, 640, 120, 60);
-		add(btn6);
-		
-		MyPageTabButton btn7 = new MyPageTabButton("회원 탈퇴");		
-		btn7.setBounds(0, 700, 120, 60);
-		add(btn7);
+		JLabel lblNewLabel_1_1_2 = new JLabel("");
+		lblNewLabel_1_1_2.setOpaque(true);
+		lblNewLabel_1_1_2.setBackground(Color.WHITE);
+		lblNewLabel_1_1_2.setBounds(110, 364, 90, 3);
+		add(lblNewLabel_1_1_2);
 		
 		
 	}

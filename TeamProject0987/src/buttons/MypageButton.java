@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -56,6 +57,11 @@ public class MypageButton extends JButton {
 			setText(name);
 			addActionListener(eventListener);
 			
+		}
+
+		public MypageButton(String name, ImageIcon img) {
+			super(name, img);
+			addActionListener(eventListener);
 		}	
 }
 
