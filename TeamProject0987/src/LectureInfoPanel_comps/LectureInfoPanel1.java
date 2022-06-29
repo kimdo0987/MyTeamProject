@@ -20,7 +20,7 @@ public class LectureInfoPanel1 extends JPanel {
 		detailInfoLabel.setLineWrap(true);
 		detailInfoLabel.setBackground(Color.WHITE);
 		detailInfoLabel.setOpaque(true);
-		detailInfoLabel.setFont(new Font("굴림", Font.PLAIN, 24));
+		detailInfoLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
 		detailInfoLabel.setBounds(0, 0, 786, 390);
 		add(detailInfoLabel);
 

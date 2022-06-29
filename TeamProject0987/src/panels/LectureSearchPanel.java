@@ -171,7 +171,7 @@ public class LectureSearchPanel extends ImagePanel {
 			JLabel lblTeamname = new JLabel("강의검색");
 			lblTeamname.setFont(new Font("배달의민족 도현", Font.BOLD, 39));
 			lblTeamname.setForeground(Color.WHITE);
-			lblTeamname.setBounds(523, 29, 153, 62);
+			lblTeamname.setBounds(523, 29, 170, 62);
 			add(lblTeamname);
 			
 			JLabel lblNewLabel = new JLabel(" 강의추천");

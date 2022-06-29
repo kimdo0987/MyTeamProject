@@ -2,6 +2,7 @@ package LectureInfoPanel_comps;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.util.HashMap;
 
 import javax.swing.JPanel;
@@ -9,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
@@ -124,7 +126,19 @@ public class LectureInfoPanel3 extends JPanel {
 		
 		// JscroollPane 의 사이즈와 테이블의 사이즈를 각각 따로 설정해야 하는듯 합니다.
 		// 그 중에서도 테이블의 scrollPane 의 사이즈보다 크거나 같아야 합니다.
-
+		
+		
+		//테이블 폰트 설정
+		scheduleTable.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		
+		//컬럼명 폰트 설정
+		JTableHeader tableHeader = scheduleTable.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 17);
+		tableHeader.setFont(headerFont);
+		
+		
+		
+		
 		JScrollPane scrollPane = new JScrollPane(scheduleTable);
 		scrollPane.setSize(786, 390);
 		add(scrollPane);
