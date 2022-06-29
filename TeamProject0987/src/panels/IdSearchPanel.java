@@ -27,7 +27,7 @@ import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
 import popups.IdFindPopup;
 
-public class IdSearchPanel extends JPanel{
+public class IdSearchPanel extends JPanel {
 
 	private static String nameText = "";
 	private static String jNumText = "";
