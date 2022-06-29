@@ -2,6 +2,7 @@ package panels;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -14,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,7 +32,7 @@ import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
 import tempPassword.TempPassword;
 
-public class PwSearchPanel extends JPanel {
+public class PwSearchPanel extends ImagePanel {
 	private static String nameText = "";
 	private static String idText = "";
 	private static String jNumText = "";
@@ -40,6 +42,17 @@ public class PwSearchPanel extends JPanel {
 	private static String backJNum;
 	
 	public PwSearchPanel() { 
+		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
+		ImageIcon pwIcon = new ImageIcon("images/intackBtn/임시비밀번호로변경버튼.png");
+		
+		Image img1 = mainIcon.getImage();
+		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon changemainIcon = new ImageIcon(changeImg1);
+		
+		Image img2 = pwIcon.getImage();
+		Image changeImg2 = img2.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
+		ImageIcon changePwIcon = new ImageIcon(changeImg2);
+		
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);
 		
@@ -58,11 +71,16 @@ public class PwSearchPanel extends JPanel {
 		
 		
 		GoToButton mainBtn = new GoToButton("메인");
-		mainBtn.setBounds(105, 36, 70, 44);
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(changemainIcon);
+		mainBtn.setBorderPainted(false);
+		mainBtn.setBackground(Color.WHITE);
+		mainBtn.setBounds(105, 36, 40, 50);
 		add(mainBtn);	
 		
 		TopLabel toplabel = new TopLabel("비밀번호 찾기");
 		add(toplabel);
+		
 		
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
 		add(idInput);
@@ -123,7 +141,13 @@ public class PwSearchPanel extends JPanel {
 			}	
 		});
 		
-		JButton pwSearchBtn = new JButton("임시 비밀번호로 변경하기");
+		JButton pwSearchBtn = new JButton("임시 비밀번호로 변경");
+		
+		pwSearchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		pwSearchBtn.setIcon(changePwIcon);
+		pwSearchBtn.setBorderPainted(false);
+		pwSearchBtn.setBackground(Color.WHITE);
+		
 		pwSearchBtn.setBounds(470, 425, 200, 50);
 		pwSearchBtn.addActionListener(new ActionListener() {
 			
