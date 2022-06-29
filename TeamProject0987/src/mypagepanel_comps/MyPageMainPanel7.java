@@ -54,12 +54,12 @@ public class MyPageMainPanel7 extends ImagePanel {
 		pwInput.setBounds(380, 500, 300, 30);
 		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
 		
-		pwInput.addKeyListener(new KeyAdapter() {				// 입력한것을 pwText에 받기
-			@Override
-			public void keyReleased(KeyEvent e) {
-				pwText = pwInput.getText().toString();
-			}	
-		});
+//		pwInput.addKeyListener(new KeyAdapter() {				// 입력한것을 pwText에 받기
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				pwText = pwInput.getText().toString();
+//			}	
+//		});
 		
 		JButton leaveBtn = new JButton("탈퇴하기");
 		leaveBtn.setBounds(260, 500, 200,40);
@@ -92,7 +92,7 @@ public class MyPageMainPanel7 extends ImagePanel {
 					searchPw = "";
 				}
 				
-				if (searchPw.equals(pwText)) {
+				if (searchPw.equals(String.valueOf(pwInput.getPassword()))) {
 					JOptionPane.showMessageDialog(null, "탈퇴가 완료되었습니다. \r\n이용해주셔서 감사합니다."			// 탈퇴멘트
 									, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
 
