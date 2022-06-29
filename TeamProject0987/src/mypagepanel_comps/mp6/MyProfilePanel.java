@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import database.OjdbcConnection;
 import panels.MainPanel;
+import java.awt.Font;
 
 public class MyProfilePanel extends JPanel {
 	private String name;
@@ -27,53 +28,74 @@ public class MyProfilePanel extends JPanel {
 	private String mail;
 
 	public MyProfilePanel() {
+		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 
 		setBounds(0, 58, 730, 511);
 		String sql = "SELECT * FROM members";
 		
 		JLabel nameLabel = new JLabel("이름");
-		nameLabel.setBounds(110, 100, 50, 50);
+		nameLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+		nameLabel.setForeground(Color.WHITE);
+		nameLabel.setBounds(193, 100, 76, 50);
 		add(nameLabel); 
 
 		JLabel lbl1 = new JLabel("이름 넣는 곳");
+		lbl1.setFont(new Font("굴림", Font.PLAIN, 16));
+		lbl1.setForeground(Color.WHITE);
 		add(lbl1);
-		lbl1.setBounds(170, 100, 50, 50);
+		lbl1.setBounds(300, 100, 250, 50);
 		
 		JLabel idLabel = new JLabel("ID");
-		idLabel.setBounds(120, 140, 50, 50);
+		idLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+		idLabel.setForeground(Color.WHITE);
+		idLabel.setBounds(193, 140, 76, 50);
 		add(idLabel);
 		
 		JLabel lbl2 = new JLabel("ID 넣는 곳");
+		lbl2.setFont(new Font("굴림", Font.PLAIN, 16));
+		lbl2.setForeground(Color.WHITE);
 		add(lbl2);
-		lbl2.setBounds(170, 140, 100, 50);
+		lbl2.setBounds(300, 140, 250, 50);
 		
 		JLabel birthLabel = new JLabel("생년월일");
-		birthLabel.setBounds(100, 180, 50, 50);
+		birthLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+		birthLabel.setForeground(Color.WHITE);
+		birthLabel.setBounds(193, 180, 76, 50);
 		add(birthLabel);
 		
 		JLabel lbl3 = new JLabel("생년월일 넣는 곳");
+		lbl3.setFont(new Font("굴림", Font.PLAIN, 16));
+		lbl3.setForeground(Color.WHITE);
 		add(lbl3);
-		lbl3.setBounds(170, 180, 100, 50);
+		lbl3.setBounds(300, 180, 250, 50);
 		
 		JLabel phoneNumberLabel = new JLabel("전화번호");
-		phoneNumberLabel.setBounds(100, 220, 50, 50);
+		phoneNumberLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+		phoneNumberLabel.setForeground(Color.WHITE);
+		phoneNumberLabel.setBounds(193, 220, 76, 50);
 		add(phoneNumberLabel);
 		
 		JLabel lbl4 = new JLabel("전화번호 넣는 곳");
+		lbl4.setFont(new Font("굴림", Font.PLAIN, 16));
+		lbl4.setForeground(Color.WHITE);
 		add(lbl4);
-		lbl4.setBounds(170, 220, 100, 50);
+		lbl4.setBounds(300, 220, 250, 50);
 		
 		JLabel emailLabel = new JLabel("이메일");
-		emailLabel.setBounds(105, 260, 50, 50);
+		emailLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+		emailLabel.setForeground(Color.WHITE);
+		emailLabel.setBounds(193, 260, 76, 50);
 		add(emailLabel);
 		
 		JLabel lbl5 = new JLabel("이메일 넣는 곳");
+		lbl5.setFont(new Font("굴림", Font.PLAIN, 16));
+		lbl5.setForeground(Color.WHITE);
 		add(lbl5);
-		lbl5.setBounds(170, 260, 100, 50);
+		lbl5.setBounds(300, 260, 250, 50);
 		
 		JButton modifyBtn = new JButton("내 정보 수정하기");
-		modifyBtn.setBounds(276, 349, 145, 50);
+		modifyBtn.setBounds(300, 360, 150, 50);
 		modifyBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -108,27 +130,16 @@ public class MyProfilePanel extends JPanel {
 		lbl4.setText(phone);	
 		lbl5.setText(mail);	
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(281, 100, 2, 210);
+		add(lblNewLabel);
+		
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		
 		
 	}
-	
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		JPanel panel = new JPanel();
-//		frame.getContentPane().add(panel);
-//		panel.setBounds(100, 100, 1200, 800);
-//		panel.setBackground(Color.white);
-//		panel.setLayout(null);
-//
-//		panel.add(new MyProfilePanel());
-//
-//		frame.setBounds(100, 100, 1200, 800);
-//		frame.setLocationRelativeTo(null);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setVisible(true);	
-//		
-//	}
 }
