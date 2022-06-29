@@ -2,8 +2,12 @@ package panels;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.LoginButton;
 import buttons.LogoutButton;
-import labels.TopLabel;
-import java.awt.Font;
+import buttons.SignupButton;
 
 public class CustomerServicePanel extends ImagePanel {
 
@@ -37,10 +41,27 @@ public class CustomerServicePanel extends ImagePanel {
 		lblNewLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 54));
 		lblNewLabel.setBounds(203, 57, 573, 80);
 		add(lblNewLabel);
+
+		ImageIcon icon = new ImageIcon("images/homeButton.png");
+		Image img = icon.getImage();
+		// 창의 사이즈인 500,500에 맞춰서 이미지를 변경
+		Image changeImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon = new ImageIcon(changeImg);
 		
 		GoToButton mainBtn = new GoToButton("메인");
-		mainBtn.setBounds(969, 31, 50, 50);
-		add(mainBtn);
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(changeIcon);
+		mainBtn.setBorderPainted(false);
+		mainBtn.setBounds(20, 31, 75, 75);
+		mainBtn.setBackground(Color.WHITE);
+		mainBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.myPagePanel.setVisible(false);
+			}
+		});
+		
+		add(mainBtn);		
 		
 		String useStr ="<html><body style='text-align:left;'>서비스의 원활한 제공을 위하여 회원이 동의한 목적과 범위 내에서만 개인정보를 수집하며,"
 				+ "<br/>\r\n개인정보 보호 관련 법령에 따라 안전하게 관리합니다.</body></html>"; 
@@ -49,14 +70,14 @@ public class CustomerServicePanel extends ImagePanel {
 		JLabel explainLabel = new JLabel(privacyStr);
 		explainLabel.setForeground(Color.WHITE);
 		explainLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 20));
-		explainLabel.setBounds(203, 169, 802, 80);
+		explainLabel.setBounds(203, 259, 802, 80);
 		add(explainLabel);
 		
 		
 		JButton privacy = new JButton("개인정보처리방침");
 		privacy.setBackground(Color.WHITE);
 		privacy.setFont(new Font("배달의민족 도현", Font.BOLD, 19));
-		privacy.setBounds(302, 271, 192, 80);
+		privacy.setBounds(203, 169, 192, 80);
 		privacy.addActionListener(new ActionListener() {
 
 			@Override
@@ -82,7 +103,7 @@ public class CustomerServicePanel extends ImagePanel {
 				lblNewLabel.setText("이용약관");
 			}
 		});
-		use.setBounds(506, 271, 192, 80);
+		use.setBounds(407, 169, 192, 80);
 		add(use);
 
 		JButton road = new JButton("찾아오시는 길");
@@ -98,19 +119,19 @@ public class CustomerServicePanel extends ImagePanel {
 				lblNewLabel.setText("찾아오시는길");
 			}
 		});
-		road.setBounds(710, 271, 192, 80);
+		road.setBounds(611, 169, 192, 80);
 		add(road);
 
-		GoToButton join = new GoToButton("회원가입");
-		join.setBounds(1073, 31, 92, 66);
+		SignupButton join = new SignupButton("");
+		join.setBounds(1050, 31, 115, 115);
 		add(join);
 
-		loginBtn = new GoToButton("로그인");
-		loginBtn.setBounds(1044, 232, 144, 100);
+		LoginButton loginBtn = new LoginButton("");
+		loginBtn.setBounds(1050, 181, 115, 115);
 		add(loginBtn);
 
 		logoutBtn = new LogoutButton("로그아웃");
-		logoutBtn.setBounds(1044, 353, 144, 100);
+		logoutBtn.setBounds(1050, 331, 115, 115);
 		add(logoutBtn);
 
 		JLabel privacyLabel = new JLabel();
@@ -134,6 +155,12 @@ public class CustomerServicePanel extends ImagePanel {
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(203, 144, 802, 15);
 		add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("메인");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+		lblNewLabel_2.setBounds(37, 112, 38, 25);
+		add(lblNewLabel_2);
 		
 		
 	
