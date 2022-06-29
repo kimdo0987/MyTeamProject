@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +25,7 @@ import mypagepanel_comps.MyPageMainPanel7;
 import mypagepanel_comps.MyPageTabButton;
 import mypagepanel_comps.PaymentPanel;
 import java.awt.Font;
+import java.awt.Image;
 
 public class MyPagePanel extends ImagePanel {
 	
@@ -86,9 +90,41 @@ public class MyPagePanel extends ImagePanel {
 		btn1.setBounds(0, 172, 200, 60);
 		add(btn1);
 		
+		ImageIcon icon = new ImageIcon("images/homeButton.png");
+		Image img = icon.getImage();
+		// 창의 사이즈인 500,500에 맞춰서 이미지를 변경
+		Image changeImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon = new ImageIcon(changeImg);
+		
+		ImageIcon icon2 = new ImageIcon("images/homeButton2.png");
+		Image img2 = icon2.getImage();
+		Image changeImg2 = img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon2 = new ImageIcon(changeImg2);
+		
 		GoToButton mainBtn = new GoToButton("메인");
-		mainBtn.setBounds(12, 10, 106, 55);
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(changeIcon);
+		mainBtn.setBorderPainted(false);
+		mainBtn.setBounds(10, 10, 75, 75);
 		mainBtn.setBackground(Color.WHITE);
+		mainBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.myPagePanel.setVisible(false);
+			}
+		});
+		
+		mainBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mainBtn.setIcon(changeIcon2);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				mainBtn.setIcon(changeIcon);
+			}
+		});
 		add(mainBtn);		
 		
 		JLabel lbl1 = new JLabel("내 수강");
