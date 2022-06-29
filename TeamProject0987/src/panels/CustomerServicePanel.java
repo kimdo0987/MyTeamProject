@@ -1,18 +1,19 @@
 package panels;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import buttons.GoToButton;
+import buttons.LoginButton;
 import buttons.LogoutButton;
+import buttons.SignupButton;
 import labels.TopLabel;
-
-import java.awt.Color;
 
 public class CustomerServicePanel extends JPanel {
 	
-	public static GoToButton loginBtn;
+	public static LoginButton loginBtn;
 	public static LogoutButton logoutBtn;
 	
 	public CustomerServicePanel() {
@@ -39,11 +40,11 @@ public class CustomerServicePanel extends JPanel {
 		road.setBounds(741, 150, 192, 80);
 		add(road);
 		
-		GoToButton join = new GoToButton("회원가입");
+		SignupButton join = new SignupButton("회원가입");
 		join.setBounds(331, 660, 153, 100 );
 		add(join);
 		
-		loginBtn = new GoToButton ("로그인");
+		loginBtn = new LoginButton ("로그인");
 		loginBtn.setBounds(645, 660, 144, 100);
 		add(loginBtn);
 		
