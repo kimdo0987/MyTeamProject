@@ -28,7 +28,6 @@ import panels.MainPanel;
 
 public class MyPageMainPanel6 extends ImagePanel {
 
-
 	MpChangePanel mpPanel = new MpChangePanel();
 	public static String pw;
 	public static String inputPw;
