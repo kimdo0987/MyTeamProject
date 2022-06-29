@@ -88,6 +88,7 @@ public class LectureTable extends JPanel {
 		table.getColumnModel().getColumn(3).setMinWidth(80);
 		table.getColumnModel().getColumn(3).setMaxWidth(80);
 		
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.setRowHeight(30);
 		table.setShowVerticalLines(false);
 		
@@ -147,7 +148,9 @@ public class LectureTable extends JPanel {
 							
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
+
 							LectureInfoPanel1.detailInfoLabel.setText("\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
+
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							
@@ -156,8 +159,7 @@ public class LectureTable extends JPanel {
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
 							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
 							LectureInfoPanel.lectureTime = (rs.getString("timetable"));
-							
-							
+	
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();

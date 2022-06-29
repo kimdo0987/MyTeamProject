@@ -67,7 +67,7 @@ public class LectureTable3 extends JPanel {
 		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
-		
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.setEnabled(false);
 		
 		table.setPreferredScrollableViewportSize(new Dimension(700, 600));
