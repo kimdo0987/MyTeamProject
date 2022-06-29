@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import buttons.WishButton;
 import database.OjdbcConnection;
 import labels.TopLabel;
 import methods.RestrictTextLength;
@@ -69,79 +70,79 @@ public class MyPageMainPanel7 extends ImagePanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(null, "정말 탈퇴하시겠습니까?", "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
+//				JOptionPane.showMessageDialog(null, "정말 탈퇴하시겠습니까?", "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
+				
+				int logoutBtnresult = JOptionPane.showConfirmDialog(MainPanel.thisFrame, "정말 탈퇴하시겠습니까?","Message",
+						JOptionPane.OK_CANCEL_OPTION, 1);
+				
 				
 				// currUserId에 해당하는 member_password 가 현재 pwText가 맞다면 -> 탈퇴진행
-				
-				try (Connection conn = OjdbcConnection.getConnection();
-						PreparedStatement pstmt1 = conn
-								.prepareStatement("SELECT member_password FROM members "
-												+ "WHERE member_id = ?");) {
-					pstmt1.setString(1, MainPanel.currUserId);
-					ResultSet rs1 = pstmt1.executeQuery();
-
-					while (rs1.next()) {
-						searchPw = rs1.getString(1);
-					}
+				if (logoutBtnresult == 0) {
 					
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				
-				if (searchPw == null) {		// nullPointer 오류 잡기
-					searchPw = "";
-				}
-				
-				if (searchPw.equals(pwText)) {
-					JOptionPane.showMessageDialog(null, "탈퇴가 완료되었습니다. \r\n이용해주셔서 감사합니다."			// 탈퇴멘트
-									, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
-
-					
-					String sql1 = "DELETE FROM members WHERE member_id = ?";
-					String sql2 = "DELETE FROM favorite_category WHERE member_id = ?";
-					try (Connection conn = OjdbcConnection.getConnection();					// 데이터 삭제완료
-							PreparedStatement pstmt = conn.prepareStatement(sql1);
-							PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-					){
-						conn.setAutoCommit(false);
-						pstmt.setString(1, MainPanel.currUserId);
-						pstmt.executeQuery();
-						System.out.println("members 테이블에있는 탈퇴한 회원정보 삭제");
+					try (Connection conn = OjdbcConnection.getConnection();
+							PreparedStatement pstmt1 = conn
+									.prepareStatement("SELECT member_password FROM members "
+											+ "WHERE member_id = ?");) {
+						pstmt1.setString(1, MainPanel.currUserId);
+						ResultSet rs1 = pstmt1.executeQuery();
 						
-						pstmt2.setString(1, MainPanel.currUserId);
-						pstmt2.executeQuery();
-						conn.commit();
-						System.out.println("favorite_category 테이블에있는 탈퇴한 회원정보 삭제, 커밋 완료");
+						while (rs1.next()) {
+							searchPw = rs1.getString(1);
+						}
+						
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
+					
+					if (searchPw == null) {		// nullPointer 오류 잡기
+						searchPw = "";
+					}
+					
+					if (searchPw.equals(pwText)) {
+						JOptionPane.showMessageDialog(null, "탈퇴가 완료되었습니다. \r\n이용해주셔서 감사합니다."			// 탈퇴멘트
+								, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
+						
+						
+						String sql1 = "DELETE FROM members WHERE member_id = ?";
+						try (Connection conn = OjdbcConnection.getConnection();					// 데이터 삭제완료
+								PreparedStatement pstmt = conn.prepareStatement(sql1);
+								){
+							conn.setAutoCommit(false);
+							pstmt.setString(1, MainPanel.currUserId);
+							pstmt.executeQuery();
+							
+							conn.commit();
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
 //					커밋 시켜주기
+						
+						// currUserId 비워주기
+						MainPanel.currUserId = "logout";
+						
+						// 입력했던 비밀번호 textfield와 그걸받은 값을 다시비워주기
+						pwInput.setText("");
+						pwText = "";
+						
+						// 로그아웃버튼  -> 로그인 버튼으로 만들어주기
+						MainPanel.loginBtn.setVisible(true);
+						MainPanel.logoutBtn.setVisible(false);
+						
+						CustomerServicePanel.loginBtn.setVisible(false);
+						CustomerServicePanel.logoutBtn.setVisible(true);
+						
+						// 메인페이지로 설정해주기
+						MainPanel.currPanel.setVisible(false);
+						MainPanel.mainPanel.setVisible(true);			
+						//이전 페이지가 없기 때문에 이전페이지설정 안함
+						MainPanel.currPanel = MainPanel.mainPanel;
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. \r\n다시 확인해주세요."
+								, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
+					}
 					
-					// currUserId 비워주기
-					MainPanel.currUserId = "logout";
-					
-					// 입력했던 비밀번호 textfield와 그걸받은 값을 다시비워주기
-					pwInput.setText("");
-					pwText = "";
-					
-					// 로그아웃버튼  -> 로그인 버튼으로 만들어주기
-					MainPanel.loginBtn.setVisible(true);
-					MainPanel.logoutBtn.setVisible(false);
-					
-					CustomerServicePanel.loginBtn.setVisible(false);
-					CustomerServicePanel.logoutBtn.setVisible(true);
-					
-					// 메인페이지로 설정해주기
-					MainPanel.currPanel.setVisible(false);
-					MainPanel.mainPanel.setVisible(true);			
-					//이전 페이지가 없기 때문에 이전페이지설정 안함
-					MainPanel.currPanel = MainPanel.mainPanel;
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. \r\n다시 확인해주세요."
-							, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
-				}
-				
+				} 
 				
 			}
 		});
