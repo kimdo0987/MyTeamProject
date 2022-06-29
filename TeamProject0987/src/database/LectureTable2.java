@@ -3,6 +3,7 @@ package database;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import LectureInfoPanel_comps.LectureInfoPanel1;
 import LectureInfoPanel_comps.LectureInfoPanel3;
@@ -49,6 +51,14 @@ public class LectureTable2 extends JPanel {
 		};
 		
 		JTable table = new JTable(mod);
+		
+		//테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		
+		//컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 17);
+		tableHeader.setFont(headerFont);
 		
 		MyRenderer cellRenderer = new MyRenderer();
 		table.addMouseMotionListener(new MouseMotionAdapter(){
@@ -129,7 +139,7 @@ public class LectureTable2 extends JPanel {
 
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
-							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
+							LectureInfoPanel1.detailInfoLabel.setText("\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							

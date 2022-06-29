@@ -1,6 +1,7 @@
 package LectureInfoPanel_comps;
 
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -8,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import database.GetLectureComments;
 import panels.LectureSearchPanel;
@@ -49,7 +51,14 @@ public class LectureInfoPanel2 extends JPanel {
 		
 		add(table);
 		
-		
+		// 테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+
+		// 컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 17);
+		tableHeader.setFont(headerFont);
+
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 730, 500);
