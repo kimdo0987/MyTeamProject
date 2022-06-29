@@ -16,6 +16,13 @@ public class MpChangePanel extends JPanel {
 	public MpChangePanel() {
 		setOpaque(false);
 		setBackground(Color.DARK_GRAY);
+		
+		mpLayout = new CardLayout();
+		mpPanel = new JPanel();
+		mpPanel1 = new MpPwChangePanel();
+		mpPanel0 = new MyProfilePanel();
+		mpPanel2 = new MpPhoneNumChangePanel();
+		mpPanel3 = new MpEmailChangePanel();
 
 		setBounds(0, 58, 730, 511);
 		setLayout(null);
