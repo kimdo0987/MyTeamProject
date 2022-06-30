@@ -74,7 +74,13 @@ public class PwSearchPanel extends ImagePanel {
 		setLayout(null);
 		
 		JButton lastPageBtn = new JButton("이전");
-		lastPageBtn.setBounds(23, 36, 70, 44);
+		
+		lastPageBtn.setBounds(135, 29, 95, 95);
+		lastPageBtn.setBorderPainted(false);
+		lastPageBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		lastPageBtn.setIcon(new ImageIcon("images/backBtn.png"));
+		lastPageBtn.setRolloverIcon(new ImageIcon("images/backBtn2.png"));
+	
 		add(lastPageBtn);
 		lastPageBtn.addActionListener(new ActionListener() {
 			
@@ -89,13 +95,11 @@ public class PwSearchPanel extends ImagePanel {
 		
 		GoToButton mainBtn = new GoToButton("메인");
 		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-		mainBtn.setIcon(changemainIcon);
+		mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
+		mainBtn.setRolloverIcon(new ImageIcon("images/homeBtn2.png"));
 		mainBtn.setBorderPainted(false);
-		mainBtn.setBackground(Color.WHITE);
-		mainBtn.setBounds(105, 36, 40, 50);
-		mainBtn.setRolloverIcon(changeYMainIcon); //마우스 올렸을때 이미지 추가
-		
-		add(mainBtn);	
+		mainBtn.setBounds(40, 29, 95, 95);
+		add(mainBtn);
 		
 		TopLabel toplabel = new TopLabel("비밀번호 찾기");
 		add(toplabel);
