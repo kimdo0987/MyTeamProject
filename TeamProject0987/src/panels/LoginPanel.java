@@ -5,6 +5,7 @@ package panels;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -14,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,11 +29,10 @@ import methods.IdKeyAdaptor;
 import methods.PwKeyAdaptor;
 import methods.RestrictTextLength;
 
-public class LoginPanel extends JPanel {
+public class LoginPanel extends ImagePanel {
 	
 	//버튼,라벨,텍스트필드 생성완료
 
-//	static public String pwText;
 	static public String idText = "";
 	static public String searchPw;
 	private HintPasswordField pwInput;
@@ -40,9 +41,66 @@ public class LoginPanel extends JPanel {
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);
 		
+		
+		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
+		ImageIcon loginIcon = new ImageIcon("images/intackBtn/로그인.png");
+		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디조회버튼.png");
+		ImageIcon pwSearchIcon = new ImageIcon("images/intackBtn/비밀번호찾기버튼.png");
+		ImageIcon signInIcon = new ImageIcon("images/intackBtn/회원가입버튼.png");
+		
+		ImageIcon yLoginIcon = new ImageIcon("images/intackYellowBtn/노란로그인.png");
+		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
+		ImageIcon yPwSearchIcon = new ImageIcon("images/intackYellowBtn/노란비밀번호찾기.png");
+		ImageIcon ySignInIcon = new ImageIcon("images/intackYellowBtn/노란회원가입.png");
+		
+		
+		// 크기조정
+		Image img1 = mainIcon.getImage();
+		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon changemainIcon = new ImageIcon(changeImg1);
+
+		Image img2 = loginIcon.getImage();
+		Image changeImg2 = img2.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeloginIcon = new ImageIcon(changeImg2);
+		
+		Image img3 = idSearchIcon.getImage();
+		Image changeImg3 = img3.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeidSearchIcon = new ImageIcon(changeImg3);
+		
+		Image img4 = pwSearchIcon.getImage();
+		Image changeImg4 = img4.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
+		ImageIcon changepwSearchIcon = new ImageIcon(changeImg4);
+		
+		Image img5 = signInIcon.getImage();
+		Image changeImg5 = img5.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
+		ImageIcon changesignInIcon = new ImageIcon(changeImg5);
+		///////////////////////////////////////////////////////////////////////////
+		
+		
+		
+		// 노란이미지 크기조정중
+		Image img22 = loginIcon.getImage();
+		Image changeImg22 = img22.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeYLoginIcon = new ImageIcon(changeImg22);
+		
+		Image img33 = idSearchIcon.getImage();
+		Image changeImg33 = img33.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYIdSearchIcon = new ImageIcon(changeImg33);
+		
+		Image img44 = pwSearchIcon.getImage();
+		Image changeImg44 = img44.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYPwSearchIcon = new ImageIcon(changeImg44);
+		
+		Image img55 = signInIcon.getImage();
+		Image changeImg55 = img55.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYSignInIcon = new ImageIcon(changeImg55);
+		
+		
+		
+//		loginCenter.setBounds(400, 200, 100, 50);
 		//////////////// 여기서부터 클래스화 할수있을거같음 //////////////////////////
 		JButton lastPageBtn = new JButton("이전");
-		lastPageBtn.setBounds(12, 9, 70, 44);
+		lastPageBtn.setBounds(23, 36, 70, 44);
 		add(lastPageBtn);
 		lastPageBtn.addActionListener(new ActionListener() {			
 			@Override
@@ -64,7 +122,12 @@ public class LoginPanel extends JPanel {
 		
 		
 		GoToButton mainBtn = new GoToButton("메인");
-		mainBtn.setBounds(97, 9, 64, 44);
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(changemainIcon);
+		mainBtn.setBorderPainted(false);
+		mainBtn.setBounds(105, 36, 40, 50);
+		
+		mainBtn.setBackground(Color.WHITE);
 		add(mainBtn);
 		mainBtn.addActionListener(new ActionListener() {
 			
@@ -84,6 +147,8 @@ public class LoginPanel extends JPanel {
 		
 		JLabel loginCenter = new JLabel("로그인");
 		add(loginCenter);
+		loginCenter.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
+		loginCenter.setForeground(Color.WHITE);
 		loginCenter.setBounds(400, 200, 100, 50);
 		
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
@@ -116,6 +181,12 @@ public class LoginPanel extends JPanel {
 		
 
 		JButton loginBtn = new JButton("로그인");
+		loginBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		loginBtn.setIcon(changeloginIcon);
+		loginBtn.setBorderPainted(false);
+//		loginBtn.setRolloverIcon(lectureSearchBtn1_img); //마우스 올렸을때 이미지 추가
+		
+		loginBtn.setBackground(Color.WHITE);
 		add(loginBtn);
 		loginBtn.setBounds(450, 350, 200, 50);
 		
@@ -152,7 +223,7 @@ public class LoginPanel extends JPanel {
 					MainPanel.mainPanel.setVisible(true);
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
-					MainPanel.currUserId = idText;
+					MainPanel.currUserId = idInput.getText().toString();
 
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);
@@ -185,6 +256,11 @@ public class LoginPanel extends JPanel {
 		JButton findId = new JButton("아이디찾기");
 		add(findId);
 		findId.setBounds(339, 430, 150, 35);
+		findId.setFont(new Font("굴림", Font.PLAIN, 0));
+		findId.setIcon(changeidSearchIcon);
+		findId.setBorderPainted(false);
+		
+		findId.setBackground(Color.WHITE);
 		findId.addActionListener(new ActionListener() {		
 			
 			@Override
@@ -202,6 +278,11 @@ public class LoginPanel extends JPanel {
 		JButton findPwBtn = new JButton("비밀번호찾기");
 		add(findPwBtn);
 		findPwBtn.setBounds(500, 430, 150, 35);
+		findPwBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		findPwBtn.setIcon(changepwSearchIcon);
+		findPwBtn.setBorderPainted(false);
+		
+		findPwBtn.setBackground(Color.WHITE);
 		findPwBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -215,10 +296,14 @@ public class LoginPanel extends JPanel {
 				
 			}
 		});
-		
+
 		SignupButton signUp = new SignupButton("회원가입");
 		add(signUp);
 		signUp.setBounds(661, 430, 150, 35);
+		signUp.setFont(new Font("굴림", Font.PLAIN, 0));
+		signUp.setIcon(changesignInIcon);
+		signUp.setBorderPainted(false);
 		
+		signUp.setBackground(Color.WHITE);
 	}
 }

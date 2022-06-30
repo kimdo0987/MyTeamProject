@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import labels.TopLabel;
 import panels.ImagePanel;
@@ -79,7 +80,13 @@ public class MyPageMainPanel5 extends ImagePanel {
 		table.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
 		table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
 
-		
+		// 테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+
+		// 컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
+		tableHeader.setFont(headerFont);
 		
 		//테이블 생성에 관한 내용
 		table.setFillsViewportHeight(true);

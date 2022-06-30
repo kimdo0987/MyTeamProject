@@ -41,7 +41,7 @@ public class SignupPanel extends ImagePanel {
 	private HintPasswordField rePwField;
 	private JTextField insertNameField;
 	private JTextField insertJNum1Field;
-	private JTextField insertJNum2Field;
+	private JPasswordField insertJNum2Field;
 	private JTextField insertPhoneNumField1;
 	private JTextField insertPhoneNumField2;
 	private JTextField insertPhoneNumField3;
@@ -73,8 +73,11 @@ public class SignupPanel extends ImagePanel {
 		mainBtn.setBounds(97, 9, 64, 44);
 		add(mainBtn);		
 		
-		TopLabel toplabel = new TopLabel("회원 가입");
-		add(toplabel);		
+		JLabel lblTeamname = new JLabel("회원 가입");
+		lblTeamname.setFont(new Font("배달의민족 도현", Font.BOLD, 39));
+		lblTeamname.setForeground(Color.WHITE);
+		lblTeamname.setBounds(475, 28, 170, 62);
+		add(lblTeamname);
 		
 		
 		
@@ -82,15 +85,17 @@ public class SignupPanel extends ImagePanel {
 		JLabel idMsgLabel = new JLabel("");
 		idMsgLabel.setVisible(true);
 		idMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		idMsgLabel.setBounds(202, 143, 276, 32);
+		idMsgLabel.setBounds(431, 143, 276, 32);
 		add(idMsgLabel);
 
 		createIdField = new HintTextField("4~16 이내 영문숫자조합");
-		createIdField.setBounds(202, 99, 276, 44);
+		createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+		createIdField.setBounds(431, 99, 253, 44);
 		createIdField.addKeyListener(new RestrictTextLength(createIdField, 16)); // 글자수제한
 		createIdField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) { // keyTyped에서 한글입력 막기
+				createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
 				if ((!Pattern.matches("\\w", "" + e.getKeyChar()) || e.getKeyChar() == '_')) {
 					e.consume(); // 이벤트 소멸(무시)하기
 				}
@@ -127,7 +132,7 @@ public class SignupPanel extends ImagePanel {
 					idMsgLabel.setText("아이디는 4글자 이상이여야 합니다");
 				} else if (Pattern.matches("\\w*", msg) && msg.length() < 17 && msg.length() > 3) {
 					if (!idMsgLabel.getText().equals("중복확인완료")) { // 완료된상태에서는 안바뀌게
-						idMsgLabel.setForeground(new Color(0, 128, 0)); // 초록색
+						idMsgLabel.setForeground(new Color(153, 255, 153)); // 초록색
 						idMsgLabel.setText("사용가능한 형식입니다 (중복확인을 해주세요)");
 					}
 				}
@@ -139,7 +144,9 @@ public class SignupPanel extends ImagePanel {
 		createIdField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
+				createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
 				if (createIdField.getText().equals("4~16 이내 영문숫자조합")) {
+					createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
 					idMsgLabel.setForeground(Color.red);
 					idMsgLabel.setText("필수 정보입니다");
 				} else {
@@ -147,13 +154,18 @@ public class SignupPanel extends ImagePanel {
 				}
 			}
 
+			@Override
+			public void focusGained(FocusEvent e) {
+				createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+				
+			}
 		});
 
 		add(createIdField);
 		
 		/////////////////// 중복 확인 /////////////////////////////
 		JButton idCheckBtn = new JButton("중복확인");
-		idCheckBtn.setBounds(490, 99, 87, 44);
+		idCheckBtn.setBounds(699, 98, 87, 44);
 		idCheckBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -199,29 +211,37 @@ public class SignupPanel extends ImagePanel {
 		////////////////////비밀번호 생성조건 ///////////////////////////////////
 		JLabel pwMsgLabel = new JLabel("");
 		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		pwMsgLabel.setBounds(202, 235, 276, 43);
+		pwMsgLabel.setBounds(431, 235, 276, 43);
 		add(pwMsgLabel);
 		
 		JLabel rePwMsgLabel = new JLabel("");
 		rePwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		rePwMsgLabel.setBounds(202, 325, 276, 43);
+		rePwMsgLabel.setBounds(431, 325, 276, 43);
 		add(rePwMsgLabel);
 		
 		createPwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
-		createPwField.setFont(new Font("굴림", Font.PLAIN, 16));
-		createPwField.setBounds(202, 190, 276, 49);
+		createPwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+		createPwField.setBounds(431, 190, 253, 49);
 		createPwField.addKeyListener(new RestrictTextLength(createPwField, 12)); //글자수제한
 		
+		
 		rePwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
-		rePwField.setFont(new Font("굴림", Font.PLAIN, 16));
-		rePwField.setBounds(202, 280, 276, 49);
+		rePwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+		rePwField.setBounds(431, 280, 253, 49);
 		rePwField.addKeyListener(new RestrictTextLength(rePwField, 12)); //글자수제한
 		
 		createPwField.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				createPwField.setEchoChar('*');
+				super.keyPressed(e);
+			}			
+
 			public void keyReleased(KeyEvent e) {     
 				
 				String msg = String.valueOf(createPwField.getPassword());
-				
+				createPwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				if (!Pattern.matches("[!-~]", "" + e.getKeyChar())) { // 특수문자,영어,숫자 이외의 문자는 입력안됨
 					e.consume(); // 이벤트 소멸(무시)하기
 				}
@@ -234,23 +254,32 @@ public class SignupPanel extends ImagePanel {
 					pwMsgLabel.setForeground(Color.red);
 					pwMsgLabel.setText("사용 불가능한 문자가 포함되어 있습니다");
 				} else if (Pattern.matches("[!-~]*", msg) && msg.length() < 13 && msg.length() > 7) {
-					pwMsgLabel.setForeground(new Color(0, 128, 0)); // 초록색
+					pwMsgLabel.setForeground(new Color(153, 255, 153)); // 초록색
 					pwMsgLabel.setText("사용가능한 비밀번호입니다");
 				}
 				if (!msg.equals(String.valueOf(rePwField.getPassword()))) {
 					rePwMsgLabel.setForeground(Color.red);
 					rePwMsgLabel.setText("비밀번호가 일치하지 않습니다");
 				} else {
-					rePwMsgLabel.setForeground(new Color(0, 128, 0));
+					rePwMsgLabel.setForeground(new Color(153, 255, 153));
 					rePwMsgLabel.setText("비밀번호가 같게 입력되었습니다");
 				}
 			}
 		});
 
 		createPwField.addFocusListener(new FocusAdapter() {
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				createPwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+				super.focusGained(e);
+			}
+			
 			@Override
 			public void focusLost(FocusEvent e) {
+				createPwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				if ((String.valueOf(createPwField.getPassword())).equals("8~12 이내 영문숫자특문조합")) {
+					createPwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
 					pwMsgLabel.setForeground(Color.red);
 					pwMsgLabel.setText("필수 정보입니다");
 				} else {
@@ -268,6 +297,12 @@ public class SignupPanel extends ImagePanel {
 
 		
 		rePwField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				rePwField.setEchoChar('*');
+				super.keyPressed(e);
+			}
+			
 			public void keyReleased(KeyEvent e) {   
 				
 				String msg = String.valueOf(rePwField.getPassword());
@@ -282,7 +317,7 @@ public class SignupPanel extends ImagePanel {
 					rePwMsgLabel.setText("사용 불가능한 문자가 포함되어 있습니다");
 				} else if ((Pattern.matches("[!-~]*", msg)) && msg.equals(String.valueOf(createPwField.getPassword()))
 						&& msg.length() < 13 && msg.length() > 7) {
-					rePwMsgLabel.setForeground(new Color(0, 128, 0)); // 초록색
+					rePwMsgLabel.setForeground(new Color(153, 255, 153)); // 초록색
 					rePwMsgLabel.setText("비밀번호가 같게 입력되었습니다");
 				} else if (!msg.equals(String.valueOf(createPwField.getPassword()))) {
 					rePwMsgLabel.setForeground(Color.red);
@@ -294,13 +329,21 @@ public class SignupPanel extends ImagePanel {
 		});
 
 		rePwField.addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				rePwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+			}
+
 			@Override
 			public void focusLost(FocusEvent e) {
+				rePwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				String msg = String.valueOf(rePwField.getPassword());
 				if (!msg.equals(String.valueOf(createPwField.getPassword()))) {
 					rePwMsgLabel.setForeground(Color.red);
 					rePwMsgLabel.setText("비밀번호가 일치하지 않습니다");
-				} else {
+				} else if(msg.equals("8~12 이내 영문숫자특문조합")){
+					rePwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
 
 				}
 			}
@@ -312,24 +355,25 @@ public class SignupPanel extends ImagePanel {
 		//////////////////////// 이름 입력 조건 ///////////////////////////////////
 		JLabel insertNameLabel = new JLabel("이름");
 		insertNameLabel.setForeground(Color.WHITE);
-		insertNameLabel.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertNameLabel.setBounds(156, 365, 37, 44);
+		insertNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		insertNameLabel.setBounds(376, 365, 46, 44);
 		add(insertNameLabel);
 		
 		JLabel nameMsgLabel = new JLabel();
 		nameMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		nameMsgLabel.setBounds(201, 404, 276, 32);
+		nameMsgLabel.setBounds(430, 404, 276, 32);
 		add(nameMsgLabel);
 		
 		insertNameField = new JTextField();
 		insertNameField.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertNameField.setBounds(201, 365, 276, 44);
+		insertNameField.setBounds(431, 365, 253, 44);
 
 		insertNameField.addKeyListener(new RestrictTextLength(insertNameField, 14));
 		insertNameField.addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
+				insertNameField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				String msg = insertNameField.getText();
 				if (!(Pattern.matches("[A-Za-z]", "" + e.getKeyChar())
 						|| ('가' <= e.getKeyChar()) && (e.getKeyChar() <= '힣')) || e.getKeyChar() == '_') {
@@ -344,17 +388,21 @@ public class SignupPanel extends ImagePanel {
 
 		insertNameField.addFocusListener(new FocusAdapter() {
 			@Override
+			public void focusGained(FocusEvent e) {
+				insertNameField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));			
+			}
+			
+			@Override
 			public void focusLost(FocusEvent e) {
+				insertNameField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				if (insertNameField.getText().equals("")) {
 					nameMsgLabel.setForeground(Color.red);
 					nameMsgLabel.setText("필수 정보입니다");
 				} else {
-					nameMsgLabel.setForeground(new Color(0, 128, 0));
+					nameMsgLabel.setForeground(new Color(153, 255, 153));
 					nameMsgLabel.setText("입력완료");
 				}
-
 			}
-
 		});
 		add(insertNameField);
 		
@@ -362,25 +410,32 @@ public class SignupPanel extends ImagePanel {
 		
 		JLabel insertJNum1Label = new JLabel("주민번호");
 		insertJNum1Label.setForeground(Color.WHITE);
-		insertJNum1Label.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertJNum1Label.setBounds(127, 522, 64, 44);
+		insertJNum1Label.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		insertJNum1Label.setBounds(345, 522, 75, 44);
 		add(insertJNum1Label);
 		
 		JLabel JNumMsgLabel = new JLabel();
 		JNumMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		JNumMsgLabel.setBounds(193, 561, 276, 32);
+		JNumMsgLabel.setBounds(431, 561, 276, 32);
 		add(JNumMsgLabel);
 		
 		insertJNum1Field = new JTextField();
 		insertJNum1Field.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertJNum1Field.setBounds(193, 522, 121, 44);
+		insertJNum1Field.setBounds(431, 522, 105, 44);
 		insertJNum1Field.addKeyListener(new RestrictTextLength(insertJNum1Field, 6)); //글자수제한
 		insertJNum1Field.addKeyListener(new OnlyNumKeyAdaptor());
 		insertJNum1Field.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				insertJNum1Field.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));			
+			}
+			
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if ((insertJNum1Field.getText() + insertJNum2Field.getText()).length() == 13) {
-					JNumMsgLabel.setForeground(new Color(0, 128, 0));
+					JNumMsgLabel.setForeground(new Color(153, 255, 153));
 					JNumMsgLabel.setText("입력완료");
 				} else {
 					JNumMsgLabel.setForeground(Color.red);
@@ -396,14 +451,22 @@ public class SignupPanel extends ImagePanel {
 		
 		insertJNum2Field = new JPasswordField();
 		insertJNum2Field.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertJNum2Field.setBounds(350, 522, 127, 44);
+		insertJNum2Field.setBounds(569, 522, 115, 44);
 		insertJNum2Field.addKeyListener(new RestrictTextLength(insertJNum2Field, 7)); //글자수제한
 		insertJNum2Field.addKeyListener(new OnlyNumKeyAdaptor());
 		insertJNum2Field.addKeyListener(new KeyAdapter() {
+			
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				insertJNum2Field.setEchoChar('*');
+				insertJNum2Field.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));			
+			}
+			
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if ((insertJNum1Field.getText() + insertJNum2Field.getText()).length() == 13) {
-					JNumMsgLabel.setForeground(new Color(0, 128, 0));
+					JNumMsgLabel.setForeground(new Color(153, 255, 153));
 					JNumMsgLabel.setText("입력완료");
 				} else {
 					JNumMsgLabel.setForeground(Color.red);
@@ -418,12 +481,17 @@ public class SignupPanel extends ImagePanel {
 		
 		insertJNum1Field.addFocusListener(new FocusAdapter() {
 			@Override
+			public void focusGained(FocusEvent e) {
+				insertJNum1Field.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+			}
+			@Override
 			public void focusLost(FocusEvent e) {
-				if ((insertJNum1Field.getText() + insertJNum2Field.getText()).length() != 13) {
+				insertJNum1Field.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+				if ((insertJNum1Field.getText().length() + (insertJNum2Field.getPassword().length))!= 13) {
 					JNumMsgLabel.setForeground(Color.red);
 					JNumMsgLabel.setText("주민번호를 올바르게 입력해 주세요");
 				} else {
-					JNumMsgLabel.setForeground(new Color(0, 128, 0));
+					JNumMsgLabel.setForeground(new Color(153, 255, 153));
 					JNumMsgLabel.setText("입력완료");
 				}
 
@@ -434,12 +502,18 @@ public class SignupPanel extends ImagePanel {
 		
 		insertJNum2Field.addFocusListener(new FocusAdapter() {
 			@Override
+			public void focusGained(FocusEvent e) {
+				insertJNum2Field.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+			
+			}
+			@Override
 			public void focusLost(FocusEvent e) {
+				insertJNum2Field.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				if ((insertJNum1Field.getText() + insertJNum2Field.getText()).length() != 13) {
 					JNumMsgLabel.setForeground(Color.red);
 					JNumMsgLabel.setText("주민번호를 올바르게 입력해 주세요");
 				} else {
-					JNumMsgLabel.setForeground(new Color(0, 128, 0));
+					JNumMsgLabel.setForeground(new Color(153, 255, 153));
 					JNumMsgLabel.setText("입력완료");
 				}
 
@@ -451,23 +525,23 @@ public class SignupPanel extends ImagePanel {
 		
 		JLabel insertPhoneNumLabel = new JLabel("전화번호");
 		insertPhoneNumLabel.setForeground(Color.WHITE);
-		insertPhoneNumLabel.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumLabel.setBounds(127, 439, 64, 44);
+		insertPhoneNumLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		insertPhoneNumLabel.setBounds(345, 439, 75, 44);
 		add(insertPhoneNumLabel);
 		
 		JLabel hyphenLabel = new JLabel("-");
+		hyphenLabel.setForeground(new Color(255, 255, 255));
 		hyphenLabel.setFont(new Font("굴림", Font.PLAIN, 16));
-		hyphenLabel.setBounds(329, 522, 30, 44);
+		hyphenLabel.setBounds(548, 522, 30, 44);
 		add(hyphenLabel);
 		
 		JLabel phoneMsgLabel = new JLabel();
 		phoneMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
-		phoneMsgLabel.setBounds(201, 474, 276, 43);
+		phoneMsgLabel.setBounds(430, 474, 276, 43);
 		add(phoneMsgLabel);
 		
-		insertPhoneNumField1 = new JTextField();
-		insertPhoneNumField1.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumField1.setBounds(201, 439, 39, 44);
+		insertPhoneNumField1 = new JTextField();		
+		insertPhoneNumField1.setBounds(431, 439, 47, 44);
 		insertPhoneNumField1.addKeyListener(new RestrictTextLength(insertPhoneNumField1, 3));//글자수 3자로 제한
 		insertPhoneNumField1.addKeyListener(new OnlyNumKeyAdaptor()); //숫자만 입력가능, 복붙차단
 		
@@ -476,19 +550,25 @@ public class SignupPanel extends ImagePanel {
 		
 		insertPhoneNumField2 = new JTextField();
 		insertPhoneNumField2.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumField2.setBounds(261, 439, 52, 44);
+		insertPhoneNumField2.setBounds(505, 439, 70, 44);
 		insertPhoneNumField2.addKeyListener(new RestrictTextLength(insertPhoneNumField2, 4));//글자수 4자로제한
 		insertPhoneNumField2.addKeyListener(new OnlyNumKeyAdaptor()); //숫자만 입력가능, 복붙차단
 		add(insertPhoneNumField2);
 		
 		insertPhoneNumField3 = new JTextField();
 		insertPhoneNumField3.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumField3.setBounds(336, 439, 52, 44);
+		insertPhoneNumField3.setBounds(598, 439, 70, 44);
 		insertPhoneNumField3.addKeyListener(new RestrictTextLength(insertPhoneNumField3, 4));//글자수 4자로제한
 		insertPhoneNumField3.addKeyListener(new OnlyNumKeyAdaptor()); //숫자만 입력가능, 복붙차단
 		add(insertPhoneNumField3);
 		
 		KeyListener phoneNumKeyAdapter = new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				insertPhoneNumField1.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+				insertPhoneNumField2.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+				insertPhoneNumField3.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -497,7 +577,7 @@ public class SignupPanel extends ImagePanel {
 					phoneMsgLabel.setForeground(Color.red);
 					phoneMsgLabel.setText("전화번호를 정확히 입력해 주세요");
 				} else {
-					phoneMsgLabel.setForeground(new Color(0, 128, 0));
+					phoneMsgLabel.setForeground(new Color(153, 255, 153));
 					phoneMsgLabel.setText("입력완료");
 				}
 			}
@@ -529,24 +609,24 @@ public class SignupPanel extends ImagePanel {
 		
 		JLabel mailMsgLabel = new JLabel("example@gmail.com 형식으로 입력해주세요");
 		mailMsgLabel.setForeground(Color.WHITE);
-		mailMsgLabel.setBounds(193, 631, 325, 43);
+		mailMsgLabel.setBounds(431, 631, 325, 43);
 		mailMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
 		add(mailMsgLabel);
 		
 		JTextField insertMailField = new JTextField("");
 		insertMailField.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertMailField.setBounds(193, 596, 132, 44);
+		insertMailField.setBounds(431, 595, 114, 44);
 		
 		JTextField domainField = new JTextField("");
 		domainField.setFont(new Font("굴림", Font.PLAIN, 16));
-		domainField.setBounds(350, 596, 132, 44);
+		domainField.setBounds(579, 595, 105, 44);
 		add(domainField);
 		
 		insertMailField.addKeyListener(new RestrictTextLength(insertMailField, 20));
 		insertMailField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-
+				
 				if ((e.getKeyChar() != KeyEvent.VK_BACK_SPACE) && (e.getKeyChar() != KeyEvent.VK_DELETE)
 						&& (e.getKeyCode() != 36) // END키 허용
 						&& (e.getKeyCode() != 35) // HOME키 허용
@@ -558,6 +638,7 @@ public class SignupPanel extends ImagePanel {
 			}
 			@Override
 			public void keyTyped(KeyEvent e) { // 타자칠때 숫자이외 방지용
+				insertMailField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				if (!((e.getKeyChar() >= '0' && e.getKeyChar() <= '9')
 						|| (e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z') || e.getKeyChar() == '_'
 						|| e.getKeyChar() == '-')) {
@@ -569,7 +650,7 @@ public class SignupPanel extends ImagePanel {
 			public void keyReleased(KeyEvent e) {
 				String email = insertMailField.getText()+"@"+domainField.getText();
 				if(Pattern.matches("\\w+@\\w+\\.[a-zA-Z]+(\\.[a-zA-Z]+)*", email)) {
-					mailMsgLabel.setForeground(new Color(0, 128, 0));
+					mailMsgLabel.setForeground(new Color(153, 255, 153));
 					mailMsgLabel.setText("입력완료");
 				} else {
 					mailMsgLabel.setForeground(Color.RED);
@@ -600,6 +681,7 @@ public class SignupPanel extends ImagePanel {
 
 			@Override
 			public void keyTyped(KeyEvent e) { // 타자칠때 영소문자 숫자 . 이외차단 
+				domainField.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
 				if (!((e.getKeyChar() >= '0' && e.getKeyChar() <= '9')
 						|| (e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z') 
 						|| e.getKeyChar() == '.')) {
@@ -612,7 +694,7 @@ public class SignupPanel extends ImagePanel {
 			public void keyReleased(KeyEvent e) {
 				String email = insertMailField.getText()+"@"+domainField.getText();
 				if(Pattern.matches("\\w+@\\w+\\.[a-zA-Z]+(\\.[a-zA-Z]+)*", email)) {
-					mailMsgLabel.setForeground(new Color(0, 128, 0));
+					mailMsgLabel.setForeground(new Color(153, 255, 153));
 					mailMsgLabel.setText("입력완료");
 				} else {
 					mailMsgLabel.setForeground( Color.RED);
@@ -640,7 +722,8 @@ public class SignupPanel extends ImagePanel {
 		domainField.addFocusListener(mailFocusAdapter);
 		
 		JPanel cateBtnPanel = new JPanel();
-		cateBtnPanel.setBounds(642, 99, 400, 531);
+		cateBtnPanel.setBounds(888, 113, 160, 480);
+		cateBtnPanel.setOpaque(false);
 		add(cateBtnPanel);
 		cateBtnPanel.setLayout(new GridLayout(6,2));
 		
@@ -648,20 +731,20 @@ public class SignupPanel extends ImagePanel {
 		
 		cateBtnPanel.add(new CateButton("개발도구"));		
 		cateBtnPanel.add(new CateButton("게임개발"));
-		cateBtnPanel.add(new CateButton("교양,기타"));
-		cateBtnPanel.add(new CateButton("데브옵스/인프라"));
-		cateBtnPanel.add(new CateButton("데스크톱 앱 개발"));
+		cateBtnPanel.add(new CateButton("교양"));
+		cateBtnPanel.add(new CateButton("데브옵스"));
+		cateBtnPanel.add(new CateButton("데스크톱"));
 		cateBtnPanel.add(new CateButton("데이터베이스"));
-		cateBtnPanel.add(new CateButton("모바일 앱 개발"));
+		cateBtnPanel.add(new CateButton("모바일"));
 		cateBtnPanel.add(new CateButton("백엔드"));
-		cateBtnPanel.add(new CateButton("알고리즘/자료구조"));
-		cateBtnPanel.add(new CateButton("임베디드/IOT"));
+		cateBtnPanel.add(new CateButton("알고리즘"));
+		cateBtnPanel.add(new CateButton("임베디드"));
 		cateBtnPanel.add(new CateButton("프론트엔드"));
 		
 		
 		/////////////// 회원가입 완료 조건 /////////////////////////////////
 		JButton createBtn = new JButton("회원 가입 완료");
-		createBtn.setBounds(473, 700, 185, 38);
+		createBtn.setBounds(449, 699, 185, 38);
 		
 		createBtn.addActionListener(new ActionListener() {
 			@Override
@@ -772,46 +855,50 @@ public class SignupPanel extends ImagePanel {
 		/////////////// 항목 표시해주는 라벨 /////////////////////////////////
 		JLabel lblNewLabel = new JLabel("아이디");
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 15));
-		lblNewLabel.setBounds(138, 100, 52 , 43);
+		lblNewLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		lblNewLabel.setBounds(356, 100, 63 , 43);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("비밀번호");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(132, 194, 64, 43);
+		lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		lblNewLabel_1.setBounds(345, 194, 80, 43);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("비밀번호 재입력");
 		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setFont(new Font("굴림", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(77, 284, 121, 43);
+		lblNewLabel_1_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		lblNewLabel_1_1.setBounds(286, 284, 141, 43);
 		add(lblNewLabel_1_1);
 				
 		JLabel insertPhoneNumLabel_1 = new JLabel("이메일");
 		insertPhoneNumLabel_1.setForeground(Color.WHITE);
-		insertPhoneNumLabel_1.setFont(new Font("굴림", Font.PLAIN, 16));
-		insertPhoneNumLabel_1.setBounds(127, 596, 64, 44);
+		insertPhoneNumLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		insertPhoneNumLabel_1.setBounds(356, 596, 64, 44);
 		add(insertPhoneNumLabel_1);
 		
 		JLabel hyphenLabel_1 = new JLabel("-");
+		hyphenLabel_1.setForeground(new Color(255, 255, 255));
 		hyphenLabel_1.setFont(new Font("굴림", Font.PLAIN, 16));
-		hyphenLabel_1.setBounds(246, 439, 30, 44);
+		hyphenLabel_1.setBounds(490, 439, 30, 44);
 		add(hyphenLabel_1);
 		
 		JLabel hyphenLabel_2 = new JLabel("-");
+		hyphenLabel_2.setForeground(new Color(255, 255, 255));
 		hyphenLabel_2.setFont(new Font("굴림", Font.PLAIN, 16));
-		hyphenLabel_2.setBounds(318, 439, 16, 44);
+		hyphenLabel_2.setBounds(580, 439, 16, 44);
 		add(hyphenLabel_2);
 		
 		JLabel atLabel_3 = new JLabel("@");
+		atLabel_3.setForeground(new Color(255, 255, 255));
 		atLabel_3.setFont(new Font("굴림", Font.PLAIN, 16));
-		atLabel_3.setBounds(329, 595, 30, 44);
+		atLabel_3.setBounds(553, 596, 30, 44);
 		add(atLabel_3);
 		
 		JLabel lblNewLabel_2 = new JLabel("관심 분야를 골라 주세요 (선택사항)");
+		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setBounds(735, 639, 235, 24);
+		lblNewLabel_2.setBounds(862, 604, 235, 24);
 		add(lblNewLabel_2);
 		
 		
@@ -820,27 +907,33 @@ public class SignupPanel extends ImagePanel {
 
 //눌렀을때 카테고리 이름을 HashSet에 저장하고 색깔이 바뀌는 버튼
 class CateButton extends JButton {
-	 public CateButton(String name) {
-		 super.setText(name);
-		 setBackground(new Color(153, 153, 153));
-		 setSize(80,80);
-		// setIcon(new ImageIcon("images/"+imagePath[num])); //버튼에 맞는이미지 받아오기
-		 addActionListener(new ActionListener() {
-			
+
+	public CateButton(String name) {
+		super.setText(name);
+		setBackground(new Color(153, 153, 153));
+		setSize(80, 80);
+
+		// 버튼에 맞는이미지 받아오기
+		setIcon(new ImageIcon("images/" + name + ".png"));
+		//setPressedIcon(new ImageIcon("images/" + name + 2 + ".png"));
+		setFont(new Font("", Font.BOLD, 0));//버튼에 보여지는 글자크기 0 
+		
+		addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				if(getBackground().equals(new Color(153, 153, 153))) {//무색
-					setBackground(new Color(204,255,204));//초록
+
+				if (getBackground().equals(new Color(153, 153, 153))) {// 무색
+					setBackground(new Color(204, 255, 204));// 초록
 					SignupPanel.favCategories.add(name);
-					
-				} else if (getBackground().equals(new Color(204,255,204))) {//초록
-					setBackground(new Color(153, 153, 153));//무색
+					setIcon(new ImageIcon("images/" + name +2+ ".png"));
+
+				} else if (getBackground().equals(new Color(204, 255, 204))) {// 초록
+					setBackground(new Color(153, 153, 153));// 무색
 					SignupPanel.favCategories.remove(name);
+					setIcon(new ImageIcon("images/" + name + ".png"));
 				}
-				//System.out.println(SignupPanel.favCategories);
-				
+				// System.out.println(SignupPanel.favCategories);
+
 			}
 		});
 		 

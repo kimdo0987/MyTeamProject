@@ -3,6 +3,7 @@ package database;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -18,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import LectureInfoPanel_comps.LectureInfoPanel1;
 import LectureInfoPanel_comps.LectureInfoPanel3;
@@ -65,7 +67,7 @@ public class LectureTable3 extends JPanel {
 		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
-		
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.setEnabled(false);
 		
 		table.setPreferredScrollableViewportSize(new Dimension(700, 600));
@@ -92,6 +94,13 @@ public class LectureTable3 extends JPanel {
 //		} catch (ClassNotFoundException e4) {
 //			
 //		}
+
+		// 테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+
+		// 컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 17);
 		
 		table.setRowHeight(30); // 셀 높이 조정
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -136,7 +145,7 @@ public class LectureTable3 extends JPanel {
 							
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
-							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
+							LectureInfoPanel1.detailInfoLabel.setText("\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							

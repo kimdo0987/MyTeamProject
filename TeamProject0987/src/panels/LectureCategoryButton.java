@@ -21,11 +21,19 @@ public class LectureCategoryButton extends JButton {
 			"알고리즘.png","임베디드.png","교양.png"
 	};
 	
+	private static String [] imagePath2 = {
+			"개발도구2.png","게임개발2.png","프론트엔드2.png",
+			"데브옵스2.png","데스크톱2.png",
+			"데이터베이스2.png","모바일2.png","백엔드2.png",
+			"알고리즘2.png","임베디드2.png","교양2.png"
+	};
+	
 	public LectureCategoryButton (int num) {
 		this.num = num;
 		setText(category[num]);
 		setSize(80,80);
 		setIcon(new ImageIcon("images/"+imagePath[num]));
+		setRolloverIcon(new ImageIcon("images/"+imagePath2[num]));
 //		setBorderPainted(false);
 		setFont(new Font("", Font.BOLD, 0));
 		
