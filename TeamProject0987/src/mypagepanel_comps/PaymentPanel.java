@@ -44,7 +44,7 @@ public class PaymentPanel extends ImagePanel {
 		ImageIcon payChkBtnicon2 = new ImageIcon("images/mp3/paypanel/노란결제확인버튼.png");
 		Image payChkBtnimg2 = payChkBtnicon2.getImage();
 		Image payChkBtn2 = payChkBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-		MyPageTabButton payCheckButton = new MyPageTabButton(new ImageIcon(payChkBtn1));
+		JButton payCheckButton = new JButton(new ImageIcon(payChkBtn1));
 		payCheckButton.setFont(new Font("굴림", Font.PLAIN, 0));
 		payCheckButton.setBounds(586, 675, 294, 75);
 		payCheckButton.setBorder(BorderFactory.createEmptyBorder());
