@@ -36,7 +36,7 @@ public class GetLectureComments {
 				ratingSum = ratingSum += Integer.parseInt(rs.getString("rating"));
 				
 				list.add(new String[] {
-						rs.getString("member_id"),
+						rs.getString("member_id").substring(0,4)+"****",
 						rs.getString("comment_msg"),
 						rs.getString("rating")
 				});
