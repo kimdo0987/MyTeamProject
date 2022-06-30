@@ -44,14 +44,14 @@ public class LoginPanel extends ImagePanel {
 		
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
 		ImageIcon loginIcon = new ImageIcon("images/intackBtn/로그인.png");
-		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디조회버튼.png");
+		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디찾기버튼.png");
 		ImageIcon pwSearchIcon = new ImageIcon("images/intackBtn/비밀번호찾기버튼.png");
 		ImageIcon signInIcon = new ImageIcon("images/intackBtn/회원가입버튼.png");
 		
 		
 		ImageIcon yMainIcon = new ImageIcon("images/homebutton3.png");
 		ImageIcon yLoginIcon = new ImageIcon("images/intackYellowBtn/노란로그인.png");
-		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
+		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디찾기.png");
 		ImageIcon yPwSearchIcon = new ImageIcon("images/intackYellowBtn/노란비밀번호찾기.png");
 		ImageIcon ySignInIcon = new ImageIcon("images/intackYellowBtn/노란회원가입.png");
 		
