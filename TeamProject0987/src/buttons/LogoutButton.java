@@ -34,6 +34,17 @@ public class LogoutButton extends JButton {
 						JOptionPane.OK_CANCEL_OPTION, 1);
 				
 				if (logoutBtnresult == 0) {
+					
+					//패널에관한 내용
+					MainPanel.currPanel.setVisible(false);
+					MainPanel.mainPanel.setVisible(true);
+					MainPanel.lastPanel = MainPanel.currPanel;
+					MainPanel.currPanel = MainPanel.mainPanel;
+					
+					
+					
+					
+					//밑에부터는 버튼들에관한 내용
 					MainPanel.logoutBtn.setVisible(false);
 					MainPanel.loginBtn.setVisible(true);
 					
@@ -43,7 +54,10 @@ public class LogoutButton extends JButton {
 					
 					MainPanel.currUserId = "logout";
 					
-					System.out.println(MainPanel.currUserId);
+					// 회원가입 버튼 다시 보이게설정함
+					MainPanel.signUpBtn.setVisible(true);
+					CustomerServicePanel.join.setVisible(true);
+					
 				}
 				
 				
