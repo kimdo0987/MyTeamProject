@@ -3,13 +3,13 @@ package LectureInfoPanel_comps;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
+
+import panels.ImagePanel;
 
 // 상세정보 버튼을 누르면 등장하는 패널입니다.
 
-public class LectureInfoPanel1 extends JPanel {
+public class LectureInfoPanel1 extends ImagePanel {
 	
 	public static JTextArea detailInfoLabel = new JTextArea();
 	public LectureInfoPanel1() {
@@ -18,9 +18,9 @@ public class LectureInfoPanel1 extends JPanel {
 		setLayout(null);
 		detailInfoLabel.setEditable(false);
 		detailInfoLabel.setLineWrap(true);
-		detailInfoLabel.setBackground(Color.WHITE);
 		detailInfoLabel.setOpaque(true);
-		detailInfoLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
+		detailInfoLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
+		detailInfoLabel.setForeground(Color.WHITE);
 		detailInfoLabel.setBounds(0, 0, 786, 390);
 		add(detailInfoLabel);
 

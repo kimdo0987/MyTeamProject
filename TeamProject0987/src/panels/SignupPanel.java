@@ -2,6 +2,7 @@ package panels;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -55,7 +56,11 @@ public class SignupPanel extends ImagePanel {
 		
 		//////////////// 여기서부터 클래스화 할수있을거같음 //////////////////////////
 		JButton lastPageBtn = new JButton("이전");
-		lastPageBtn.setBounds(12, 9, 70, 44);
+		lastPageBtn.setBounds(135, 29, 95, 95);
+		lastPageBtn.setBorderPainted(false);
+		lastPageBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		lastPageBtn.setIcon(new ImageIcon("images/backBtn.png"));
+		lastPageBtn.setRolloverIcon(new ImageIcon("images/backBtn2.png"));
 		add(lastPageBtn);
 		lastPageBtn.addActionListener(new ActionListener() {
 			@Override
@@ -70,8 +75,13 @@ public class SignupPanel extends ImagePanel {
 		//////////////////////////////////////////////////////////////////
 		
 		GoToButton mainBtn = new GoToButton("메인");
-		mainBtn.setBounds(97, 9, 64, 44);
-		add(mainBtn);		
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
+		mainBtn.setRolloverIcon(new ImageIcon("images/homeBtn2.png"));
+		mainBtn.setBorderPainted(false);
+		mainBtn.setBounds(40, 29, 95, 95);
+		add(mainBtn);
+		
 		
 		JLabel lblTeamname = new JLabel("회원 가입");
 		lblTeamname.setFont(new Font("배달의민족 도현", Font.BOLD, 39));
@@ -165,7 +175,22 @@ public class SignupPanel extends ImagePanel {
 		
 		/////////////////// 중복 확인 /////////////////////////////
 		JButton idCheckBtn = new JButton("중복확인");
-		idCheckBtn.setBounds(699, 98, 87, 44);
+		
+		idCheckBtn.setFont(new Font("",Font.PLAIN,0));
+		
+		Image img3= (new ImageIcon("images/changeButton/중복확인버튼.png").getImage());
+		Image changeImg3 = img3.getScaledInstance(110, 50, Image.SCALE_SMOOTH);
+		ImageIcon idCheckIcon = new ImageIcon(changeImg3);
+		idCheckBtn.setIcon(idCheckIcon );
+		
+		Image img4= (new ImageIcon("images/changeButton/노란중복확인버튼.png").getImage());
+		Image changeImg4 = img4.getScaledInstance(110, 50, Image.SCALE_SMOOTH);
+		ImageIcon idCheckIcon2 = new ImageIcon(changeImg4);
+		idCheckBtn.setRolloverIcon(idCheckIcon2);
+		
+		idCheckBtn.setBorderPainted(false);	
+		
+		idCheckBtn.setBounds(699, 98, 105, 50);
 		idCheckBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -221,13 +246,13 @@ public class SignupPanel extends ImagePanel {
 		
 		createPwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
 		createPwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
-		createPwField.setBounds(431, 190, 253, 49);
+		createPwField.setBounds(431, 190, 253, 44);
 		createPwField.addKeyListener(new RestrictTextLength(createPwField, 12)); //글자수제한
 		
 		
 		rePwField = new HintPasswordField("8~12 이내 영문숫자특문조합");
 		rePwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
-		rePwField.setBounds(431, 280, 253, 49);
+		rePwField.setBounds(431, 280, 253, 44);
 		rePwField.addKeyListener(new RestrictTextLength(rePwField, 12)); //글자수제한
 		
 		createPwField.addKeyListener(new KeyAdapter() {
@@ -743,8 +768,21 @@ public class SignupPanel extends ImagePanel {
 		
 		
 		/////////////// 회원가입 완료 조건 /////////////////////////////////
-		JButton createBtn = new JButton("회원 가입 완료");
-		createBtn.setBounds(449, 699, 185, 38);
+		JButton createBtn = new JButton("회원 가입");
+		createBtn.setFont(new Font("",Font.PLAIN,0));
+		
+		Image img1= (new ImageIcon("images/changeButton/회원가입버튼.png").getImage());
+		Image changeImg1 = img1.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeSignupIcon = new ImageIcon(changeImg1);
+		createBtn.setIcon(changeSignupIcon);
+		
+		Image img2= (new ImageIcon("images/changeButton/노란회원가입버튼.png").getImage());
+		Image changeImg2 = img2.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeSignupIcon2 = new ImageIcon(changeImg2);
+		createBtn.setRolloverIcon(changeSignupIcon2);
+		
+		createBtn.setBorderPainted(false);
+		createBtn.setBounds(449, 675, 202, 50);
 		
 		createBtn.addActionListener(new ActionListener() {
 			@Override

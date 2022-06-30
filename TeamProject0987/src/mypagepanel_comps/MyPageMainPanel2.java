@@ -52,15 +52,15 @@ public class MyPageMainPanel2 extends ImagePanel {
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
 		table.setPreferredScrollableViewportSize(new Dimension(800,600));
 		
-		table.getColumnModel().getColumn(0).setMinWidth(110);
-		table.getColumnModel().getColumn(0).setMaxWidth(110);
-		table.getColumnModel().getColumn(1).setMinWidth(400);//셀 너비 조정
-		table.getColumnModel().getColumn(1).setMaxWidth(400);
-		table.getColumnModel().getColumn(2).setMinWidth(180);
-		table.getColumnModel().getColumn(2).setMaxWidth(180);
+		table.getColumnModel().getColumn(0).setMinWidth(90);
+		table.getColumnModel().getColumn(0).setMaxWidth(90);
+		table.getColumnModel().getColumn(1).setMinWidth(540);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMaxWidth(540);
+		table.getColumnModel().getColumn(2).setMinWidth(110);
+		table.getColumnModel().getColumn(2).setMaxWidth(110);
 		
-		table.getColumnModel().getColumn(3).setMinWidth(110);
-		table.getColumnModel().getColumn(3).setMaxWidth(110);
+		table.getColumnModel().getColumn(3).setMinWidth(60);
+		table.getColumnModel().getColumn(3).setMaxWidth(60);
 		
 		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -78,7 +78,7 @@ public class MyPageMainPanel2 extends ImagePanel {
 		panel.add(tablePanel);
 		
 		// 테이블 폰트 설정
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 
 		// 컬럼명 폰트 설정
 		JTableHeader tableHeader = table.getTableHeader();
