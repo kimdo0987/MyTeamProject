@@ -18,6 +18,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import labels.TopLabel;
 import mypagepanel_comps.frames.CancelLectureFrame;
@@ -138,7 +139,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		    @Override
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		    	//table.setFont(new Font("Serif", Font.PLAIN, 13));
 		    	cellRenderer.colAtMouse = -1;
 		    }
 		});
@@ -166,12 +167,12 @@ public class MyPageMainPanel1 extends ImagePanel {
 		        		cellRenderer.fontunderLine = font.deriveFont(attributes);
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        		//table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        		cellRenderer.colAtMouse = -1;
 		        	}	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        	//table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        	cellRenderer.colAtMouse = -1;
 		        }
 			}
@@ -188,12 +189,20 @@ public class MyPageMainPanel1 extends ImagePanel {
 
 		add(panel);
 		
+		// 테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 
+		// 컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
+		tableHeader.setFont(headerFont);
+
+		
 		JLabel tableNameLabel = new JLabel("수강 목록");
 		tableNameLabel.setForeground(Color.WHITE);
 		tableNameLabel.setBounds(80, 60, 280, 60);
 		add(tableNameLabel);
-		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		//tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.WHITE);

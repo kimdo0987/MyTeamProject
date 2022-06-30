@@ -19,15 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import database.OjdbcConnection;
-import labels.TopLabel;
 import mypagepanel_comps.mp6.MpChangePanel;
+import mypagepanel_comps.mp6.MyProfilePanel;
 import panels.ImagePanel;
 import panels.MainPanel;
 
 //계정 관리 Panel이 될 JPanel입니다
 
 public class MyPageMainPanel6 extends ImagePanel {
-
 
 	MpChangePanel mpPanel = new MpChangePanel();
 	public static String pw;
@@ -123,6 +122,8 @@ public class MyPageMainPanel6 extends ImagePanel {
 										JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치합니다",
 												"비밀번호 확인", 1);
 										tablePanel.setVisible(false);
+										mpPanel = new MpChangePanel();
+										panel.add(mpPanel);
 										mpPanel.setVisible(true);
 									} else {
 										JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치하지 않습니다",

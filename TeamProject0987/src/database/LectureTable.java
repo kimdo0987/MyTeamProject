@@ -19,9 +19,9 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import LectureInfoPanel_comps.LectureInfoPanel1;
-import LectureInfoPanel_comps.LectureInfoPanel3;
 import buttons.WishButton;
 import panels.LectureInfoPanel;
 import panels.LectureSearchPanel;
@@ -48,6 +48,13 @@ public class LectureTable extends JPanel {
 		};
 
 		JTable table = new JTable(mod);
+		//테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		
+		//컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 17);
+		tableHeader.setFont(headerFont);
 		
 		MyRenderer cellRenderer = new MyRenderer();
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
@@ -82,6 +89,7 @@ public class LectureTable extends JPanel {
 		table.getColumnModel().getColumn(3).setMinWidth(80);
 		table.getColumnModel().getColumn(3).setMaxWidth(80);
 		
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.setRowHeight(30);
 		table.setShowVerticalLines(false);
 		
@@ -141,7 +149,9 @@ public class LectureTable extends JPanel {
 							
 							detailInfoHash.put(rs.getString("lecture_id"), rs.getString("lecture_info"));
 
-							LectureInfoPanel1.detailInfoLabel.setText("\n\n\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
+
+							LectureInfoPanel1.detailInfoLabel.setText("\n"+(detailInfoHash.get(rs.getString("lecture_id"))));
+
 
 							System.out.println("강의정보 : " + LectureInfoPanel1.detailInfoLabel.getText());
 							
@@ -150,8 +160,7 @@ public class LectureTable extends JPanel {
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
 							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
 							LectureInfoPanel.lectureTime = (rs.getString("timetable"));
-							
-							
+	
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();

@@ -223,7 +223,7 @@ public class LoginPanel extends ImagePanel {
 					MainPanel.mainPanel.setVisible(true);
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
-					MainPanel.currUserId = idText;
+					MainPanel.currUserId = idInput.getText().toString();
 
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);

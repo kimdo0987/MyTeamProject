@@ -8,14 +8,21 @@ import java.awt.Color;
 public class MpChangePanel extends JPanel {
 	public static CardLayout mpLayout = new CardLayout();
 	public static JPanel mpPanel = new JPanel();
+	public static MyProfilePanel mpPanel0 = new MyProfilePanel();
 	public static MpPwChangePanel mpPanel1 = new MpPwChangePanel();
 	public static MpPhoneNumChangePanel mpPanel2 = new MpPhoneNumChangePanel();
 	public static MpEmailChangePanel mpPanel3 = new MpEmailChangePanel();
-	public static MyProfilePanel mpPanel0 = new MyProfilePanel();
-
+	
 	public MpChangePanel() {
 		setOpaque(false);
 		setBackground(Color.DARK_GRAY);
+		
+		mpLayout = new CardLayout();
+		mpPanel = new JPanel();
+		mpPanel1 = new MpPwChangePanel();
+		mpPanel0 = new MyProfilePanel();
+		mpPanel2 = new MpPhoneNumChangePanel();
+		mpPanel3 = new MpEmailChangePanel();
 
 		setBounds(0, 58, 730, 511);
 		setLayout(null);

@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import labels.TopLabel;
 import panels.ImagePanel;
@@ -163,7 +164,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		    @Override
 		    public void mouseExited(MouseEvent e) {
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		    	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		    	//table.setFont(new Font("Serif", Font.PLAIN, 13));
 		    	cellRenderer.colAtMouse = -1;
 		    }
 		});
@@ -181,7 +182,8 @@ public class MyPageMainPanel3 extends ImagePanel {
 		        	table.repaint();
 
 		        	
-		        	Font font = table.getFont();
+		        	Font font = (new Font("맑은 고딕", Font.PLAIN, 17));
+		    		
 					Map attributes = font.getAttributes();
 					attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		        	
@@ -192,12 +194,12 @@ public class MyPageMainPanel3 extends ImagePanel {
 
 		        	} else {
 		        		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		        		table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        		//table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        		cellRenderer.colAtMouse = -1;
 		        	}		        	
 		        } else {
 		        	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		        	table.setFont(new Font("Serif", Font.PLAIN, 13));
+		        	//table.setFont(new Font("Serif", Font.PLAIN, 13));
 		        	cellRenderer.colAtMouse = -1;
 		        }
 		        
@@ -208,6 +210,16 @@ public class MyPageMainPanel3 extends ImagePanel {
 		        }
 			}
 		});
+		
+		
+		// 테이블 폰트 설정
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+
+		// 컬럼명 폰트 설정
+		JTableHeader tableHeader = table.getTableHeader();
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
+		tableHeader.setFont(headerFont);
+		
 		
 		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
 		paymentBtn.setBackground(new Color(255, 127, 80));
@@ -285,6 +297,14 @@ public class MyPageMainPanel3 extends ImagePanel {
 				
 				ListSelectionModel selectionModel = table2.getSelectionModel(); //한 행만 선택가능
 				selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				
+				// 테이블 폰트 설정
+				table2.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+
+				// 컬럼명 폰트 설정
+				JTableHeader tableHeader = table2.getTableHeader();
+				Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
+				tableHeader.setFont(headerFont);
 				
 				table2.setFillsViewportHeight(true);
 				MyPageMainPanel3.table2 = table2;
