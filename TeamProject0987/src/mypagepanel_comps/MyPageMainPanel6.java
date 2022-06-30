@@ -3,6 +3,7 @@ package mypagepanel_comps;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -12,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -103,32 +106,53 @@ public class MyPageMainPanel6 extends ImagePanel {
 					tablePanel.add(pwLabel);
 					
 					
-					JButton okBtn = new JButton("확인");
-					okBtn.setBounds(552, 306, 71, 65);
-					tablePanel.add(okBtn);
-					
 					JLabel lblNewLabel_1 = new JLabel("<html><body>계정 관리 페이지는 보안 사고 예방을 위해 <br/> 고객님의 비밀번호 재 확인이 필요합니다.</body></html>");
 					lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 24));
 					lblNewLabel_1.setForeground(Color.WHITE);
 					lblNewLabel_1.setBounds(0, -16, 498, 112);
 					tablePanel.add(lblNewLabel_1);
+					/*
+					ImageIcon modifyBtnicon1 = new ImageIcon("images/changeButton/내정보수정하기버튼.png");
+					Image modifyBtnimg1 = modifyBtnicon1.getImage();
+					Image modifyBtn1 = modifyBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+					ImageIcon modifyBtnicon2 = new ImageIcon("images/changeButton/노란내정보수정하기버튼.png");
+					Image modifyBtnimg2 = modifyBtnicon2.getImage();
+					Image modifyBtn2 = modifyBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+					/////////////////////////////////////////////////////////
+					JButton modifyButton = new JButton(new ImageIcon(modifyBtn1));
+					modifyButton.setFont(new Font("굴림", Font.PLAIN, 0));
+					modifyButton.setBounds(251, 379, 294, 75);
+					modifyButton.setBorder(BorderFactory.createEmptyBorder());
+					modifyButton.setRolloverIcon(new ImageIcon(modifyBtn2));
+					*/
 					
-					okBtn.addActionListener(new ActionListener() {
-						
+					ImageIcon okBtnicon1 = new ImageIcon("images/mongBtn/chkButton.png");
+					Image okBtnimg1 = okBtnicon1.getImage();
+					Image okBtn1 = okBtnimg1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+					ImageIcon okBtnicon2 = new ImageIcon("images/mongBtn/YchkButton.png");
+					Image okBtnimg2 = okBtnicon2.getImage();
+					Image okBtn2 = okBtnimg2.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+					
+					JButton okButton = new JButton(new ImageIcon(okBtn1));
+					okButton.setFont(new Font("굴림", Font.PLAIN, 0));
+					okButton.setBounds(552, 306, 69, 69);
+					okButton.setBorder(BorderFactory.createEmptyBorder());
+					okButton.setRolloverIcon(new ImageIcon(okBtn2));
+					tablePanel.add(okButton);
+					okButton.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							
-									if(pw.equals(inputPw)) {
-										JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치합니다",
-												"비밀번호 확인", 1);
-										tablePanel.setVisible(false);
-										mpPanel = new MpChangePanel();
-										panel.add(mpPanel);
-										mpPanel.setVisible(true);
-									} else {
-										JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치하지 않습니다",
-												"비밀번호 오류", 1);
-									}
+							if(pw.equals(inputPw)) {
+								JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치합니다",
+										"비밀번호 확인", 1);
+								tablePanel.setVisible(false);
+								mpPanel = new MpChangePanel();
+								panel.add(mpPanel);
+								mpPanel.setVisible(true);
+							} else {
+								JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치하지 않습니다",
+										"비밀번호 오류", 1);
+							}
 						}
 					});
 					
