@@ -29,6 +29,7 @@ public class MypageButton extends JButton {
 
 				if (MainPanel.currUserId.equals("logout")) {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "회원만 이용 가능합니다\n로그인해 주세요");
+					
 					MainPanel.currPanel.setVisible(false);
 					MainPanel.thisFrame.remove(MainPanel.loginPanel);
 					LoginPanel newLoginPanel = new LoginPanel();
