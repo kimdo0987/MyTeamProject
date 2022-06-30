@@ -79,7 +79,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		model.addColumn("강사명");
 		model.addColumn("수강 기간");
 		model.addColumn("수강료");
-		model.addColumn("장바구니에서 삭제");
+		model.addColumn("장바구니");
 		
 		//row 넣을 data
 		String[][] data = database.MyWishLists.getMyWishLists();
@@ -98,7 +98,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		
 		table.getColumnModel().getColumn(0).setMinWidth(40);
 		table.getColumnModel().getColumn(0).setMaxWidth(40);
-		table.getColumnModel().getColumn(1).setMinWidth(300);//셀 너비 조정
+		table.getColumnModel().getColumn(1).setMinWidth(330);//셀 너비 조정
 		table.getColumnModel().getColumn(1).setMaxWidth(300);
 		table.getColumnModel().getColumn(2).setMinWidth(120);
 		table.getColumnModel().getColumn(2).setMaxWidth(120);
@@ -107,8 +107,8 @@ public class MyPageMainPanel3 extends ImagePanel {
 		table.getColumnModel().getColumn(3).setMaxWidth(130);
 		table.getColumnModel().getColumn(4).setMinWidth(90);
 		table.getColumnModel().getColumn(4).setMaxWidth(90);
-		table.getColumnModel().getColumn(5).setMinWidth(100);
-		table.getColumnModel().getColumn(5).setMaxWidth(120);
+		table.getColumnModel().getColumn(5).setMinWidth(90);
+		table.getColumnModel().getColumn(5).setMaxWidth(90);
 		
 		///////////////////////////////////////////////////////
 		
@@ -213,7 +213,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		
 		
 		// 테이블 폰트 설정
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 
 		// 컬럼명 폰트 설정
 		JTableHeader tableHeader = table.getTableHeader();
@@ -299,7 +299,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 				selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				
 				// 테이블 폰트 설정
-				table2.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+				table2.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 
 				// 컬럼명 폰트 설정
 				JTableHeader tableHeader = table2.getTableHeader();

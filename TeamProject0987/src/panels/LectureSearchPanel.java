@@ -23,7 +23,6 @@ import database.LectureTable3;
 
 public class LectureSearchPanel extends ImagePanel {
 
-	public static String lectureImageCategory;
 	public static int currLectureId; //////////
 	public static int lectureCnt;
 	public static JLabel lectureCntLabel = new JLabel("총 100개가 검색되었습니다");
@@ -61,6 +60,7 @@ public class LectureSearchPanel extends ImagePanel {
 			MypageButton myInfoBtn = new MypageButton("마이페이지");
 			myInfoBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 			myInfoBtn.setIcon(new ImageIcon("images/infoBtn.png"));
+			myInfoBtn.setRolloverIcon(new ImageIcon("images/infoBtn2.png"));
 			myInfoBtn.setBorderPainted(false);
 			myInfoBtn.setBackground(Color.WHITE);
 			
@@ -73,7 +73,6 @@ public class LectureSearchPanel extends ImagePanel {
 //				}
 //			});
 			myInfoBtn.setBounds(160, 29, 95, 95);
-			myInfoBtn.setRolloverIcon(new ImageIcon("images/infoBtn2.png"));
 			add(myInfoBtn);
 			
 			JPanel lectureListPanel = new JPanel();

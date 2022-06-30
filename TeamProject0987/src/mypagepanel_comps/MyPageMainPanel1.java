@@ -45,7 +45,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBounds(0, 0, 800, 568);	
 		
-		String[] headings = new String[] {"강의명","강사명","수강시작일", "수강평작성", "수강포기", "출석률"};
+		String[] headings = new String[] {"강의명","강사명","수강기간", "수강평작성", "수강포기", "출석률"};
 		String[][] data = database.MyLectureLists.getMyLectureLists();
 		tablePanel.setLayout(null);
 		
@@ -60,18 +60,18 @@ public class MyPageMainPanel1 extends ImagePanel {
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
 //		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
-		table.getColumnModel().getColumn(0).setMinWidth(300);//셀 너비 조정
-		table.getColumnModel().getColumn(0).setMaxWidth(300);
+		table.getColumnModel().getColumn(0).setMinWidth(370);//셀 너비 조정
+		table.getColumnModel().getColumn(0).setMaxWidth(370);
 		table.getColumnModel().getColumn(1).setMinWidth(100);
 		table.getColumnModel().getColumn(1).setMaxWidth(100);
-		table.getColumnModel().getColumn(2).setMinWidth(110);
-		table.getColumnModel().getColumn(2).setMaxWidth(110);		
+		table.getColumnModel().getColumn(2).setMinWidth(140);
+		table.getColumnModel().getColumn(2).setMaxWidth(140);		
 		table.getColumnModel().getColumn(3).setMinWidth(75);
 		table.getColumnModel().getColumn(3).setMaxWidth(75);
 		table.getColumnModel().getColumn(4).setMinWidth(60);
 		table.getColumnModel().getColumn(4).setMaxWidth(60);
-		table.getColumnModel().getColumn(5).setMinWidth(155);
-		table.getColumnModel().getColumn(5).setMaxWidth(155);
+		table.getColumnModel().getColumn(5).setMinWidth(55);
+		table.getColumnModel().getColumn(5).setMaxWidth(55);
 		
 		
 		table.setRowHeight(30); // 셀 높이 조정		
@@ -104,6 +104,8 @@ public class MyPageMainPanel1 extends ImagePanel {
 			
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
+		    	
+				
 		    	// getPoint 는 좌표를 뽑아오는건데 rowAtPoint, columnAtPoint 는 
 		    	// 행과 열의 범위를 좌표화해서 뽑아옵니다.
 		    	/*
@@ -138,6 +140,8 @@ public class MyPageMainPanel1 extends ImagePanel {
 		    
 		    @Override
 		    public void mouseExited(MouseEvent e) {
+		    	// 테이블 폰트 설정
+				table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		    	setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		    	//table.setFont(new Font("Serif", Font.PLAIN, 13));
 		    	cellRenderer.colAtMouse = -1;
@@ -147,6 +151,9 @@ public class MyPageMainPanel1 extends ImagePanel {
 		table.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				// 테이블 폰트 설정
+				table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+				
 				int row = table.rowAtPoint(e.getPoint());
 		        int col = table.columnAtPoint(e.getPoint());
 		        if (row >= 0 && col >= 0) {
@@ -190,7 +197,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		add(panel);
 		
 		// 테이블 폰트 설정
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 
 		// 컬럼명 폰트 설정
 		JTableHeader tableHeader = table.getTableHeader();

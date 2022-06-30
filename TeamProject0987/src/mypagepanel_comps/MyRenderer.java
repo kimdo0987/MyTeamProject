@@ -22,16 +22,18 @@ public class MyRenderer extends DefaultTableCellRenderer {
 		if (!(table.isRowSelected(row) && table.isColumnSelected(column))) // 현재 선택된 행의 색상은 변경하지 않고 선택 해제된 경우에만 배경색상을 변경한다
 		{
 			
-			if (row == rowAtMouse) {
-				c.setBackground(color);
-			}  else {
-				c.setBackground(Color.WHITE);				
-			}
+//			if (row == rowAtMouse) {
+//				c.setBackground(color);
+//			}  else {
+//				c.setBackground(Color.WHITE);				
+//			}
 			
-			if (row == rowAtMouse && column == colAtMouse) {
+			if (row == rowAtMouse && column == colAtMouse) {	
+			
         		table.setFont(fontunderLine);
 			} else {
-				c.setFont(new Font("Serif", Font.PLAIN, 13));
+				c.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+				
 			}
 		}
 		return c;

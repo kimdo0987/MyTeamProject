@@ -99,7 +99,7 @@ public class MyPageMainPanel4 extends ImagePanel {
 		tablePanel.setLayout(null);
 		
 		// 테이블 폰트 설정
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 
 		// 컬럼명 폰트 설정
 		JTableHeader tableHeader = table.getTableHeader();

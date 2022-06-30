@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -146,7 +148,20 @@ public class LectureTable2 extends JPanel {
 							LectureSearchPanel.currLectureId = rs.getInt("lecture_id");//////
 							WishButton.currLectureId = rs.getInt("lecture_id");
 							LectureInfoPanel.lectureNameLabel.setText(rs.getString("lecture_name"));
-							LectureSearchPanel.lectureImageCategory = rs.getString("lecture_category");
+							String ctg = rs.getString("lecture_category");
+							
+							if(ctg.equals("데브옵스/인프라")) {
+								ctg = "데브옵스";
+							} else if (ctg.equals("알고리즘/자료구조")) {
+								ctg = "알고리즘";
+							} else if (ctg.equals("임베디드/IOT")) {
+								ctg = "임베디드";
+							} 
+							
+							JLabel cateImage = new JLabel(new ImageIcon("images/categoryImage/"+ctg+".png"));
+							
+							
+							LectureInfoPanel.imagePanel.add(cateImage);
 							LectureInfoPanel.lectureTime = (rs.getString("timetable"));
 						}
 					} catch (SQLException e1) {
