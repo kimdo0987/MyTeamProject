@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -30,6 +31,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 //쿠폰함 Panel이 될 JPanel입니다
@@ -130,10 +133,35 @@ public class MyPageMainPanel4 extends ImagePanel {
 		add(couponCodeField);
 		couponCodeField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("등록");
-		btnNewButton.setBounds(832, 138, 90, 35);
-		add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+//		ImageIcon payBtnicon1 = new ImageIcon("images/mp3/결제하기버튼.png");
+//		Image payBtnimg1 = payBtnicon1.getImage();
+//		Image payBtn1 = payBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+//		ImageIcon payBtnicon2 = new ImageIcon("images/mp3/노란결제하기버튼.png");
+//		Image payBtnimg2 = payBtnicon2.getImage();
+//		Image payBtn2 = payBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+//		MyPageTabButton paymentButton = new MyPageTabButton("결제하기버튼", new ImageIcon(payBtn1));
+//		paymentButton.setFont(new Font("굴림", Font.PLAIN, 0));
+//		paymentButton.setBounds(586, 675, 294, 75);
+//		paymentButton.setBorder(BorderFactory.createEmptyBorder());
+//		paymentButton.setRolloverIcon(new ImageIcon(payBtn2));
+//		add(paymentButton);
+		
+		ImageIcon addBtnicon1 = new ImageIcon("images/addBtn/addBtn.png");
+		Image addBtnimg1 = addBtnicon1.getImage();
+		Image addBtn1 = addBtnimg1.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		
+		ImageIcon addBtnicon2 = new ImageIcon("images/addBtn/YaddBtn.png");
+		Image addBtnimg2 = addBtnicon2.getImage();
+		Image addBtn2 = addBtnimg2.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		
+		JButton addButton = new JButton(new ImageIcon(addBtn1));
+		
+		addButton.setBounds(832, 138, 35, 35);
+		addButton.setBorder(BorderFactory.createEmptyBorder());
+		addButton.setRolloverIcon(new ImageIcon(addBtn2));
+		
+		add(addButton);
+		addButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
