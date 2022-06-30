@@ -25,7 +25,7 @@ public class MainPanel extends ImagePanel {
 
 	
 	private MypageButton myPageBtn;
-	private SignupButton signUpBtn;
+	public static SignupButton signUpBtn;
 	public static LoginButton loginBtn;
 	public static LogoutButton logoutBtn;
 
