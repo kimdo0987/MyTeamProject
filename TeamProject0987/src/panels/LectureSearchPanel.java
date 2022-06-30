@@ -29,6 +29,13 @@ public class LectureSearchPanel extends ImagePanel {
 			"데이터베이스.png","모바일.png","백엔드.png",
 			"알고리즘.png","임베디드.png","교양.png"
 	};
+	
+	private static String [] imagePath2 = {
+			"개발도구2.png","게임개발2.png","프론트엔드2.png",
+			"데브옵스2.png","데스크톱2.png",
+			"데이터베이스2.png","모바일2.png","백엔드2.png",
+			"알고리즘2.png","임베디드2.png","교양2.png"
+	};
 
 	public static int currLectureId; //////////
 	public static int lectureCnt;
@@ -211,12 +218,14 @@ public class LectureSearchPanel extends ImagePanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					cateBtn.setIcon(new ImageIcon("images/" +imagePath[cateBtn.num]+"2"));
-					
+					cateBtn.setIcon(new ImageIcon("images/"+imagePath2[cateBtn.num]));
+					cateBtn.setFont(new Font("", Font.BOLD, 0));
+					System.out.println();
 					for (int i = 0; i < buttonArr.length; ++i) {
 						if (!buttonArr[i].getText().equals(cateBtn.getText())) {
+							buttonArr[i].setFont(new Font("", Font.BOLD, 0));
 							if (i < 11) {
-								buttonArr[i].setIcon(new ImageIcon("images/" + imagePath[i]));
+								buttonArr[i].setIcon(new ImageIcon("images/" + imagePath[i]));								
 							} else if (i == 11) {
 								buttonArr[i].setIcon(new ImageIcon("images/all.png"));
 							} else if (i == 12) {
