@@ -85,7 +85,7 @@ public class MpPwChangePanel extends JPanel {
 			///////////////////////////////////////////////////////////////////////
 
 			JButton pnChangeBtn = new JButton("전화번호 변경");
-			pnChangeBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+			pnChangeBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			pnChangeBtn.setIcon(new ImageIcon(changeImg1));
 			pnChangeBtn.setBorder(BorderFactory.createEmptyBorder());
 			pnChangeBtn.setRolloverIcon(new ImageIcon(changeImg4));
@@ -101,7 +101,7 @@ public class MpPwChangePanel extends JPanel {
 			/////////////////////////////////////////////////////////////////////////
 
 			JButton emailChangeBtn = new JButton("이메일 변경");
-			emailChangeBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+			emailChangeBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			emailChangeBtn.setIcon(new ImageIcon(changeImg2));
 			emailChangeBtn.setRolloverIcon(new ImageIcon(changeImg5));
 			emailChangeBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -118,7 +118,7 @@ public class MpPwChangePanel extends JPanel {
 			/////////////////////////////////////////////////////////////////////////////////
       
 			JButton pwChangeBtn = new JButton("비밀번호 변경");
-			pwChangeBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+			pwChangeBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			pwChangeBtn.setIcon(new ImageIcon(changeImg3));
 //			pwChangeBtn.setRolloverIcon(new ImageIcon(changeImg6));
 			pwChangeBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -139,7 +139,7 @@ public class MpPwChangePanel extends JPanel {
 			Image profileBtnimg2 = profileBtnicon2.getImage();
 			Image profileBtn2 = profileBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
 			JButton profileButton = new JButton(new ImageIcon(profileBtn1));
-			profileButton.setFont(new Font("굴림", Font.PLAIN, 0));
+			profileButton.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			profileButton.setBorder(BorderFactory.createEmptyBorder());
 			profileButton.setRolloverIcon(new ImageIcon(profileBtn2));
 			profileButton.addActionListener(new ActionListener() {
@@ -178,24 +178,24 @@ public class MpPwChangePanel extends JPanel {
 
 			JLabel newPwLabel = new JLabel("새 비밀번호");
 			newPwLabel.setForeground(Color.WHITE);
-			newPwLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+			newPwLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 			newPwLabel.setBounds(56, 212, 124, 51);
 			add(newPwLabel);
 
 			JLabel newPwLabel2 = new JLabel("새 비밀번호 확인");
-			newPwLabel2.setFont(new Font("굴림", Font.PLAIN, 16));
+			newPwLabel2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 			newPwLabel2.setForeground(Color.WHITE);
 			newPwLabel2.setBounds(56, 273, 124, 51);
 			add(newPwLabel2);
 
 			JLabel nameLabel = new JLabel("이름");
-			nameLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+			nameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 			nameLabel.setForeground(Color.WHITE);
 			nameLabel.setBounds(56, 151, 124, 51);
 			add(nameLabel);
 
 			JLabel nameLabel2 = new JLabel(userName);
-			nameLabel2.setFont(new Font("굴림", Font.PLAIN, 16));
+			nameLabel2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 			nameLabel2.setForeground(Color.WHITE);
 			nameLabel2.setBounds(197, 151, 207, 51);
 			add(nameLabel2);
@@ -209,7 +209,7 @@ public class MpPwChangePanel extends JPanel {
 			Image changeBtn2 = changeBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
 			/////////////////////////////////////////////////////////
 			JButton changeButton = new JButton(new ImageIcon(changeBtn1));
-			changeButton.setFont(new Font("굴림", Font.PLAIN, 0));
+			changeButton.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			changeButton.setBounds(260, 346, 196, 50);
 			changeButton.setBorder(BorderFactory.createEmptyBorder());
 			changeButton.setRolloverIcon(new ImageIcon(changeBtn2));
