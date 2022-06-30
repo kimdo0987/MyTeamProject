@@ -28,7 +28,6 @@ import panels.MainPanel;
 
 public class MyPageMainPanel6 extends ImagePanel {
 
-
 	MpChangePanel mpPanel = new MpChangePanel();
 	public static String pw;
 	public static String inputPw;
@@ -123,9 +122,8 @@ public class MyPageMainPanel6 extends ImagePanel {
 										JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치합니다",
 												"비밀번호 확인", 1);
 										tablePanel.setVisible(false);
-										mpPanel.remove(MpChangePanel.mpPanel0);
-										MyProfilePanel mpPanel0 = new MyProfilePanel();
-										mpPanel.add(mpPanel0,"profile");
+										mpPanel = new MpChangePanel();
+										panel.add(mpPanel);
 										mpPanel.setVisible(true);
 									} else {
 										JOptionPane.showMessageDialog(MainPanel.thisFrame, "비밀번호가 일치하지 않습니다",

@@ -23,11 +23,17 @@ public class MyPageTabButton extends JButton {
 				MyPagePanel.cardLayoutPanel.add(MyPagePanel.payPanel, "결제하기");
 				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "결제하기");
 			} else if (name.equals("나의 장바구니")) {
-					MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel3);
-					MyPagePanel.mainPanel3 = new MyPageMainPanel3();
-					MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel3, "나의 장바구니");
-					MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "나의 장바구니");
-			} else {
+				MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel3);
+				MyPagePanel.mainPanel3 = new MyPageMainPanel3();
+				MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel3, "나의 장바구니");
+				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "나의 장바구니");
+			} else if(name.equals("계정 관리")){
+				MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel6);
+				MyPagePanel.mainPanel6 = new MyPageMainPanel6();
+				MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel6, "계정 관리");
+				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "계정 관리");
+				
+			}else {
 			// System.out.println(name); cardLayout에서 어떤 panel 꺼내오는지 확인
 			MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, name);
 			}
