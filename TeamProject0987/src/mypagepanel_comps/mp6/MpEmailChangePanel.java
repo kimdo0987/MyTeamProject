@@ -74,7 +74,7 @@ public class MpEmailChangePanel extends JPanel {
 //				
 //
 //				GoToButton mainBtn = new GoToButton("메인");
-//				mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+//				mainBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 //				mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
 //				mainBtn.setBorderPainted(false);
 //				mainBtn.setBounds(1037, 38, 46, 44);
@@ -103,7 +103,7 @@ public class MpEmailChangePanel extends JPanel {
 			///////////////////////////////////////////////////////////////////////
 			
 			JButton pnChangeBtn = new JButton("전화번호 변경");
-			pnChangeBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+			pnChangeBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			pnChangeBtn.setIcon(new ImageIcon(changeImg1));
 			pnChangeBtn.setBorder(BorderFactory.createEmptyBorder());
 			pnChangeBtn.setRolloverIcon(new ImageIcon(changeImg4));
@@ -119,7 +119,7 @@ public class MpEmailChangePanel extends JPanel {
 			///////////////////////////////////////////////////////////////////////
 
 			JButton emailChangeBtn = new JButton("이메일 변경");
-			emailChangeBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+			emailChangeBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			emailChangeBtn.setIcon(new ImageIcon(changeImg2));
 //			emailChangeBtn.setRolloverIcon(new ImageIcon(changeImg5));
 			emailChangeBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -136,7 +136,7 @@ public class MpEmailChangePanel extends JPanel {
 			///////////////////////////////////////////////////////////////////////
 
 			JButton pwChangeBtn = new JButton("비밀번호 변경");
-			pwChangeBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+			pwChangeBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			pwChangeBtn.setIcon(new ImageIcon(changeImg3));
 			pwChangeBtn.setRolloverIcon(new ImageIcon(changeImg6));
 			pwChangeBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -154,7 +154,7 @@ public class MpEmailChangePanel extends JPanel {
 
 			JLabel emailLabel = new JLabel(currEmail);
 			emailLabel.setForeground(Color.WHITE);
-			emailLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+			emailLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 			emailLabel.setBounds(196, 162, 469, 51);
 			add(emailLabel);
 
@@ -172,13 +172,13 @@ public class MpEmailChangePanel extends JPanel {
 
 			JLabel emailLabel2 = new JLabel("기존 이메일");
 			emailLabel2.setForeground(Color.WHITE);
-			emailLabel2.setFont(new Font("굴림", Font.PLAIN, 16));
+			emailLabel2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 			emailLabel2.setBounds(56, 162, 124, 51);
 			add(emailLabel2);
 
 			JLabel newEmailLabel = new JLabel("새 이메일");
 			newEmailLabel.setForeground(Color.WHITE);
-			newEmailLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+			newEmailLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 			newEmailLabel.setBounds(56, 223, 124, 51);
 			add(newEmailLabel);
 			
@@ -189,7 +189,7 @@ public class MpEmailChangePanel extends JPanel {
 			Image profileBtnimg2 = profileBtnicon2.getImage();
 			Image profileBtn2 = profileBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
 			JButton profileButton = new JButton(new ImageIcon(profileBtn1));
-			profileButton.setFont(new Font("굴림", Font.PLAIN, 0));
+			profileButton.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 			profileButton.setBorder(BorderFactory.createEmptyBorder());
 			profileButton.setRolloverIcon(new ImageIcon(profileBtn2));
 			profileButton.addActionListener(new ActionListener() {
@@ -210,7 +210,7 @@ public class MpEmailChangePanel extends JPanel {
 		Image changeBtn2 = changeBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
 		/////////////////////////////////////////////////////////
 		JButton changeButton = new JButton(new ImageIcon(changeBtn1));
-		changeButton.setFont(new Font("굴림", Font.PLAIN, 0));
+		changeButton.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
 		changeButton.setBounds(260, 346, 196, 50);
 		changeButton.setBorder(BorderFactory.createEmptyBorder());
 		changeButton.setRolloverIcon(new ImageIcon(changeBtn2));	

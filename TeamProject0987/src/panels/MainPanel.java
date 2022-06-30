@@ -25,13 +25,13 @@ public class MainPanel extends ImagePanel {
 
 	
 	private MypageButton myPageBtn;
-	private SignupButton signUpBtn;
+	public static SignupButton signUpBtn;
 	public static LoginButton loginBtn;
 	public static LogoutButton logoutBtn;
 
 	public static JFrame thisFrame;
 
-	public static String currUserId = "hansm1119";
+	public static String currUserId = "logout";
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
 	public static MyPagePanel myPagePanel = new MyPagePanel();
@@ -55,6 +55,7 @@ public class MainPanel extends ImagePanel {
 		ImageIcon customerServiceBtn_img = new ImageIcon("images/dohyun3.png");
 		ImageIcon customerServiceBtn1_img = new ImageIcon("images/dohyun3-1.png");
 		
+
 		getMainPanel();
 		currPanel = mainPanel;
 		setBounds(0, 0, 1200, 800); // 패널크기는 JFrame 크기와 같게 (0,0, 1200, 800)로 만들어주세요
@@ -96,7 +97,7 @@ public class MainPanel extends ImagePanel {
 		JLabel lblNewLabel = new JLabel("<html><body style='text-align:center;'>Developer <br/>lecture <br/>program</body></html>", JLabel.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Libre Baskerville", Font.PLAIN, 100));
-		lblNewLabel.setBounds(130, 20, 904, 399);
+		lblNewLabel.setBounds(130, 65, 904, 399);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");

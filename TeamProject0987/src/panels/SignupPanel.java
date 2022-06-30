@@ -190,7 +190,7 @@ public class SignupPanel extends ImagePanel {
 		
 		idCheckBtn.setBorderPainted(false);	
 		
-		idCheckBtn.setBounds(699, 98, 105, 50);
+		idCheckBtn.setBounds(699, 96, 105, 50);
 		idCheckBtn.addActionListener(new ActionListener() {
 
 			@Override

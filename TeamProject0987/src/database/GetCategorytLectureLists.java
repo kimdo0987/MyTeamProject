@@ -36,7 +36,7 @@ public class GetCategorytLectureLists {
 						rs.getString("lecture_start_date||''||''")
 				});
 			}
-			panels.LectureSearchPanel.lectureCntLabel.setText("총 "+lecCnt+"개의 강의를 검색하였습니다");
+			panels.LectureSearchPanel.lectureCntLabel.setText("<"+category+"> "+lecCnt+"개의 강의를 검색하였습니다");
 			
 			System.out.println("The data has been fetched2");
 			String[][] arr = new String[list.size()][4];

@@ -3,6 +3,7 @@ package mypagepanel_comps;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -10,12 +11,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.font.TextAttribute;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,7 +23,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import labels.TopLabel;
 import panels.ImagePanel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
@@ -48,9 +47,9 @@ public class MyPageMainPanel3 extends ImagePanel {
 		
 		JLabel tableNameLabel = new JLabel("장바구니 리스트");
 		tableNameLabel.setForeground(Color.WHITE);
-		tableNameLabel.setBounds(80, 60, 460, 60);
+		tableNameLabel.setBounds(80, 40, 421, 90);
 		add(tableNameLabel);
-		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBounds(0, 0, 800, 529);		
@@ -182,7 +181,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		        	table.repaint();
 
 		        	
-		        	Font font = (new Font("맑은 고딕", Font.PLAIN, 17));
+		        	Font font = (new Font("맑은 고딕", Font.PLAIN, 14));
 		    		
 					Map attributes = font.getAttributes();
 					attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
@@ -221,10 +220,18 @@ public class MyPageMainPanel3 extends ImagePanel {
 		tableHeader.setFont(headerFont);
 		
 		
-		MyPageTabButton paymentBtn = new MyPageTabButton("결제하기");
-		paymentBtn.setBackground(new Color(255, 127, 80));
-		paymentBtn.setBounds(642, 675, 238, 49);
-		add(paymentBtn);
+		ImageIcon payBtnicon1 = new ImageIcon("images/mp3/결제하기버튼.png");
+		Image payBtnimg1 = payBtnicon1.getImage();
+		Image payBtn1 = payBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+		ImageIcon payBtnicon2 = new ImageIcon("images/mp3/노란결제하기버튼.png");
+		Image payBtnimg2 = payBtnicon2.getImage();
+		Image payBtn2 = payBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+		MyPageTabButton paymentButton = new MyPageTabButton("결제하기", new ImageIcon(payBtn1));
+		paymentButton.setFont(new Font("굴림", Font.PLAIN, 0));
+		paymentButton.setBounds(586, 675, 294, 75);
+		paymentButton.setBorder(BorderFactory.createEmptyBorder());
+		paymentButton.setRolloverIcon(new ImageIcon(payBtn2));
+		add(paymentButton);
 		
 		
 		DefaultTableModel model2 = new DefaultTableModel();
@@ -244,7 +251,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 
 		
 		//obtain selected row
-		paymentBtn.addActionListener(new ActionListener() {
+		paymentButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -278,15 +285,15 @@ public class MyPageMainPanel3 extends ImagePanel {
 				
 				table2.getColumnModel().getColumn(0).setMinWidth(300);
 				table2.getColumnModel().getColumn(0).setMaxWidth(300);
-				table2.getColumnModel().getColumn(1).setMinWidth(80);//셀 너비 조정
-				table2.getColumnModel().getColumn(1).setMaxWidth(80);
+				table2.getColumnModel().getColumn(1).setMinWidth(100);//셀 너비 조정
+				table2.getColumnModel().getColumn(1).setMaxWidth(100);
 				table2.getColumnModel().getColumn(2).setMinWidth(120);
 				table2.getColumnModel().getColumn(2).setMaxWidth(120);
 				
-				table2.getColumnModel().getColumn(3).setMinWidth(60);
-				table2.getColumnModel().getColumn(3).setMaxWidth(60);
-				table2.getColumnModel().getColumn(4).setMinWidth(90);
-				table2.getColumnModel().getColumn(4).setMaxWidth(90);
+				table2.getColumnModel().getColumn(3).setMinWidth(100);
+				table2.getColumnModel().getColumn(3).setMaxWidth(100);
+				table2.getColumnModel().getColumn(4).setMinWidth(100);
+				table2.getColumnModel().getColumn(4).setMaxWidth(100);
 				table2.getColumnModel().getColumn(5).setMinWidth(100);
 				table2.getColumnModel().getColumn(5).setMaxWidth(100);
 				

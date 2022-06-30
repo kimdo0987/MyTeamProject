@@ -66,9 +66,9 @@ public class MyPageMainPanel6 extends ImagePanel {
 					
 					JLabel tableNameLabel = new JLabel("계정 관리");
 					tableNameLabel.setForeground(Color.WHITE);
-					tableNameLabel.setBounds(80, 60, 321, 60);
+					tableNameLabel.setBounds(80, 40, 400, 90);
 					add(tableNameLabel);
-					tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+					tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 					
 					JPanel tablePanel = new JPanel();
 					tablePanel.setOpaque(false);
@@ -81,7 +81,7 @@ public class MyPageMainPanel6 extends ImagePanel {
 
 					JLabel pwChangeLabel = new JLabel("비밀번호를 입력해주세요");
 					pwChangeLabel.setForeground(Color.WHITE);
-					pwChangeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+					pwChangeLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
 					pwChangeLabel.setBounds(205, 163, 356, 57);
 					tablePanel.add(pwChangeLabel);
 
@@ -101,30 +101,16 @@ public class MyPageMainPanel6 extends ImagePanel {
 					
 					JLabel pwLabel = new JLabel("비밀번호");
 					pwLabel.setForeground(Color.WHITE);
-					pwLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+					pwLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
 					pwLabel.setBounds(101, 222, 92, 73);
 					tablePanel.add(pwLabel);
 					
 					
 					JLabel lblNewLabel_1 = new JLabel("<html><body>계정 관리 페이지는 보안 사고 예방을 위해 <br/> 고객님의 비밀번호 재 확인이 필요합니다.</body></html>");
-					lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 24));
+					lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.BOLD, 24));
 					lblNewLabel_1.setForeground(Color.WHITE);
 					lblNewLabel_1.setBounds(0, -16, 498, 112);
 					tablePanel.add(lblNewLabel_1);
-					/*
-					ImageIcon modifyBtnicon1 = new ImageIcon("images/changeButton/내정보수정하기버튼.png");
-					Image modifyBtnimg1 = modifyBtnicon1.getImage();
-					Image modifyBtn1 = modifyBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-					ImageIcon modifyBtnicon2 = new ImageIcon("images/changeButton/노란내정보수정하기버튼.png");
-					Image modifyBtnimg2 = modifyBtnicon2.getImage();
-					Image modifyBtn2 = modifyBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-					/////////////////////////////////////////////////////////
-					JButton modifyButton = new JButton(new ImageIcon(modifyBtn1));
-					modifyButton.setFont(new Font("굴림", Font.PLAIN, 0));
-					modifyButton.setBounds(251, 379, 294, 75);
-					modifyButton.setBorder(BorderFactory.createEmptyBorder());
-					modifyButton.setRolloverIcon(new ImageIcon(modifyBtn2));
-					*/
 					
 					ImageIcon okBtnicon1 = new ImageIcon("images/mongBtn/chkButton.png");
 					Image okBtnimg1 = okBtnicon1.getImage();

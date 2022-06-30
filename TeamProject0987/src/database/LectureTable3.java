@@ -69,7 +69,6 @@ public class LectureTable3 extends JPanel {
 		table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.setEnabled(false);
 		
 		table.setPreferredScrollableViewportSize(new Dimension(700, 600));
@@ -102,7 +101,8 @@ public class LectureTable3 extends JPanel {
 
 		// 컬럼명 폰트 설정
 		JTableHeader tableHeader = table.getTableHeader();
-		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 17);
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 15);
+		tableHeader.setFont(headerFont);
 		
 		table.setRowHeight(30); // 셀 높이 조정
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능

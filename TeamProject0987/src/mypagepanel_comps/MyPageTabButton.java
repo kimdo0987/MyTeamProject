@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultButtonModel;
+import javax.swing.Icon;
 import javax.swing.JButton;
 
 import panels.MainPanel;
@@ -49,5 +51,29 @@ public class MyPageTabButton extends JButton {
 		
 		
 	}
+	
+	 /**
+     * Creates a button with an icon.
+     *
+     * @param icon  the Icon image to display on the button
+     */
+    public MyPageTabButton(Icon icon) {
+        this(null, icon);
+    }
 
+    /**
+     * Creates a button with initial text and an icon.
+     *
+     * @param text  the text of the button
+     * @param icon  the Icon image to display on the button
+     */
+    public MyPageTabButton(String name, Icon icon) {
+        // Create the model
+        setModel(new DefaultButtonModel());
+        setText(name);
+		this.name = name;
+		addActionListener(eventListener);
+        // initialize
+        init(name, icon);
+    }
 }

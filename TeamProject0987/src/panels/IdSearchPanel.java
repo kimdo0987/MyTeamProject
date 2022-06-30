@@ -46,6 +46,7 @@ public class IdSearchPanel extends ImagePanel {
 		setLayout(null);
 		
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
+
 		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디조회버튼.png");
 		
 		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
@@ -53,6 +54,7 @@ public class IdSearchPanel extends ImagePanel {
 		Image img33 = yIdSearchIcon.getImage();
 		Image changeImg33 = img33.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeYIdSearchIcon = new ImageIcon(changeImg33);
+
 		
 		Image img1 = mainIcon.getImage();
 		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -62,9 +64,18 @@ public class IdSearchPanel extends ImagePanel {
 		Image changeImg3 = img3.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeidSearchIcon = new ImageIcon(changeImg3);
 		
+		Image img4 = idSearchIcon2.getImage();
+		Image changeImg4 = img4.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeidSearchIcon2 = new ImageIcon(changeImg4);
 		
 		JButton lastPageBtn = new JButton("이전");
-		lastPageBtn.setBounds(23, 36, 70, 44);
+		
+		lastPageBtn.setBounds(135, 29, 95, 95);
+		lastPageBtn.setBorderPainted(false);
+		lastPageBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		lastPageBtn.setIcon(new ImageIcon("images/backBtn.png"));
+		lastPageBtn.setRolloverIcon(new ImageIcon("images/backBtn2.png"));
+		
 		add(lastPageBtn);
 		lastPageBtn.addActionListener(new ActionListener() {
 			
@@ -79,12 +90,12 @@ public class IdSearchPanel extends ImagePanel {
 		
 		GoToButton mainBtn = new GoToButton("메인");
 		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-		mainBtn.setIcon(changemainIcon);
+		mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
+		mainBtn.setRolloverIcon(new ImageIcon("images/homeBtn2.png"));
 		mainBtn.setBorderPainted(false);
-		mainBtn.setBounds(105, 36, 40, 50);
-		
-		mainBtn.setBackground(Color.WHITE);
+		mainBtn.setBounds(40, 29, 95, 95);
 		add(mainBtn);
+		
 		mainBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -151,8 +162,10 @@ public class IdSearchPanel extends ImagePanel {
 		idSearchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		idSearchBtn.setIcon(changeidSearchIcon);
 		idSearchBtn.setBorderPainted(false);
+
 		idSearchBtn.setRolloverIcon(changeYIdSearchIcon);
 		
+
 		idSearchBtn.setBackground(Color.white);
 		idSearchBtn.addActionListener(new ActionListener() {
 
