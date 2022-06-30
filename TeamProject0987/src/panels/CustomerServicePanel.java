@@ -68,7 +68,7 @@ public class CustomerServicePanel extends ImagePanel {
 		JLabel explainLabel = new JLabel(privacyStr);
 		explainLabel.setForeground(Color.WHITE);
 		explainLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 20));
-		explainLabel.setBounds(203, 259, 802, 80);
+		explainLabel.setBounds(203, 271, 802, 80);
 		add(explainLabel);
 		
 		

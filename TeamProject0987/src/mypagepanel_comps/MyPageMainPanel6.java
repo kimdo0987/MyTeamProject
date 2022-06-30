@@ -111,20 +111,6 @@ public class MyPageMainPanel6 extends ImagePanel {
 					lblNewLabel_1.setForeground(Color.WHITE);
 					lblNewLabel_1.setBounds(0, -16, 498, 112);
 					tablePanel.add(lblNewLabel_1);
-					/*
-					ImageIcon modifyBtnicon1 = new ImageIcon("images/changeButton/내정보수정하기버튼.png");
-					Image modifyBtnimg1 = modifyBtnicon1.getImage();
-					Image modifyBtn1 = modifyBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-					ImageIcon modifyBtnicon2 = new ImageIcon("images/changeButton/노란내정보수정하기버튼.png");
-					Image modifyBtnimg2 = modifyBtnicon2.getImage();
-					Image modifyBtn2 = modifyBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-					/////////////////////////////////////////////////////////
-					JButton modifyButton = new JButton(new ImageIcon(modifyBtn1));
-					modifyButton.setFont(new Font("굴림", Font.PLAIN, 0));
-					modifyButton.setBounds(251, 379, 294, 75);
-					modifyButton.setBorder(BorderFactory.createEmptyBorder());
-					modifyButton.setRolloverIcon(new ImageIcon(modifyBtn2));
-					*/
 					
 					ImageIcon okBtnicon1 = new ImageIcon("images/mongBtn/chkButton.png");
 					Image okBtnimg1 = okBtnicon1.getImage();

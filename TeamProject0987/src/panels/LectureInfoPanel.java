@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -57,9 +58,9 @@ public class LectureInfoPanel extends ImagePanel {
 		add(mainBtn);
 		
 		rateAvgLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
-		rateAvgLabel.setForeground(Color.WHITE);
+		rateAvgLabel.setForeground(Color.YELLOW);
 		rateAvgLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		rateAvgLabel.setBounds(478, 366, 226, 30);
+		rateAvgLabel.setBounds(478, 354, 226, 42);
 		add(rateAvgLabel);
 		
 		MypageButton myInfoBtn = new MypageButton("마이페이지");
@@ -82,7 +83,7 @@ public class LectureInfoPanel extends ImagePanel {
 		
 		////////////////////////////////////////////////
 		
-		cardLayoutPanel.setBounds(199, 406, 786, 337);
+		cardLayoutPanel.setBounds(199, 406, 786, 335);
 		add(cardLayoutPanel);
 		
 		cardLayoutPanel.setLayout(cardLayout1);
@@ -99,6 +100,7 @@ public class LectureInfoPanel extends ImagePanel {
 		detailInfoBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		detailInfoBtn.setIcon(new ImageIcon("images/상세정보.png"));
 		detailInfoBtn.setRolloverIcon(new ImageIcon("images/상세정보2.png"));
+		detailInfoBtn.setBorder(BorderFactory.createEmptyBorder());
 		detailInfoBtn.setBorderPainted(false);
 		detailInfoBtn.setBounds(199, 276, 226, 62);
 		detailInfoBtn.addActionListener(new ActionListener() {
