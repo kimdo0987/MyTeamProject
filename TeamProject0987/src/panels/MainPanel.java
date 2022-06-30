@@ -31,7 +31,7 @@ public class MainPanel extends ImagePanel {
 
 	public static JFrame thisFrame;
 
-	public static String currUserId = "hansm1119";
+	public static String currUserId = "logout";
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
 	public static MyPagePanel myPagePanel = new MyPagePanel();
@@ -55,6 +55,7 @@ public class MainPanel extends ImagePanel {
 		ImageIcon customerServiceBtn_img = new ImageIcon("images/dohyun3.png");
 		ImageIcon customerServiceBtn1_img = new ImageIcon("images/dohyun3-1.png");
 		
+
 		getMainPanel();
 		currPanel = mainPanel;
 		setBounds(0, 0, 1200, 800); // 패널크기는 JFrame 크기와 같게 (0,0, 1200, 800)로 만들어주세요

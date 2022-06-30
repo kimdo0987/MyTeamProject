@@ -20,7 +20,6 @@ public class LectureInfoPanel1 extends ImagePanel {
 		detailInfoLabel.setLineWrap(true);
 		detailInfoLabel.setOpaque(true);
 		detailInfoLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
-		detailInfoLabel.setForeground(Color.WHITE);
 		detailInfoLabel.setBounds(0, 0, 786, 390);
 		add(detailInfoLabel);
 
