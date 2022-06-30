@@ -47,7 +47,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		
 		JLabel tableNameLabel = new JLabel("장바구니 리스트");
 		tableNameLabel.setForeground(Color.WHITE);
-		tableNameLabel.setBounds(80, 60, 460, 60);
+		tableNameLabel.setBounds(80, 40, 421, 90);
 		add(tableNameLabel);
 		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
