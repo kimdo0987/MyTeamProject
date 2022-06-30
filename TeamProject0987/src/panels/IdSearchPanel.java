@@ -5,6 +5,7 @@ package panels;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -14,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,7 +30,7 @@ import methods.OnlyNumKeyAdaptor;
 import methods.RestrictTextLength;
 import popups.IdFindPopup;
 
-public class IdSearchPanel extends JPanel {
+public class IdSearchPanel extends ImagePanel {
 
 	private static String nameText = "";
 	private static String jNumText = "";
@@ -35,11 +38,24 @@ public class IdSearchPanel extends JPanel {
 	private static String searchId;
 	private static String frontJNum;
 	private static String backJNum;
+	private Icon changemainIcon;
 	
 	public IdSearchPanel() {
 	
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);
+		
+		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
+		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디찾기버튼.png");
+		
+		Image img1 = mainIcon.getImage();
+		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon changemainIcon = new ImageIcon(changeImg1);
+		
+		Image img3 = idSearchIcon.getImage();
+		Image changeImg3 = img3.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeidSearchIcon = new ImageIcon(changeImg3);
+		
 		
 		JButton lastPageBtn = new JButton("이전");
 		lastPageBtn.setBounds(23, 36, 70, 44);
@@ -55,9 +71,24 @@ public class IdSearchPanel extends JPanel {
 		});
 		
 		
-		GoToButton firstPageBtn = new GoToButton("메인");
-		firstPageBtn.setBounds(105, 36, 70, 44);
-		add(firstPageBtn);		
+		GoToButton mainBtn = new GoToButton("메인");
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(changemainIcon);
+		mainBtn.setBorderPainted(false);
+		mainBtn.setBounds(105, 36, 40, 50);
+		
+		mainBtn.setBackground(Color.WHITE);
+		add(mainBtn);
+		mainBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.currPanel.setVisible(false);
+				MainPanel.mainPanel.setVisible(true);
+				MainPanel.currPanel=MainPanel.mainPanel;
+				
+			}
+		});	
 			
 		TopLabel toplabel = new TopLabel("아이디 찾기");
 		add(toplabel);
@@ -107,8 +138,14 @@ public class IdSearchPanel extends JPanel {
 			}	
 		});
 
-		JButton idSearchBtn = new JButton("아이디 조회");
-		idSearchBtn.setBounds(478, 378, 200, 50);
+		JButton idSearchBtn = new JButton("아이디 찾기");
+		add(idSearchBtn);
+		idSearchBtn.setBounds(500, 378, 150, 30);
+		idSearchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		idSearchBtn.setIcon(changeidSearchIcon);
+		idSearchBtn.setBorderPainted(false);
+		
+		idSearchBtn.setBackground(Color.white);
 		idSearchBtn.addActionListener(new ActionListener() {
 
 			@Override

@@ -2,24 +2,23 @@ package mypagepanel_comps;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-import buttons.WishButton;
 import database.OjdbcConnection;
-import labels.TopLabel;
 import methods.RestrictTextLength;
 import panels.CustomerServicePanel;
 import panels.ImagePanel;
@@ -38,7 +37,8 @@ public class MyPageMainPanel7 extends ImagePanel {
 		setLayout(null);
 		
 		JPanel panel = new JPanel(); //탈퇴시 안내사항label, 비밀번호작성 textField,버튼 이 들어가는 패널 (장바구니 panel)
-		panel.setBounds(80, 155, 800, 510);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(80, 154, 800, 424);
 		panel.setLayout(null);
 		add(panel);
 		
@@ -48,18 +48,39 @@ public class MyPageMainPanel7 extends ImagePanel {
 		add(tableNameLabel);
 		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
 		
-		JLabel report = new JLabel("탈퇴시 안내사항");
-		report.setBounds(320,80,200,200);
-		panel.add(report);
+		/*
+		ImageIcon modifyBtnicon1 = new ImageIcon("images/changeButton/내정보수정하기버튼.png");
+		Image modifyBtnimg1 = modifyBtnicon1.getImage();
+		Image modifyBtn1 = modifyBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+		ImageIcon modifyBtnicon2 = new ImageIcon("images/changeButton/노란내정보수정하기버튼.png");
+		Image modifyBtnimg2 = modifyBtnicon2.getImage();
+		Image modifyBtn2 = modifyBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+		/////////////////////////////////////////////////////////
+		JButton modifyButton = new JButton(new ImageIcon(modifyBtn1));
+		modifyButton.setFont(new Font("굴림", Font.PLAIN, 0));
+		modifyButton.setBounds(251, 379, 294, 75);
+		modifyButton.setBorder(BorderFactory.createEmptyBorder());
+		modifyButton.setRolloverIcon(new ImageIcon(modifyBtn2));
+		*/
 		
-		JLabel  explain = new JLabel("비밀번호를 입력해주세요");
-		explain.setBounds(220,300,200,60);
-		panel.add(explain);
+		ImageIcon notifyicon = new ImageIcon("images/mp7/탈퇴안내.png");
+		Image notifyimg = notifyicon.getImage();
+		Image notify = notifyimg.getScaledInstance(570, 400, Image.SCALE_SMOOTH);
+		JLabel report = new JLabel(new ImageIcon(notify));
+		report.setBounds(12,10,570,400);
+		report.setFont(new Font("굴림", Font.PLAIN, 0));
+		panel.add(report);
 		
 		JPasswordField pwInput = new JPasswordField();
 		add(pwInput);
-		pwInput.setBounds(380, 500, 300, 30);
+		pwInput.setBounds(437, 604, 273, 45);
 		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBounds(80, 124, 800, 3);
+		add(lblNewLabel);
 		
 //		pwInput.addKeyListener(new KeyAdapter() {				// 입력한것을 pwText에 받기
 //			@Override
@@ -68,11 +89,26 @@ public class MyPageMainPanel7 extends ImagePanel {
 //			}	
 //		});
 		
-		JButton leaveBtn = new JButton("탈퇴하기");
-		leaveBtn.setBounds(260, 460, 200,40);
-		panel.add(leaveBtn);
+		ImageIcon leaveBtnicon1 = new ImageIcon("images/mp7/탈퇴하기버튼.png");
+		Image leaveBtnimg1 = leaveBtnicon1.getImage();
+		Image leaveBtn1 = leaveBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+		ImageIcon leaveBtnicon2 = new ImageIcon("images/mp7/노란탈퇴하기버튼.png");
+		Image leaveBtnimg2 = leaveBtnicon2.getImage();
+		Image leaveBtn2 = leaveBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
+		JButton leaveButton = new JButton(new ImageIcon(leaveBtn1));
+		leaveButton.setFont(new Font("굴림", Font.PLAIN, 0));
+		leaveButton.setBounds(351, 658, 294, 75);
+		leaveButton.setBorder(BorderFactory.createEmptyBorder());
+		leaveButton.setRolloverIcon(new ImageIcon(leaveBtn2));
+		add(leaveButton);
 		
-		leaveBtn.addActionListener(new ActionListener() {
+		JLabel explain = new JLabel("비밀번호를 입력해주세요");
+		explain.setFont(new Font("굴림", Font.PLAIN, 16));
+		explain.setForeground(Color.WHITE);
+		explain.setBounds(237, 595, 200, 60);
+		add(explain);
+		
+		leaveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -154,11 +190,5 @@ public class MyPageMainPanel7 extends ImagePanel {
 				
 			}
 		});
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setBounds(80, 124, 800, 3);
-		add(lblNewLabel);
 	}
 }
