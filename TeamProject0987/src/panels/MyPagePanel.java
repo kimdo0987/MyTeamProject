@@ -129,6 +129,7 @@ public class MyPagePanel extends ImagePanel {
 		
 		JLabel lbl1 = new JLabel("내 수강");
 		lbl1.setForeground(Color.WHITE);
+		lbl1.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
 		lbl1.setHorizontalAlignment(JLabel.CENTER);
 		lbl1.setLocation(0, 143);
 		lbl1.setBackground(Color.GRAY);
@@ -137,6 +138,7 @@ public class MyPagePanel extends ImagePanel {
 		
 		JLabel lbl2 = new JLabel("나의 수강관리");
 		lbl2.setForeground(Color.WHITE);
+		lbl2.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
 		lbl2.setHorizontalAlignment(JLabel.CENTER);
 		lbl2.setSize(new Dimension(104, 69));
 		lbl2.setBackground(Color.GRAY);
@@ -145,6 +147,7 @@ public class MyPagePanel extends ImagePanel {
 		
 		JLabel lbl3 = new JLabel("회원 관리");
 		lbl3.setForeground(Color.WHITE);
+		lbl3.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
 		lbl3.setHorizontalAlignment(JLabel.CENTER);
 		lbl3.setSize(new Dimension(104, 69));
 		lbl3.setBackground(Color.GRAY);

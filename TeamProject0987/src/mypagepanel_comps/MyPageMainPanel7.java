@@ -44,9 +44,9 @@ public class MyPageMainPanel7 extends ImagePanel {
 		
 		JLabel tableNameLabel = new JLabel("회원 탈퇴");
 		tableNameLabel.setForeground(Color.WHITE);
-		tableNameLabel.setBounds(80, 60, 321, 60);
+		tableNameLabel.setBounds(80, 40, 400, 90);
 		add(tableNameLabel);
-		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		/*
 		ImageIcon modifyBtnicon1 = new ImageIcon("images/changeButton/내정보수정하기버튼.png");
@@ -103,7 +103,7 @@ public class MyPageMainPanel7 extends ImagePanel {
 		add(leaveButton);
 		
 		JLabel explain = new JLabel("비밀번호를 입력해주세요");
-		explain.setFont(new Font("굴림", Font.PLAIN, 16));
+		explain.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 		explain.setForeground(Color.WHITE);
 		explain.setBounds(237, 595, 200, 60);
 		add(explain);
