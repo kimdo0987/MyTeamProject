@@ -51,6 +51,14 @@ public class PaymentPanel extends ImagePanel {
 		payCheckButton.setRolloverIcon(new ImageIcon(payChkBtn2));
 		add(payCheckButton);
 		
+		payCheckButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
+		
 		JPanel panel = new JPanel(); //탈퇴시 안내사항label, 비밀번호작성 textField,버튼 이 들어가는 패널 (장바구니 panel)
 		panel.setBounds(80, 154, 800, 510);
 		panel.setLayout(null);
