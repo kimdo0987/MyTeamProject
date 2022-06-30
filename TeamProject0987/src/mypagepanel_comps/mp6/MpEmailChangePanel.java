@@ -181,51 +181,67 @@ public class MpEmailChangePanel extends JPanel {
 			newEmailLabel.setFont(new Font("굴림", Font.PLAIN, 16));
 			newEmailLabel.setBounds(56, 223, 124, 51);
 			add(newEmailLabel);
-
-	  	JButton emailChangeOkBtn = new JButton("변경 하기");
-	  	emailChangeOkBtn.setBounds(260, 346, 202, 78);
-  		add(emailChangeOkBtn);
-      
-   		JButton profileBtn = new JButton("내 정보");
-  		profileBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
-			}
-		});
-		profileBtn.setBounds(56, 10, 93, 23);
-		add(profileBtn);
-
-
-		emailChangeOkBtn.addActionListener(new ActionListener() {
-
-				@Override
+			
+			ImageIcon profileBtnicon1 = new ImageIcon("images/changeButton/내정보버튼.png");
+			Image profileBtnimg1 = profileBtnicon1.getImage();
+			Image profileBtn1 = profileBtnimg1.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
+			ImageIcon profileBtnicon2 = new ImageIcon("images/changeButton/노란내정보버튼.png");
+			Image profileBtnimg2 = profileBtnicon2.getImage();
+			Image profileBtn2 = profileBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
+			JButton profileButton = new JButton(new ImageIcon(profileBtn1));
+			profileButton.setFont(new Font("굴림", Font.PLAIN, 0));
+			profileButton.setBorder(BorderFactory.createEmptyBorder());
+			profileButton.setRolloverIcon(new ImageIcon(profileBtn2));
+			profileButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try(
+					MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
+				}
+	  	  	});
+			profileButton.setBounds(56, 10, 100, 25);
+		  	add(profileButton);
+			
+			
+		/////////////////////////////////////////////////////////
+		ImageIcon changeBtnicon1 = new ImageIcon("images/changeButton/변경하기버튼.png");
+		Image changeBtnimg1 = changeBtnicon1.getImage();
+		Image changeBtn1 = changeBtnimg1.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeBtnicon2 = new ImageIcon("images/changeButton/노란변경하기버튼.png");
+		Image changeBtnimg2 = changeBtnicon2.getImage();
+		Image changeBtn2 = changeBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
+		/////////////////////////////////////////////////////////
+		JButton changeButton = new JButton(new ImageIcon(changeBtn1));
+		changeButton.setFont(new Font("굴림", Font.PLAIN, 0));
+		changeButton.setBounds(260, 346, 196, 50);
+		changeButton.setBorder(BorderFactory.createEmptyBorder());
+		changeButton.setRolloverIcon(new ImageIcon(changeBtn2));	
+		changeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try(
 						Connection conn = OjdbcConnection.getConnection(); 
 						PreparedStatement pstmt = conn.prepareStatement(sql);
-					) {
-						conn.setAutoCommit(false);
-						pstmt.setString(1, newEmail);
-						pstmt.setString(2, MainPanel.currUserId);
-						
-						pstmt.executeUpdate();
-						conn.commit();
-						
-					} catch (SQLException e1) {
-
-						e1.printStackTrace();
-					}
+						) {
+					conn.setAutoCommit(false);
+					pstmt.setString(1, newEmail);
+					pstmt.setString(2, MainPanel.currUserId);
 					
-					JOptionPane.showMessageDialog(
-							MainPanel.thisFrame, newEmail + "로 이메일이 변경되었습니다", "변경 완료", 1);
-					newEmailField.setText("");
+					pstmt.executeUpdate();
+					conn.commit();
 					
+				} catch (SQLException e1) {
 					
+					e1.printStackTrace();
 				}
-			});
-
-
-
+				
+				JOptionPane.showMessageDialog(
+						MainPanel.thisFrame, newEmail + "로 이메일이 변경되었습니다", "변경 완료", 1);
+				newEmailField.setText("");
+				
+				
+			}
+		});
+  		add(changeButton);
 		} catch (Exception e) {
 
 		}

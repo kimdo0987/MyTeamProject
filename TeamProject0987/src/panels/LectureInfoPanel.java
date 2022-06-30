@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -18,78 +19,57 @@ import buttons.GoToButton;
 import buttons.MypageButton;
 import buttons.WishButton;
 
-public class LectureInfoPanel extends JPanel {
+public class LectureInfoPanel extends ImagePanel {
 	
 	public static JLabel lectureNameLabel = new JLabel();
-	public static JLabel lectureImageLabel = new JLabel();
 	public static CardLayout cardLayout1 = new CardLayout();
-	public static JPanel cardLayoutPanel = new JPanel();
+	public static JPanel cardLayoutPanel = new ImagePanel();
 	public static JLabel rateAvgLabel = new JLabel();
 	public static String lectureTime = "";
+	public static String lectureCategory = "";
+	public static ImagePanel imagePanel = new ImagePanel();
 	
 	public static LectureInfoPanel1 lectureInfoPanel1 = new LectureInfoPanel1();
 	public static LectureInfoPanel2 lectureInfoPanel2 = new LectureInfoPanel2(99);
 	public static LectureInfoPanel3 lectureInfoPanel3 = new LectureInfoPanel3(lectureTime);
+	public static JLabel lectureImageLabel = new JLabel();
 	
 	public LectureInfoPanel() {
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.DARK_GRAY);
-		panel.setBounds(199, 117, 785, 170);
-		add(panel);
-		panel.setLayout(null);
-		
-		WishButton enrolmentBtn = new WishButton();
-		
-		enrolmentBtn.setBounds(226, 101, 508, 50);
-		panel.add(enrolmentBtn);
-		
-		lectureNameLabel.setOpaque(true);
-		lectureNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lectureNameLabel.setBackground(Color.WHITE);
-		lectureNameLabel.setBounds(226, 21, 508, 70);
-		panel.add(lectureNameLabel);
-		
-		
-		lectureImageLabel.setOpaque(true);
-		lectureImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lectureImageLabel.setBackground(Color.PINK);
-		lectureImageLabel.setBounds(46, 21, 168, 130);
-		panel.add(lectureImageLabel);
-		
 		GoToButton mainBtn = new GoToButton("메인"); ///////////////
-		mainBtn.setFont(new Font("굴림", Font.PLAIN, 15));
+
+		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
+		mainBtn.setRolloverIcon(new ImageIcon("images/homeBtn2.png"));
+		mainBtn.setBorderPainted(false);
 		mainBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainPanel.lectureInfoPanel.setVisible(false);
+				imagePanel.removeAll();
 				
 			}
 		});
 		mainBtn.setBackground(Color.WHITE);
-		mainBtn.setBounds(199, 39, 106, 55);
+		mainBtn.setBounds(40, 29, 95, 95);
 		add(mainBtn);
 		
-		rateAvgLabel.setFont(new Font("굴림", Font.PLAIN, 15));
-		rateAvgLabel.setOpaque(true);
+		rateAvgLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
+		rateAvgLabel.setForeground(Color.WHITE);
 		rateAvgLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		rateAvgLabel.setBounds(199, 365, 785, 30);
+		rateAvgLabel.setBounds(478, 366, 226, 30);
 		add(rateAvgLabel);
 		
-		JLabel stateLabel = new JLabel("강의 정보");
-		stateLabel.setFont(new Font("굴림", Font.PLAIN, 20));
-		stateLabel.setOpaque(true);
-		stateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		stateLabel.setBackground(Color.WHITE);
-		stateLabel.setBounds(323, 39, 554, 68);
-		add(stateLabel);
-		
-		MypageButton myInfoBtn = new MypageButton("마이페이지");	
+		MypageButton myInfoBtn = new MypageButton("마이페이지");
+		myInfoBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		myInfoBtn.setIcon(new ImageIcon("images/infoBtn.png"));
+		myInfoBtn.setRolloverIcon(new ImageIcon("images/infoBtn2.png"));
+		myInfoBtn.setBorderPainted(false);
 		myInfoBtn.setBackground(Color.WHITE);
+		myInfoBtn.setBounds(160, 29, 95, 95);
+		add(myInfoBtn);
 //		myInfoBtn.addActionListener(new ActionListener() { /////////////////////   
 //			
 //			@Override
@@ -98,15 +78,16 @@ public class LectureInfoPanel extends JPanel {
 //				
 //			}
 //		});
-		myInfoBtn.setBounds(889, 39, 106, 55);
-		add(myInfoBtn);
+		
 		
 		////////////////////////////////////////////////
 		
-		cardLayoutPanel.setBounds(199, 400, 786, 390);
+		cardLayoutPanel.setBounds(199, 406, 786, 337);
 		add(cardLayoutPanel);
 		
 		cardLayoutPanel.setLayout(cardLayout1);
+		lectureInfoPanel1.detailInfoLabel.setLocation(0, 0);
+		lectureInfoPanel1.detailInfoLabel.setSize(786, 372);
 		
 		cardLayoutPanel.add(lectureInfoPanel1, "상세정보");
 		cardLayoutPanel.add(lectureInfoPanel2, "수강평");///////////////////
@@ -115,7 +96,11 @@ public class LectureInfoPanel extends JPanel {
 		//////////////////////////////////////////////////
 		
 		LectureInfoTabButton detailInfoBtn = new LectureInfoTabButton("상세정보");
-		detailInfoBtn.setBounds(198, 300, 261, 62);
+		detailInfoBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		detailInfoBtn.setIcon(new ImageIcon("images/상세정보.png"));
+		detailInfoBtn.setRolloverIcon(new ImageIcon("images/상세정보2.png"));
+		detailInfoBtn.setBorderPainted(false);
+		detailInfoBtn.setBounds(199, 276, 226, 62);
 		detailInfoBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -134,7 +119,11 @@ public class LectureInfoPanel extends JPanel {
 				}
 		});
 		
-		commentsBtn.setBounds(460, 300, 261, 62);
+		commentsBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		commentsBtn.setIcon(new ImageIcon("images/강의수강평.png"));
+		commentsBtn.setRolloverIcon(new ImageIcon("images/강의수강평2.png"));
+		commentsBtn.setBorderPainted(false);
+		commentsBtn.setBounds(478, 276, 226, 62);
 		add(commentsBtn);
 		
 		LectureInfoTabButton scheduleBtn = new LectureInfoTabButton("강의 시간표");
@@ -146,19 +135,55 @@ public class LectureInfoPanel extends JPanel {
 				lectureInfoPanel3 = new LectureInfoPanel3(lectureTime); ///////////	
 				cardLayoutPanel.add(lectureInfoPanel3, "강의 시간표");
 				rateAvgLabel.setText("");
+				System.out.println(lectureCategory);
 			}
 		});
-		scheduleBtn.setBounds(722, 300, 261, 62);
+		scheduleBtn.setBounds(756, 276, 226, 62);
+		scheduleBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		scheduleBtn.setIcon(new ImageIcon("images/강의시간표.png"));
+		scheduleBtn.setRolloverIcon(new ImageIcon("images/강의시간표2.png"));
+		scheduleBtn.setBorderPainted(false);
+		
 		add(scheduleBtn);
+		
+		
+		imagePanel.setBounds(275,140,95,95);
+		add(imagePanel);
+		
+		
+		
+//		lectureImageLabel.setOpaque(true);
+//		lectureImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		lectureNameLabel.setForeground(Color.WHITE);
+		lectureNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 20));
+		lectureNameLabel.setBounds(412, 140, 498, 42);
+		add(lectureNameLabel);
+		
+//		lectureNameLabel.setOpaque(true);
+//		lectureNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		WishButton enrolmentBtn = new WishButton();
+		enrolmentBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		enrolmentBtn.setIcon(new ImageIcon("images/wishBtn.png"));
+		enrolmentBtn.setRolloverIcon(new ImageIcon("images/wishBtn2.png"));
+		enrolmentBtn.setBorderPainted(false);
+		enrolmentBtn.setBounds(383, 191, 498, 50);
+		add(enrolmentBtn);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBackground(Color.WHITE);
+		lblNewLabel_1.setOpaque(true);
+		lblNewLabel_1.setBounds(199, 254, 786, 3);
+		add(lblNewLabel_1);
+		
+		JLabel lblNewLabel = new JLabel("강의정보");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 36));
+		lblNewLabel.setBounds(523, 28, 154, 70);
+		add(lblNewLabel);
 	
 	}
-	
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		frame.getContentPane().add(new LectureInfoPanel());
-//		frame.setBounds(100, 100, 1200, 800);
-//		frame.setLocationRelativeTo(null);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setVisible(true);
-//	}
 }
