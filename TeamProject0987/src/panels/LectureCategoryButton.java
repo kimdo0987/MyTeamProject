@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 public class LectureCategoryButton extends JButton {
 	
+	
 	private String cateName;
 	private int num;
 

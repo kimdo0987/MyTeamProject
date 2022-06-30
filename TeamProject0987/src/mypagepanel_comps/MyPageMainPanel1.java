@@ -209,7 +209,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		tableNameLabel.setForeground(Color.WHITE);
 		tableNameLabel.setBounds(80, 60, 280, 60);
 		add(tableNameLabel);
-		//tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.WHITE);

@@ -8,8 +8,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,6 +45,12 @@ public class LoginPanel extends ImagePanel {
 	public LoginPanel() {
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);
+		
+		JLabel lblTeamname = new JLabel("로그인");
+		lblTeamname.setFont(new Font("배달의민족 도현", Font.BOLD, 39));
+		lblTeamname.setForeground(Color.WHITE);
+		lblTeamname.setBounds(523, 29, 170, 62);
+		add(lblTeamname);
 		
 		
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
@@ -109,7 +119,11 @@ public class LoginPanel extends ImagePanel {
 //		loginCenter.setBounds(400, 200, 100, 50);
 		//////////////// 여기서부터 클래스화 할수있을거같음 //////////////////////////
 		JButton lastPageBtn = new JButton("이전");
-		lastPageBtn.setBounds(23, 36, 70, 44);
+		lastPageBtn.setBounds(135, 29, 95, 95);
+		lastPageBtn.setBorderPainted(false);
+		lastPageBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		lastPageBtn.setIcon(new ImageIcon("images/backBtn.png"));
+		lastPageBtn.setRolloverIcon(new ImageIcon("images/backBtn2.png"));
 		add(lastPageBtn);
 		lastPageBtn.addActionListener(new ActionListener() {			
 			@Override
@@ -128,56 +142,58 @@ public class LoginPanel extends ImagePanel {
 				}
 			}
 		});
-		
-		
 		GoToButton mainBtn = new GoToButton("메인");
 		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-		mainBtn.setIcon(changemainIcon);
+		mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
+		mainBtn.setRolloverIcon(new ImageIcon("images/homeBtn2.png"));
 		mainBtn.setBorderPainted(false);
-		mainBtn.setBounds(105, 36, 40, 50);
-		mainBtn.setRolloverIcon(changeYMainIcon); //마우스 올렸을때 이미지 추가
-		
-		mainBtn.setBackground(Color.WHITE);
+		mainBtn.setBounds(40, 29, 95, 95);
 		add(mainBtn);
-		mainBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				MainPanel.currPanel.setVisible(false);
-				MainPanel.mainPanel.setVisible(true);
-				MainPanel.currPanel=MainPanel.mainPanel;
-				
-			}
-		});
+
 		
 		//////////////////////////////////////////////////////////////////
 		
-		TopLabel toplabel = new TopLabel("로그인");
-		add(toplabel);
+		
 		
 		JLabel loginCenter = new JLabel("로그인");
 		add(loginCenter);
 		loginCenter.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
 		loginCenter.setForeground(Color.WHITE);
-		loginCenter.setBounds(400, 200, 100, 50);
-		
+		loginCenter.setBounds(421, 200, 100, 50);
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
+		idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
 		add(idInput);
-		idInput.setBounds(400, 250, 300, 30);
+		idInput.setBounds(421, 250, 300, 30);
 		idInput.addKeyListener(new RestrictTextLength(idInput, 16)); //글자수제한
 		idInput.addKeyListener(new IdKeyAdaptor()); // 제약사항 적용
-//		idInput.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				idText = idInput.getText().toString();
-//			}	
-//		});
+		idInput.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+			}
+			
+		});
+		
+		idInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+			}
+			@Override
+			public void focusGained(FocusEvent e) {
+				idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+			}
+		
+		});
+		
 		
 		pwInput = new HintPasswordField("비밀번호를 입력하세요.");
-		pwInput.setFont(new Font("굴림", Font.PLAIN, 16));
-		pwInput.setBounds(400, 300, 300, 30);
-		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
+		pwInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+		pwInput.setBounds(421, 300, 300, 30);
+		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); // 글자수제한
 		pwInput.addKeyListener(new PwKeyAdaptor()); // 제약사항 적용
+
 		pwInput.addKeyListener(new KeyAdapter() {
 
 				@Override
@@ -240,15 +256,29 @@ public class LoginPanel extends ImagePanel {
 				}
 		});
 		
+
 		add(pwInput);
-	    
-//		pwInput.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				char[] a = pwInput.getPassword();
-//				pwText = String.valueOf(a);				
-//			}	
-//		});
+
+		pwInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				pwInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				pwInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+			}
+		
+		});
+		pwInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				pwInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
+				pwInput.setEchoChar('*');
+				super.keyPressed(e);
+			}
+		});
 		
 
 		JButton loginBtn = new JButton("로그인");
@@ -259,7 +289,7 @@ public class LoginPanel extends ImagePanel {
 		
 		loginBtn.setBackground(Color.WHITE);
 		add(loginBtn);
-		loginBtn.setBounds(450, 350, 200, 50);
+		loginBtn.setBounds(471, 350, 200, 50);
 		
 		
 		
@@ -304,11 +334,11 @@ public class LoginPanel extends ImagePanel {
 					
 					// 다시 비워진 상태로 돌려놓기
 					idInput.setText("아이디를 입력하세요.");
-					idInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
 					idInput.setForeground(Color.GRAY);
 					
 					pwInput.setText("비밀번호를 입력하세요.");
-					pwInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					pwInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));  
 					pwInput.setForeground(Color.GRAY);
 					pwInput.setEchoChar((char) 0);
 					
@@ -326,7 +356,7 @@ public class LoginPanel extends ImagePanel {
 		
 		JButton findId = new JButton("아이디찾기");
 		add(findId);
-		findId.setBounds(339, 430, 150, 35);
+		findId.setBounds(360, 430, 150, 35);
 		findId.setFont(new Font("굴림", Font.PLAIN, 0));
 		findId.setIcon(changeidSearchIcon);
 		findId.setBorderPainted(false);
@@ -340,7 +370,7 @@ public class LoginPanel extends ImagePanel {
 				MainPanel.currPanel.setVisible(false);
 				MainPanel.thisFrame.remove(MainPanel.idSearchPanel);
 				MainPanel.idSearchPanel = new IdSearchPanel();
-				MainPanel.thisFrame.add(MainPanel.idSearchPanel);
+				MainPanel.thisFrame.getContentPane().add(MainPanel.idSearchPanel);
 				MainPanel.idSearchPanel.setVisible(true);
 				MainPanel.currPanel = MainPanel.idSearchPanel;
 			}
@@ -349,7 +379,7 @@ public class LoginPanel extends ImagePanel {
 		
 		JButton findPwBtn = new JButton("비밀번호찾기");
 		add(findPwBtn);
-		findPwBtn.setBounds(500, 430, 150, 35);
+		findPwBtn.setBounds(521, 430, 150, 35);
 		findPwBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		findPwBtn.setIcon(changepwSearchIcon);
 		findPwBtn.setBorderPainted(false);
@@ -363,7 +393,7 @@ public class LoginPanel extends ImagePanel {
 				MainPanel.currPanel.setVisible(false);
 				MainPanel.thisFrame.remove(MainPanel.pwSerachPanel);
 				MainPanel.pwSerachPanel = new PwSearchPanel();
-				MainPanel.thisFrame.add(MainPanel.pwSerachPanel);
+				MainPanel.thisFrame.getContentPane().add(MainPanel.pwSerachPanel);
 				MainPanel.pwSerachPanel.setVisible(true);
 				MainPanel.currPanel = MainPanel.pwSerachPanel;
 				
@@ -372,7 +402,7 @@ public class LoginPanel extends ImagePanel {
 
 		SignupButton signUp = new SignupButton("회원가입");
 		add(signUp);
-		signUp.setBounds(661, 430, 150, 35);
+		signUp.setBounds(682, 430, 150, 35);
 		signUp.setFont(new Font("굴림", Font.PLAIN, 0));
 		signUp.setIcon(changesignInIcon);
 		signUp.setBorderPainted(false);

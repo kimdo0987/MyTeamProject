@@ -97,7 +97,7 @@ public class MainPanel extends ImagePanel {
 		JLabel lblNewLabel = new JLabel("<html><body style='text-align:center;'>Developer <br/>lecture <br/>program</body></html>", JLabel.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Libre Baskerville", Font.PLAIN, 100));
-		lblNewLabel.setBounds(130, 20, 904, 399);
+		lblNewLabel.setBounds(130, 65, 904, 399);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
