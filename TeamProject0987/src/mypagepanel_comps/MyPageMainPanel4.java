@@ -126,7 +126,7 @@ public class MyPageMainPanel4 extends ImagePanel {
 		tableNameLabel_1.setBounds(534, 133, 127, 40);
 		add(tableNameLabel_1);
 		tableNameLabel_1.setForeground(Color.WHITE);
-		tableNameLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
+		tableNameLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 		
 		couponCodeField = new JTextField();
 		couponCodeField.setBounds(644, 138, 176, 35);

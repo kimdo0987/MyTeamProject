@@ -103,7 +103,7 @@ public class MyPageMainPanel7 extends ImagePanel {
 		add(leaveButton);
 		
 		JLabel explain = new JLabel("비밀번호를 입력해주세요");
-		explain.setFont(new Font("굴림", Font.PLAIN, 16));
+		explain.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 		explain.setForeground(Color.WHITE);
 		explain.setBounds(237, 595, 200, 60);
 		add(explain);
