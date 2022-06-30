@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 
 import buttons.GoToButton;
 import buttons.SignupButton;
+import database.LectureTable2;
 import database.OjdbcConnection;
 import labels.TopLabel;
 import methods.IdKeyAdaptor;
@@ -177,6 +178,67 @@ public class LoginPanel extends ImagePanel {
 		pwInput.setBounds(400, 300, 300, 30);
 		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
 		pwInput.addKeyListener(new PwKeyAdaptor()); // 제약사항 적용
+		pwInput.addKeyListener(new KeyAdapter() {
+
+				@Override
+				public void keyPressed(KeyEvent e) {
+					 if(e.getKeyCode() == KeyEvent.VK_ENTER){
+						 try (
+									Connection conn = OjdbcConnection.getConnection();
+									PreparedStatement pstmt = conn.prepareStatement("SELECT member_password FROM members "
+											+ "WHERE member_id = ?");
+							) {
+								pstmt.setString(1, idInput.getText().toString());
+								ResultSet rs = pstmt.executeQuery();
+								
+								while(rs.next()) {
+									searchPw = rs.getString("member_password");
+								}
+								
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
+							
+
+							if (searchPw == null) {
+								searchPw = "";
+							}
+							
+							// 로그인 성공상황
+							if(searchPw.equals(String.valueOf(pwInput.getPassword()))) {
+								MainPanel.currPanel.setVisible(false);
+								MainPanel.mainPanel.setVisible(true);
+								MainPanel.lastPanel = MainPanel.currPanel;
+								MainPanel.currPanel = MainPanel.mainPanel;
+								MainPanel.currUserId = idInput.getText().toString();
+
+								MainPanel.loginBtn.setVisible(false);
+								MainPanel.logoutBtn.setVisible(true);
+								
+								CustomerServicePanel.loginBtn.setVisible(false);
+								CustomerServicePanel.logoutBtn.setVisible(true);
+								
+								// 다시 비워진 상태로 돌려놓기
+								idInput.setText("아이디를 입력하세요.");
+								idInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+								idInput.setForeground(Color.GRAY);
+								
+								pwInput.setText("비밀번호를 입력하세요.");
+								pwInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+								pwInput.setForeground(Color.GRAY);
+								pwInput.setEchoChar((char) 0);
+								
+								searchPw = "";
+								
+								// 로그인 실패상황
+
+							} else {
+								JOptionPane.showMessageDialog(MainPanel.thisFrame, "아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
+										+ "입력하신 내용을 다시 확인해주세요.");
+							}
+					 }
+				}
+		});
 		
 		add(pwInput);
 	    
