@@ -57,7 +57,7 @@ public class MyPageMainPanel4 extends ImagePanel {
 		tableNameLabel.setForeground(Color.WHITE);
 		tableNameLabel.setBounds(80, 60, 491, 60);
 		add(tableNameLabel);
-		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		
 		///////////////////TABLE 생성 //////////////////////////

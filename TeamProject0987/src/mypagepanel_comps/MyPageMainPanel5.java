@@ -32,7 +32,7 @@ public class MyPageMainPanel5 extends ImagePanel {
 		tableNameLabel.setForeground(Color.WHITE);
 		tableNameLabel.setBounds(80, 60, 321, 60);
 		add(tableNameLabel);
-		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBounds(0, 0, 800, 610);	
