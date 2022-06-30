@@ -100,8 +100,9 @@ public class LectureSearchPanel extends ImagePanel {
 			});
 			JButton recommendBtn = new JButton("강의추천");
 			recommendBtn.setIcon(new ImageIcon("images/recommendBtn.png"));
+			recommendBtn.setRolloverIcon(new ImageIcon("images/recommendBtn2.png"));
 			recommendBtn.setFont(new Font("Gulim", Font.PLAIN, 0));
-			recommendBtn.setBounds(309, 129, 46, 44);
+			recommendBtn.setBounds(283, 116, 75, 75);
 			recommendBtn.addActionListener(new ActionListener() {
 
 				@Override
@@ -155,7 +156,8 @@ public class LectureSearchPanel extends ImagePanel {
 			
 			JButton searchBtn = new JButton("검색");
 			searchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-			searchBtn.setIcon(new ImageIcon("images/searchBtn.png"));
+			searchBtn.setIcon(new ImageIcon("images/검색.png"));
+			searchBtn.setRolloverIcon(new ImageIcon("images/검색2.png"));
 			searchBtn.setBorderPainted(false);
 			searchBtn.addActionListener(new ActionListener() {
 				
@@ -167,7 +169,7 @@ public class LectureSearchPanel extends ImagePanel {
 					searchField.setText("");
 				}
 			});
-			searchBtn.setBounds(849, 129, 46, 44);
+			searchBtn.setBounds(853, 116, 75, 75);
 			searchBtn.setBackground(Color.WHITE);
 			add(searchBtn);
 			
@@ -176,18 +178,6 @@ public class LectureSearchPanel extends ImagePanel {
 			lblTeamname.setForeground(Color.WHITE);
 			lblTeamname.setBounds(523, 29, 170, 62);
 			add(lblTeamname);
-			
-			JLabel lblNewLabel = new JLabel(" 강의추천");
-			lblNewLabel.setForeground(new Color(255, 255, 255));
-			lblNewLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
-			lblNewLabel.setBounds(297, 175, 67, 29);
-			add(lblNewLabel);
-			
-			JLabel lblNewLabel_1 = new JLabel("  검색하기");
-			lblNewLabel_1.setForeground(Color.WHITE);
-			lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
-			lblNewLabel_1.setBounds(840, 175, 67, 29);
-			add(lblNewLabel_1);
 			
 			for (int i = 0; i < 11; ++i) {
 				LectureCategoryButton cateBtn = new LectureCategoryButton(i);

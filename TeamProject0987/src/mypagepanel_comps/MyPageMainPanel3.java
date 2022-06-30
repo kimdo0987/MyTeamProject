@@ -181,7 +181,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		        	table.repaint();
 
 		        	
-		        	Font font = (new Font("맑은 고딕", Font.PLAIN, 17));
+		        	Font font = (new Font("맑은 고딕", Font.PLAIN, 14));
 		    		
 					Map attributes = font.getAttributes();
 					attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
