@@ -67,11 +67,13 @@ public class MyPageTabButton extends JButton {
      * @param text  the text of the button
      * @param icon  the Icon image to display on the button
      */
-    public MyPageTabButton(String text, Icon icon) {
+    public MyPageTabButton(String name, Icon icon) {
         // Create the model
         setModel(new DefaultButtonModel());
-
+        setText(name);
+		this.name = name;
+		addActionListener(eventListener);
         // initialize
-        init(text, icon);
+        init(name, icon);
     }
 }

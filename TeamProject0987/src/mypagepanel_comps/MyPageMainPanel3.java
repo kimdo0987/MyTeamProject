@@ -226,7 +226,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		ImageIcon payBtnicon2 = new ImageIcon("images/mp3/노란결제하기버튼.png");
 		Image payBtnimg2 = payBtnicon2.getImage();
 		Image payBtn2 = payBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-		MyPageTabButton paymentButton = new MyPageTabButton(new ImageIcon(payBtn1));
+		MyPageTabButton paymentButton = new MyPageTabButton("결제하기", new ImageIcon(payBtn1));
 		paymentButton.setFont(new Font("굴림", Font.PLAIN, 0));
 		paymentButton.setBounds(586, 675, 294, 75);
 		paymentButton.setBorder(BorderFactory.createEmptyBorder());
@@ -285,15 +285,15 @@ public class MyPageMainPanel3 extends ImagePanel {
 				
 				table2.getColumnModel().getColumn(0).setMinWidth(300);
 				table2.getColumnModel().getColumn(0).setMaxWidth(300);
-				table2.getColumnModel().getColumn(1).setMinWidth(80);//셀 너비 조정
-				table2.getColumnModel().getColumn(1).setMaxWidth(80);
+				table2.getColumnModel().getColumn(1).setMinWidth(100);//셀 너비 조정
+				table2.getColumnModel().getColumn(1).setMaxWidth(100);
 				table2.getColumnModel().getColumn(2).setMinWidth(120);
 				table2.getColumnModel().getColumn(2).setMaxWidth(120);
 				
-				table2.getColumnModel().getColumn(3).setMinWidth(60);
-				table2.getColumnModel().getColumn(3).setMaxWidth(60);
-				table2.getColumnModel().getColumn(4).setMinWidth(90);
-				table2.getColumnModel().getColumn(4).setMaxWidth(90);
+				table2.getColumnModel().getColumn(3).setMinWidth(100);
+				table2.getColumnModel().getColumn(3).setMaxWidth(100);
+				table2.getColumnModel().getColumn(4).setMinWidth(100);
+				table2.getColumnModel().getColumn(4).setMaxWidth(100);
 				table2.getColumnModel().getColumn(5).setMinWidth(100);
 				table2.getColumnModel().getColumn(5).setMaxWidth(100);
 				
