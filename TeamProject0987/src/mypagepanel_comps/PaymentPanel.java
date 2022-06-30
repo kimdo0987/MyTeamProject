@@ -27,9 +27,9 @@ public class PaymentPanel extends ImagePanel {
 		//헤딩
 		JLabel tableNameLabel = new JLabel("결제확인");
 		tableNameLabel.setForeground(Color.WHITE);
-		tableNameLabel.setBounds(80, 60, 460, 60);
+		tableNameLabel.setBounds(80, 40, 460, 90);
 		add(tableNameLabel);
-		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		//구분선
 		JLabel lblNewLabel = new JLabel("");

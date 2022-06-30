@@ -47,6 +47,8 @@ public class IdSearchPanel extends ImagePanel {
 		
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
 		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디찾기버튼.png");
+		ImageIcon idSearchIcon2 = new ImageIcon("images/intackYellowBtn/노란아이디찾기.png");
+		
 		
 		Image img1 = mainIcon.getImage();
 		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -56,6 +58,9 @@ public class IdSearchPanel extends ImagePanel {
 		Image changeImg3 = img3.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeidSearchIcon = new ImageIcon(changeImg3);
 		
+		Image img4 = idSearchIcon2.getImage();
+		Image changeImg4 = img4.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeidSearchIcon2 = new ImageIcon(changeImg4);
 		
 		JButton lastPageBtn = new JButton("이전");
 		lastPageBtn.setBounds(23, 36, 70, 44);
@@ -144,7 +149,7 @@ public class IdSearchPanel extends ImagePanel {
 		idSearchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		idSearchBtn.setIcon(changeidSearchIcon);
 		idSearchBtn.setBorderPainted(false);
-		
+		idSearchBtn.setRolloverIcon(changeidSearchIcon2);
 		idSearchBtn.setBackground(Color.white);
 		idSearchBtn.addActionListener(new ActionListener() {
 
