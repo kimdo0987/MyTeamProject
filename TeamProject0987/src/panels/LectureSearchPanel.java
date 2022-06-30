@@ -115,6 +115,32 @@ public class LectureSearchPanel extends ImagePanel {
 
 			}
 		});
+		
+		allCategoryBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				allCategoryBtn.setIcon(new ImageIcon("images/all2.png"));
+				allCategoryBtn.setFont(new Font("", Font.BOLD, 0));
+				
+				for (int i = 0; i < buttonArr.length; ++i) {
+					if (!buttonArr[i].getText().equals(allCategoryBtn.getText())) {
+						buttonArr[i].setFont(new Font("", Font.BOLD, 0));
+						if (i < 11) {
+							buttonArr[i].setIcon(new ImageIcon("images/" + imagePath[i]));								
+						} else if (i == 11) {
+							buttonArr[i].setIcon(new ImageIcon("images/all.png"));
+						} else if (i == 12) {
+							buttonArr[i].setIcon(new ImageIcon("images/recommendBtn.png"));
+						}
+					}
+
+				}
+
+			}
+		});
+		
+		
 		buttonArr[11]= allCategoryBtn;
 		
 		JButton recommendBtn = new JButton("강의추천");
@@ -133,6 +159,32 @@ public class LectureSearchPanel extends ImagePanel {
 
 			}
 		});
+		
+		recommendBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				recommendBtn.setIcon(new ImageIcon("images/recommendBtn2.png"));
+				recommendBtn.setFont(new Font("", Font.BOLD, 0));
+				
+				for (int i = 0; i < buttonArr.length; ++i) {
+					if (!buttonArr[i].getText().equals(recommendBtn.getText())) {
+						buttonArr[i].setFont(new Font("", Font.BOLD, 0));
+						if (i < 11) {
+							buttonArr[i].setIcon(new ImageIcon("images/" + imagePath[i]));								
+						} else if (i == 11) {
+							buttonArr[i].setIcon(new ImageIcon("images/all.png"));
+						} else if (i == 12) {
+							buttonArr[i].setIcon(new ImageIcon("images/recommendBtn.png"));
+						}
+					}
+
+				}
+
+			}
+		});
+		
+		
 		recommendBtn.setBackground(Color.WHITE);
 		recommendBtn.setBorderPainted(false);
 		add(recommendBtn);
@@ -220,7 +272,7 @@ public class LectureSearchPanel extends ImagePanel {
 				public void actionPerformed(ActionEvent e) {
 					cateBtn.setIcon(new ImageIcon("images/"+imagePath2[cateBtn.num]));
 					cateBtn.setFont(new Font("", Font.BOLD, 0));
-					System.out.println();
+					
 					for (int i = 0; i < buttonArr.length; ++i) {
 						if (!buttonArr[i].getText().equals(cateBtn.getText())) {
 							buttonArr[i].setFont(new Font("", Font.BOLD, 0));
