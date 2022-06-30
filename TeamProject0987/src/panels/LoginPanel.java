@@ -231,6 +231,10 @@ public class LoginPanel extends ImagePanel {
 								MainPanel.loginBtn.setVisible(false);
 								MainPanel.logoutBtn.setVisible(true);
 								
+								MainPanel.signUpBtn.setVisible(false);
+								CustomerServicePanel.join.setVisible(false);
+								CustomerServicePanel.logoutBtn.setBounds(1050, 31, 115, 115);
+								
 								CustomerServicePanel.loginBtn.setVisible(false);
 								CustomerServicePanel.logoutBtn.setVisible(true);
 								
