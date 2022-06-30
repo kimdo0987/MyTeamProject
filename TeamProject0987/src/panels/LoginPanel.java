@@ -48,6 +48,8 @@ public class LoginPanel extends ImagePanel {
 		ImageIcon pwSearchIcon = new ImageIcon("images/intackBtn/비밀번호찾기버튼.png");
 		ImageIcon signInIcon = new ImageIcon("images/intackBtn/회원가입버튼.png");
 		
+		
+		ImageIcon yMainIcon = new ImageIcon("images/homebutton3.png");
 		ImageIcon yLoginIcon = new ImageIcon("images/intackYellowBtn/노란로그인.png");
 		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
 		ImageIcon yPwSearchIcon = new ImageIcon("images/intackYellowBtn/노란비밀번호찾기.png");
@@ -79,19 +81,25 @@ public class LoginPanel extends ImagePanel {
 		
 		
 		// 노란이미지 크기조정중
-		Image img22 = loginIcon.getImage();
+		
+		Image img11 = yMainIcon.getImage();
+		Image changeImg11 = img11.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeYMainIcon = new ImageIcon(changeImg11);
+		
+		
+		Image img22 = yLoginIcon.getImage();
 		Image changeImg22 = img22.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
 		ImageIcon changeYLoginIcon = new ImageIcon(changeImg22);
 		
-		Image img33 = idSearchIcon.getImage();
+		Image img33 = yIdSearchIcon.getImage();
 		Image changeImg33 = img33.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeYIdSearchIcon = new ImageIcon(changeImg33);
 		
-		Image img44 = pwSearchIcon.getImage();
+		Image img44 = yPwSearchIcon.getImage();
 		Image changeImg44 = img44.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeYPwSearchIcon = new ImageIcon(changeImg44);
 		
-		Image img55 = signInIcon.getImage();
+		Image img55 = ySignInIcon.getImage();
 		Image changeImg55 = img55.getScaledInstance(153, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeYSignInIcon = new ImageIcon(changeImg55);
 		
@@ -126,6 +134,7 @@ public class LoginPanel extends ImagePanel {
 		mainBtn.setIcon(changemainIcon);
 		mainBtn.setBorderPainted(false);
 		mainBtn.setBounds(105, 36, 40, 50);
+		mainBtn.setRolloverIcon(changeYMainIcon); //마우스 올렸을때 이미지 추가
 		
 		mainBtn.setBackground(Color.WHITE);
 		add(mainBtn);
@@ -184,7 +193,7 @@ public class LoginPanel extends ImagePanel {
 		loginBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		loginBtn.setIcon(changeloginIcon);
 		loginBtn.setBorderPainted(false);
-//		loginBtn.setRolloverIcon(lectureSearchBtn1_img); //마우스 올렸을때 이미지 추가
+		loginBtn.setRolloverIcon(changeYLoginIcon); //마우스 올렸을때 이미지 추가
 		
 		loginBtn.setBackground(Color.WHITE);
 		add(loginBtn);
@@ -259,6 +268,7 @@ public class LoginPanel extends ImagePanel {
 		findId.setFont(new Font("굴림", Font.PLAIN, 0));
 		findId.setIcon(changeidSearchIcon);
 		findId.setBorderPainted(false);
+		findId.setRolloverIcon(changeYIdSearchIcon); //마우스 올렸을때 이미지 추가
 		
 		findId.setBackground(Color.WHITE);
 		findId.addActionListener(new ActionListener() {		
@@ -281,6 +291,7 @@ public class LoginPanel extends ImagePanel {
 		findPwBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		findPwBtn.setIcon(changepwSearchIcon);
 		findPwBtn.setBorderPainted(false);
+		findPwBtn.setRolloverIcon(changeYPwSearchIcon); //마우스 올렸을때 이미지 추가
 		
 		findPwBtn.setBackground(Color.WHITE);
 		findPwBtn.addActionListener(new ActionListener() {
@@ -303,6 +314,7 @@ public class LoginPanel extends ImagePanel {
 		signUp.setFont(new Font("굴림", Font.PLAIN, 0));
 		signUp.setIcon(changesignInIcon);
 		signUp.setBorderPainted(false);
+		signUp.setRolloverIcon(changeYSignInIcon); //마우스 올렸을때 이미지 추가
 		
 		signUp.setBackground(Color.WHITE);
 	}

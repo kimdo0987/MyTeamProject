@@ -45,6 +45,11 @@ public class PwSearchPanel extends ImagePanel {
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
 		ImageIcon pwIcon = new ImageIcon("images/intackBtn/임시비밀번호로변경버튼.png");
 		
+		ImageIcon yMainIcon = new ImageIcon("images/homebutton3.png");
+		ImageIcon yPwCreateIcon = new ImageIcon("images/intackYellowBtn/노란임시비밀번호생성.png");
+		
+		
+		//크기조정
 		Image img1 = mainIcon.getImage();
 		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		ImageIcon changemainIcon = new ImageIcon(changeImg1);
@@ -52,6 +57,18 @@ public class PwSearchPanel extends ImagePanel {
 		Image img2 = pwIcon.getImage();
 		Image changeImg2 = img2.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
 		ImageIcon changePwIcon = new ImageIcon(changeImg2);
+		
+		//노란거 크기조정
+		Image img11 = yMainIcon.getImage();
+		Image changeImg11 = img11.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeYMainIcon = new ImageIcon(changeImg11);
+
+		Image img22 = yPwCreateIcon.getImage();
+		Image changeImg22 = img22.getScaledInstance(210, 50, Image.SCALE_SMOOTH);
+		ImageIcon changeYLoginIcon = new ImageIcon(changeImg22);
+		
+		
+		
 		
 		setBounds(0, 0, 1200, 800);
 		setLayout(null);
@@ -76,6 +93,8 @@ public class PwSearchPanel extends ImagePanel {
 		mainBtn.setBorderPainted(false);
 		mainBtn.setBackground(Color.WHITE);
 		mainBtn.setBounds(105, 36, 40, 50);
+		mainBtn.setRolloverIcon(changeYMainIcon); //마우스 올렸을때 이미지 추가
+		
 		add(mainBtn);	
 		
 		TopLabel toplabel = new TopLabel("비밀번호 찾기");
@@ -126,6 +145,8 @@ public class PwSearchPanel extends ImagePanel {
 		JLabel pwMsgLabel = new JLabel("-");
 		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
 		pwMsgLabel.setBounds(594, 330, 20, 44);
+		pwMsgLabel.setForeground(Color.WHITE);
+		
 		add(pwMsgLabel);
 		
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
@@ -147,6 +168,7 @@ public class PwSearchPanel extends ImagePanel {
 		pwSearchBtn.setIcon(changePwIcon);
 		pwSearchBtn.setBorderPainted(false);
 		pwSearchBtn.setBackground(Color.WHITE);
+		pwSearchBtn.setRolloverIcon(changeYLoginIcon); //마우스 올렸을때 이미지 추가
 		
 		pwSearchBtn.setBounds(470, 425, 200, 50);
 		pwSearchBtn.addActionListener(new ActionListener() {

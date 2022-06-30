@@ -38,9 +38,15 @@ public class MyPageMainPanel7 extends ImagePanel {
 		setLayout(null);
 		
 		JPanel panel = new JPanel(); //탈퇴시 안내사항label, 비밀번호작성 textField,버튼 이 들어가는 패널 (장바구니 panel)
-		panel.setBounds(162, 155, 730, 569);
+		panel.setBounds(80, 155, 800, 510);
 		panel.setLayout(null);
 		add(panel);
+		
+		JLabel tableNameLabel = new JLabel("회원 탈퇴");
+		tableNameLabel.setForeground(Color.WHITE);
+		tableNameLabel.setBounds(80, 60, 321, 60);
+		add(tableNameLabel);
+		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
 		
 		JLabel report = new JLabel("탈퇴시 안내사항");
 		report.setBounds(320,80,200,200);
@@ -63,7 +69,7 @@ public class MyPageMainPanel7 extends ImagePanel {
 //		});
 		
 		JButton leaveBtn = new JButton("탈퇴하기");
-		leaveBtn.setBounds(260, 500, 200,40);
+		leaveBtn.setBounds(260, 460, 200,40);
 		panel.add(leaveBtn);
 		
 		leaveBtn.addActionListener(new ActionListener() {
