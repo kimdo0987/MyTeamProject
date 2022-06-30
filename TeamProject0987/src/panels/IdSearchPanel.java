@@ -64,7 +64,7 @@ public class IdSearchPanel extends ImagePanel {
 		Image changeImg3 = img3.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeidSearchIcon = new ImageIcon(changeImg3);
 		
-		Image img4 = idSearchIcon2.getImage();
+		Image img4 = yIdSearchIcon.getImage();
 		Image changeImg4 = img4.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeidSearchIcon2 = new ImageIcon(changeImg4);
 		
