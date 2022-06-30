@@ -25,13 +25,13 @@ public class MainPanel extends ImagePanel {
 
 	
 	private MypageButton myPageBtn;
-	private SignupButton signUpBtn;
+	public static SignupButton signUpBtn;
 	public static LoginButton loginBtn;
 	public static LogoutButton logoutBtn;
 
 	public static JFrame thisFrame;
 
-	public static String currUserId = "hansm1119";
+	public static String currUserId = "logout";
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
 	public static MyPagePanel myPagePanel = new MyPagePanel();

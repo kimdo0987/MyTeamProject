@@ -22,6 +22,7 @@ import buttons.SignupButton;
 
 public class CustomerServicePanel extends ImagePanel {
 
+	public static SignupButton join;
 	public static LoginButton loginBtn;
 	public static LogoutButton logoutBtn;
 
@@ -119,7 +120,7 @@ public class CustomerServicePanel extends ImagePanel {
 		road.setBounds(813, 169, 192, 80);
 		add(road);
 
-		SignupButton join = new SignupButton("회원가입");
+		join = new SignupButton("회원가입");
 		join.setBounds(1050, 31, 115, 115);
 		add(join);
 
