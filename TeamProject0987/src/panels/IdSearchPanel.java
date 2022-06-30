@@ -46,9 +46,15 @@ public class IdSearchPanel extends ImagePanel {
 		setLayout(null);
 		
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
-		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디찾기버튼.png");
-		ImageIcon idSearchIcon2 = new ImageIcon("images/intackYellowBtn/노란아이디찾기.png");
+
+		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디조회버튼.png");
 		
+		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
+		
+		Image img33 = yIdSearchIcon.getImage();
+		Image changeImg33 = img33.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYIdSearchIcon = new ImageIcon(changeImg33);
+
 		
 		Image img1 = mainIcon.getImage();
 		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -58,7 +64,7 @@ public class IdSearchPanel extends ImagePanel {
 		Image changeImg3 = img3.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeidSearchIcon = new ImageIcon(changeImg3);
 		
-		Image img4 = idSearchIcon2.getImage();
+		Image img4 = yIdSearchIcon.getImage();
 		Image changeImg4 = img4.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeidSearchIcon2 = new ImageIcon(changeImg4);
 		
@@ -128,6 +134,14 @@ public class IdSearchPanel extends ImagePanel {
 			}	
 		});
 		
+
+		JLabel pwMsgLabel = new JLabel("-");
+		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		pwMsgLabel.setBounds(572, 286, 20, 44);
+		pwMsgLabel.setForeground(Color.white);
+		add(pwMsgLabel);
+		
+
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
 		jNumInput2.setBounds(620, 404, 170, 44);
@@ -141,13 +155,16 @@ public class IdSearchPanel extends ImagePanel {
 			}	
 		});
 
-		JButton idSearchBtn = new JButton("아이디 찾기");
+		JButton idSearchBtn = new JButton("아이디 조회");
 		add(idSearchBtn);
 		idSearchBtn.setBounds(525, 513, 150, 30);
 		idSearchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		idSearchBtn.setIcon(changeidSearchIcon);
 		idSearchBtn.setBorderPainted(false);
-		idSearchBtn.setRolloverIcon(changeidSearchIcon2);
+
+		idSearchBtn.setRolloverIcon(changeYIdSearchIcon);
+		
+
 		idSearchBtn.setBackground(Color.white);
 		idSearchBtn.addActionListener(new ActionListener() {
 
