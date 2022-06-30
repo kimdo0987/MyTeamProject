@@ -325,7 +325,13 @@ public class LoginPanel extends ImagePanel {
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
 					MainPanel.currUserId = idInput.getText().toString();
+					
+					MainPanel.signUpBtn.setVisible(false);
+					CustomerServicePanel.join.setVisible(false);
+					CustomerServicePanel.logoutBtn.setBounds(1050, 31, 115, 115);
 
+					
+					
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);
 					
