@@ -55,11 +55,10 @@ public class LectureTable extends JPanel {
 		
 		//컬럼명 폰트 설정
 		JTableHeader tableHeader = table.getTableHeader();
-		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 17);
+		Font headerFont = new Font("맑은 고딕", Font.PLAIN, 15);
 		tableHeader.setFont(headerFont);
 		
 		MyRenderer cellRenderer = new MyRenderer();
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.addMouseMotionListener(new MouseMotionAdapter(){
 			public void mouseMoved(MouseEvent e)
 			{
@@ -90,8 +89,6 @@ public class LectureTable extends JPanel {
 		table.getColumnModel().getColumn(2).setMaxWidth(150);
 		table.getColumnModel().getColumn(3).setMinWidth(80);
 		table.getColumnModel().getColumn(3).setMaxWidth(80);
-		
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		table.setRowHeight(30);
 		table.setShowVerticalLines(false);
 		

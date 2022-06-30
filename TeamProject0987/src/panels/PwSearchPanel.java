@@ -74,7 +74,13 @@ public class PwSearchPanel extends ImagePanel {
 		setLayout(null);
 		
 		JButton lastPageBtn = new JButton("이전");
-		lastPageBtn.setBounds(23, 36, 70, 44);
+		
+		lastPageBtn.setBounds(135, 29, 95, 95);
+		lastPageBtn.setBorderPainted(false);
+		lastPageBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		lastPageBtn.setIcon(new ImageIcon("images/backBtn.png"));
+		lastPageBtn.setRolloverIcon(new ImageIcon("images/backBtn2.png"));
+	
 		add(lastPageBtn);
 		lastPageBtn.addActionListener(new ActionListener() {
 			
@@ -89,21 +95,16 @@ public class PwSearchPanel extends ImagePanel {
 		
 		GoToButton mainBtn = new GoToButton("메인");
 		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-		mainBtn.setIcon(changemainIcon);
+		mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
+		mainBtn.setRolloverIcon(new ImageIcon("images/homeBtn2.png"));
 		mainBtn.setBorderPainted(false);
-		mainBtn.setBackground(Color.WHITE);
-		mainBtn.setBounds(105, 36, 40, 50);
-		mainBtn.setRolloverIcon(changeYMainIcon); //마우스 올렸을때 이미지 추가
-		
-		add(mainBtn);	
-		
-		TopLabel toplabel = new TopLabel("비밀번호 찾기");
-		add(toplabel);
+		mainBtn.setBounds(40, 29, 95, 95);
+		add(mainBtn);
 		
 		
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
 		add(idInput);
-		idInput.setBounds(420, 220, 361, 44);
+		idInput.setBounds(435, 260, 361, 44);
 		idInput.addKeyListener(new RestrictTextLength(idInput, 16)); //글자수제한
 		idInput.addKeyListener(new IdKeyAdaptor()); // 제약사항 적용
 		
@@ -117,7 +118,7 @@ public class PwSearchPanel extends ImagePanel {
 		
 		HintTextField nameInput = new HintTextField("이름을 입력하세요.");
 		add(nameInput);
-		nameInput.setBounds(420, 275, 361, 44);
+		nameInput.setBounds(435, 358, 361, 44);
 		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); //글자수제한
 		nameInput.addKeyListener(new NameKeyAdaptor()); // 제약사항 적용
 
@@ -131,7 +132,7 @@ public class PwSearchPanel extends ImagePanel {
 		
 		HintTextField jNumInput = new HintTextField("주민등록번호 앞 6자리");
 		add(jNumInput);
-		jNumInput.setBounds(420, 330, 170, 44);
+		jNumInput.setBounds(435, 441, 170, 44);
 		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 6)); //글자수제한
 		jNumInput.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 		
@@ -144,14 +145,14 @@ public class PwSearchPanel extends ImagePanel {
 		
 		JLabel pwMsgLabel = new JLabel("-");
 		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
-		pwMsgLabel.setBounds(594, 330, 20, 44);
+		pwMsgLabel.setBounds(609, 439, 20, 44);
 		pwMsgLabel.setForeground(Color.WHITE);
 		
 		add(pwMsgLabel);
 		
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
-		jNumInput2.setBounds(610, 330, 170, 44);
+		jNumInput2.setBounds(625, 441, 170, 44);
 		jNumInput2.addKeyListener(new RestrictTextLength(jNumInput2, 7)); //글자수제한
 		jNumInput2.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 
@@ -170,7 +171,7 @@ public class PwSearchPanel extends ImagePanel {
 		pwSearchBtn.setBackground(Color.WHITE);
 		pwSearchBtn.setRolloverIcon(changeYLoginIcon); //마우스 올렸을때 이미지 추가
 		
-		pwSearchBtn.setBounds(470, 425, 200, 50);
+		pwSearchBtn.setBounds(525, 513, 200, 50);
 		pwSearchBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -281,6 +282,30 @@ public class PwSearchPanel extends ImagePanel {
 			}
 		});
 		add(pwSearchBtn);
+		
+		JLabel lblNewLabel = new JLabel("비밀번호 찾기");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 40));
+		lblNewLabel.setBounds(490, 29, 261, 93);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("아이디");
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+		lblNewLabel_1.setBounds(435, 220, 86, 30);
+		add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("이름");
+		lblNewLabel_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+		lblNewLabel_1_1.setBounds(435, 318, 86, 30);
+		add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("주민등록번호");
+		lblNewLabel_1_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+		lblNewLabel_1_1_1.setBounds(435, 408, 217, 30);
+		add(lblNewLabel_1_1_1);
 	}
 	
 }

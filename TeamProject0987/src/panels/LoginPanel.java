@@ -55,14 +55,14 @@ public class LoginPanel extends ImagePanel {
 		
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
 		ImageIcon loginIcon = new ImageIcon("images/intackBtn/로그인.png");
-		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디조회버튼.png");
+		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디찾기버튼.png");
 		ImageIcon pwSearchIcon = new ImageIcon("images/intackBtn/비밀번호찾기버튼.png");
 		ImageIcon signInIcon = new ImageIcon("images/intackBtn/회원가입버튼.png");
 		
 		
 		ImageIcon yMainIcon = new ImageIcon("images/homebutton3.png");
 		ImageIcon yLoginIcon = new ImageIcon("images/intackYellowBtn/노란로그인.png");
-		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
+		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디찾기.png");
 		ImageIcon yPwSearchIcon = new ImageIcon("images/intackYellowBtn/노란비밀번호찾기.png");
 		ImageIcon ySignInIcon = new ImageIcon("images/intackYellowBtn/노란회원가입.png");
 		
@@ -231,6 +231,10 @@ public class LoginPanel extends ImagePanel {
 								MainPanel.loginBtn.setVisible(false);
 								MainPanel.logoutBtn.setVisible(true);
 								
+								MainPanel.signUpBtn.setVisible(false);
+								CustomerServicePanel.join.setVisible(false);
+								CustomerServicePanel.logoutBtn.setBounds(1050, 31, 115, 115);
+								
 								CustomerServicePanel.loginBtn.setVisible(false);
 								CustomerServicePanel.logoutBtn.setVisible(true);
 								
@@ -325,7 +329,13 @@ public class LoginPanel extends ImagePanel {
 					MainPanel.lastPanel = MainPanel.currPanel;
 					MainPanel.currPanel = MainPanel.mainPanel;
 					MainPanel.currUserId = idInput.getText().toString();
+					
+					MainPanel.signUpBtn.setVisible(false);
+					CustomerServicePanel.join.setVisible(false);
+					CustomerServicePanel.logoutBtn.setBounds(1050, 31, 115, 115);
 
+					
+					
 					MainPanel.loginBtn.setVisible(false);
 					MainPanel.logoutBtn.setVisible(true);
 					
@@ -356,7 +366,7 @@ public class LoginPanel extends ImagePanel {
 		
 		JButton findId = new JButton("아이디찾기");
 		add(findId);
-		findId.setBounds(360, 430, 150, 35);
+		findId.setBounds(337, 428, 150, 35);
 		findId.setFont(new Font("굴림", Font.PLAIN, 0));
 		findId.setIcon(changeidSearchIcon);
 		findId.setBorderPainted(false);
@@ -379,7 +389,7 @@ public class LoginPanel extends ImagePanel {
 		
 		JButton findPwBtn = new JButton("비밀번호찾기");
 		add(findPwBtn);
-		findPwBtn.setBounds(521, 430, 150, 35);
+		findPwBtn.setBounds(498, 428, 150, 35);
 		findPwBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		findPwBtn.setIcon(changepwSearchIcon);
 		findPwBtn.setBorderPainted(false);
@@ -402,7 +412,7 @@ public class LoginPanel extends ImagePanel {
 
 		SignupButton signUp = new SignupButton("회원가입");
 		add(signUp);
-		signUp.setBounds(682, 430, 150, 35);
+		signUp.setBounds(659, 428, 150, 35);
 		signUp.setFont(new Font("굴림", Font.PLAIN, 0));
 		signUp.setIcon(changesignInIcon);
 		signUp.setBorderPainted(false);
