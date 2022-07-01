@@ -86,7 +86,7 @@ public class SignupPanel extends ImagePanel {
 		JLabel lblTeamname = new JLabel("회원 가입");
 		lblTeamname.setFont(new Font("배달의민족 도현", Font.BOLD, 39));
 		lblTeamname.setForeground(Color.WHITE);
-		lblTeamname.setBounds(475, 28, 170, 62);
+		lblTeamname.setBounds(475, 28, 180, 62);
 		add(lblTeamname);
 		
 		

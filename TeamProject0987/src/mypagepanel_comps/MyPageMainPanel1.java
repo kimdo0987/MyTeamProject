@@ -60,16 +60,16 @@ public class MyPageMainPanel1 extends ImagePanel {
 		JTable table = new JTable(mod); // 수정불가능한 테이블로 생성
 //		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
-		table.getColumnModel().getColumn(0).setMinWidth(370);//셀 너비 조정
-		table.getColumnModel().getColumn(0).setMaxWidth(370);
+		table.getColumnModel().getColumn(0).setMinWidth(360);//셀 너비 조정
+		table.getColumnModel().getColumn(0).setMaxWidth(360);
 		table.getColumnModel().getColumn(1).setMinWidth(100);
 		table.getColumnModel().getColumn(1).setMaxWidth(100);
 		table.getColumnModel().getColumn(2).setMinWidth(140);
 		table.getColumnModel().getColumn(2).setMaxWidth(140);		
 		table.getColumnModel().getColumn(3).setMinWidth(75);
 		table.getColumnModel().getColumn(3).setMaxWidth(75);
-		table.getColumnModel().getColumn(4).setMinWidth(60);
-		table.getColumnModel().getColumn(4).setMaxWidth(60);
+		table.getColumnModel().getColumn(4).setMinWidth(70);
+		table.getColumnModel().getColumn(4).setMaxWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(55);
 		table.getColumnModel().getColumn(5).setMaxWidth(55);
 		
