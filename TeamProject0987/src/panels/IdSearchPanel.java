@@ -135,13 +135,6 @@ public class IdSearchPanel extends ImagePanel {
 		});
 		
 
-		JLabel pwMsgLabel = new JLabel("-");
-		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
-		pwMsgLabel.setBounds(572, 286, 20, 44);
-		pwMsgLabel.setForeground(Color.white);
-		add(pwMsgLabel);
-		
-
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
 		jNumInput2.setBounds(620, 404, 170, 44);
