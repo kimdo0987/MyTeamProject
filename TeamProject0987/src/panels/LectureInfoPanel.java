@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -57,6 +58,30 @@ public class LectureInfoPanel extends ImagePanel {
 		mainBtn.setBounds(40, 29, 95, 95);
 		add(mainBtn);
 		
+		
+		JButton lastPageBtn = new JButton("이전");
+		lastPageBtn.setBounds(160, 29, 95, 95);
+		lastPageBtn.setBorderPainted(false);
+		lastPageBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		lastPageBtn.setIcon(new ImageIcon("images/backBtn.png"));
+		lastPageBtn.setRolloverIcon(new ImageIcon("images/backBtn2.png"));
+		add(lastPageBtn);
+		lastPageBtn.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.currPanel.setVisible(false);
+				MainPanel.lastPanel.setVisible(true);
+				
+				MainPanel.currPanel = MainPanel.lastPanel;
+				MainPanel.lastPanel = LectureInfoPanel.lectureInfoPanel1;
+			}
+		});
+		
+		
+		
+		
+		
+		
 		rateAvgLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
 		rateAvgLabel.setForeground(Color.YELLOW);
 		rateAvgLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,8 +94,9 @@ public class LectureInfoPanel extends ImagePanel {
 		myInfoBtn.setRolloverIcon(new ImageIcon("images/infoBtn2.png"));
 		myInfoBtn.setBorderPainted(false);
 		myInfoBtn.setBackground(Color.WHITE);
-		myInfoBtn.setBounds(160, 29, 95, 95);
+		myInfoBtn.setBounds(1060, 29, 95, 95);
 		add(myInfoBtn);
+//		myInfoBtn.setBounds(160, 29, 95, 95);
 //		myInfoBtn.addActionListener(new ActionListener() { /////////////////////   
 //			
 //			@Override
