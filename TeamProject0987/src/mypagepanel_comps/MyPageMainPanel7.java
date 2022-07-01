@@ -183,8 +183,13 @@ public class MyPageMainPanel7 extends ImagePanel {
 						MainPanel.loginBtn.setVisible(true);
 						MainPanel.logoutBtn.setVisible(false);
 						
-						CustomerServicePanel.loginBtn.setVisible(false);
-						CustomerServicePanel.logoutBtn.setVisible(true);
+						MainPanel.signUpBtn.setVisible(true);
+						
+						CustomerServicePanel.loginBtn.setVisible(true);
+						CustomerServicePanel.logoutBtn.setVisible(false);
+						
+						CustomerServicePanel.join.setVisible(true);
+						
 						
 						// 메인페이지로 설정해주기
 						MainPanel.currPanel.setVisible(false);
