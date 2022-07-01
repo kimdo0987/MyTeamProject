@@ -52,10 +52,10 @@ public class MyPageMainPanel7 extends ImagePanel {
 		JLabel lblNewLabel_2 = new JLabel("회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요");
 		lblNewLabel_2.setForeground(new Color(255, 51, 51));
 		lblNewLabel_2.setFont(new Font("배달의민족 도현", Font.BOLD | Font.ITALIC, 18));
-		lblNewLabel_2.setBounds(42, 89, 440, 62);
+		lblNewLabel_2.setBounds(42, 89, 490, 62);
 		panel.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("<html><body>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다. <br><br> Ⅰ. 게시판 형태의 이용기록 <br> Ⅱ. 회원과 관련된 정보 Ⅲ. 결제된 강의 <br> Ⅳ. 쿠폰 <br> Ⅴ. 장바구니 내역 <br> Ⅵ. 수강중인 강의 목록 <br> Ⅶ. 출결 현황 목록 </body></html>");
+		JLabel lblNewLabel_3 = new JLabel("<html><body>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다. <br><br> Ⅰ. 게시판 형태의 이용기록 <br> Ⅱ. 회원과 관련된 정보 <br> Ⅲ. 결제된 강의 <br> Ⅳ. 쿠폰 <br> Ⅴ. 장바구니 내역 <br> Ⅵ. 수강중인 강의 목록 <br> Ⅶ. 출결 현황 목록 </body></html>");
 		lblNewLabel_3.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
 		lblNewLabel_3.setForeground(Color.WHITE);
 		lblNewLabel_3.setBounds(42, 101, 531, 282);
@@ -148,7 +148,7 @@ public class MyPageMainPanel7 extends ImagePanel {
 					}
 					
 					pwText = String.valueOf(pwInput.getPassword());
-					System.out.println(pwText);
+					//System.out.println(pwText);
 					if (searchPw.equals(pwText)) {
 						JOptionPane.showMessageDialog(null, "탈퇴가 완료되었습니다. \r\n이용해주셔서 감사합니다."			// 탈퇴멘트
 								, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
