@@ -93,7 +93,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		table.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
 		table.getColumnModel().getColumn(4).setCellRenderer(cellRenderer);
-
+		table.getColumnModel().getColumn(5).setCellRenderer(cellRenderer);
 		
 		
 		// 수강평 쓴 아이디는 다시 접근할 수 없게 만들어야함
