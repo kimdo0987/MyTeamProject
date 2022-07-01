@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -191,11 +193,12 @@ public class LectureSearchPanel extends ImagePanel {
 		buttonArr[12]= recommendBtn;
 
 		HintTextField searchField = new HintTextField("검색어를 입력해주세요");
-		searchField.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
+		searchField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
 		searchField.addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+				searchField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					LectureTable2 lecListPanel2 = new LectureTable2(searchField.getText());
 					lectureListPanel.add(lecListPanel2, searchField.getText());
@@ -203,6 +206,21 @@ public class LectureSearchPanel extends ImagePanel {
 					searchField.setText("");
 				}
 			}
+		});
+
+		searchField.addFocusListener(new FocusAdapter() {
+
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				searchField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));		
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				searchField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+			}
+
 		});
 		searchField.setColumns(10);
 		searchField.setBounds(367, 129, 470, 62);

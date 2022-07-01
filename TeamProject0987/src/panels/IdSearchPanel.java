@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -108,20 +110,41 @@ public class IdSearchPanel extends ImagePanel {
 		});
 		
 		//
-		HintTextField nameInput = new HintTextField("이름를 입력하세요.");
+		HintTextField nameInput = new HintTextField("이름을 입력하세요.");
 		add(nameInput);
+		nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
 		nameInput.setBounds(429, 309, 361, 44);
-		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); //글자수제한
+		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); // 글자수제한
 		nameInput.addKeyListener(new NameKeyAdaptor()); // 제약사항 적용
+
+		nameInput.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+			}
+		});
 
 		nameInput.addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyTyped(KeyEvent e) {
+				nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+			}
+
+			@Override
 			public void keyReleased(KeyEvent e) {
 				nameText = nameInput.getText().toString();
-			}	
+			}
 		});
+
 //		jNumText - 최종 받는 텍스트
 		HintTextField jNumInput1 = new HintTextField("주민등록번호 앞 6자리");
+		jNumInput1.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 		add(jNumInput1);
 		jNumInput1.setBounds(430, 404, 170, 44);
 		jNumInput1.addKeyListener(new RestrictTextLength(jNumInput1, 6)); //글자수제한
@@ -129,23 +152,57 @@ public class IdSearchPanel extends ImagePanel {
 
 		jNumInput1.addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyTyped(KeyEvent e) {
+				jNumInput1.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
+			}
+			@Override
 			public void keyReleased(KeyEvent e) {
 				frontJNum = jNumInput1.getText().toString();
 			}	
 		});
-		
+		jNumInput1.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				jNumInput1.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				jNumInput1.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
+		});
 
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
+		jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 		jNumInput2.setBounds(620, 404, 170, 44);
 		jNumInput2.addKeyListener(new RestrictTextLength(jNumInput2, 7)); //글자수제한
 		jNumInput2.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 
 		jNumInput2.addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyTyped(KeyEvent e) {
+				jNumInput2.setEchoChar('*');
+				super.keyTyped(e);
+			}
+			@Override
 			public void keyReleased(KeyEvent e) {
 				backJNum = jNumInput2.getText().toString();
 			}	
+		});
+		
+		jNumInput2.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
 		});
 
 		JButton idSearchBtn = new JButton("아이디 조회");
@@ -196,18 +253,18 @@ public class IdSearchPanel extends ImagePanel {
 					JOptionPane.showMessageDialog(MainPanel.thisFrame, "조회된 아이디 : " + searchId);
 					
 					// 다시 비워놓기
-					nameInput.setText("이름를 입력하세요.");
-					nameInput.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					nameInput.setText("이름을 입력하세요.");				
+					nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
 					nameInput.setForeground(Color.GRAY);
 					nameText = "";
 					
 
 					jNumInput1.setText("주민등록번호 앞 6자리");
-					jNumInput1.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					jNumInput1.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));  
 					jNumInput1.setForeground(Color.GRAY);
 					
 					jNumInput2.setText("주민등록번호 뒤 7자리");
-					jNumInput2.setFont(new Font("맑은고딕", Font.PLAIN, 14));  
+					jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));  
 					jNumInput2.setForeground(Color.GRAY);
 					jNumText = "";
 					//
