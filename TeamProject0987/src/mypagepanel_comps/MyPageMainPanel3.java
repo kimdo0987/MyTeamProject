@@ -29,6 +29,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
@@ -46,7 +48,9 @@ public class MyPageMainPanel3 extends ImagePanel {
 	ArrayList<Integer> checkedRows;
 	public String[] couponArr;
 	public Integer[] discountRate;
+	public ArrayList<String> arrList;
 	static JTable table2;
+	JComboBox newComboBox; 
 	
 	public MyPageMainPanel3() {
 		setBackground(new Color(255, 153, 204));
@@ -247,7 +251,16 @@ public class MyPageMainPanel3 extends ImagePanel {
 		add(paymentButton);
 		
 		
-		DefaultTableModel model2 = new DefaultTableModel();
+		DefaultTableModel model2 = new DefaultTableModel(){
+			
+			
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		    	if(column==4) {return true;}
+		       return false;
+		    }
+		};
 		
 		JTable table2 = new JTable(); // 수정불가능한 테이블로 생성
 		
@@ -283,11 +296,11 @@ public class MyPageMainPanel3 extends ImagePanel {
 					}					
 					
 				}				
-				System.out.println(checkedRows);
+				//System.out.println(checkedRows);
 				int i = 0;
 				for(int checkRow : checkedRows) {
-					System.out.println(checkRow);
-					System.out.println(data[checkRow][0]);
+					//System.out.println(checkRow);
+					//System.out.println(data[checkRow][0]);
 					model2.addRow(new Object[0]); 
 					model2.setValueAt(data[checkRow][0], i, 0); // (data[row][column], 위치 row번째 행, 위치 column)
 					model2.setValueAt(data[checkRow][1], i, 1);
@@ -329,7 +342,6 @@ public class MyPageMainPanel3 extends ImagePanel {
 				Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
 				tableHeader.setFont(headerFont);
 				
-				
 				String sql = "SELECT * FROM coupon_lists " + "WHERE member_id = ?" + " AND expiration_period > sysdate"
 						+ " AND used_or_unused = '사용가능'";
 
@@ -362,14 +374,12 @@ public class MyPageMainPanel3 extends ImagePanel {
 						
 					}
 					for(String coupon :couponArr) {
-						System.out.println(coupon);
+						arrList.add(coupon);
 						}
 					
 
-				} catch (Exception e2) {
-					System.out.println(e2.getMessage());
+				} catch (Exception e2) {					
 					e2.printStackTrace();
-
 				}
 				
 				
@@ -378,24 +388,67 @@ public class MyPageMainPanel3 extends ImagePanel {
 				////////////////
 				
 				
-				JComboBox comboBox = new JComboBox<String>(couponArr);
 				
-				comboBox.addItemListener(new ItemListener(){
-					public void itemStateChanged(ItemEvent e) {
+				
+				newComboBox= new JComboBox<String>(couponArr);
+				JComboBox comboBox = new JComboBox<String>(couponArr);
+				comboBox.addPopupMenuListener(new PopupMenuListener() {
 					
-						if(e.getStateChange()==ItemEvent.SELECTED) {
-							int index = comboBox.getSelectedIndex();
-							if(index==1) {System.out.println("a");
-								
-							}else if(index ==2 ) {
-								System.out.println("b");
-							}else if(index ==3) {
-								System.out.println("C");
-							}
+					@Override
+					public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+						comboBox.removeAllItems();
+						
+						for(int i = 0; i < newComboBox.getItemCount(); ++i) {
+							comboBox.addItem(newComboBox.getItemAt(i));
 						}
+						
+						System.out.println(table2.getValueAt(0, 4)); 
+						System.out.println(table2.getValueAt(1, 4)); 
+						System.out.println(table2.getValueAt(2, 4));
+						System.out.println(table2.getValueAt(3, 4));
+						 
+						System.out.println("========");
+						comboBox.removeItem(table2.getValueAt(0, 4));
+						comboBox.removeItem(table2.getValueAt(1, 4));
+						comboBox.removeItem(table2.getValueAt(2, 4));
+						comboBox.removeItem(table2.getValueAt(3, 4));
+//						comboBox.addItem("짱짱");
+						
+					}
 					
-				}
-			});
+					@Override
+					public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+//						System.out.println("인비져블로 새로생성");
+						
+					}
+					
+					@Override
+					public void popupMenuCanceled(PopupMenuEvent e) {
+//						System.out.println("캔슬드 새로생성");
+//						comboBox.removeAllItems();
+//						for(int i = 0; i < newComboBox.getItemCount(); ++i) {
+//							comboBox.addItem(newComboBox.getItemAt(i));
+//						}
+						
+					}
+				});
+				
+//				comboBox.addItemListener(new ItemListener(){
+//					public void itemStateChanged(ItemEvent e) {
+//					
+//						if(e.getStateChange() == ItemEvent.SELECTED) {
+//							int index = comboBox.getSelectedIndex();
+//							if(index==1) {System.out.println("a");
+//								
+//							}else if(index ==2 ) {
+//								System.out.println("b");
+//							}else if(index ==3) {
+//								System.out.println("C");
+//							}
+//						}
+//					
+//				}
+//			});
 					
 //				comboBox.addFocusListener(new FocusListener() {
 //					@Override
@@ -421,16 +474,16 @@ public class MyPageMainPanel3 extends ImagePanel {
 //						System.out.println(e.getSource());//						
 //					}
 //				});
-				
-				comboBox.addItemListener(new ItemListener() {
-					public void itemStateChanged(ItemEvent e) {
-						if (e.getStateChange() == ItemEvent.SELECTED) {
-							int index = comboBox.getSelectedIndex();
-							System.out.println("sel"+index);
-						}
-						
-					}
-				});
+//				
+//				comboBox.addItemListener(new ItemListener() {
+//					public void itemStateChanged(ItemEvent e) {
+//						if (e.getStateChange() == ItemEvent.SELECTED) {
+//							int index = comboBox.getSelectedIndex();
+//							System.out.println("sel"+index);
+//						}
+//						
+//					}
+//				});
 				
 				
 				

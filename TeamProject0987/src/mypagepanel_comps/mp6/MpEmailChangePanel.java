@@ -160,7 +160,7 @@ public class MpEmailChangePanel extends JPanel {
 	  			@Override
 	  			public void keyReleased(KeyEvent e) {
 	  				newEmail = mailField.getText()+"@"+domainField;
-	  				System.out.println(newEmail);
+	  				//System.out.println(newEmail);
 	  			}
 	  			
 	  		});
@@ -173,7 +173,7 @@ public class MpEmailChangePanel extends JPanel {
 	  			@Override
 	  			public void keyReleased(KeyEvent e) {
 	  				newEmail = mailField.getText()+"@"+domainField.getText();
-	  				System.out.println(newEmail);
+	  				//System.out.println(newEmail);
 	  			}
 	  			
 	  		});
@@ -231,7 +231,7 @@ public class MpEmailChangePanel extends JPanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(newEmail);
+					//System.out.println(newEmail);
 					if (newEmail == null) {
 					} else if (Pattern.matches("\\w+@\\w+\\.[a-zA-Z]+(\\.[a-zA-Z]+)*", newEmail)) {
 
