@@ -1,5 +1,8 @@
 package mypagepanel_comps.mp6;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -8,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,15 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import LectureInfoPanel_comps.LectureInfoPanel1;
-import buttons.GoToButton;
 import database.OjdbcConnection;
-import panels.LectureInfoPanel;
-import panels.LectureSearchPanel;
+import methods.RestrictTextLength;
 import panels.MainPanel;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Color;
 
 public class MpEmailChangePanel extends JPanel {
 	String newEmail;
@@ -63,22 +61,8 @@ public class MpEmailChangePanel extends JPanel {
 			
 			setLayout(null);
 
-			setBounds(0, 58, 730, 511);
-			
-//			ImageIcon icon = new ImageIcon("images/homeBtn.png");
-//			
-//			Image img = icon.getImage();
-//			// 창의 사이즈인 500,500에 맞춰서 이미지를 변경
-//			Image changeImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-//			ImageIcon changeIcon = new ImageIcon(changeImg);
-//				
-//
-//				GoToButton mainBtn = new GoToButton("메인");
-//				mainBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
-//				mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
-//				mainBtn.setBorderPainted(false);
-//				mainBtn.setBounds(1037, 38, 46, 44);
-			///////////////////////////////////////////////////////////////////////
+			setBounds(0, 58, 730, 511);			
+
 			ImageIcon icon1 = new ImageIcon("images/changeButton/전화번호변경버튼.png");
 			ImageIcon icon2 = new ImageIcon("images/changeButton/하늘이메일변경버튼.png");
 			ImageIcon icon3 = new ImageIcon("images/changeButton/비밀번호변경버튼.png");
@@ -158,17 +142,47 @@ public class MpEmailChangePanel extends JPanel {
 			emailLabel.setBounds(196, 162, 469, 51);
 			add(emailLabel);
 
-			JTextField newEmailField = new JTextField();
-			newEmailField.setBounds(196, 223, 469, 51);
-			newEmailField.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyReleased(KeyEvent e) {
-					newEmail = newEmailField.getText();
-				}
-
-			});
-
-			add(newEmailField);
+			
+	  		
+	  		JTextField mailField = new JTextField();
+	  		mailField.setBounds(196, 222, 145, 51);
+	  		add(mailField);
+	  		
+	  		JTextField domainField = new JTextField();
+	  		domainField.setBounds(377, 222, 124, 51);
+	  		add(domainField);
+	  		mailField.addKeyListener(new RestrictTextLength(mailField, 20));
+	  		mailField.addKeyListener(new KeyAdapter() {
+	  			@Override
+	  			public void keyTyped(KeyEvent e) {
+	  				mailField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+	  			}
+	  			@Override
+	  			public void keyReleased(KeyEvent e) {
+	  				newEmail = mailField.getText()+"@"+domainField;
+	  				//System.out.println(newEmail);
+	  			}
+	  			
+	  		});
+	  		domainField.addKeyListener(new RestrictTextLength(domainField, 20));
+	  		domainField.addKeyListener(new KeyAdapter() {
+	  			@Override
+	  			public void keyTyped(KeyEvent e) {
+	  				domainField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+	  			}
+	  			@Override
+	  			public void keyReleased(KeyEvent e) {
+	  				newEmail = mailField.getText()+"@"+domainField.getText();
+	  				//System.out.println(newEmail);
+	  			}
+	  			
+	  		});
+	  		
+	  		
+	  		JLabel lblNewLabel = new JLabel("@");
+	  		lblNewLabel.setForeground(Color.WHITE);
+	  		lblNewLabel.setBounds(353, 222, 36, 51);
+	  		add(lblNewLabel);				
 
 			JLabel emailLabel2 = new JLabel("기존 이메일");
 			emailLabel2.setForeground(Color.WHITE);
@@ -196,58 +210,59 @@ public class MpEmailChangePanel extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					MpChangePanel.mpLayout.show(MpChangePanel.mpPanel, "profile");
 				}
-	  	  	});
+			});
 			profileButton.setBounds(56, 10, 100, 25);
-		  	add(profileButton);
-			
-			
-		/////////////////////////////////////////////////////////
-		ImageIcon changeBtnicon1 = new ImageIcon("images/changeButton/변경하기버튼.png");
-		Image changeBtnimg1 = changeBtnicon1.getImage();
-		Image changeBtn1 = changeBtnimg1.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
-		ImageIcon changeBtnicon2 = new ImageIcon("images/changeButton/노란변경하기버튼.png");
-		Image changeBtnimg2 = changeBtnicon2.getImage();
-		Image changeBtn2 = changeBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
-		/////////////////////////////////////////////////////////
-		JButton changeButton = new JButton(new ImageIcon(changeBtn1));
-		changeButton.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
-		changeButton.setBounds(260, 346, 196, 50);
-		changeButton.setBorder(BorderFactory.createEmptyBorder());
-		changeButton.setRolloverIcon(new ImageIcon(changeBtn2));	
-		changeButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try(
-						Connection conn = OjdbcConnection.getConnection(); 
-						PreparedStatement pstmt = conn.prepareStatement(sql);
-						) {
-					conn.setAutoCommit(false);
-					pstmt.setString(1, newEmail);
-					pstmt.setString(2, MainPanel.currUserId);
-					
-					pstmt.executeUpdate();
-					conn.commit();
-					
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
+			add(profileButton);
+
+			/////////////////////////////////////////////////////////
+			ImageIcon changeBtnicon1 = new ImageIcon("images/changeButton/변경하기버튼.png");
+			Image changeBtnimg1 = changeBtnicon1.getImage();
+			Image changeBtn1 = changeBtnimg1.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
+			ImageIcon changeBtnicon2 = new ImageIcon("images/changeButton/노란변경하기버튼.png");
+			Image changeBtnimg2 = changeBtnicon2.getImage();
+			Image changeBtn2 = changeBtnimg2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
+			/////////////////////////////////////////////////////////
+			JButton changeButton = new JButton(new ImageIcon(changeBtn1));
+			changeButton.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
+			changeButton.setBounds(260, 346, 196, 50);
+			changeButton.setBorder(BorderFactory.createEmptyBorder());
+			changeButton.setRolloverIcon(new ImageIcon(changeBtn2));
+			changeButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//System.out.println(newEmail);
+					if (newEmail == null) {
+					} else if (Pattern.matches("\\w+@\\w+\\.[a-zA-Z]+(\\.[a-zA-Z]+)*", newEmail)) {
+
+						try (Connection conn = OjdbcConnection.getConnection();
+								PreparedStatement pstmt = conn.prepareStatement(sql);) {
+							conn.setAutoCommit(false);
+							pstmt.setString(1, newEmail);
+							pstmt.setString(2, MainPanel.currUserId);
+
+							pstmt.executeUpdate();
+							conn.commit();
+
+						} catch (SQLException e1) {
+
+							e1.printStackTrace();
+						}
+
+						JOptionPane.showMessageDialog(MainPanel.thisFrame, newEmail + "로 이메일이 변경되었습니다", "변경 완료", 1);
+						mailField.setText("");
+						domainField.setText("");
+
+					} else {
+						JOptionPane.showMessageDialog(MainPanel.thisFrame, "이메일을 올바른 형식으로 입력해 주세요");
+					}
 				}
-				
-				JOptionPane.showMessageDialog(
-						MainPanel.thisFrame, newEmail + "로 이메일이 변경되었습니다", "변경 완료", 1);
-				newEmailField.setText("");
-				
-				
-			}
-		});
-  		add(changeButton);
+			});
+			add(changeButton);
+
 		} catch (Exception e) {
 
 		}
 
-
 	}
-
-	}
-
+}

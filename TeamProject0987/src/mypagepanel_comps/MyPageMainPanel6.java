@@ -89,6 +89,14 @@ public class MyPageMainPanel6 extends ImagePanel {
 					pwInputField.addKeyListener(new KeyAdapter() {
 						
 						@Override
+						public void keyTyped(KeyEvent e) {
+							pwInputField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+							pwInputField.setEchoChar('*');
+						
+						}
+					
+						
+						@Override
 						public void keyReleased(KeyEvent e) {
 							char[] a = pwInputField.getPassword();
 							

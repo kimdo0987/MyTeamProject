@@ -127,6 +127,9 @@ public class LectureTable3 extends JPanel {
 				
 				MainPanel.lectureSearchPanel.setVisible(false);
 				MainPanel.lectureInfoPanel.setVisible(true);
+				MainPanel.lastPanel = MainPanel.lectureSearchPanel;
+				MainPanel.currPanel = MainPanel.lectureInfoPanel;
+				
 				LectureInfoPanel.cardLayout1.show(LectureInfoPanel.cardLayoutPanel,"상세정보");
 				
 				
