@@ -143,7 +143,7 @@ public class LectureInfoPanel3 extends JPanel {
 		scrollPane.setSize(786, 390);
 		add(scrollPane);
 		
-
+		scheduleTable.setEnabled(false);
 		scheduleTable.setSize(786, 390);
 		scheduleTable.setRowHeight(30);
 		scheduleTable.setFillsViewportHeight(true);
