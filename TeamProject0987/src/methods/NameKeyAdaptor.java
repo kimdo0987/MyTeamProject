@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class NameKeyAdaptor implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
+		
 			if(!(Pattern.matches("[A-Za-z]", ""+e.getKeyChar())|| 
 					('가'<= e.getKeyChar())&&(e.getKeyChar()<='힣')) ||e.getKeyChar()=='_') {
 				e.consume(); // 이벤트 소멸(무시)하기

@@ -8,6 +8,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -105,43 +107,98 @@ public class PwSearchPanel extends ImagePanel {
 		HintTextField idInput = new HintTextField("아이디를 입력하세요.");
 		add(idInput);
 		idInput.setBounds(435, 260, 361, 44);
+		idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
 		idInput.addKeyListener(new RestrictTextLength(idInput, 16)); //글자수제한
 		idInput.addKeyListener(new IdKeyAdaptor()); // 제약사항 적용
 		
 		idInput.addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyTyped(KeyEvent e) {
+				idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+			}
+			@Override
 			public void keyReleased(KeyEvent e) {
 				idText = idInput.getText().toString();
 			}	
 		});
+		idInput.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				idInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));				
+			}
+		});
+		
 		
 		
 		HintTextField nameInput = new HintTextField("이름을 입력하세요.");
 		add(nameInput);
 		nameInput.setBounds(435, 358, 361, 44);
+		nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
 		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); //글자수제한
 		nameInput.addKeyListener(new NameKeyAdaptor()); // 제약사항 적용
 
 		nameInput.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+			}
 			@Override
 			public void keyReleased(KeyEvent e) {
 				nameText = nameInput.getText().toString();
 			}	
 		});
 		
+		nameInput.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				nameInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));				
+			}
+		});
+		
 		
 		HintTextField jNumInput = new HintTextField("주민등록번호 앞 6자리");
 		add(jNumInput);
 		jNumInput.setBounds(435, 441, 170, 44);
+		jNumInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 		jNumInput.addKeyListener(new RestrictTextLength(jNumInput, 6)); //글자수제한
 		jNumInput.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 		
 		jNumInput.addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyTyped(KeyEvent e) {
+				jNumInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
+			}
+			@Override
 			public void keyReleased(KeyEvent e) {
 				frontJNum = jNumInput.getText().toString();
 			}	
 		});		
+		
+		jNumInput.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				jNumInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				jNumInput.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
+		});
 		
 		JLabel pwMsgLabel = new JLabel("-");
 		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
@@ -152,15 +209,36 @@ public class PwSearchPanel extends ImagePanel {
 		
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
+		jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
+		
 		jNumInput2.setBounds(625, 441, 170, 44);
 		jNumInput2.addKeyListener(new RestrictTextLength(jNumInput2, 7)); //글자수제한
 		jNumInput2.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 
 		jNumInput2.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
+				jNumInput2.setEchoChar('*');
+			}
 			@Override
 			public void keyReleased(KeyEvent e) {
 				backJNum = jNumInput2.getText().toString();
 			}	
+		});
+		
+		jNumInput2.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				jNumInput2.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));				
+			}
 		});
 		
 		JButton pwSearchBtn = new JButton("임시 비밀번호로 변경");
