@@ -134,6 +134,7 @@ public class IdSearchPanel extends ImagePanel {
 			}	
 		});
 		
+
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
 		jNumInput2.setBounds(620, 404, 170, 44);
