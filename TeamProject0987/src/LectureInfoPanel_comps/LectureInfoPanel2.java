@@ -33,7 +33,7 @@ public class LectureInfoPanel2 extends JPanel {
 		
 		JTable table = new JTable(mod);
 		table.setPreferredScrollableViewportSize(new Dimension(700, 600));
-
+		table.setEnabled(false);
 		table.getColumnModel().getColumn(0).setMinWidth(100);// 셀 너비 조정
 		table.getColumnModel().getColumn(0).setMaxWidth(100);
 		table.getColumnModel().getColumn(1).setMinWidth(600);
@@ -48,7 +48,9 @@ public class LectureInfoPanel2 extends JPanel {
 
 		ListSelectionModel selectionModel = table.getSelectionModel();
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+		table.setCellSelectionEnabled(false); // 한셀만 선택가능
+		table.getTableHeader().setReorderingAllowed(false); // 컬럼 헤더 고정 (이동 불가)
+		table.getTableHeader().setResizingAllowed(false);
 		add(table);
 		
 		// 테이블 폰트 설정
