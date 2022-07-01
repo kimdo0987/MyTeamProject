@@ -17,6 +17,9 @@ import buttons.LogoutButton;
 import buttons.MypageButton;
 import buttons.SignupButton;
 import labels.TopLabel;
+import mypagepanel_comps.MyPageMainPanel3;
+import mypagepanel_comps.PaymentPanel;
+
 import java.awt.Color;
 
 // 첫화면
@@ -40,6 +43,8 @@ public class MainPanel extends ImagePanel {
 	public static LoginPanel loginPanel = new LoginPanel();
 	public static IdSearchPanel idSearchPanel = new IdSearchPanel();
 	public static PwSearchPanel pwSerachPanel = new PwSearchPanel();
+	public static PaymentPanel paymentPanel;
+	public static MyPageMainPanel3 mypageMainPanel3;
 
 	public static JPanel currPanel; // 이전 버튼 구현하는데 사용되는 패널들.
 	public static JPanel lastPanel;
