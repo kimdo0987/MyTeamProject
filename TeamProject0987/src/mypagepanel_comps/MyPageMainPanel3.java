@@ -6,15 +6,25 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.font.TextAttribute;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,7 +32,9 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
+import database.OjdbcConnection;
 import panels.ImagePanel;
 import panels.MainPanel;
 import popups.DeleteChkPopup;
@@ -33,6 +45,8 @@ public class MyPageMainPanel3 extends ImagePanel {
 	
 	static JTable table;
 	ArrayList<Integer> checkedRows;
+	public String[] couponArr;
+	public Integer[] discountRate;
 	static JTable table2;
 	
 	public MyPageMainPanel3() {
@@ -47,9 +61,9 @@ public class MyPageMainPanel3 extends ImagePanel {
 		
 		JLabel tableNameLabel = new JLabel("장바구니 리스트");
 		tableNameLabel.setForeground(Color.WHITE);
-		tableNameLabel.setBounds(80, 60, 460, 60);
+		tableNameLabel.setBounds(80, 40, 421, 90);
 		add(tableNameLabel);
-		tableNameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 58));
+		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBounds(0, 0, 800, 529);		
@@ -257,6 +271,9 @@ public class MyPageMainPanel3 extends ImagePanel {
 			public void actionPerformed(ActionEvent e) {
 				checkedRows = new ArrayList<>();
 				
+				
+				
+				
 				for (int i = 0; i < table.getRowCount(); i++) {
 					Boolean checked = Boolean.valueOf(table.getValueAt(i, 0).toString());
 										
@@ -312,6 +329,99 @@ public class MyPageMainPanel3 extends ImagePanel {
 				JTableHeader tableHeader = table2.getTableHeader();
 				Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
 				tableHeader.setFont(headerFont);
+				
+				
+				String sql = "SELECT * FROM coupon_lists " + "WHERE member_id = ?" + " AND expiration_period > sysdate"
+						+ " AND used_or_unused = '사용가능'";
+
+				try (Connection con = OjdbcConnection.getConnection();
+						PreparedStatement pstmt = con.prepareStatement(sql);
+						PreparedStatement pstmt1 = con.prepareStatement(sql);
+				) {
+					
+					pstmt.setString(1, MainPanel.currUserId);
+					pstmt1.setString(1, MainPanel.currUserId);
+					
+					ResultSet result = pstmt.executeQuery();
+					ResultSet result1 = pstmt1.executeQuery();
+					int j = 0;
+					
+					while (result.next()) {						
+						++j;
+					}
+					
+					couponArr = new String[j];
+					discountRate = new Integer[j];
+					
+					int k = 0;
+					
+					
+					while (result1.next()) {
+						couponArr[k] = result1.getString(4);
+						discountRate[k]= result1.getInt(5);
+						++k;
+						
+					}
+					for(String coupon :couponArr) {
+						System.out.println(coupon);
+						}
+					
+
+				} catch (Exception e2) {
+					System.out.println(e2.getMessage());
+					e2.printStackTrace();
+
+				}
+				
+				
+				//일단 콤보박스부터 만들기
+				
+				////////////////
+				
+				
+				JComboBox comboBox = new JComboBox<String>(couponArr);
+				
+//				comboBox.addFocusListener(new FocusListener() {
+//					
+//					@Override
+//					public void focusLost(FocusEvent e) {
+//						System.out.println("lost" );
+//						comboBox.removeItem(comboBox.getSelectedItem());
+//						
+//					}
+//					
+//					@Override
+//					public void focusGained(FocusEvent e) {
+//						comboBox.addItem(comboBox.getSelectedItem());
+//						
+//					}
+//				});
+//				comboBox.addItemListener(new ItemListener() {
+//					
+//					@Override
+//					public void itemStateChanged(ItemEvent e) {
+//						System.out.println(e.getSource());//						
+//					}
+//				});
+				
+				comboBox.addItemListener(new ItemListener() {
+					public void itemStateChanged(ItemEvent e) {
+						if (e.getStateChange() == ItemEvent.SELECTED) {
+							int index = comboBox.getSelectedIndex();
+							System.out.println("sel"+index);
+						}
+						
+					}
+				});
+				
+				
+				
+
+				
+				//테이블에서 하나의 column(열, 칸) 관리자 얻어오기
+				TableColumn column = table2.getColumnModel().getColumn(4); //표의 한 열을 담당하는 객체를 소환
+				column.setCellEditor(new DefaultCellEditor(comboBox));  
+				
 				
 				table2.setFillsViewportHeight(true);
 				MyPageMainPanel3.table2 = table2;

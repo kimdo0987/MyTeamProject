@@ -46,7 +46,15 @@ public class IdSearchPanel extends ImagePanel {
 		setLayout(null);
 		
 		ImageIcon mainIcon = new ImageIcon("images/homebutton.png");
-		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디찾기버튼.png");
+
+		ImageIcon idSearchIcon = new ImageIcon("images/intackBtn/아이디조회버튼.png");
+		
+		ImageIcon yIdSearchIcon = new ImageIcon("images/intackYellowBtn/노란아이디조회.png");
+		
+		Image img33 = yIdSearchIcon.getImage();
+		Image changeImg33 = img33.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeYIdSearchIcon = new ImageIcon(changeImg33);
+
 		
 		Image img1 = mainIcon.getImage();
 		Image changeImg1 = img1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -56,9 +64,18 @@ public class IdSearchPanel extends ImagePanel {
 		Image changeImg3 = img3.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
 		ImageIcon changeidSearchIcon = new ImageIcon(changeImg3);
 		
+		Image img4 = yIdSearchIcon.getImage();
+		Image changeImg4 = img4.getScaledInstance(155, 35, Image.SCALE_SMOOTH);
+		ImageIcon changeidSearchIcon2 = new ImageIcon(changeImg4);
 		
 		JButton lastPageBtn = new JButton("이전");
-		lastPageBtn.setBounds(23, 36, 70, 44);
+		
+		lastPageBtn.setBounds(135, 29, 95, 95);
+		lastPageBtn.setBorderPainted(false);
+		lastPageBtn.setFont(new Font("굴림", Font.PLAIN, 0));
+		lastPageBtn.setIcon(new ImageIcon("images/backBtn.png"));
+		lastPageBtn.setRolloverIcon(new ImageIcon("images/backBtn2.png"));
+		
 		add(lastPageBtn);
 		lastPageBtn.addActionListener(new ActionListener() {
 			
@@ -73,12 +90,12 @@ public class IdSearchPanel extends ImagePanel {
 		
 		GoToButton mainBtn = new GoToButton("메인");
 		mainBtn.setFont(new Font("굴림", Font.PLAIN, 0));
-		mainBtn.setIcon(changemainIcon);
+		mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
+		mainBtn.setRolloverIcon(new ImageIcon("images/homeBtn2.png"));
 		mainBtn.setBorderPainted(false);
-		mainBtn.setBounds(105, 36, 40, 50);
-		
-		mainBtn.setBackground(Color.WHITE);
+		mainBtn.setBounds(40, 29, 95, 95);
 		add(mainBtn);
+		
 		mainBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -88,15 +105,12 @@ public class IdSearchPanel extends ImagePanel {
 				MainPanel.currPanel=MainPanel.mainPanel;
 				
 			}
-		});	
-			
-		TopLabel toplabel = new TopLabel("아이디 찾기");
-		add(toplabel);
+		});
 		
 		//
 		HintTextField nameInput = new HintTextField("이름를 입력하세요.");
 		add(nameInput);
-		nameInput.setBounds(398, 227, 361, 44);
+		nameInput.setBounds(429, 309, 361, 44);
 		nameInput.addKeyListener(new RestrictTextLength(nameInput, 14)); //글자수제한
 		nameInput.addKeyListener(new NameKeyAdaptor()); // 제약사항 적용
 
@@ -109,7 +123,7 @@ public class IdSearchPanel extends ImagePanel {
 //		jNumText - 최종 받는 텍스트
 		HintTextField jNumInput1 = new HintTextField("주민등록번호 앞 6자리");
 		add(jNumInput1);
-		jNumInput1.setBounds(398, 286, 170, 44);
+		jNumInput1.setBounds(430, 404, 170, 44);
 		jNumInput1.addKeyListener(new RestrictTextLength(jNumInput1, 6)); //글자수제한
 		jNumInput1.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 
@@ -120,14 +134,9 @@ public class IdSearchPanel extends ImagePanel {
 			}	
 		});
 		
-		JLabel pwMsgLabel = new JLabel("-");
-		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
-		pwMsgLabel.setBounds(572, 286, 20, 44);
-		add(pwMsgLabel);
-		
 		HintPasswordField jNumInput2 = new HintPasswordField("주민등록번호 뒤 7자리");
 		add(jNumInput2);
-		jNumInput2.setBounds(588, 286, 170, 44);
+		jNumInput2.setBounds(620, 404, 170, 44);
 		jNumInput2.addKeyListener(new RestrictTextLength(jNumInput2, 7)); //글자수제한
 		jNumInput2.addKeyListener(new OnlyNumKeyAdaptor()); // 제약사항 적용
 
@@ -138,13 +147,16 @@ public class IdSearchPanel extends ImagePanel {
 			}	
 		});
 
-		JButton idSearchBtn = new JButton("아이디 찾기");
+		JButton idSearchBtn = new JButton("아이디 조회");
 		add(idSearchBtn);
-		idSearchBtn.setBounds(500, 378, 150, 30);
+		idSearchBtn.setBounds(525, 513, 150, 30);
 		idSearchBtn.setFont(new Font("굴림", Font.PLAIN, 0));
 		idSearchBtn.setIcon(changeidSearchIcon);
 		idSearchBtn.setBorderPainted(false);
+
+		idSearchBtn.setRolloverIcon(changeYIdSearchIcon);
 		
+
 		idSearchBtn.setBackground(Color.white);
 		idSearchBtn.addActionListener(new ActionListener() {
 
@@ -206,6 +218,30 @@ public class IdSearchPanel extends ImagePanel {
 			}
 		});
 		add(idSearchBtn);
+		
+		JLabel lblNewLabel = new JLabel("아이디찾기");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 40));
+		lblNewLabel.setBounds(490, 29, 219, 70);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("이름");
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+		lblNewLabel_1.setBounds(429, 269, 86, 30);
+		add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("주민등록번호");
+		lblNewLabel_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 19));
+		lblNewLabel_1_1.setBounds(429, 364, 191, 30);
+		add(lblNewLabel_1_1);
+		
+		JLabel pwMsgLabel = new JLabel("-");
+		pwMsgLabel.setForeground(Color.WHITE);
+		pwMsgLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		pwMsgLabel.setBounds(604, 404, 20, 44);
+		add(pwMsgLabel);
 		
 	}
 }

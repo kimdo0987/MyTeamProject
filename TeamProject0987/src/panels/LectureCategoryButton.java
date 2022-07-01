@@ -12,8 +12,8 @@ public class LectureCategoryButton extends JButton {
 	
 	
 	private String cateName;
-	private int num;
-
+	int num;
+	
 	
 	private static String[] category = 
 		{"개발도구", "게임개발", "프론트엔드", "데브옵스/인프라", "데스크톱 앱 개발", "데이터베이스", "모바일 앱 개발"
