@@ -63,11 +63,12 @@ public class CustomerServicePanel extends ImagePanel {
 		String useStr ="<html><body style='text-align:left;'>서비스의 원활한 제공을 위하여 회원이 동의한 목적과 범위 내에서만 개인정보를 수집하며,"
 				+ "<br/>\r\n개인정보 보호 관련 법령에 따라 안전하게 관리합니다.</body></html>"; 
 		String privacyStr = "<html><body style='text-align:left;'>이용자 여러분의 프라이버시를 소중하게 생각합니다. <br/>\r\n이용자 프라이버시 보호를 위한 다양한 활동과 유용한  정보들을 확인하실 수 있습니다</body></html>";
-		String roadStr = "<html><body style='text-align:left;'>센터를 찾아오실 수 있는 교통수단별 안내와 다양한 편의시설 안내입니다.";
+		String roadStr = "<html><body style='text-align:left;'>센터를 찾아오실 수 있는 교통수단별 안내와 다양한 편의시설 안내입니다. <br> "
+				+ "주소: 서울특별시 강남구 신사동 도산대로 173 / 연락처: 02-549-1500 <br> 고객센터 영업시간: 월-토 오전 09:00 ~ 06:30";
 		JLabel explainLabel = new JLabel(privacyStr);
 		explainLabel.setForeground(Color.WHITE);
 		explainLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 20));
-		explainLabel.setBounds(203, 301, 802, 80);
+		explainLabel.setBounds(203, 301, 840, 80);
 		add(explainLabel);
 		
 		String privacyStr1 = "<html><body style='text-align:left;'>개인정보 보호원칙<br/>"
@@ -102,6 +103,7 @@ public class CustomerServicePanel extends ImagePanel {
 			public void actionPerformed(ActionEvent e) {
 				customerLmg.show(panel, "개인정보");
 				explainLabel.setText(privacyStr);
+				explainLabel.setBounds(203, 301, 802, 80);
 				lblNewLabel.setText("개인정보처리방침");
 			}
 		});
@@ -118,6 +120,7 @@ public class CustomerServicePanel extends ImagePanel {
 			public void actionPerformed(ActionEvent e) {
 				customerLmg.show(panel, "이용약관");
 				explainLabel.setText(useStr);
+				explainLabel.setBounds(203, 301, 840, 80);
 				lblNewLabel.setText("이용약관");
 			}
 		});
@@ -134,6 +137,7 @@ public class CustomerServicePanel extends ImagePanel {
 			public void actionPerformed(ActionEvent e) {
 				customerLmg.show(panel, "오시는길");
 				explainLabel.setText(roadStr);
+				explainLabel.setBounds(203, 260, 802, 130);
 				lblNewLabel.setText("찾아오시는길");
 			}
 		});

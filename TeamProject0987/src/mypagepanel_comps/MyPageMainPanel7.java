@@ -36,11 +36,30 @@ public class MyPageMainPanel7 extends ImagePanel {
 		setBounds(118, 0, 1093, 800);	
 		setLayout(null);
 		
-		JPanel panel = new JPanel(); //탈퇴시 안내사항label, 비밀번호작성 textField,버튼 이 들어가는 패널 (장바구니 panel)
+		JPanel panel = new JPanel();
+		panel.setOpaque(false);
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(80, 154, 800, 424);
+		panel.setBounds(80, 154, 800, 355);
 		panel.setLayout(null);
 		add(panel);
+		
+		JLabel lblNewLabel_1 = new JLabel("탈퇴 안내");
+		lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 24));
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setBounds(42, 10, 157, 81);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요");
+		lblNewLabel_2.setForeground(new Color(255, 51, 51));
+		lblNewLabel_2.setFont(new Font("배달의민족 도현", Font.BOLD | Font.ITALIC, 18));
+		lblNewLabel_2.setBounds(42, 89, 490, 62);
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("<html><body>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다. <br><br> Ⅰ. 게시판 형태의 이용기록 <br> Ⅱ. 회원과 관련된 정보 <br> Ⅲ. 결제된 강의 <br> Ⅳ. 쿠폰 <br> Ⅴ. 장바구니 내역 <br> Ⅵ. 수강중인 강의 목록 <br> Ⅶ. 출결 현황 목록 </body></html>");
+		lblNewLabel_3.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+		lblNewLabel_3.setForeground(Color.WHITE);
+		lblNewLabel_3.setBounds(42, 101, 531, 282);
+		panel.add(lblNewLabel_3);
 		
 		JLabel tableNameLabel = new JLabel("회원 탈퇴");
 		tableNameLabel.setForeground(Color.WHITE);
@@ -48,33 +67,17 @@ public class MyPageMainPanel7 extends ImagePanel {
 		add(tableNameLabel);
 		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
-		/*
-		ImageIcon modifyBtnicon1 = new ImageIcon("images/changeButton/내정보수정하기버튼.png");
-		Image modifyBtnimg1 = modifyBtnicon1.getImage();
-		Image modifyBtn1 = modifyBtnimg1.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-		ImageIcon modifyBtnicon2 = new ImageIcon("images/changeButton/노란내정보수정하기버튼.png");
-		Image modifyBtnimg2 = modifyBtnicon2.getImage();
-		Image modifyBtn2 = modifyBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
-		/////////////////////////////////////////////////////////
-		JButton modifyButton = new JButton(new ImageIcon(modifyBtn1));
-		modifyButton.setFont(new Font("굴림", Font.PLAIN, 0));
-		modifyButton.setBounds(251, 379, 294, 75);
-		modifyButton.setBorder(BorderFactory.createEmptyBorder());
-		modifyButton.setRolloverIcon(new ImageIcon(modifyBtn2));
-		*/
+
 		
 		ImageIcon notifyicon = new ImageIcon("images/mp7/탈퇴안내.png");
 		Image notifyimg = notifyicon.getImage();
 		Image notify = notifyimg.getScaledInstance(570, 400, Image.SCALE_SMOOTH);
-		JLabel report = new JLabel(new ImageIcon(notify));
-		report.setBounds(12,10,570,400);
-		report.setFont(new Font("굴림", Font.PLAIN, 0));
-		panel.add(report);
 		
 		JPasswordField pwInput = new JPasswordField();
 		add(pwInput);
-		pwInput.setBounds(437, 604, 273, 45);
+		pwInput.setBounds(450, 543, 273, 45);
 		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.WHITE);
@@ -97,7 +100,7 @@ public class MyPageMainPanel7 extends ImagePanel {
 		Image leaveBtn2 = leaveBtnimg2.getScaledInstance(300, 75, Image.SCALE_SMOOTH);
 		JButton leaveButton = new JButton(new ImageIcon(leaveBtn1));
 		leaveButton.setFont(new Font("굴림", Font.PLAIN, 0));
-		leaveButton.setBounds(351, 658, 294, 75);
+		leaveButton.setBounds(353, 606, 294, 75);
 		leaveButton.setBorder(BorderFactory.createEmptyBorder());
 		leaveButton.setRolloverIcon(new ImageIcon(leaveBtn2));
 		add(leaveButton);
@@ -105,8 +108,10 @@ public class MyPageMainPanel7 extends ImagePanel {
 		JLabel explain = new JLabel("비밀번호를 입력해주세요");
 		explain.setFont(new Font("배달의민족 도현", Font.PLAIN, 16));
 		explain.setForeground(Color.WHITE);
-		explain.setBounds(237, 595, 200, 60);
+		explain.setBounds(250, 536, 200, 60);
 		add(explain);
+		
+		
 		
 		leaveButton.addActionListener(new ActionListener() {
 			@Override
@@ -142,18 +147,24 @@ public class MyPageMainPanel7 extends ImagePanel {
 						searchPw = "";
 					}
 					
+					pwText = String.valueOf(pwInput.getPassword());
+					//System.out.println(pwText);
 					if (searchPw.equals(pwText)) {
 						JOptionPane.showMessageDialog(null, "탈퇴가 완료되었습니다. \r\n이용해주셔서 감사합니다."			// 탈퇴멘트
 								, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
 						
 						
 						String sql1 = "DELETE FROM members WHERE member_id = ?";
+						String sql2 = "DELETE FROM favorite_category WHERE member_id = ?";
 						try (Connection conn = OjdbcConnection.getConnection();					// 데이터 삭제완료
 								PreparedStatement pstmt = conn.prepareStatement(sql1);
+								PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 								){
 							conn.setAutoCommit(false);
 							pstmt.setString(1, MainPanel.currUserId);
+							pstmt2.setString(1, MainPanel.currUserId);
 							pstmt.executeQuery();
+							pstmt2.executeQuery();
 							
 							conn.commit();
 						} catch (SQLException e1) {
@@ -172,8 +183,13 @@ public class MyPageMainPanel7 extends ImagePanel {
 						MainPanel.loginBtn.setVisible(true);
 						MainPanel.logoutBtn.setVisible(false);
 						
-						CustomerServicePanel.loginBtn.setVisible(false);
-						CustomerServicePanel.logoutBtn.setVisible(true);
+						MainPanel.signUpBtn.setVisible(true);
+						
+						CustomerServicePanel.loginBtn.setVisible(true);
+						CustomerServicePanel.logoutBtn.setVisible(false);
+						
+						CustomerServicePanel.join.setVisible(true);
+						
 						
 						// 메인페이지로 설정해주기
 						MainPanel.currPanel.setVisible(false);

@@ -86,7 +86,7 @@ public class SignupPanel extends ImagePanel {
 		JLabel lblTeamname = new JLabel("회원 가입");
 		lblTeamname.setFont(new Font("배달의민족 도현", Font.BOLD, 39));
 		lblTeamname.setForeground(Color.WHITE);
-		lblTeamname.setBounds(475, 28, 170, 62);
+		lblTeamname.setBounds(475, 28, 180, 62);
 		add(lblTeamname);
 		
 		
@@ -794,7 +794,7 @@ public class SignupPanel extends ImagePanel {
 						if(rePwMsgLabel.getText().equals("비밀번호가 같게 입력되었습니다")) {
 							if(nameMsgLabel.getText().equals("입력완료")) {
 								if(JNumMsgLabel.getText().equals("입력완료")) {
-									int age = (LocalDateTime.now().getYear()-1900+1-(Integer.parseInt(insertJNum1Field.getText().substring(0, 2))));
+									//int age = (LocalDateTime.now().getYear()-1900+1-(Integer.parseInt(insertJNum1Field.getText().substring(0, 2))));
 									try (
 											Connection conn = OjdbcConnection.getConnection();
 											PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM members "
@@ -816,7 +816,7 @@ public class SignupPanel extends ImagePanel {
 													
 													) { 											
 												//DB에 저장 members, 관심 카테고리 저장.
-												String sql = "INSERT INTO members VALUES (?,?,?,?,?,?,?)";
+												String sql = "INSERT INTO members VALUES (?,?,?,?,?,?)";
 														
  												//해쉬셋해서 하나씩 꺼내서 갯수만큼 insert반복
 												String sql2 = "INSERT INTO favorite_category VALUES "
@@ -832,10 +832,9 @@ public class SignupPanel extends ImagePanel {
 														pstmt.setString(1, createIdField.getText());
 														pstmt.setString(2, String.valueOf(createPwField.getPassword()));
 														pstmt.setString(3, insertNameField.getText());
-														pstmt.setInt(4, age);
-														pstmt.setString(5, insertPhoneNumField1.getText()+"-"+insertPhoneNumField2.getText()+"-"+ insertPhoneNumField3.getText());
-														pstmt.setString(6, insertMailField.getText()+"@"+domainField.getText());
-														pstmt.setString(7, insertJNum1Field.getText()+insertJNum2Field.getText());
+														pstmt.setString(4, insertPhoneNumField1.getText()+"-"+insertPhoneNumField2.getText()+"-"+ insertPhoneNumField3.getText());
+														pstmt.setString(5, insertMailField.getText()+"@"+domainField.getText());
+														pstmt.setString(6, insertJNum1Field.getText()+String.valueOf(insertJNum2Field.getPassword()));
 														pstmt.executeUpdate();
 														conn.commit();
 														
