@@ -22,7 +22,6 @@ import java.awt.Color;
 // 첫화면
 
 public class MainPanel extends ImagePanel {
-
 	
 	private MypageButton myPageBtn;
 	public static SignupButton signUpBtn;
