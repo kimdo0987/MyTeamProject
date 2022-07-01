@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -381,18 +380,37 @@ public class MyPageMainPanel3 extends ImagePanel {
 				
 				JComboBox comboBox = new JComboBox<String>(couponArr);
 				
+				comboBox.addItemListener(new ItemListener(){
+					public void itemStateChanged(ItemEvent e) {
+					
+						if(e.getStateChange()==ItemEvent.SELECTED) {
+							int index = comboBox.getSelectedIndex();
+							if(index==1) {System.out.println("a");
+								
+							}else if(index ==2 ) {
+								System.out.println("b");
+							}else if(index ==3) {
+								System.out.println("C");
+							}
+						}
+					
+				}
+			});
+					
 //				comboBox.addFocusListener(new FocusListener() {
-//					
 //					@Override
 //					public void focusLost(FocusEvent e) {
-//						System.out.println("lost" );
-//						comboBox.removeItem(comboBox.getSelectedItem());
+//						JComboBox<String> performedBox = (JComboBox)e.getSource();
+//						performedBox.removeItem(comboBox.getSelectedItem());
+//						
 //						
 //					}
 //					
 //					@Override
 //					public void focusGained(FocusEvent e) {
-//						comboBox.addItem(comboBox.getSelectedItem());
+//						JComboBox performedBox = (JComboBox)e.getSource();
+//						
+//						performedBox.addItem(comboBox.getSelectedItem());
 //						
 //					}
 //				});
