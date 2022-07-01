@@ -76,6 +76,7 @@ public class MyPageMainPanel7 extends ImagePanel {
 		pwInput.setBounds(437, 604, 273, 45);
 		pwInput.addKeyListener(new RestrictTextLength(pwInput, 12)); //글자수제한
 		
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setOpaque(true);
@@ -107,6 +108,8 @@ public class MyPageMainPanel7 extends ImagePanel {
 		explain.setForeground(Color.WHITE);
 		explain.setBounds(237, 595, 200, 60);
 		add(explain);
+		
+		
 		
 		leaveButton.addActionListener(new ActionListener() {
 			@Override
@@ -142,18 +145,24 @@ public class MyPageMainPanel7 extends ImagePanel {
 						searchPw = "";
 					}
 					
+					pwText = String.valueOf(pwInput.getPassword());
+					System.out.println(pwText);
 					if (searchPw.equals(pwText)) {
 						JOptionPane.showMessageDialog(null, "탈퇴가 완료되었습니다. \r\n이용해주셔서 감사합니다."			// 탈퇴멘트
 								, "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
 						
 						
 						String sql1 = "DELETE FROM members WHERE member_id = ?";
+						String sql2 = "DELETE FROM favorite_category WHERE member_id = ?";
 						try (Connection conn = OjdbcConnection.getConnection();					// 데이터 삭제완료
 								PreparedStatement pstmt = conn.prepareStatement(sql1);
+								PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 								){
 							conn.setAutoCommit(false);
 							pstmt.setString(1, MainPanel.currUserId);
+							pstmt2.setString(2, MainPanel.currUserId);
 							pstmt.executeQuery();
+							pstmt2.executeQuery();
 							
 							conn.commit();
 						} catch (SQLException e1) {

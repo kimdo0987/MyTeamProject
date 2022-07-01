@@ -67,7 +67,7 @@ public class CustomerServicePanel extends ImagePanel {
 		JLabel explainLabel = new JLabel(privacyStr);
 		explainLabel.setForeground(Color.WHITE);
 		explainLabel.setFont(new Font("배달의민족 도현", Font.BOLD, 20));
-		explainLabel.setBounds(203, 301, 802, 80);
+		explainLabel.setBounds(203, 301, 840, 80);
 		add(explainLabel);
 		
 		String privacyStr1 = "<html><body style='text-align:left;'>개인정보 보호원칙<br/>"
