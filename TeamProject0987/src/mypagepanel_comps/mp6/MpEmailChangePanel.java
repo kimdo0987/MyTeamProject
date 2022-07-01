@@ -63,22 +63,8 @@ public class MpEmailChangePanel extends JPanel {
 			
 			setLayout(null);
 
-			setBounds(0, 58, 730, 511);
-			
-//			ImageIcon icon = new ImageIcon("images/homeBtn.png");
-//			
-//			Image img = icon.getImage();
-//			// 창의 사이즈인 500,500에 맞춰서 이미지를 변경
-//			Image changeImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-//			ImageIcon changeIcon = new ImageIcon(changeImg);
-//				
-//
-//				GoToButton mainBtn = new GoToButton("메인");
-//				mainBtn.setFont(new Font("배달의민족 도현", Font.PLAIN, 0));
-//				mainBtn.setIcon(new ImageIcon("images/homeBtn.png"));
-//				mainBtn.setBorderPainted(false);
-//				mainBtn.setBounds(1037, 38, 46, 44);
-			///////////////////////////////////////////////////////////////////////
+			setBounds(0, 58, 730, 511);			
+
 			ImageIcon icon1 = new ImageIcon("images/changeButton/전화번호변경버튼.png");
 			ImageIcon icon2 = new ImageIcon("images/changeButton/하늘이메일변경버튼.png");
 			ImageIcon icon3 = new ImageIcon("images/changeButton/비밀번호변경버튼.png");

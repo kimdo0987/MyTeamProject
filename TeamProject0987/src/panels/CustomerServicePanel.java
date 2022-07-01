@@ -120,7 +120,7 @@ public class CustomerServicePanel extends ImagePanel {
 			public void actionPerformed(ActionEvent e) {
 				customerLmg.show(panel, "이용약관");
 				explainLabel.setText(useStr);
-				explainLabel.setBounds(203, 301, 802, 80);
+				explainLabel.setBounds(203, 301, 840, 80);
 				lblNewLabel.setText("이용약관");
 			}
 		});
