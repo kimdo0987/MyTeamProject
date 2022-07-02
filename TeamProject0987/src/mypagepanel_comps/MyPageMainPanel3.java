@@ -47,6 +47,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 	
 	static JTable table;
 	ArrayList<Integer> checkedRows;
+	public int rowSize;
 	public String[] couponArr;
 	public Integer[] discountRate;
 	public ArrayList<String> arrList;
@@ -70,6 +71,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		put("봄맞이 할인쿠폰",10);
 		put("",0);
 		put("선택안함",0);
+		put("---쿠폰선택---",0);
 		put("null",0);
 		}};
 
@@ -91,7 +93,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 0, 800, 529);		
+		tablePanel.setBounds(0, 0, 800, 510);		
 		tablePanel.setLayout(null);
 		panel.add(tablePanel);
 		
@@ -285,19 +287,25 @@ public class MyPageMainPanel3 extends ImagePanel {
 				
 			}
 		});
-		
-		DefaultTableModel model2 = new DefaultTableModel(){
-			
-			
-		    @Override
-		    public boolean isCellEditable(int row, int column) {
-		       //all cells false
-		    	if(column==4) {return true;}
-		       return false;
-		    }
+
+		DefaultTableModel model2 = new DefaultTableModel() {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// all cells false
+				if (column == 4) {
+					return true;
+				} else {
+					return false;
+				}
+			}
 		};
 		
 		JTable table2 = new JTable(); // 수정불가능한 테이블로 생성
+		
+		table2.setSelectionBackground(Color.white); //선택한셀 색 안변하게 하기
+		
+		
 		
 //		table.setPreferredScrollableViewportSize(new Dimension(700,600));
 		
@@ -331,6 +339,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 					}					
 					
 				}				
+				rowSize = checkedRows.size();
 				//System.out.println(checkedRows);
 				int i = 0;
 				for(int checkRow : checkedRows) {
@@ -361,6 +370,8 @@ public class MyPageMainPanel3 extends ImagePanel {
 				table2.getColumnModel().getColumn(5).setMinWidth(90);
 				table2.getColumnModel().getColumn(5).setMaxWidth(90);
 				
+			
+								
 				table2.setRowHeight(30); // 셀 높이 조정		
 				table2.setCellSelectionEnabled(true); // 한셀만 선택가능
 				table2.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
@@ -442,7 +453,8 @@ public class MyPageMainPanel3 extends ImagePanel {
 						// System.out.println(table2.getValueAt(rowrow, colcol)); //내가 집은 item 보기
 
 						// 집은게 공백이거나 선택안함이면 아무동작안함
-						if ((("" + table2.getValueAt(rowrow, colcol)).equals(""))
+						if ((("" + table2.getValueAt(rowrow, colcol)).equals("---쿠폰선택---"))
+								||(("" + table2.getValueAt(rowrow, colcol)).equals(""))
 								|| (("" + table2.getValueAt(rowrow, colcol)).equals("null"))
 								|| ("" + table2.getValueAt(rowrow, colcol)).equals("선택안함")) {
 						} else {
@@ -475,7 +487,8 @@ public class MyPageMainPanel3 extends ImagePanel {
 							}
 							//3
 							for (int i = 0; i < checkedRows.size(); i++) {
-								if ((("" + table2.getValueAt(i, 4)).equals(""))
+								if ((("" + table2.getValueAt(rowrow, colcol)).equals("---쿠폰선택---"))
+										||(("" + table2.getValueAt(i, 4)).equals(""))
 										|| (("" + table2.getValueAt(i, 4)).equals("null"))
 										|| ("" + table2.getValueAt(i, 4)).equals("선택안함")) {
 								} else {
@@ -524,7 +537,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 800, 529);
+		scrollPane.setBounds(0, 0, 800, 510);
 		tablePanel.add(scrollPane);
 		panel.add(tablePanel);
 		setTable(table);

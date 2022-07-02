@@ -37,7 +37,7 @@ public class MyWishLists {
 						result.getString("teacher_name"),
 						result.getString("lecture_start_date||'~'||lecture_end_date"),
 						result.getString("lecture_price"),
-						"삭제하기","",""
+						"삭제하기","---쿠폰선택---",result.getString("lecture_price")
 				});
 			}
 			System.out.println("The data(MyWishLists) has been fetched");

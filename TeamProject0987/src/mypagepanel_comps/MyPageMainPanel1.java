@@ -43,7 +43,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 0, 800, 568);	
+		tablePanel.setBounds(0, 0, 800, 560);	
 		
 		String[] headings = new String[] {"강의명","강사명","수강기간", "수강평작성", "수강포기", "출석률"};
 		String[][] data = database.MyLectureLists.getMyLectureLists();
@@ -52,7 +52,9 @@ public class MyPageMainPanel1 extends ImagePanel {
 		
 		// 테이블의 셀 내용 수정 불가 시작 //
 		DefaultTableModel mod = new DefaultTableModel(data, headings) {
+			
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				
 				return false;
 			}
 		};
@@ -196,7 +198,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		//테이블 생성에 관한 내용
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 500);
+		scrollPane.setBounds(0, 0, 1093, 560);
 		scrollPane.setSize(getSize());
 		tablePanel.add(scrollPane);
 		panel.add(tablePanel);
