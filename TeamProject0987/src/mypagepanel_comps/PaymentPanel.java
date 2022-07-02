@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
@@ -18,11 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.table.TableColumn;
 
 import panels.ImagePanel;
-import panels.MainPanel;
 
 public class PaymentPanel extends ImagePanel {
-	public JLabel totalPricelbl;
-	
 	public PaymentPanel() {
 		setBackground(new Color(245, 222, 179));
 		setBounds(118, 0, 1093, 800);	
@@ -80,19 +76,18 @@ public class PaymentPanel extends ImagePanel {
 		panel.add(tablePanel);
 		
 		
-		JLabel tableNameLabel_1 = new JLabel("총 결제 금액");
+		JLabel tableNameLabel_1 = new JLabel("결제 금액");
 		tableNameLabel_1.setForeground(Color.WHITE);
 		tableNameLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 36));
-		tableNameLabel_1.setBounds(355, 576, 235, 90);
+		tableNameLabel_1.setBounds(419, 576, 171, 90);
 		add(tableNameLabel_1);
-		DecimalFormat df = new DecimalFormat(",###");
-		totalPricelbl = new JLabel((df.format(MainPanel.mypageMainPanel3.total_price) + "원"));
-		totalPricelbl.setForeground(Color.WHITE);
-		totalPricelbl.setFont(new Font("배달의민족 도현", Font.PLAIN, 36));
-		totalPricelbl.setBounds(586, 576, 294, 90);
-		add(totalPricelbl);
 		
-		MainPanel.paymentPanel = this;
+		JLabel tableNameLabel_1_1 = new JLabel("0원");
+		tableNameLabel_1_1.setForeground(Color.WHITE);
+		tableNameLabel_1_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 36));
+		tableNameLabel_1_1.setBounds(586, 576, 294, 90);
+		add(tableNameLabel_1_1);
+		
 		
 	}
 }

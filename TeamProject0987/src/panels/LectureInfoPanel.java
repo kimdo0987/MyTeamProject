@@ -163,7 +163,7 @@ public class LectureInfoPanel extends ImagePanel {
 				lectureInfoPanel3 = new LectureInfoPanel3(lectureTime); ///////////	
 				cardLayoutPanel.add(lectureInfoPanel3, "강의 시간표");
 				rateAvgLabel.setText("");
-				//System.out.println(lectureCategory);
+				System.out.println(lectureCategory);
 			}
 		});
 		scheduleBtn.setBounds(756, 276, 226, 62);

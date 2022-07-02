@@ -6,6 +6,10 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -13,10 +17,7 @@ import java.awt.font.TextAttribute;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -28,10 +29,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
@@ -49,30 +46,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 	ArrayList<Integer> checkedRows;
 	public String[] couponArr;
 	public Integer[] discountRate;
-	public ArrayList<String> arrList;
 	static JTable table2;
-	JComboBox newComboBox; 
-	private int rowrow;
-	private int colcol;
-	Object a;
-	public int total_price = 0;
-	
-	static final HashMap<String, Integer> couponMap= new HashMap <String, Integer>(){{
-		put("강좌 10% 할인쿠폰", 10);
-		put("강좌 15% 할인쿠폰",15);
-		put("강좌 20% 할인쿠폰",20);
-		put("강좌 25% 할인쿠폰",25);
-		put("연계결제 할인쿠폰",10);
-		put("취준/대학생 할인쿠폰",20);
-		put("고등학생 할인쿠폰",20);
-		put("여름방학 할인쿠폰",10);
-		put("겨울방학 할인쿠폰",10);
-		put("봄맞이 할인쿠폰",10);
-		put("",0);
-		put("선택안함",0);
-		put("null",0);
-		}};
-
 	
 	public MyPageMainPanel3() {
 		setBackground(new Color(255, 153, 204));
@@ -271,31 +245,9 @@ public class MyPageMainPanel3 extends ImagePanel {
 		paymentButton.setBorder(BorderFactory.createEmptyBorder());
 		paymentButton.setRolloverIcon(new ImageIcon(payBtn2));
 		add(paymentButton);
-		paymentButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				total_price = 0;
-				for(int i = 0; i < checkedRows.size(); ++i) {
-				total_price += Integer.parseInt(""+table2.getValueAt(i, 3)) ;				
-				}
-				
-				DecimalFormat df = new DecimalFormat(",###");
-				MainPanel.paymentPanel.totalPricelbl.setText(df.format(total_price) + "원");	
-				
-			}
-		});
 		
-		DefaultTableModel model2 = new DefaultTableModel(){
-			
-			
-		    @Override
-		    public boolean isCellEditable(int row, int column) {
-		       //all cells false
-		    	if(column==4) {return true;}
-		       return false;
-		    }
-		};
+		
+		DefaultTableModel model2 = new DefaultTableModel();
 		
 		JTable table2 = new JTable(); // 수정불가능한 테이블로 생성
 		
@@ -331,11 +283,11 @@ public class MyPageMainPanel3 extends ImagePanel {
 					}					
 					
 				}				
-				//System.out.println(checkedRows);
+				System.out.println(checkedRows);
 				int i = 0;
 				for(int checkRow : checkedRows) {
-					//System.out.println(checkRow);
-					//System.out.println(data[checkRow][0]);
+					System.out.println(checkRow);
+					System.out.println(data[checkRow][0]);
 					model2.addRow(new Object[0]); 
 					model2.setValueAt(data[checkRow][0], i, 0); // (data[row][column], 위치 row번째 행, 위치 column)
 					model2.setValueAt(data[checkRow][1], i, 1);
@@ -354,12 +306,12 @@ public class MyPageMainPanel3 extends ImagePanel {
 				table2.getColumnModel().getColumn(2).setMinWidth(120);
 				table2.getColumnModel().getColumn(2).setMaxWidth(120);
 				
-				table2.getColumnModel().getColumn(3).setMinWidth(70);
-				table2.getColumnModel().getColumn(3).setMaxWidth(70);
-				table2.getColumnModel().getColumn(4).setMinWidth(130);
-				table2.getColumnModel().getColumn(4).setMaxWidth(130);
-				table2.getColumnModel().getColumn(5).setMinWidth(90);
-				table2.getColumnModel().getColumn(5).setMaxWidth(90);
+				table2.getColumnModel().getColumn(3).setMinWidth(100);
+				table2.getColumnModel().getColumn(3).setMaxWidth(100);
+				table2.getColumnModel().getColumn(4).setMinWidth(100);
+				table2.getColumnModel().getColumn(4).setMaxWidth(100);
+				table2.getColumnModel().getColumn(5).setMinWidth(100);
+				table2.getColumnModel().getColumn(5).setMaxWidth(100);
 				
 				table2.setRowHeight(30); // 셀 높이 조정		
 				table2.setCellSelectionEnabled(true); // 한셀만 선택가능
@@ -376,6 +328,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 				JTableHeader tableHeader = table2.getTableHeader();
 				Font headerFont = new Font("맑은 고딕", Font.PLAIN, 14);
 				tableHeader.setFont(headerFont);
+				
 				
 				String sql = "SELECT * FROM coupon_lists " + "WHERE member_id = ?" + " AND expiration_period > sysdate"
 						+ " AND used_or_unused = '사용가능'";
@@ -396,152 +349,131 @@ public class MyPageMainPanel3 extends ImagePanel {
 						++j;
 					}
 					
-					couponArr = new String[j+1];
-					discountRate = new Integer[j+1];
+					couponArr = new String[j];
+					discountRate = new Integer[j];
 					
-					int k = 1;
-					couponArr[0]="선택안함";
-					discountRate[0]=0;
+					int k = 0;
+					
+					
 					while (result1.next()) {
 						couponArr[k] = result1.getString(4);
 						discountRate[k]= result1.getInt(5);
 						++k;
 						
 					}
-//					for(String coupon :couponArr) {
-//						arrList.add(coupon);
+					for(String coupon :couponArr) {
+						System.out.println(coupon);
+						}
+					
+
+				} catch (Exception e2) {
+					System.out.println(e2.getMessage());
+					e2.printStackTrace();
+
+				}
+				
+				
+				//일단 콤보박스부터 만들기
+				
+				////////////////
+				
+				
+				JComboBox comboBox = new JComboBox<String>(couponArr);
+				
+				comboBox.addItemListener(new ItemListener(){
+					public void itemStateChanged(ItemEvent e) {
+					
+						if(e.getStateChange()==ItemEvent.SELECTED) {
+							int index = comboBox.getSelectedIndex();
+							if(index==1) {System.out.println("a");
+								
+							}else if(index ==2 ) {
+								System.out.println("b");
+							}else if(index ==3) {
+								System.out.println("C");
+							}
+						}
+					
+				}
+			});
+					
+//				comboBox.addFocusListener(new FocusListener() {
+//					@Override
+//					public void focusLost(FocusEvent e) {
+//						JComboBox<String> performedBox = (JComboBox)e.getSource();
+//						performedBox.removeItem(comboBox.getSelectedItem());
+//						
+//						
 //					}
 //					
-
-				} catch (Exception e2) {					
-					e2.printStackTrace();
-				}
-				/////////////////
-				// 콤보박스 만들기//
-				/////////////////
+//					@Override
+//					public void focusGained(FocusEvent e) {
+//						JComboBox performedBox = (JComboBox)e.getSource();
+//						
+//						performedBox.addItem(comboBox.getSelectedItem());
+//						
+//					}
+//				});
+//				comboBox.addItemListener(new ItemListener() {
+//					
+//					@Override
+//					public void itemStateChanged(ItemEvent e) {
+//						System.out.println(e.getSource());//						
+//					}
+//				});
 				
-				table2.addMouseMotionListener(new MouseMotionAdapter() {
-					@Override
-					public void mouseMoved(MouseEvent e) {
-						
-						rowrow = table2.rowAtPoint(e.getPoint());
-						colcol = table2.columnAtPoint(e.getPoint());
-						// System.out.println(rowrow + " /// " + colcol);
-					}
-				});
-
-				newComboBox = new JComboBox<String>(couponArr);
-				JComboBox comboBox = new JComboBox<String>(couponArr);
-				ArrayList list = new ArrayList(Arrays.asList(couponArr));
-
-				comboBox.addPopupMenuListener(new PopupMenuListener() {
-
-					@Override
-					public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-						// System.out.println("열림");
-						// System.out.println(table2.getValueAt(rowrow, colcol)); //내가 집은 item 보기
-
-						// 집은게 공백이거나 선택안함이면 아무동작안함
-						if ((("" + table2.getValueAt(rowrow, colcol)).equals(""))
-								|| (("" + table2.getValueAt(rowrow, colcol)).equals("null"))
-								|| ("" + table2.getValueAt(rowrow, colcol)).equals("선택안함")) {
-						} else {
-							// 집은게 쿠폰이면 comboBox list에 넣는다
-							// Item 다시 집어넣을때 순서섞이지 않게 집어넣기
-							a = table2.getValueAt(rowrow, colcol);
-							for (int i = 0; i < comboBox.getItemCount(); i++) {
-								if (list.indexOf(comboBox.getItemAt(i)) != -1) {
-									if (list.indexOf(comboBox.getItemAt(i)) > list.indexOf(a)) {
-										comboBox.insertItemAt(a, i); //a는 집은 Item, i는 넣을 위치
-										break; //넣을위치 처음으로 찾은순간 반복문 빠져나온다
-									}
-								}
-							}
-
+				comboBox.addItemListener(new ItemListener() {
+					public void itemStateChanged(ItemEvent e) {
+						if (e.getStateChange() == ItemEvent.SELECTED) {
+							int index = comboBox.getSelectedIndex();
+							System.out.println("sel"+index);
 						}
-
-					}
-
-					@Override
-					public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-						//System.out.println("닫힘");
-						//comboBox를 닫을때는 1.모든 item 지운다 2.초기상태로 재생성한다 3.현재 컬럼들에 있는 값들을 다 제거한다(공백칸과 선택안함은 무시)
-						if (rowrow >= 0 && colcol == 4 && (list.indexOf(table2.getValueAt(rowrow, colcol)) > -1)) {
-							//1.
-							comboBox.removeAllItems();
-							//2.
-							for (int i = 0; i < newComboBox.getItemCount(); ++i) {
-								comboBox.addItem(newComboBox.getItemAt(i));
-							}
-							//3
-							for (int i = 0; i < checkedRows.size(); i++) {
-								if ((("" + table2.getValueAt(i, 4)).equals(""))
-										|| (("" + table2.getValueAt(i, 4)).equals("null"))
-										|| ("" + table2.getValueAt(i, 4)).equals("선택안함")) {
-								} else {
-									comboBox.removeItem(table2.getValueAt(i, 4));
-
-								}
-							}
-						}
-						//////////////// 선택한 쿠폰에 따라 결제금액 계산하여 컬럼에 출력 /////////////
-						int i = table2.getSelectedColumn();
-						total_price = 0;
-						if (i >= 0) {
-							for (int j = 0; j < checkedRows.size(); ++j) {
-							double price = (Integer.parseInt(""+table2.getValueAt(j, 3)))*((100-couponMap.get(""+table2.getValueAt(j, 4)))*0.01);
-								model2.setValueAt(Math.round(price), j, 5);								
-								total_price	+= Math.round(price);
-							}							
-						}
-						DecimalFormat df = new DecimalFormat(",###");
-						MainPanel.paymentPanel.totalPricelbl.setText(df.format(total_price) + "원");						
 						
 					}
-
-					@Override
-					public void popupMenuCanceled(PopupMenuEvent e) {
-
-					}
 				});
+				
+				
+				
 
-				// 테이블에서 하나의 column(열, 칸) 관리자 얻어오기
-				TableColumn column = table2.getColumnModel().getColumn(4); // 표의 한 열을 담당하는 객체를 소환
-				column.setCellEditor(new DefaultCellEditor(comboBox));
-
+				
+				//테이블에서 하나의 column(열, 칸) 관리자 얻어오기
+				TableColumn column = table2.getColumnModel().getColumn(4); //표의 한 열을 담당하는 객체를 소환
+				column.setCellEditor(new DefaultCellEditor(comboBox));  
+				
+				
 				table2.setFillsViewportHeight(true);
 				MyPageMainPanel3.table2 = table2;
 			}
 		});
-
-		table.setRowHeight(30); // 셀 높이 조정
+		
+		
+		table.setRowHeight(30); // 셀 높이 조정		
 		table.setCellSelectionEnabled(true); // 한셀만 선택가능
-		table.getTableHeader().setReorderingAllowed(false); // 컬럼 헤더 고정 (이동 불가)
+		table.getTableHeader().setReorderingAllowed(false); //컬럼 헤더 고정 (이동 불가)
 		table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 고정 (변경 불가)
-
-		ListSelectionModel selectionModel = table.getSelectionModel(); // 한 행만 선택가능
-		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+		
+		
+		ListSelectionModel selectionModel = table.getSelectionModel(); //한 행만 선택가능
+		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 	
+		
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 800, 529);
-		tablePanel.add(scrollPane);
+		scrollPane.setBounds(0, 0, 800, 529);		
+		tablePanel.add(scrollPane);		
 		panel.add(tablePanel);
 		setTable(table);
-
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setOpaque(true);
 		lblNewLabel.setBounds(80, 124, 800, 3);
 		add(lblNewLabel);
-		
-		MainPanel.mypageMainPanel3 = this;
 	}
-
+	
 	public void setTable(JTable table) {
 		this.table = table;
 	}
-
+	
 	public static JTable getTable() {
 		return table;
 	}
