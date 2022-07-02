@@ -110,7 +110,7 @@ public class LectureSearchPanel extends ImagePanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(allCategoryBtn.getText());
+				//System.out.println(allCategoryBtn.getText());
 				LectureTable lecListPanel = new LectureTable(allCategoryBtn.getText());
 				lectureListPanel.add(lecListPanel, allCategoryBtn.getText());
 				layMng.show(lectureListPanel, allCategoryBtn.getText());
@@ -276,7 +276,7 @@ public class LectureSearchPanel extends ImagePanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(cateBtn.getText());
+					//System.out.println(cateBtn.getText());
 					LectureTable lecListPanel = new LectureTable(cateBtn.getText());
 					lectureListPanel.add(lecListPanel, cateBtn.getText());
 					layMng.show(lectureListPanel, cateBtn.getText());

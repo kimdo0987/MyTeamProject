@@ -119,9 +119,10 @@ public class LectureTable2 extends JPanel {
 
 				lectureName = (String) table.getValueAt(row, 0);
 				
-				
 				MainPanel.lectureSearchPanel.setVisible(false);
 				MainPanel.lectureInfoPanel.setVisible(true);
+				MainPanel.lastPanel = MainPanel.lectureSearchPanel;
+				MainPanel.currPanel = MainPanel.lectureInfoPanel;
 				LectureInfoPanel.cardLayout1.show(LectureInfoPanel.cardLayoutPanel,"상세정보");
 
 
