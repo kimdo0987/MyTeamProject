@@ -155,6 +155,13 @@ public class MpPwChangePanel extends JPanel {
 			newPwField.setBounds(196, 212, 469, 51);
 			newPwField.addKeyListener(new KeyAdapter() {
 				@Override
+				public void keyTyped(KeyEvent e) {
+					newPwField.setEchoChar('*');
+					newPwField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+
+				}
+				
+				@Override
 				public void keyReleased(KeyEvent e) {
 					char[] a = newPwField.getPassword();
 					
@@ -167,6 +174,13 @@ public class MpPwChangePanel extends JPanel {
 			newPwField2.setColumns(10);
 			newPwField2.setBounds(196, 273, 469, 51);
 			newPwField2.addKeyListener(new KeyAdapter() {
+				
+				@Override
+				public void keyTyped(KeyEvent e) {
+					newPwField2.setEchoChar('*');
+					newPwField2.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+				
+				}
 				@Override
 				public void keyReleased(KeyEvent e) {
 					char[] a = newPwField2.getPassword();

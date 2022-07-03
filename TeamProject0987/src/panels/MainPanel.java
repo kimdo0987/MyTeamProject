@@ -3,6 +3,11 @@ package panels;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -16,7 +21,11 @@ import buttons.LoginButton;
 import buttons.LogoutButton;
 import buttons.MypageButton;
 import buttons.SignupButton;
+import database.OjdbcConnection;
 import labels.TopLabel;
+import mypagepanel_comps.MyPageMainPanel3;
+import mypagepanel_comps.PaymentPanel;
+
 import java.awt.Color;
 
 // 첫화면
@@ -30,7 +39,7 @@ public class MainPanel extends ImagePanel {
 
 	public static JFrame thisFrame;
 
-	public static String currUserId = "logout";
+	public static String currUserId = "hansm1119";
 	public static MainPanel mainPanel = new MainPanel();
 	public static LectureSearchPanel lectureSearchPanel = new LectureSearchPanel();
 	public static MyPagePanel myPagePanel = new MyPagePanel();
@@ -40,6 +49,8 @@ public class MainPanel extends ImagePanel {
 	public static LoginPanel loginPanel = new LoginPanel();
 	public static IdSearchPanel idSearchPanel = new IdSearchPanel();
 	public static PwSearchPanel pwSerachPanel = new PwSearchPanel();
+	public static PaymentPanel paymentPanel;
+	public static MyPageMainPanel3 mypageMainPanel3;
 
 	public static JPanel currPanel; // 이전 버튼 구현하는데 사용되는 패널들.
 	public static JPanel lastPanel;
@@ -142,6 +153,28 @@ public class MainPanel extends ImagePanel {
 
 		frm.add(lectureInfoPanel);
 		lectureInfoPanel.setVisible(false);
+		
+		
+		String sql1 = "UPDATE coupon_lists SET used_or_unused = '유효기간만료'"
+				+ " WHERE expiration_period < to_date(?,'yy_mm_dd') AND used_or_unused = '사용가능'";
+				
+		try (
+				Connection conn = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 
-	}
+		) {
+			conn.setAutoCommit(false);
+			
+			pstmt1.setString(1, ""+LocalDateTime.now().toLocalDate());
+			pstmt1.executeUpdate();
+			
+			conn.commit();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+				
+		
+	}		
 }
