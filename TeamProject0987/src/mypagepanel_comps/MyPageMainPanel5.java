@@ -35,7 +35,7 @@ public class MyPageMainPanel5 extends ImagePanel {
 		tableNameLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 58));
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 0, 800, 610);	
+		tablePanel.setBounds(0, 0, 800, 560);	
 		tablePanel.setLayout(null);
 		
 		String[] headings = new String[] {"주문번호", "주문날짜", "강의명", "쿠폰명", "정가", "결제금액", "결제수단"};
@@ -91,7 +91,7 @@ public class MyPageMainPanel5 extends ImagePanel {
 		//테이블 생성에 관한 내용
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 800, 610);
+		scrollPane.setBounds(0, 0, 800, 560);
 		tablePanel.add(scrollPane);
 		
 		panel.add(tablePanel);

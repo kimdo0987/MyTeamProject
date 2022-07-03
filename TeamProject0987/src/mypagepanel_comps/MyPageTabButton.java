@@ -34,12 +34,33 @@ public class MyPageTabButton extends JButton {
 				MyPagePanel.mainPanel6 = new MyPageMainPanel6();
 				MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel6, "계정 관리");
 				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "계정 관리");
-				
-			}else {
-			// System.out.println(name); cardLayout에서 어떤 panel 꺼내오는지 확인
-			MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, name);
+			} else if (name.equals("나의 수강조회")){
+					MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel1);
+					MyPagePanel.mainPanel1 = new MyPageMainPanel1();
+					MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel1, "나의 수강조회");
+					MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "나의 수강조회");				
+			} else if (name.equals("출결 현황 조회")){
+				MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel2);
+				MyPagePanel.mainPanel2 = new MyPageMainPanel2();
+				MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel2, "출결 현황 조회");
+				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "출결 현황 조회");
+			}else if (name.equals("쿠폰함")){
+					MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel4);
+				MyPagePanel.mainPanel4 = new MyPageMainPanel4();
+				MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel4, "쿠폰함");
+				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "쿠폰함");
+
+			} else if (name.equals("구매 내역")) {
+				MyPagePanel.cardLayoutPanel.remove(MyPagePanel.mainPanel5);
+				MyPagePanel.mainPanel5 = new MyPageMainPanel5();
+				MyPagePanel.cardLayoutPanel.add(MyPagePanel.mainPanel5, "구매 내역");
+				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, "구매 내역");
+
+			} else {
+				// System.out.println(name); cardLayout에서 어떤 panel 꺼내오는지 확인
+				MyPagePanel.cardLayout1.show(MyPagePanel.cardLayoutPanel, name);
 			}
-		}		
+		}
 	};
 	
 	

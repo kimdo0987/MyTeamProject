@@ -43,7 +43,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(0, 0, 800, 568);	
+		tablePanel.setBounds(0, 0, 800, 560);	
 		
 		String[] headings = new String[] {"강의명","강사명","수강기간", "수강평작성", "수강포기", "출석률"};
 		String[][] data = database.MyLectureLists.getMyLectureLists();
@@ -52,7 +52,9 @@ public class MyPageMainPanel1 extends ImagePanel {
 		
 		// 테이블의 셀 내용 수정 불가 시작 //
 		DefaultTableModel mod = new DefaultTableModel(data, headings) {
+			
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				
 				return false;
 			}
 		};
@@ -130,9 +132,9 @@ public class MyPageMainPanel1 extends ImagePanel {
 		        if (row >= 0 && col >= 0) {
 		        	String a = table.getValueAt(row, 5).toString().substring(0, 2);
 		        	if (col == 3) {
-		        		if(Integer.parseInt(a)<19) {/////////////////////////////////////////////////////////////////
-		        			JOptionPane.showMessageDialog(MainPanel.thisFrame, "수강률이 50% 이상만 작성할 수 있습니다",
-									"비밀번호 확인", 1);
+		        		if(Integer.parseInt(a)<20) {/////////////////////////////////////////////////////////////////
+		        			JOptionPane.showMessageDialog(MainPanel.thisFrame, "수강률이 20% 이상만 작성할 수 있습니다",
+									"수강평 작성 알림", 1);
 		        		}else {
 						new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 		        		}
@@ -196,7 +198,7 @@ public class MyPageMainPanel1 extends ImagePanel {
 		//테이블 생성에 관한 내용
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 730, 500);
+		scrollPane.setBounds(0, 0, 1093, 560);
 		scrollPane.setSize(getSize());
 		tablePanel.add(scrollPane);
 		panel.add(tablePanel);
