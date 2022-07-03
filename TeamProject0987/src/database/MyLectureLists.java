@@ -25,6 +25,8 @@ public class MyLectureLists {
 				+ "attendance_state = '출석' "
 				+ "and "
 				+ "a.member_id = ? "
+				+ "and "
+				+ "m.member_id = ? "
 				+ "GROUP BY lecture_name, teacher_name, l.lecture_start_date,l.lecture_end_date, "
 				+ "l.lecture_id";
 		
@@ -41,6 +43,8 @@ public class MyLectureLists {
 				+ "p.refund_status = 'null' "
 				+ "and "
 				+ "p.member_id = ? "
+				+ "and "
+				+ "m.member_id = ? "
 				+ "GROUP BY lecture_name, teacher_name, l.lecture_start_date,l.lecture_end_date, "
 				+ "l.lecture_id";
 		
@@ -52,7 +56,9 @@ public class MyLectureLists {
 			
 		) {
 			pstmt.setString(1, MainPanel.currUserId);
+			pstmt.setString(2, MainPanel.currUserId);
 			pstmt2.setString(1, MainPanel.currUserId);
+			pstmt2.setString(2, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
 			ResultSet result2 = pstmt2.executeQuery();
 	
