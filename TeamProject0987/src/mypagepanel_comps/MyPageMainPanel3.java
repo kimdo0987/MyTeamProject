@@ -356,19 +356,19 @@ public class MyPageMainPanel3 extends ImagePanel {
 				}
 				table2.setModel(model2);
 				
-				table2.getColumnModel().getColumn(0).setMinWidth(300);
-				table2.getColumnModel().getColumn(0).setMaxWidth(300);
+				table2.getColumnModel().getColumn(0).setMinWidth(280);
+				table2.getColumnModel().getColumn(0).setMaxWidth(280);
 				table2.getColumnModel().getColumn(1).setMinWidth(100);//셀 너비 조정
 				table2.getColumnModel().getColumn(1).setMaxWidth(100);
-				table2.getColumnModel().getColumn(2).setMinWidth(120);
-				table2.getColumnModel().getColumn(2).setMaxWidth(120);
+				table2.getColumnModel().getColumn(2).setMinWidth(150);
+				table2.getColumnModel().getColumn(2).setMaxWidth(150);
 				
 				table2.getColumnModel().getColumn(3).setMinWidth(70);
 				table2.getColumnModel().getColumn(3).setMaxWidth(70);
 				table2.getColumnModel().getColumn(4).setMinWidth(130);
 				table2.getColumnModel().getColumn(4).setMaxWidth(130);
-				table2.getColumnModel().getColumn(5).setMinWidth(90);
-				table2.getColumnModel().getColumn(5).setMaxWidth(90);
+				table2.getColumnModel().getColumn(5).setMinWidth(80);
+				table2.getColumnModel().getColumn(5).setMaxWidth(80);
 				
 			
 								
@@ -389,7 +389,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 				tableHeader.setFont(headerFont);
 				
 				String sql = "SELECT * FROM coupon_lists " + "WHERE member_id = ?" + " AND expiration_period > sysdate"
-						+ " AND used_or_unused = '사용가능'";
+						+ " AND used_or_unused = '사용가능' ORDER BY coupon_name";
 
 				try (Connection con = OjdbcConnection.getConnection();
 						PreparedStatement pstmt = con.prepareStatement(sql);
