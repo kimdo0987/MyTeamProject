@@ -106,12 +106,14 @@ public class PaymentPanel extends ImagePanel {
 					
 					String sql1 = "DELETE FROM wish_lists w WHERE w.lecture_id = (SELECT w2.lecture_id FROM wish_lists w2, lecture_lists l WHERE w2.lecture_id = l.lecture_id AND user_id = ? AND l.lecture_name = ? ) AND user_id = ?";
 					
-					String sql2 = "UPDATE coupon_lists SET used_or_unused = ? WHERE member_id = ? AND coupon_name = ?"
-							+ " AND expiration_period = (SELECT min(expiration_period) FROM coupon_lists"
-							+ " WHERE member_id = ? AND coupon_name = ? AND used_or_unused = ?)";
+					String sql21 = "SELECT * FROM coupon_lists a WHERE member_id = ? AND coupon_name = ? AND used_or_unused = ? AND a.expiration_period = (SELECT min(expiration_period) FROM coupon_lists WHERE member_id = ? AND coupon_name = ? AND used_or_unused = ?)";
+					String sql2 = "UPDATE coupon_lists SET used_or_unused = ? WHERE coupon_id = ?";
+//							+ "member_id = ? AND coupon_name = ? AND used_or_unused = ? "
+//							+ " AND expiration_period = (SELECT min(expiration_period) FROM coupon_lists"
+//							+ " WHERE member_id = ? AND coupon_name = ? AND used_or_unused = ?)";
 
 					String sql3 = "SELECT * FROM lecture_lists WHERE lecture_name = ?";
-					String sql4 = "SELECT * FROM coupon_lists a WHERE member_id = ? AND a.expiration_period = (SELECT min(expiration_period) FROM coupon_lists WHERE member_id = ? AND coupon_name = ? AND used_or_unused = ?)";
+					String sql4 = "SELECT * FROM coupon_lists a WHERE member_id = ? AND coupon_name = ? AND used_or_unused = ? AND a.expiration_period = (SELECT min(expiration_period) FROM coupon_lists WHERE member_id = ? AND coupon_name = ? AND used_or_unused = ?)";
 
 					String sql5 = "INSERT INTO payment_log VALUES (PAYMENT_SEQ.nextval,PAYMENT_SEQ.nextval,?,?,?,?,to_date(?,'yy_mm_dd'),?,?)";
 					
@@ -121,7 +123,8 @@ public class PaymentPanel extends ImagePanel {
 							PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 							
 							PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-
+							PreparedStatement pstmt21 = conn.prepareStatement(sql21, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+							
 							PreparedStatement pstmt3 = conn.prepareStatement(sql3, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 							PreparedStatement pstmt4 = conn.prepareStatement(sql4, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 							
@@ -138,16 +141,7 @@ public class PaymentPanel extends ImagePanel {
 							pstmt1.setString(3, MainPanel.currUserId);
 							pstmt1.executeUpdate();
 						}
-						//2. 사용한쿠폰 사용완료로 수정 (이름 같은것들중에 가장 기간이 짧은것부터 먼저 사용) //////////
-						for (int i = 0; i < MainPanel.mypageMainPanel3.rowSize; i++) {
-							pstmt2.setString(1, "사용완료");
-							pstmt2.setString(2, MainPanel.currUserId);
-							pstmt2.setString(3, "" + MyPageMainPanel3.table2.getValueAt(i, 4));
-							pstmt2.setString(4, MainPanel.currUserId);
-							pstmt2.setString(5, "" + MyPageMainPanel3.table2.getValueAt(i, 4));
-							pstmt2.setString(6, "사용가능");
-							pstmt2.executeUpdate();
-						}
+
 						
 						//3. 결제 LOG에 추가	//////////					
 						
@@ -171,19 +165,24 @@ public class PaymentPanel extends ImagePanel {
 									|| (("" + MyPageMainPanel3.table2.getValueAt(i, 4)).equals("선택안함"))
 									|| (("" + MyPageMainPanel3.table2.getValueAt(i, 4)).equals("null"))) {
 								pstmt4.setString(1, "logout");
-								pstmt4.setString(2, "logout");
-								pstmt4.setString(3, "사용 안함");
-								pstmt4.setString(4, "분류없음");
+								pstmt4.setString(2, "사용 안함");
+								pstmt4.setString(3, "분류없음");
+								pstmt4.setString(4, "logout");
+								pstmt4.setString(5, "사용 안함");
+								pstmt4.setString(6, "분류없음");
 							} else {
 								pstmt4.setString(1, MainPanel.currUserId);
-								pstmt4.setString(2, MainPanel.currUserId);
-								pstmt4.setString(3, "" + MyPageMainPanel3.table2.getValueAt(i, 4));
-								pstmt4.setString(4, "사용가능");
+								pstmt4.setString(2, "" + MyPageMainPanel3.table2.getValueAt(i, 4));
+								pstmt4.setString(3, "사용가능");
+								pstmt4.setString(4, MainPanel.currUserId);
+								pstmt4.setString(5, "" + MyPageMainPanel3.table2.getValueAt(i, 4));
+								pstmt4.setString(6, "사용가능");
 							}							
 							
 							ResultSet rs2 = pstmt4.executeQuery();
 							rs2.first();
 							Integer couponid = rs2.getInt(1); 
+							System.out.println(couponid);
 							
 							////////////////// 나머지 데이터는 불러올 수 있으므로 INSERT 실행 ////////////////////////
 							pstmt5.setString(1, MainPanel.currUserId);
@@ -194,6 +193,48 @@ public class PaymentPanel extends ImagePanel {
 							pstmt5.setString(6, ""+ comboBox.getSelectedItem());
 							pstmt5.setString(7, "null");
 							pstmt5.executeUpdate();
+						}
+						
+						
+						//2. 사용한쿠폰 사용완료로 수정 (이름 같은것들중에 가장 기간이 짧은것부터 먼저 사용) //////////
+						for (int i = 0; i < MainPanel.mypageMainPanel3.rowSize; i++) {						
+							
+							
+							/////////// 2-1.쿠폰이름으로 쿠폰id 받기 ///////////////
+							
+							// 만약 사용안하는 상태일때는 '사용 안함' 쿠폰 적용 coupon_id -> 0 
+							if ((("" + MyPageMainPanel3.table2.getValueAt(i, 4)).equals(""))
+									|| (("" + MyPageMainPanel3.table2.getValueAt(i, 4)).equals("---쿠폰선택---"))
+									|| (("" + MyPageMainPanel3.table2.getValueAt(i, 4)).equals("선택안함"))
+									|| (("" + MyPageMainPanel3.table2.getValueAt(i, 4)).equals("null"))) {
+								pstmt21.setString(1, "logout");
+								pstmt21.setString(2, "사용 안함");
+								pstmt21.setString(3, "분류없음");
+								pstmt21.setString(4, "logout");
+								pstmt21.setString(5, "사용 안함");
+								pstmt21.setString(6, "분류없음");
+							} else {
+								pstmt21.setString(1, MainPanel.currUserId);
+								pstmt21.setString(2, "" + MyPageMainPanel3.table2.getValueAt(i, 4));
+								pstmt21.setString(3, "사용가능");
+								pstmt21.setString(4, MainPanel.currUserId);
+								pstmt21.setString(5, "" + MyPageMainPanel3.table2.getValueAt(i, 4));
+								pstmt21.setString(6, "사용가능");
+							}							
+							
+							ResultSet rs21 = pstmt21.executeQuery();
+							rs21.first();
+							Integer couponid21 = rs21.getInt(1); 							
+							
+							if(couponid21 == 0) {
+							pstmt2.setString(1, "분류없음");
+							pstmt2.setInt(2, couponid21);
+							} else {
+								pstmt2.setString(1, "사용완료");
+								pstmt2.setInt(2, couponid21);
+								
+							}
+							pstmt2.executeUpdate();
 						}
 						
 						

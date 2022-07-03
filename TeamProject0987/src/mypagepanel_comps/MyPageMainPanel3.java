@@ -356,19 +356,19 @@ public class MyPageMainPanel3 extends ImagePanel {
 				}
 				table2.setModel(model2);
 				
-				table2.getColumnModel().getColumn(0).setMinWidth(300);
-				table2.getColumnModel().getColumn(0).setMaxWidth(300);
+				table2.getColumnModel().getColumn(0).setMinWidth(280);
+				table2.getColumnModel().getColumn(0).setMaxWidth(280);
 				table2.getColumnModel().getColumn(1).setMinWidth(100);//셀 너비 조정
 				table2.getColumnModel().getColumn(1).setMaxWidth(100);
-				table2.getColumnModel().getColumn(2).setMinWidth(120);
-				table2.getColumnModel().getColumn(2).setMaxWidth(120);
+				table2.getColumnModel().getColumn(2).setMinWidth(150);
+				table2.getColumnModel().getColumn(2).setMaxWidth(150);
 				
 				table2.getColumnModel().getColumn(3).setMinWidth(70);
 				table2.getColumnModel().getColumn(3).setMaxWidth(70);
 				table2.getColumnModel().getColumn(4).setMinWidth(130);
 				table2.getColumnModel().getColumn(4).setMaxWidth(130);
-				table2.getColumnModel().getColumn(5).setMinWidth(90);
-				table2.getColumnModel().getColumn(5).setMaxWidth(90);
+				table2.getColumnModel().getColumn(5).setMinWidth(80);
+				table2.getColumnModel().getColumn(5).setMaxWidth(80);
 				
 			
 								
@@ -389,7 +389,7 @@ public class MyPageMainPanel3 extends ImagePanel {
 				tableHeader.setFont(headerFont);
 				
 				String sql = "SELECT * FROM coupon_lists " + "WHERE member_id = ?" + " AND expiration_period > sysdate"
-						+ " AND used_or_unused = '사용가능'";
+						+ " AND used_or_unused = '사용가능' ORDER BY coupon_name";
 
 				try (Connection con = OjdbcConnection.getConnection();
 						PreparedStatement pstmt = con.prepareStatement(sql);
@@ -453,22 +453,27 @@ public class MyPageMainPanel3 extends ImagePanel {
 						// System.out.println(table2.getValueAt(rowrow, colcol)); //내가 집은 item 보기
 
 						// 집은게 공백이거나 선택안함이면 아무동작안함
-						if ((("" + table2.getValueAt(rowrow, colcol)).equals("---쿠폰선택---"))
-								||(("" + table2.getValueAt(rowrow, colcol)).equals(""))
-								|| (("" + table2.getValueAt(rowrow, colcol)).equals("null"))
-								|| ("" + table2.getValueAt(rowrow, colcol)).equals("선택안함")) {
-						} else {
-							// 집은게 쿠폰이면 comboBox list에 넣는다
-							// Item 다시 집어넣을때 순서섞이지 않게 집어넣기
-							a = table2.getValueAt(rowrow, colcol);
-							for (int i = 0; i < comboBox.getItemCount(); i++) {
-								if (list.indexOf(comboBox.getItemAt(i)) != -1) {
-									if (list.indexOf(comboBox.getItemAt(i)) > list.indexOf(a)) {
-										comboBox.insertItemAt(a, i); //a는 집은 Item, i는 넣을 위치
-										break; //넣을위치 처음으로 찾은순간 반복문 빠져나온다
+						if (rowrow > -1 && colcol > -1) {
+							if ((("" + table2.getValueAt(rowrow, colcol)).equals("---쿠폰선택---"))
+									|| (("" + table2.getValueAt(rowrow, colcol)).equals(""))
+									|| (("" + table2.getValueAt(rowrow, colcol)).equals("null"))
+									|| (("" + table2.getValueAt(rowrow, colcol)).equals("선택안함"))
+									|| (list.indexOf(table2.getValueAt(rowrow, colcol)) == -1)) {
+							} else {
+								// 집은게 쿠폰이면 comboBox list에 넣는다
+								// Item 다시 집어넣을때 순서섞이지 않게 집어넣기
+								a = table2.getValueAt(rowrow, colcol);
+								for (int i = 0; i < comboBox.getItemCount(); i++) {
+									if (list.indexOf(comboBox.getItemAt(i)) != -1) {
+										if (list.indexOf(comboBox.getItemAt(i)) > list.indexOf(a)) {
+											comboBox.insertItemAt(a, i); // a는 집은 Item, i는 넣을 위치
+											break; // 넣을위치 처음으로 찾은순간 반복문 빠져나온다
+										}
 									}
 								}
+
 							}
+						} else {
 
 						}
 
