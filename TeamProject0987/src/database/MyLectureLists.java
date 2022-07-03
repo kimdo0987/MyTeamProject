@@ -25,10 +25,12 @@ public class MyLectureLists {
 				+ "attendance_state = '출석' "
 				+ "and "
 				+ "a.member_id = ? "
+				+ "and "
+				+ "m.member_id = ? "
 				+ "GROUP BY lecture_name, teacher_name, l.lecture_start_date,l.lecture_end_date, "
 				+ "l.lecture_id";
 		
-		String sql2 = "SELECT lecture_name, count(*)-1 as 출석일, teacher_name, "
+		String sql2 = "SELECT lecture_name, count(*) as 출석일, teacher_name, "
 				+ "l.lecture_id, lecture_start_date||'~'||lecture_end_date, "
 				+ "TO_DATE(lecture_end_date)-TO_DATE(lecture_start_date) as 총 "
 				+ " FROM "
@@ -41,6 +43,8 @@ public class MyLectureLists {
 				+ "p.refund_status = 'null' "
 				+ "and "
 				+ "p.member_id = ? "
+				+ "and "
+				+ "m.member_id = ? "
 				+ "GROUP BY lecture_name, teacher_name, l.lecture_start_date,l.lecture_end_date, "
 				+ "l.lecture_id";
 		
@@ -52,7 +56,9 @@ public class MyLectureLists {
 			
 		) {
 			pstmt.setString(1, MainPanel.currUserId);
+			pstmt.setString(2, MainPanel.currUserId);
 			pstmt2.setString(1, MainPanel.currUserId);
+			pstmt2.setString(2, MainPanel.currUserId);
 			ResultSet result = pstmt.executeQuery();
 			ResultSet result2 = pstmt2.executeQuery();
 	
