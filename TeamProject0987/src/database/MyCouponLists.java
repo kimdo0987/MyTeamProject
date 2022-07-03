@@ -20,7 +20,8 @@ public class MyCouponLists {
 				+ "from "
 				+ "coupon_lists "
 				+ "where "
-				+ "member_id = ?";
+				+ "member_id = ?"
+				+ " ORDER BY used_or_unused, expiration_period";
 		
 		try (
 				Connection con = OjdbcConnection.getConnection();
