@@ -453,22 +453,27 @@ public class MyPageMainPanel3 extends ImagePanel {
 						// System.out.println(table2.getValueAt(rowrow, colcol)); //내가 집은 item 보기
 
 						// 집은게 공백이거나 선택안함이면 아무동작안함
-						if ((("" + table2.getValueAt(rowrow, colcol)).equals("---쿠폰선택---"))
-								||(("" + table2.getValueAt(rowrow, colcol)).equals(""))
-								|| (("" + table2.getValueAt(rowrow, colcol)).equals("null"))
-								|| ("" + table2.getValueAt(rowrow, colcol)).equals("선택안함")) {
-						} else {
-							// 집은게 쿠폰이면 comboBox list에 넣는다
-							// Item 다시 집어넣을때 순서섞이지 않게 집어넣기
-							a = table2.getValueAt(rowrow, colcol);
-							for (int i = 0; i < comboBox.getItemCount(); i++) {
-								if (list.indexOf(comboBox.getItemAt(i)) != -1) {
-									if (list.indexOf(comboBox.getItemAt(i)) > list.indexOf(a)) {
-										comboBox.insertItemAt(a, i); //a는 집은 Item, i는 넣을 위치
-										break; //넣을위치 처음으로 찾은순간 반복문 빠져나온다
+						if (rowrow > -1 && colcol > -1) {
+							if ((("" + table2.getValueAt(rowrow, colcol)).equals("---쿠폰선택---"))
+									|| (("" + table2.getValueAt(rowrow, colcol)).equals(""))
+									|| (("" + table2.getValueAt(rowrow, colcol)).equals("null"))
+									|| (("" + table2.getValueAt(rowrow, colcol)).equals("선택안함"))
+									|| (list.indexOf(table2.getValueAt(rowrow, colcol)) == -1)) {
+							} else {
+								// 집은게 쿠폰이면 comboBox list에 넣는다
+								// Item 다시 집어넣을때 순서섞이지 않게 집어넣기
+								a = table2.getValueAt(rowrow, colcol);
+								for (int i = 0; i < comboBox.getItemCount(); i++) {
+									if (list.indexOf(comboBox.getItemAt(i)) != -1) {
+										if (list.indexOf(comboBox.getItemAt(i)) > list.indexOf(a)) {
+											comboBox.insertItemAt(a, i); // a는 집은 Item, i는 넣을 위치
+											break; // 넣을위치 처음으로 찾은순간 반복문 빠져나온다
+										}
 									}
 								}
+
 							}
+						} else {
 
 						}
 
