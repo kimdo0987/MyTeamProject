@@ -132,9 +132,9 @@ public class MyPageMainPanel1 extends ImagePanel {
 		        if (row >= 0 && col >= 0) {
 		        	String a = table.getValueAt(row, 5).toString().substring(0, 2);
 		        	if (col == 3) {
-		        		if(Integer.parseInt(a)<19) {/////////////////////////////////////////////////////////////////
-		        			JOptionPane.showMessageDialog(MainPanel.thisFrame, "수강률이 50% 이상만 작성할 수 있습니다",
-									"비밀번호 확인", 1);
+		        		if(Integer.parseInt(a)<20) {/////////////////////////////////////////////////////////////////
+		        			JOptionPane.showMessageDialog(MainPanel.thisFrame, "수강률이 20% 이상만 작성할 수 있습니다",
+									"수강평 작성 알림", 1);
 		        		}else {
 						new CommentsFrame(""+table.getValueAt(row, 0),""+table.getValueAt(row, 1));
 		        		}
