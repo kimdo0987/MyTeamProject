@@ -3,6 +3,11 @@ package panels;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -16,6 +21,7 @@ import buttons.LoginButton;
 import buttons.LogoutButton;
 import buttons.MypageButton;
 import buttons.SignupButton;
+import database.OjdbcConnection;
 import labels.TopLabel;
 import mypagepanel_comps.MyPageMainPanel3;
 import mypagepanel_comps.PaymentPanel;
@@ -147,6 +153,28 @@ public class MainPanel extends ImagePanel {
 
 		frm.add(lectureInfoPanel);
 		lectureInfoPanel.setVisible(false);
+		
+		
+		String sql1 = "UPDATE coupon_lists SET used_or_unused = '유효기간만료'"
+				+ " WHERE expiration_period < to_date(?,'yy_mm_dd') AND used_or_unused = '사용가능'";
+				
+		try (
+				Connection conn = OjdbcConnection.getConnection(); 
+				PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 
-	}
+		) {
+			conn.setAutoCommit(false);
+			
+			pstmt1.setString(1, ""+LocalDateTime.now().toLocalDate());
+			pstmt1.executeUpdate();
+			
+			conn.commit();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+				
+		
+	}		
 }
