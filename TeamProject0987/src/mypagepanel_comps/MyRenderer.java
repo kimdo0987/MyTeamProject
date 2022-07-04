@@ -29,8 +29,8 @@ public class MyRenderer extends DefaultTableCellRenderer {
 //			}
 			
 			if (row == rowAtMouse && column == colAtMouse) {	
-			
-        		table.setFont(fontunderLine);
+				c.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+        		c.setFont(fontunderLine);
 			} else {
 				c.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 				
