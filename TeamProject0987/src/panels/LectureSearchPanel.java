@@ -158,6 +158,7 @@ public class LectureSearchPanel extends ImagePanel {
 				LectureTable3 lecListPanel = new LectureTable3();
 				lectureListPanel.add(lecListPanel, recommendBtn.getText());
 				layMng.show(lectureListPanel, recommendBtn.getText());
+				
 
 			}
 		});
