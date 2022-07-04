@@ -130,7 +130,8 @@ public class MyPageMainPanel1 extends ImagePanel {
 		        //System.out.println(row + "and" + col);
 		        
 		        if (row >= 0 && col >= 0) {
-		        	String a = table.getValueAt(row, 5).toString().substring(0, 2);
+		        	
+		        	String a = table.getValueAt(row, 5).toString().substring(0, table.getValueAt(row, 5).toString().length()-3);
 		        	if (col == 3) {
 		        		if(Integer.parseInt(a)<20) {/////////////////////////////////////////////////////////////////
 		        			JOptionPane.showMessageDialog(MainPanel.thisFrame, "수강률이 20% 이상만 작성할 수 있습니다",
