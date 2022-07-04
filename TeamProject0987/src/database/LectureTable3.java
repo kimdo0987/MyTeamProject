@@ -131,7 +131,7 @@ public class LectureTable3 extends JPanel {
 				MainPanel.currPanel = MainPanel.lectureInfoPanel;
 				
 				LectureInfoPanel.cardLayout1.show(LectureInfoPanel.cardLayoutPanel,"상세정보");
-				
+				LectureInfoPanel.rateAvgLabel.setText("");
 				
 
 

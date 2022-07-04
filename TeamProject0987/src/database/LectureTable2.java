@@ -124,7 +124,7 @@ public class LectureTable2 extends JPanel {
 				MainPanel.lastPanel = MainPanel.lectureSearchPanel;
 				MainPanel.currPanel = MainPanel.lectureInfoPanel;
 				LectureInfoPanel.cardLayout1.show(LectureInfoPanel.cardLayoutPanel,"상세정보");
-
+				LectureInfoPanel.rateAvgLabel.setText("");
 
 				HashMap<String, String> detailInfoHash = new HashMap<>();
 
