@@ -70,7 +70,7 @@ public class LectureTable2 extends JPanel {
 				if (row > -1)
 				 {
 				    cellRenderer.rowAtMouse = row;
-				    cellRenderer.color = new Color(246,246,246);
+				    cellRenderer.color = new Color(212,212,212);
 				    table.repaint();
 				 }
 			 }
