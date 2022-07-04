@@ -59,7 +59,7 @@ public class LectureTable3 extends JPanel {
 				if (row > -1)
 				 {
 				    cellRenderer.rowAtMouse = row;
-				    cellRenderer.color = new Color(246,246,246);
+				    cellRenderer.color = new Color(212,212,212);
 				    table.repaint();
 				 }
 			 }
@@ -131,7 +131,7 @@ public class LectureTable3 extends JPanel {
 				MainPanel.currPanel = MainPanel.lectureInfoPanel;
 				
 				LectureInfoPanel.cardLayout1.show(LectureInfoPanel.cardLayoutPanel,"상세정보");
-				
+				LectureInfoPanel.rateAvgLabel.setText("");
 				
 
 
