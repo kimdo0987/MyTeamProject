@@ -108,9 +108,10 @@ public class SignupPanel extends ImagePanel {
 			@Override
 			public void keyTyped(KeyEvent e) { // keyTyped에서 한글입력 막기
 				createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+				// Pattern 클래스의 matches 메서드 사용
 				// 정규표현식에서 \\w 는 [a-zA-Z0-9_] 의 일반적인 문자를 허용한다.
 				if ((!Pattern.matches("\\w", "" + e.getKeyChar()) || e.getKeyChar() == '_')) {
-					e.consume(); // 이벤트 소멸(무시)하기
+					e.consume(); // 이벤트 소멸(무시)하기 -> 밑에 Pressed 가 안되도록 하는거
 				}
 			}
 
@@ -118,18 +119,20 @@ public class SignupPanel extends ImagePanel {
 			public void keyPressed(KeyEvent e) { //keyPressed에서 복사붙여넣기등 이상한 행동막기
 				String msg = createIdField.getText();			
 				
-				if ((e.getKeyChar() != KeyEvent.VK_BACK_SPACE) && (e.getKeyChar() != KeyEvent.VK_DELETE)
+				// 아이디를 입력하다가 여러 키들을 입력 할 수 있는 상황이 있는데, 
+				// 영문과 숫자만 허용하고 다막아놔서 따로 허용해 주어야한다
+				// 별첨 > 이건 허용을 위한 코드가 아닌 것 같음
+				if ((e.getKeyChar() != KeyEvent.VK_BACK_SPACE) //백스페이스
+						&& (e.getKeyChar() != KeyEvent.VK_DELETE)
 						&& (e.getKeyCode() != 36) // END키 허용
 						&& (e.getKeyCode() != 35) // HOME키 허용
 						&& (e.getKeyCode() != 37) // 왼쪽 방향키 허용
-						&& (e.getKeyCode() != 39) // 오른쪽방향키 허용 //영문과 숫자만 허용하고 다막아놔서 따로 허용해 주어야한다
+						&& (e.getKeyCode() != 39) // 오른쪽방향키 허용
 				) {
 					e.consume(); // 이벤트 소멸(무시)하기
 				}
-
-//				 if (msg.length() > 16) { 
-//					createIdField.setText(msg.substring(0, 16)); //긴 글 복붙으로 삽입 방지
-//				} else 
+				
+				// * 는 앞에 패턴이 최소 0번 이상 나와야 한다.
 				if (!Pattern.matches("\\w*", msg)) {
 					idMsgLabel.setForeground(Color.red);
 					idMsgLabel.setText("사용 불가능한 문자가 포함되어 있습니다");
@@ -143,17 +146,18 @@ public class SignupPanel extends ImagePanel {
 				if (msg.length() < 4) {
 					idMsgLabel.setForeground(Color.red);
 					idMsgLabel.setText("아이디는 4글자 이상이여야 합니다");
-				} else if (Pattern.matches("\\w*", msg) && msg.length() < 17 && msg.length() > 3) {
+				} else if (Pattern.matches("\\w*", msg) 
+						&& msg.length() < 17 
+						&& msg.length() > 3) {
 					if (!idMsgLabel.getText().equals("중복확인완료")) { // 완료된상태에서는 안바뀌게
 						idMsgLabel.setForeground(new Color(153, 255, 153)); // 초록색
 						idMsgLabel.setText("사용가능한 형식입니다 (중복확인을 해주세요)");
 					}
 				}
 			}
-
 		});
 		
-		
+		//포커스 리스너는 키 입력 커서에 관한 리스너이다.
 		createIdField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -162,15 +166,12 @@ public class SignupPanel extends ImagePanel {
 					createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
 					idMsgLabel.setForeground(Color.red);
 					idMsgLabel.setText("필수 정보입니다");
-				} else {
-
 				}
 			}
 
 			@Override
 			public void focusGained(FocusEvent e) {
 				createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
-				
 			}
 		});
 
@@ -194,8 +195,35 @@ public class SignupPanel extends ImagePanel {
 		idCheckBtn.setBorderPainted(false);	
 		
 		idCheckBtn.setBounds(699, 96, 105, 50);
-		idCheckBtn.addActionListener(new ActionListener() {
+		
+		/*
+		 Statement 객체를 생성하면 Statement 객체의 executeQuery() 메소드를
+		 호출하여 SQL 쿼리를 실행시킬 수 있다.
+		 
+		 Statement 는 사용하면 매번 쿼리를 수행할 때마다
+		 1) 쿼리 문장 분석
+		 2) 컴파일
+		 3) 실행
+		 이 과정을 수행해야 한다. 
+		 Statement보다 prepareStatement 를 선호하는 이유는 
+		 pstmt는 처음 한 번만 세 단계를 거친 후 캐시에 담아서 재사용이 가능하다. 
+		 만약 동일한 쿼리를 반복 수행할 경우 prepareStatement가 DB에 훨씬 적은 부하를 주며, 성능도 좋다.
+		 
+		 ResultSet 객체는 커서를 현재 데이터의 행까지 가리키도록 반복한다. 초기에 커서는 첫번째 행 전에 위치한다. 
+		 next Method는 커서를 다음 행으로 이동시킨다.
+		 그리고 더이상 ResultSet 객체에서 행이 없을 경우 false를 리턴한다. 
+		 이next method는 결과값들을 통하여 다음 행이 있을 경우 true를 리턴시키기 때문에 while문을 실행시킨다.
 
+		 * ResultSet이란 쿼리문을 실행하면 얻을 수 있는 결과값 정도로 생각하면 된다.
+		 별첨 > executeQuery 로 pstmt가 쿼리문을 분석하고 조회한 결과값을 ResultSet 객체로 값을 저장한다.
+		 
+		 중복확인은 버튼을 누르면, 사용 가능한 형식이라는 메시지가 나올 때에만 가능해야 하고,
+		 id text field 에서 입력받은 값을 getText 값으로 받아서 
+		 pstmt에서 쿼리분석, 컴파일, 실행하고 member_id 테이블에 들어가는 요소는
+		 createIdField 에서 얻은 텍스트를 member_id 로 삼는다.
+		 
+		 */
+		idCheckBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!createIdField.getText().equals("4~16 이내 영문숫자조합")
@@ -217,14 +245,22 @@ public class SignupPanel extends ImagePanel {
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
+					
+					
+					// SQL문이 조회가 안되서 member_id 값에 어떠한 값도 저장이 안될경우 중복확인 통과
+					// parent Component 를 왜 받지 싶었는데 어떤 프레임이 없으면 dialog만 뚱단지 같이
+					// 나오는 일은 없어야 하기 때문인 것 같다.
 					if(memberid == null) {
-						if(JOptionPane.showConfirmDialog(MainPanel.thisFrame, "사용가능한 아이디입니다\n사용하시겠습니까?", "아이디 중복확인", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE) == 0) {
-							
+						// parent Component, Object message, String title, 
+						// Option Type, Message Type
+						if(JOptionPane.showConfirmDialog(MainPanel.thisFrame,
+								"사용가능한 아이디입니다\n사용하시겠습니까?", 
+								"아이디 중복확인", 
+								JOptionPane.YES_NO_OPTION, 
+								JOptionPane.PLAIN_MESSAGE) == 0) { 
 							createIdField.setEditable(false);
 							idMsgLabel.setText("중복확인완료");
-							createIdField.removeKeyListener(null);
-						} else {
-							
+							createIdField.removeKeyListener(null); //????
 						}				
 					} else {
 						JOptionPane.showMessageDialog(MainPanel.thisFrame, "이미 사용중인 아이디입니다");
