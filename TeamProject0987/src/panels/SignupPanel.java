@@ -91,13 +91,15 @@ public class SignupPanel extends ImagePanel {
 		
 		
 		
-		////////////////////아이디 생성조건 ///////////////////////////////////
+		//아이디 생성조건, idMsgLagel은 아이디 입력칸 밑에 
+		//"사용 불가능한 문자가 포함되어있습니다" 같은 문자가 입력되는 칸임
 		JLabel idMsgLabel = new JLabel("");
 		idMsgLabel.setVisible(true);
 		idMsgLabel.setFont(new Font("굴림", Font.PLAIN, 11));
 		idMsgLabel.setBounds(431, 143, 276, 32);
 		add(idMsgLabel);
-
+		
+		// HintTextField는 JTextField를 상속받았음
 		createIdField = new HintTextField("4~16 이내 영문숫자조합");
 		createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 17));
 		createIdField.setBounds(431, 99, 253, 44);
@@ -106,6 +108,7 @@ public class SignupPanel extends ImagePanel {
 			@Override
 			public void keyTyped(KeyEvent e) { // keyTyped에서 한글입력 막기
 				createIdField.setFont(new Font("배달의민족 도현", Font.PLAIN, 18));
+				// 정규표현식에서 \\w 는 [a-zA-Z0-9_] 의 일반적인 문자를 허용한다.
 				if ((!Pattern.matches("\\w", "" + e.getKeyChar()) || e.getKeyChar() == '_')) {
 					e.consume(); // 이벤트 소멸(무시)하기
 				}
